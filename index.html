@@ -8,12 +8,10 @@
     
     <style>
         /* ==========================================================================
-           1. ALTIN LAZER KESİM (LASER-CUT GOLD) DAVETİYE STİLLERİ
+           1. PREMIUM DAVETİYE STİLLERİ
            ========================================================================== */
         :root {
-            /* Görseldeki gibi ipeksi beyaz/krem arka plan */
             --bg-cream: #FCFAF8;
-            /* Altın ferforje rengi */
             --gold-base: #CBA153;
             --gold-gradient: linear-gradient(135deg, #EAD49C 0%, #CBA153 50%, #9F7B36 100%);
             --text-dark: #2A2522;
@@ -26,7 +24,7 @@
 
         body {
             font-family: 'Cormorant Garamond', serif;
-            background-color: #0d0a09; /* En arka koyu zemin */
+            background-color: #0d0a09; 
             color: var(--text-dark);
             overflow: hidden; height: 100vh; width: 100vw;
             display: flex; justify-content: center; align-items: center;
@@ -37,11 +35,10 @@
             width: 100%; max-width: 480px; height: 100vh;
             background-color: var(--bg-cream); position: relative; overflow: hidden;
             box-shadow: 0 0 60px rgba(0,0,0,0.9);
-            /* İpeksi kumaş dokusu hissi */
             background-image: radial-gradient(circle at 50% 0%, #FFFFFF 0%, #FCFAF8 100%);
         }
 
-        /* --- YENİ ALTIN LAZER KESİM KAPI ANİMASYONU --- */
+        /* --- FOTOĞRAFTAN OLUŞTURULAN KAPI --- */
         #door-container {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             z-index: 900; display: flex; pointer-events: auto;
@@ -49,42 +46,34 @@
         }
         #door-container.open { visibility: hidden; pointer-events: none; }
 
-        /* Kapılar artık içi tam dolu blok değil, altın kesimli saydam bir yapı */
         .door {
             width: 50%; height: 100%; position: relative;
-            background-color: #F8F5F0; /* Altında hafif ipek kağıt katmanı */
+            background-color: #fff;
             transition: transform 2s cubic-bezier(0.86, 0, 0.07, 1);
             overflow: hidden;
-            border-top: 1px solid var(--gold-base);
-            border-bottom: 1px solid var(--gold-base);
+            /* Gönderilen görsel kapı olarak ayarlandı */
+            background-image: url('image_23399f.jpg');
+            background-size: 200% 100%; /* Görselin tamamı iki kapıya yayılır */
+            background-repeat: no-repeat;
         }
         
         .door.left {
+            background-position: left center;
             border-right: 2px solid var(--gold-base);
-            box-shadow: 10px 0 30px rgba(203, 161, 83, 0.15), 5px 0 15px rgba(0,0,0,0.1);
-            transform-origin: left;
-            z-index: 3;
+            box-shadow: 10px 0 30px rgba(203, 161, 83, 0.3);
+            transform-origin: left; z-index: 3;
         }
         .door.right {
+            background-position: right center;
             border-left: 2px solid var(--gold-base);
-            box-shadow: -10px 0 30px rgba(203, 161, 83, 0.15), -5px 0 15px rgba(0,0,0,0.1);
-            transform-origin: right;
-            z-index: 2;
+            box-shadow: -10px 0 30px rgba(203, 161, 83, 0.3);
+            transform-origin: right; z-index: 2;
         }
+
         #door-container.open .door.left { transform: translateX(-105%) perspective(1000px) rotateY(-10deg); }
         #door-container.open .door.right { transform: translateX(105%) perspective(1000px) rotateY(10deg); }
 
-        /* Lazer Kesim Motif Konteyneri */
-        .laser-cut-pattern {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; opacity: 1;
-            /* Motif SVG'lerine altın efekti */
-            filter: drop-shadow(2px 3px 4px rgba(0,0,0,0.2)) drop-shadow(-1px -1px 0px rgba(255,255,255,0.8));
-        }
-        .door.left .laser-cut-pattern { transform: scaleX(1); }
-        .door.right .laser-cut-pattern { transform: scaleX(-1); } /* Simetrik olsun diye ters çevrildi */
-
-        /* 3D Premium Mühür (Görseldeki kapıyı ortalayan zarif rozet) */
+        /* 3D Premium Mühür */
         .seal-wrapper {
             position: absolute; top: 50%; right: 0; transform: translate(50%, -50%);
             z-index: 10; display: flex; flex-direction: column; align-items: center;
@@ -93,14 +82,14 @@
         .door-seal {
             width: 100px; height: 100px; border-radius: 50%;
             background: var(--gold-gradient);
-            box-shadow: 0 15px 35px rgba(203, 161, 83, 0.4), inset 0 2px 5px rgba(255,255,255,0.7), inset 0 -4px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 35px rgba(203, 161, 83, 0.5), inset 0 2px 5px rgba(255,255,255,0.7), inset 0 -4px 8px rgba(0,0,0,0.2);
             display: flex; align-items: center; justify-content: center; position: relative;
             transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.8s ease;
         }
         .door-seal-inner {
             width: 84px; height: 84px; border-radius: 50%;
             background: #FFFEFC;
-            box-shadow: inset 0 3px 6px rgba(203, 161, 83, 0.3), 0 2px 4px rgba(255,255,255,0.9);
+            box-shadow: inset 0 3px 6px rgba(203, 161, 83, 0.4), 0 2px 4px rgba(255,255,255,0.9);
             border: 1px solid var(--gold-base);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
@@ -148,7 +137,7 @@
             color: rgba(255,255,255,0.9); font-size: 11px; letter-spacing: 3px; font-family: 'Playfair Display', serif;
             text-transform: uppercase; animation: bounce 2s infinite; opacity: 0; pointer-events: none; z-index: 100;
         }
-        .doors-opened .scroll-hint { opacity: 1; }
+        .doors-opened .scroll-hint { opacity: 1; color: var(--gold-base); text-shadow: none; font-weight: 600; }
         @keyframes bounce { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, -8px); } }
 
         /* --- SCROLL YAPISI --- */
@@ -178,13 +167,12 @@
 
         /* --- LÜKS GLASSMORPHISM PANEL --- */
         .glass-panel {
-            background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--glass-border); border-radius: 16px;
-            padding: 35px 25px; width: 100%; box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+            padding: 35px 25px; width: 100%; box-shadow: 0 15px 40px rgba(42, 37, 34, 0.08);
             position: relative; overflow: hidden;
         }
         
-        /* Glass Panel İçi Ferforje Detay */
         .glass-panel::before {
             content: ''; position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
             width: 80%; height: 25px;
@@ -198,7 +186,7 @@
         .d-1 { transition-delay: 0.15s; } .d-2 { transition-delay: 0.3s; } .d-3 { transition-delay: 0.45s; }
 
         .gold-title {
-            font-family: 'Playfair Display', serif; font-size: 24px; color: var(--gold-base);
+            font-family: 'Playfair Display', serif; font-size: 24px; color: var(--gold-dark);
             margin-bottom: 15px; text-transform: uppercase; letter-spacing: 4px; font-weight: 500;
         }
         .sub-text { font-size: 17px; line-height: 1.6; color: var(--text-muted); font-style: italic; }
@@ -209,13 +197,13 @@
 
         /* Lüks Buton */
         .btn-luxury {
-            background: var(--text-dark); color: #fff; border: 1px solid var(--gold-base);
+            background: var(--text-dark); color: #fff; border: 1px solid var(--gold-dark);
             padding: 14px 30px; border-radius: 0px; font-family: 'Playfair Display', serif; font-size: 12px;
             letter-spacing: 3px; text-transform: uppercase; cursor: pointer;
             transition: all 0.4s ease; width: 100%; max-width: 260px;
             display: inline-flex; justify-content: center; align-items: center; gap: 10px;
         }
-        .btn-luxury:hover { background: var(--gold-base); border-color: var(--text-dark); }
+        .btn-luxury:hover { background: var(--gold-dark); border-color: var(--text-dark); }
 
         /* Minimalist Form Elemanları */
         .styled-input {
@@ -250,7 +238,7 @@
         #admin-panel { display: none; }
     </style>
     
-    <!-- Admin paneli CSS'i bozulmaması için buraya dahil edilmiştir -->
+    <!-- Admin paneli CSS -->
     <style>
         #admin-panel { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #F4F7F6; z-index: 99999; overflow-y: auto; color: #1F2937; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         .adm-shell { max-width: 1000px; margin: 0 auto; padding: 24px; }
@@ -282,57 +270,14 @@
 </head>
 <body>
 
-    <!-- GÖMÜLÜ SVG: GÖRSELDEKİ LÜKS ALTIN LAZER KESİM FERFORJE MOTİFİ -->
-    <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-            <g id="laser-cut-door">
-                <!-- Dış Çerçeve ve Üst Kemer -->
-                <path d="M5,150 L5,780 L235,780 L235,150 Q120,-30 5,150" fill="none" stroke="#CBA153" stroke-width="4"/>
-                <path d="M15,160 L15,770 L225,770 L225,160 Q120,-10 15,160" fill="none" stroke="#CBA153" stroke-width="1.5"/>
-                
-                <!-- Dikey Ferforje Parmaklıklar -->
-                <line x1="45" y1="190" x2="45" y2="600" stroke="#CBA153" stroke-width="2"/>
-                <line x1="75" y1="160" x2="75" y2="600" stroke="#CBA153" stroke-width="2"/>
-                <line x1="165" y1="160" x2="165" y2="600" stroke="#CBA153" stroke-width="2"/>
-                <line x1="195" y1="190" x2="195" y2="600" stroke="#CBA153" stroke-width="2"/>
-
-                <!-- Yatay Destek Barları -->
-                <line x1="15" y1="280" x2="225" y2="280" stroke="#CBA153" stroke-width="3"/>
-                <line x1="15" y1="600" x2="225" y2="600" stroke="#CBA153" stroke-width="3"/>
-
-                <!-- Üst Kemer İçi Süslü Kıvrımlar -->
-                <path d="M120,30 C180,60 190,130 225,160 C160,110 120,130 120,160 C120,130 80,110 15,160 C50,130 60,60 120,30 Z" fill="none" stroke="#CBA153" stroke-width="2"/>
-                <circle cx="120" cy="90" r="15" fill="none" stroke="#CBA153" stroke-width="2"/>
-                <circle cx="120" cy="90" r="5" fill="#CBA153"/>
-                <path d="M70,120 C90,80 150,80 170,120" fill="none" stroke="#CBA153" stroke-width="2"/>
-
-                <!-- Orta Göbek (Mührün Altındaki Ana Ferforje) -->
-                <path d="M120,330 C80,330 60,380 90,430 C120,480 150,380 120,330" fill="none" stroke="#CBA153" stroke-width="3"/>
-                <path d="M120,430 C80,480 60,530 90,580 C120,630 150,530 120,430" fill="none" stroke="#CBA153" stroke-width="3"/>
-                <circle cx="120" cy="430" r="25" fill="none" stroke="#CBA153" stroke-width="3"/>
-                
-                <!-- Alt Etek Kıvrımları -->
-                <path d="M15,650 C60,610 80,690 120,650 C160,690 180,610 225,650" fill="none" stroke="#CBA153" stroke-width="2"/>
-                <path d="M15,710 C60,670 80,750 120,710 C160,750 180,670 225,710" fill="none" stroke="#CBA153" stroke-width="2"/>
-                <circle cx="120" cy="650" r="8" fill="none" stroke="#CBA153" stroke-width="2"/>
-                <circle cx="120" cy="710" r="8" fill="none" stroke="#CBA153" stroke-width="2"/>
-            </g>
-        </defs>
-    </svg>
-
     <audio id="bg-music" loop preload="auto"></audio>
 
     <!-- ================= DAVETİYE ÖN YÜZÜ ================= -->
     <div id="app-wrapper">
 
-        <!-- KAPI VE MÜHÜR -->
+        <!-- FOTOĞRAF KAPI VE MÜHÜR -->
         <div id="door-container">
             <div class="door left">
-                <!-- Altın Lazer Kesim Katmanı -->
-                <svg class="laser-cut-pattern" viewBox="0 0 240 800" preserveAspectRatio="none">
-                    <use href="#laser-cut-door"/>
-                </svg>
-
                 <div class="seal-wrapper" onclick="openInvitation()">
                     <div class="door-seal">
                         <div class="door-seal-inner">
@@ -343,11 +288,7 @@
                 </div>
             </div>
 
-            <div class="door right">
-                <svg class="laser-cut-pattern" viewBox="0 0 240 800" preserveAspectRatio="none">
-                    <use href="#laser-cut-door"/>
-                </svg>
-            </div>
+            <div class="door right"></div>
         </div>
 
         <!-- İNCE ALTIN ÇERÇEVE & YÜZEN BUTON -->
@@ -520,7 +461,7 @@
                 
                 <div class="anim-item d-3" style="margin-top:30px;">
                     <div class="script-text" style="font-size: 42px;">Meltem & Yunus Emre</div>
-                    <div id="v_footerDate" style="font-family:'Playfair Display',serif; font-size:11px; letter-spacing:4px; color:var(--gold-base); margin-top:10px;">08.08.2026</div>
+                    <div id="v_footerDate" style="font-family:'Playfair Display',serif; font-size:11px; letter-spacing:4px; color:var(--gold-light); margin-top:10px;">08.08.2026</div>
                 </div>
             </section>
 
@@ -717,7 +658,7 @@
         function renderTimeline() {
             const c = document.getElementById('v_timelineContainer'); if(!c) return; c.innerHTML = '';
             (currentSettings.timeline || []).forEach((t, i) => { 
-                c.innerHTML += `<div class="list-item"><div class="list-cat">${t.time}</div><div class="list-title">${t.title}</div></div>${i < currentSettings.timeline.length-1 ? '<div class="thin-divider"></div>':''}`; 
+                c.innerHTML += `<div class="list-item"><div class="list-cat" style="color:var(--gold-dark);">${t.time}</div><div class="list-title">${t.title}</div></div>${i < currentSettings.timeline.length-1 ? '<div class="thin-divider"></div>':''}`; 
             });
         }
         function renderMenu() {
