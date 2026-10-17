@@ -11,8 +11,8 @@
            1. ROYAL BLACK & GOLD ŞATAFATLI DAVETİYE STİLLERİ
            ========================================================================== */
         :root {
-            --bg-dark: #0A0A0A; /* Kraliyet siyahı */
-            --bg-card: rgba(20, 20, 20, 0.7); /* Cam efekti siyahı */
+            --bg-dark: #0A0A0A;
+            --bg-card: rgba(20, 20, 20, 0.7);
             --gold-light: #F9DF9F;
             --gold-base: #D4AF37;
             --gold-dark: #997A15;
@@ -40,7 +40,6 @@
             background-image: radial-gradient(circle at 50% 0%, #2A2515 0%, #0A0A0A 80%);
         }
 
-        /* Arka Plan Yıldız Tozu (Stardust) Efekti */
         .stardust {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
@@ -53,33 +52,29 @@
         #door-container {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             z-index: 900; display: flex; pointer-events: auto;
-            transition: visibility 0s 2.2s;
-            background-color: #000; /* Görselin siyah arkaplanıyla tam uyum */
+            transition: visibility 0s 2.2s; background-color: #000;
         }
         #door-container.open { visibility: hidden; pointer-events: none; }
 
-        /* Kapılara kullanıcının görseli atandı */
         .door {
             width: 50%; height: 100%; position: relative;
             background-color: #000;
             transition: transform 2.2s cubic-bezier(0.77, 0, 0.175, 1);
-            background-image: url('image_23aa9d.jpg'); /* Kraliyet Kapısı Görseli */
-            background-size: 200% auto; /* Görseli iki kapıya yay */
-            background-position-y: center;
+            background-size: 200% 100%;
             background-repeat: no-repeat;
             box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
         }
         
         .door.left {
-            background-position-x: left;
+            background-position: left center;
             transform-origin: left; z-index: 3;
-            border-right: 1px solid rgba(212,175,55,0.3);
+            border-right: 1.5px solid rgba(212,175,55,0.5);
             box-shadow: 15px 0 40px rgba(0,0,0,0.8);
         }
         .door.right {
-            background-position-x: right;
+            background-position: right center;
             transform-origin: right; z-index: 2;
-            border-left: 1px solid rgba(212,175,55,0.3);
+            border-left: 1.5px solid rgba(212,175,55,0.5);
             box-shadow: -15px 0 40px rgba(0,0,0,0.8);
         }
 
@@ -107,15 +102,12 @@
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             position: relative;
         }
-        
         .seal-initials {
-            font-family: 'Cinzel', serif; /* Mühürde daha asil, düz ve keskin harfler */
-            font-size: 32px; font-weight: 700;
+            font-family: 'Cinzel', serif; font-size: 32px; font-weight: 700;
             background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             line-height: 1; letter-spacing: 2px;
             white-space: nowrap; display: flex; align-items: center; justify-content: center;
         }
-
         .seal-prompt {
             margin-top: 25px; background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(5px);
             border: 1px solid var(--gold-base); padding: 8px 24px; border-radius: 30px;
@@ -130,7 +122,7 @@
         #door-container.open .door-seal { transform: scale(1.5) rotate(180deg); opacity: 0; transition: all 1.2s ease; }
         #door-container.open .seal-prompt { opacity: 0; transition: 0.3s; }
 
-        /* --- İNCE ALTIN ÇERÇEVE --- */
+        /* İNCE ALTIN ÇERÇEVE */
         #inner-frame-layer {
             position: absolute; top: 15px; left: 15px; right: 15px; bottom: 15px;
             border: 1.5px solid var(--gold-dark); border-radius: 4px; pointer-events: none; z-index: 50; opacity: 0; transition: opacity 2s ease 1s;
@@ -141,7 +133,7 @@
         }
         .doors-opened #inner-frame-layer { opacity: 1; }
 
-        /* --- YÜZEN KONTROLLER --- */
+        /* YÜZEN KONTROLLER */
         .floating-controls { position: absolute; bottom: 25px; right: 25px; z-index: 100; }
         .circle-btn {
             width: 45px; height: 45px; border-radius: 50%; background: rgba(10,10,10,0.8);
@@ -159,7 +151,7 @@
         .doors-opened .scroll-hint { opacity: 1; }
         @keyframes bounce { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, -8px); } }
 
-        /* --- SCROLL YAPISI --- */
+        /* SCROLL YAPISI */
         .scroll-container { height: 100vh; width: 100%; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; scrollbar-width: none; position: relative; z-index: 5; }
         .scroll-container::-webkit-scrollbar { display: none; }
         section.slide {
@@ -168,11 +160,10 @@
             padding: 40px 30px; text-align: center; position: relative;
         }
 
-        /* --- SAHNE 1: ÇİFT FOTOĞRAFI (HERO SCENE) --- */
+        /* SAHNE 1: HERO SCENE */
         #hero-slide { padding: 0; justify-content: flex-end; }
         .hero-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;
-            background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop');
             background-size: cover; background-position: center; opacity: 0.7; filter: contrast(1.1) sepia(0.3);
         }
         .hero-gradient {
@@ -184,20 +175,18 @@
         .hero-names { font-family: 'Playfair Display', serif; font-size: 46px; color: #fff; line-height: 1.2; text-shadow: 0 4px 20px rgba(0,0,0,0.9); }
         .hero-names .ve { font-family: 'Great Vibes', cursive; font-size: 38px; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0 10px; }
 
-        /* --- ŞATAFATLI SİYAH CAM PANELLER --- */
+        /* ŞATAFATLI SİYAH CAM PANELLER */
         .glass-panel {
             background: var(--bg-card); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--glass-border); border-radius: 8px;
             padding: 35px 25px; width: 100%; box-shadow: 0 15px 40px rgba(0,0,0,0.5), inset 0 0 20px rgba(212,175,55,0.05);
             position: relative; overflow: hidden;
         }
-        
         .glass-panel::before {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
             background: var(--gold-gradient); opacity: 0.8;
         }
         
-        /* --- TİPOGRAFİ VE ANİMASYONLAR --- */
         .anim-item { opacity: 0; transform: translateY(35px); transition: opacity 1s ease-out, transform 1s cubic-bezier(0.21, 1.02, 0.73, 1); }
         section.slide.active .anim-item { opacity: 1; transform: translateY(0); }
         .d-1 { transition-delay: 0.15s; } .d-2 { transition-delay: 0.3s; } .d-3 { transition-delay: 0.45s; }
@@ -208,10 +197,7 @@
             margin-bottom: 15px; text-transform: uppercase; letter-spacing: 5px; font-weight: 700;
         }
         .sub-text { font-size: 17px; line-height: 1.6; color: var(--text-muted); font-style: italic; }
-        
-        .thin-divider {
-            width: 80px; height: 1px; background: var(--gold-gradient); margin: 20px auto; opacity: 0.5;
-        }
+        .thin-divider { width: 80px; height: 1px; background: var(--gold-gradient); margin: 20px auto; opacity: 0.5; }
 
         /* Kraliyet Butonu */
         .btn-luxury {
@@ -219,12 +205,10 @@
             padding: 14px 30px; border-radius: 4px; font-family: 'Cinzel', serif; font-size: 13px; font-weight: 600;
             letter-spacing: 4px; text-transform: uppercase; cursor: pointer;
             transition: all 0.4s ease; width: 100%; max-width: 260px;
-            display: inline-flex; justify-content: center; align-items: center; gap: 10px;
-            box-shadow: inset 0 0 0 0 var(--gold-base);
+            display: inline-flex; justify-content: center; align-items: center; gap: 10px; box-shadow: inset 0 0 0 0 var(--gold-base);
         }
         .btn-luxury:hover { box-shadow: inset 0 0 20px 0 rgba(212,175,55,0.3); background: rgba(212,175,55,0.1); }
 
-        /* Form Elemanları */
         .styled-input {
             width: 100%; max-width: 260px; padding: 12px 0; border: none; border-bottom: 1px solid rgba(212, 175, 55, 0.4);
             background: transparent; font-family: 'Cormorant Garamond', serif; font-size: 18px;
@@ -248,26 +232,22 @@
         }
         .step-btn { width: 30px; height: 30px; background: transparent; border: none; font-size: 22px; color: var(--gold-base); cursor: pointer; }
 
-        /* Listeler (Menü/Program) */
         .list-item { margin-bottom: 18px; }
         .list-cat { font-size: 11px; letter-spacing: 4px; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 4px; font-family: 'Cinzel', serif;}
         .list-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 500; color: var(--gold-light); line-height: 1.2; }
         .list-desc { font-size: 15px; font-style: italic; color: var(--text-muted); margin-top: 4px; }
 
-        #admin-panel { display: none; }
-    </style>
-    
-    <!-- Admin paneli CSS -->
-    <style>
-        #admin-panel { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #111; z-index: 99999; overflow-y: auto; color: #F4F4F4; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        /* --- ADMİN PANELİ (CSS) --- */
+        #admin-panel { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #111; z-index: 99999; overflow-y: auto; color: #F4F4F4; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         .adm-shell { max-width: 1000px; margin: 0 auto; padding: 24px; }
         .adm-header { background: #1A1A1A; border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; border: 1px solid #333; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
         .adm-brand { display: flex; align-items: center; gap: 16px; }
         .adm-logo { width: 48px; height: 48px; border-radius: 8px; background: linear-gradient(135deg, #D4AF37, #997A15); color: #000; display: flex; align-items: center; justify-content: center; font-family: 'Cinzel', serif; font-weight: 700; font-size: 18px; }
         .adm-title h1 { font-size: 20px; font-weight: 700; margin: 0 0 4px 0; color: #fff; }
         .adm-status { display: inline-block; font-size: 12px; font-weight: 600; background: rgba(212,175,55,0.2); color: #D4AF37; padding: 4px 10px; border-radius: 4px; border: 1px solid #D4AF37; }
-        .btn-adm { padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; }
+        .btn-adm { padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; transition: 0.2s; }
         .btn-adm-primary { background: linear-gradient(135deg, #D4AF37, #997A15); color: #000; }
+        .btn-adm-primary:hover { opacity:0.9; }
         .btn-adm-secondary { background: #2A2A2A; color: #D4AF37; border: 1px solid #444; }
         .adm-tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 24px; border-bottom: 1px solid #333; scrollbar-width: none; }
         .adm-tab { background: transparent; border: none; padding: 12px 20px; font-size: 14px; font-weight: 600; color: #888; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap; }
@@ -297,17 +277,17 @@
     <!-- ================= DAVETİYE ÖN YÜZÜ ================= -->
     <div id="app-wrapper">
 
-        <!-- FOTOĞRAF KAPI VE MÜHÜR -->
+        <!-- KAPI VE MÜHÜR (Görsel bağlantılı) -->
         <div id="door-container">
-            <div class="door left">
-                <div class="seal-wrapper" onclick="openInvitation()">
-                    <div class="door-seal">
-                        <div class="door-seal-inner">
-                            <div class="seal-initials" id="v_sealInitials">M&Y</div>
-                        </div>
+            <div class="door left"></div>
+            
+            <div class="seal-wrapper" onclick="openInvitation()">
+                <div class="door-seal">
+                    <div class="door-seal-inner">
+                        <div class="seal-initials" id="v_sealInitials">M&Y</div>
                     </div>
-                    <div class="seal-prompt" id="v_sealText">Mührü Kır</div>
                 </div>
+                <div class="seal-prompt" id="v_sealText">Mührü Kır</div>
             </div>
 
             <div class="door right"></div>
@@ -528,7 +508,9 @@
             <!-- TAB: MEDYA (FOTO & ŞARKI) -->
             <div id="tab-media" class="adm-tab-content">
                 <div class="adm-card">
-                    <h3 style="margin-bottom:15px; color:#D4AF37;">Açılış Fotoğrafı ve Müzik</h3>
+                    <h3 style="margin-bottom:15px; color:#D4AF37;">Açılış Kapısı & İç Fotoğraf</h3>
+                    <p style="font-size:12px; color:#888; margin-bottom:10px;">Kapı görseli HTML dosyasıyla aynı klasörde olmalı veya doğrudan resim URL'si girilmelidir.</p>
+                    <div class="f-row"><label>Açılış Kapısı Görseli (Dosya adı veya Link):</label><input type="text" class="adm-input" id="in_doorImage" placeholder="Örn: image_23aa9d.jpg"></div>
                     <div class="f-row"><label>1. Sahne (Kapak) Tam Ekran Fotoğraf Linki (URL):</label><input type="text" class="adm-input" id="in_heroImage" placeholder="Örn: https://resmim.com/gelindamat.jpg"></div>
                     <div class="f-row"><label>Arka Plan Müziği MP3 Linki:</label><input type="text" class="adm-input" id="in_musicUrl"></div>
                 </div>
@@ -565,6 +547,7 @@
                         <input type="text" class="adm-input" id="in_brideFamily" placeholder="Gelin Soyadı (Aile)">
                         <input type="text" class="adm-input" id="in_groomFamily" placeholder="Damat Soyadı (Aile)">
                         <input type="text" class="adm-input" id="in_sealInitials" placeholder="Mühür Baş Harfler (M&Y)">
+                        <input type="text" class="adm-input" id="in_sealText" placeholder="Mühür Altı Yazı">
                     </div>
                     <div class="adm-card">
                         <h3 style="margin-bottom:15px; color:#D4AF37;">Tarih ve Sayaç</h3>
@@ -618,10 +601,11 @@
 
     <script>
         const defaultSettings = {
+            doorImage: "image_23aa9d.jpg",
             heroImage: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop",
             musicUrl: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3",
             sealInitials: "M&Y", sealText: "Mührü Kır", s1TopTitle: "Davetlisiniz", 
-            brideName: "Meltem", andWord: "ve", groomName: "Yunus Emre", scrollBtnText: "Aşağı Kaydır",
+            brideName: "Meltem Alkış", andWord: "ve", groomName: "Yunus Emre Kumsal", scrollBtnText: "Aşağı Kaydır",
             inviteText: "Bu en mutlu günümüzde sizleri de aramızda görmekten onur duyarız.", 
             familyHeader: "AİLELER", brideFamily: "Alkış", brideFamilySub: "AİLESİ", groomFamily: "Kumsal", groomFamilySub: "AİLESİ",
             s3Title: "Tarih & Saat", dateDay: "08", dateMonth: "AĞUSTOS", dateYear: "2026", dateDayName: "CUMARTESİ", dateTime: "19:00",
@@ -676,6 +660,14 @@
             });
             document.getElementById('v_heroDate').innerText = `${currentSettings.dateDay}.${currentSettings.dateMonth === 'AĞUSTOS' ? '08' : '10'}.${currentSettings.dateYear}`;
             
+            // KAPI GÖRSELİ UYGULAMASI
+            const doorLeft = document.querySelector('.door.left');
+            const doorRight = document.querySelector('.door.right');
+            if(doorLeft && doorRight && currentSettings.doorImage) {
+                doorLeft.style.backgroundImage = `url('${currentSettings.doorImage}')`;
+                doorRight.style.backgroundImage = `url('${currentSettings.doorImage}')`;
+            }
+
             const upBox = document.getElementById('live-photo-upload-box'); const nBox = document.getElementById('v_photoNotice');
             if (String(currentSettings.photoUploadActive) === 'true') { if(upBox) upBox.style.display = 'block'; if(nBox) nBox.style.display = 'none'; } 
             else { if(upBox) upBox.style.display = 'none'; if(nBox) nBox.style.display = 'block'; }
@@ -687,7 +679,7 @@
         function renderTimeline() {
             const c = document.getElementById('v_timelineContainer'); if(!c) return; c.innerHTML = '';
             (currentSettings.timeline || []).forEach((t, i) => { 
-                c.innerHTML += `<div class="list-item"><div class="list-cat">${t.time}</div><div class="list-title">${t.title}</div></div>${i < currentSettings.timeline.length-1 ? '<div class="thin-divider"></div>':''}`; 
+                c.innerHTML += `<div class="list-item"><div class="list-cat" style="color:var(--gold-dark);">${t.time}</div><div class="list-title">${t.title}</div></div>${i < currentSettings.timeline.length-1 ? '<div class="thin-divider"></div>':''}`; 
             });
         }
         function renderMenu() {
