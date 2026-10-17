@@ -8,7 +8,7 @@
     
     <style>
         /* ==========================================================================
-           1. DAVETİYE ÖN YÜZ STİLLERİ (KESİNLİKLE DEĞİŞTİRİLMEDİ)
+           1. DAVETİYE ÖN YÜZ STİLLERİ
            ========================================================================== */
         :root {
             --bg-cream: #F3EAE3;
@@ -35,79 +35,53 @@
         }
 
         #app-wrapper {
-            width: 100%;
-            max-width: 480px;
-            height: 100vh;
-            background-color: var(--bg-cream);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 50px rgba(0,0,0,0.6);
+            width: 100%; max-width: 480px; height: 100vh; background-color: var(--bg-cream);
+            position: relative; overflow: hidden; box-shadow: 0 0 50px rgba(0,0,0,0.6);
             background-image: radial-gradient(rgba(158, 133, 118, 0.08) 1px, transparent 0);
             background-size: 20px 20px;
         }
 
         #door-container {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 900; display: flex; pointer-events: auto;
-            transition: visibility 0s 1.8s;
+            z-index: 900; display: flex; pointer-events: auto; transition: visibility 0s 1.8s;
         }
         #door-container.open { visibility: hidden; pointer-events: none; }
 
         .door {
-            width: 50%; height: 100%;
-            background-color: var(--door-bg);
-            position: relative;
+            width: 50%; height: 100%; background-color: var(--door-bg); position: relative;
             transition: transform 1.6s cubic-bezier(0.77, 0, 0.175, 1);
             background-image: radial-gradient(rgba(110, 85, 71, 0.06) 1px, transparent 0);
             background-size: 16px 16px;
         }
 
-        .door-inner {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            overflow: hidden; pointer-events: none;
-        }
-
-        .door.left {
-            border-right: 1px solid rgba(158, 133, 118, 0.45);
-            box-shadow: 10px 0 30px rgba(74, 56, 46, 0.22), inset -2px 0 6px rgba(255,255,255,0.7);
-            z-index: 3;
-        }
-        .door.right {
-            border-left: 1px solid rgba(158, 133, 118, 0.45);
-            box-shadow: -8px 0 25px rgba(74, 56, 46, 0.15), inset 3px 0 8px rgba(255,255,255,0.6);
-            z-index: 2;
-        }
-
+        .door-inner { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; }
+        .door.left { border-right: 1px solid rgba(158, 133, 118, 0.45); box-shadow: 10px 0 30px rgba(74, 56, 46, 0.22), inset -2px 0 6px rgba(255,255,255,0.7); z-index: 3; }
+        .door.right { border-left: 1px solid rgba(158, 133, 118, 0.45); box-shadow: -8px 0 25px rgba(74, 56, 46, 0.15), inset 3px 0 8px rgba(255,255,255,0.6); z-index: 2; }
         #door-container.open .door.left { transform: translateX(-115%); }
         #door-container.open .door.right { transform: translateX(115%); }
 
         .embossed-floral {
-            position: absolute;
-            pointer-events: none;
+            position: absolute; pointer-events: none; opacity: 0.95;
             filter: drop-shadow(2px 3px 3px rgba(74, 56, 46, 0.22)) drop-shadow(-2px -2px 2px rgba(255, 255, 255, 0.9));
-            opacity: 0.95;
         }
 
         .seal-wrapper {
-            position: absolute; top: 50%; right: 0; transform: translate(50%, -50%);
-            z-index: 10; display: flex; flex-direction: column; align-items: center;
-            cursor: pointer; pointer-events: auto; -webkit-tap-highlight-color: transparent;
+            position: absolute; top: 50%; right: 0; transform: translate(50%, -50%); z-index: 10;
+            display: flex; flex-direction: column; align-items: center; cursor: pointer; pointer-events: auto; -webkit-tap-highlight-color: transparent;
         }
 
         .door-seal {
             width: 92px; height: 122px; border-radius: 50%;
             background: linear-gradient(135deg, #F6EFE8 0%, #E5D6C8 55%, #D3C0B0 100%);
             box-shadow: 6px 10px 22px rgba(60, 44, 35, 0.28), -2px -2px 8px rgba(255, 255, 255, 0.85), inset 2px 2px 4px rgba(255, 255, 255, 0.95), inset -2px -3px 6px rgba(130, 105, 90, 0.45);
-            display: flex; align-items: center; justify-content: center; position: relative;
-            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+            display: flex; align-items: center; justify-content: center; position: relative; transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
         }
 
         .door-seal-inner {
             width: 78px; height: 106px; border-radius: 50%;
             background: linear-gradient(145deg, #E8DBD0 0%, #F4ECE4 100%);
             box-shadow: inset 2px 3px 5px rgba(115, 90, 75, 0.35), inset -2px -2px 4px rgba(255, 255, 255, 0.9), 0 1px 2px rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(158, 133, 118, 0.35); display: flex; flex-direction: column;
-            align-items: center; justify-content: center; padding: 8px 4px; position: relative;
+            border: 1px solid rgba(158, 133, 118, 0.35); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px 4px; position: relative;
         }
 
         .door-seal-inner::after {
@@ -115,23 +89,9 @@
             border-radius: 50%; border: 0.8px solid rgba(158, 133, 118, 0.28); pointer-events: none;
         }
 
-        .seal-flower-svg {
-            width: 44px; height: 54px; filter: drop-shadow(1.5px 2px 1.5px rgba(90, 68, 55, 0.28)) drop-shadow(-1px -1px 1px rgba(255, 255, 255, 0.95)); margin-bottom: 2px;
-        }
-
-        .seal-initials {
-            font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 600; letter-spacing: 2px;
-            color: #634D40; text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.9), -0.5px -0.5px 0px rgba(74, 56, 46, 0.2);
-            line-height: 1; margin-top: 2px;
-        }
-
-        .seal-prompt {
-            margin-top: 12px; background: rgba(243, 234, 227, 0.92); border: 1px solid rgba(158, 133, 118, 0.55);
-            padding: 5px 14px; border-radius: 20px; font-family: 'Playfair Display', serif; font-size: 10px;
-            letter-spacing: 2.5px; text-transform: uppercase; color: var(--text-dark);
-            box-shadow: 0 4px 10px rgba(74, 56, 46, 0.12); animation: gentlePulse 2.2s infinite ease-in-out;
-            transition: opacity 0.4s ease; white-space: nowrap;
-        }
+        .seal-flower-svg { width: 44px; height: 54px; filter: drop-shadow(1.5px 2px 1.5px rgba(90, 68, 55, 0.28)) drop-shadow(-1px -1px 1px rgba(255, 255, 255, 0.95)); margin-bottom: 2px; }
+        .seal-initials { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 600; letter-spacing: 2px; color: #634D40; text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.9), -0.5px -0.5px 0px rgba(74, 56, 46, 0.2); line-height: 1; margin-top: 2px; }
+        .seal-prompt { margin-top: 12px; background: rgba(243, 234, 227, 0.92); border: 1px solid rgba(158, 133, 118, 0.55); padding: 5px 14px; border-radius: 20px; font-family: 'Playfair Display', serif; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--text-dark); box-shadow: 0 4px 10px rgba(74, 56, 46, 0.12); animation: gentlePulse 2.2s infinite ease-in-out; transition: opacity 0.4s ease; white-space: nowrap; }
 
         .seal-wrapper:hover .door-seal { transform: scale(1.05); box-shadow: 8px 14px 26px rgba(60, 44, 35, 0.34), -2px -2px 8px rgba(255, 255, 255, 0.9); }
         .seal-wrapper:active .door-seal { transform: scale(0.97); }
@@ -144,9 +104,8 @@
         .arch-svg-frame { position: absolute; top: 18px; left: 18px; right: 18px; bottom: 18px; width: calc(100% - 36px); height: calc(100% - 36px); }
 
         .floating-btn {
-            position: absolute; z-index: 100; background: rgba(239, 229, 220, 0.85); border: 1px solid var(--border-brown);
-            color: var(--text-dark); backdrop-filter: blur(4px); cursor: pointer; display: flex; align-items: center; justify-content: center;
-            transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(74, 56, 46, 0.12);
+            position: absolute; z-index: 100; background: rgba(239, 229, 220, 0.85); border: 1px solid var(--border-brown); color: var(--text-dark);
+            backdrop-filter: blur(4px); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(74, 56, 46, 0.12);
         }
         #scroll-down-btn {
             bottom: 34px; left: 50%; transform: translateX(-50%); padding: 8px 22px; border-radius: 25px;
@@ -160,8 +119,7 @@
 
         section.slide {
             height: 100vh; width: 100%; scroll-snap-align: start; scroll-snap-stop: always;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 75px 45px 90px 45px; text-align: center; position: relative;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 75px 45px 90px 45px; text-align: center; position: relative;
         }
 
         .anim-item { opacity: 0; transform: translateY(30px); transition: opacity 0.9s ease-out, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
@@ -171,11 +129,10 @@
         .couple-names-lg { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 400; color: var(--text-dark); line-height: 1.15; letter-spacing: 1px; }
         .couple-names-md { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 400; color: var(--text-dark); }
         .ve-script { font-family: 'Great Vibes', cursive; font-size: 32px; color: var(--text-muted); display: inline-block; margin: 4px 8px; }
-        
+
         .ribbon-title {
-            display: inline-block; border: 1px solid var(--border-brown); padding: 7px 26px; border-radius: 30px;
-            font-family: 'Playfair Display', serif; font-size: 16px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dark);
-            margin-bottom: 22px; background: var(--card-bg); position: relative;
+            display: inline-block; border: 1px solid var(--border-brown); padding: 7px 26px; border-radius: 30px; font-family: 'Playfair Display', serif;
+            font-size: 16px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dark); margin-bottom: 22px; background: var(--card-bg); position: relative;
         }
         .ribbon-title::before, .ribbon-title::after { content: '•'; position: absolute; top: 50%; transform: translateY(-50%); color: var(--border-brown); font-size: 14px; }
         .ribbon-title::before { left: 10px; } .ribbon-title::after { right: 10px; }
@@ -202,10 +159,7 @@
         .map-frame { width: 100%; height: 170px; border: 1.5px solid var(--border-brown); border-radius: 14px; overflow: hidden; margin: 12px 0 16px 0; position: relative; background: #e5ddd5; }
         .map-frame iframe { width: 100%; height: 100%; border: none; filter: sepia(0.25) contrast(0.95); }
 
-        .btn-outline {
-            background: var(--card-bg); color: var(--text-dark); border: 1px solid var(--border-brown); padding: 10px 26px; border-radius: 25px;
-            font-family: 'Playfair Display', serif; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px;
-        }
+        .btn-outline { background: var(--card-bg); color: var(--text-dark); border: 1px solid var(--border-brown); padding: 10px 26px; border-radius: 25px; font-family: 'Playfair Display', serif; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px; }
         .btn-outline:hover, .btn-solid:hover { background: var(--accent-brown); color: #fff; }
         .btn-solid { background: var(--accent-brown); color: #fff; border: 1px solid var(--accent-brown); padding: 12px 30px; border-radius: 25px; font-family: 'Playfair Display', serif; font-size: 14px; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: 0.3s; width: 100%; max-width: 280px; }
 
@@ -217,19 +171,20 @@
         .timeline-item, .menu-item { margin: 10px 0; }
         .timeline-time { font-size: 13px; letter-spacing: 2px; color: var(--text-muted); }
         .timeline-title { font-family: 'Playfair Display', serif; font-size: 22px; margin-top: 2px; }
-        
         .menu-cat { font-size: 11px; letter-spacing: 2.5px; color: var(--text-muted); text-transform: uppercase; }
         .menu-name { font-family: 'Playfair Display', serif; font-size: 20px; margin: 3px 0; }
         .menu-desc { font-size: 14px; font-style: italic; color: var(--text-muted); }
 
-        .glass-card { border: 1px solid var(--border-brown); border-radius: 16px; padding: 16px 14px; background: var(--card-bg); width: 100%; margin: 8px 0; }
+        .glass-card { border: 1px solid var(--border-brown); border-radius: 16px; padding: 22px 18px; background: var(--card-bg); width: 100%; margin: 12px 0; }
         .styled-input { width: 100%; max-width: 280px; padding: 11px 16px; border: 1px solid var(--border-brown); border-radius: 25px; background: rgba(255,255,255,0.65); font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--text-dark); text-align: center; outline: none; margin: 8px 0; }
         .radio-btn-label { display: flex; align-items: center; justify-content: flex-start; gap: 10px; width: 100%; max-width: 280px; padding: 10px 18px; margin: 6px auto; border: 1px solid var(--border-brown); border-radius: 25px; background: var(--card-bg); cursor: pointer; font-size: 16px; }
         .radio-btn-label input { accent-color: var(--accent-brown); transform: scale(1.2); }
         .stepper-wrap { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 280px; border: 1px solid var(--border-brown); border-radius: 25px; padding: 4px 8px; margin: 8px auto 16px auto; background: var(--card-bg); }
         .step-btn { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border-brown); background: transparent; font-size: 18px; color: var(--text-dark); cursor: pointer; }
 
-        /* --- 2. YENİ NESİL PREMİUM ADMİN PANELİ STİLLERİ --- */
+        /* ==========================================================================
+           2. YENİ NESİL PREMİUM ADMİN PANELİ STİLLERİ
+           ========================================================================== */
         #admin-panel {
             display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: #F4F7F6; z-index: 99999; overflow-y: auto;
@@ -238,7 +193,6 @@
         
         .adm-shell { max-width: 1000px; margin: 0 auto; padding: 24px; }
         
-        /* Premium Header */
         .adm-header {
             background: #ffffff; border-radius: 16px; padding: 20px 24px; margin-bottom: 24px;
             display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;
@@ -247,8 +201,7 @@
         .adm-brand { display: flex; align-items: center; gap: 16px; }
         .adm-logo {
             width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, #6E5547, #4A382E);
-            color: #fff; display: flex; align-items: center; justify-content: center;
-            font-family: 'Playfair Display', serif; font-weight: 600; font-size: 18px; box-shadow: 0 4px 10px rgba(74, 56, 46, 0.2);
+            color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 600; font-size: 18px; box-shadow: 0 4px 10px rgba(74, 56, 46, 0.2);
         }
         .adm-title h1 { font-size: 20px; font-weight: 700; color: #111827; margin: 0 0 4px 0; letter-spacing: -0.5px; }
         .adm-status { display: inline-block; font-size: 12px; font-weight: 600; background: #D1FAE5; color: #065F46; padding: 4px 10px; border-radius: 20px; }
@@ -265,14 +218,12 @@
         .btn-adm-danger { background: #FEE2E2; color: #991B1B; padding: 6px 12px; font-size: 12px; border-radius: 6px; }
         .btn-adm-danger:hover { background: #FECACA; }
         
-        /* KPI Widget Kartları */
         .adm-kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
         .adm-kpi-card { background: #fff; padding: 20px; border-radius: 16px; border: 1px solid #E5E7EB; box-shadow: 0 2px 10px rgba(0,0,0,0.02); display: flex; align-items: center; gap: 16px; }
         .adm-kpi-icon { width: 48px; height: 48px; border-radius: 12px; background: #F3F4F6; display: flex; align-items: center; justify-content: center; font-size: 20px; }
         .adm-kpi-info p { font-size: 12px; color: #6B7280; font-weight: 600; text-transform: uppercase; margin: 0 0 4px 0; letter-spacing: 0.5px; }
         .adm-kpi-info h3 { font-size: 26px; color: #111827; font-weight: 800; margin: 0; line-height: 1; }
 
-        /* Modern Sekmeler (Tabs) */
         .adm-tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 24px; border-bottom: 2px solid #E5E7EB; scrollbar-width: none; }
         .adm-tabs::-webkit-scrollbar { display: none; }
         .adm-tab {
@@ -286,12 +237,10 @@
         .adm-tab-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Admin İçerik Kartları */
         .adm-card { background: #fff; border-radius: 16px; border: 1px solid #E5E7EB; padding: 24px; margin-bottom: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
         .adm-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #F3F4F6; padding-bottom: 16px; }
         .adm-card-header h2 { font-size: 16px; font-weight: 700; color: #111827; margin: 0; display: flex; align-items: center; gap: 8px; }
         
-        /* Modern Form Elemanları */
         .adm-form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
         .adm-form-group { margin-bottom: 16px; }
         .adm-form-group label { display: block; font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 6px; }
@@ -302,29 +251,19 @@
         .adm-input:focus { border-color: #A89080; background: #fff; box-shadow: 0 0 0 3px rgba(168, 144, 128, 0.15); }
         textarea.adm-input { resize: vertical; min-height: 80px; }
 
-        /* Modern Tablolar */
         .adm-table-container { overflow-x: auto; border: 1px solid #E5E7EB; border-radius: 12px; }
         .adm-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; white-space: nowrap; }
         .adm-table th { background: #F9FAFB; padding: 12px 16px; font-weight: 600; color: #4B5563; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; border-bottom: 1px solid #E5E7EB; }
         .adm-table td { padding: 14px 16px; border-bottom: 1px solid #F3F4F6; color: #1F2937; }
-        .adm-table tr:last-child td { border-bottom: none; }
         .adm-table tr:hover td { background: #F9FAFB; }
         .adm-badge-success { background: #D1FAE5; color: #065F46; padding: 4px 10px; border-radius: 20px; font-weight: 600; font-size: 12px; }
         .adm-badge-error { background: #FEE2E2; color: #991B1B; padding: 4px 10px; border-radius: 20px; font-weight: 600; font-size: 12px; }
 
-        /* Dinamik Satırlar (Program & Menü) */
-        .adm-dynamic-row {
-            display: flex; gap: 10px; align-items: center; background: #F9FAFB; padding: 12px;
-            border: 1px solid #E5E7EB; border-radius: 10px; margin-bottom: 10px;
-        }
+        .adm-dynamic-row { display: flex; gap: 10px; align-items: center; background: #F9FAFB; padding: 12px; border: 1px solid #E5E7EB; border-radius: 10px; margin-bottom: 10px; }
 
-        /* Başarı Bildirimi (Toast) */
         #adm-toast {
-            position: fixed; top: 24px; right: 24px; z-index: 100000;
-            background: #10B981; color: #fff; padding: 14px 24px; border-radius: 12px;
-            font-weight: 600; font-size: 14px; box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
-            transform: translateX(120%); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex; align-items: center; gap: 10px;
+            position: fixed; top: 24px; right: 24px; z-index: 100000; background: #10B981; color: #fff; padding: 14px 24px; border-radius: 12px;
+            font-weight: 600; font-size: 14px; box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3); transform: translateX(120%); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; align-items: center; gap: 10px;
         }
         #adm-toast.show { transform: translateX(0); }
 
@@ -335,6 +274,8 @@
             .btn-adm { flex: 1; justify-content: center; }
             .adm-dynamic-row { flex-direction: column; align-items: stretch; }
         }
+
+        .svg-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
     </style>
 </head>
 <body>
@@ -382,55 +323,27 @@
                     <circle cx="-14" cy="0" r="12" fill="#F8F1EC" stroke="#C2AE9F"/>
                     <circle cx="0" cy="0" r="8" fill="#DECBB9"/>
                 </g>
-                <circle cx="155" cy="65" r="6" fill="#F5ECE6" stroke="#B59E8D"/>
-                <circle cx="170" cy="85" r="4" fill="#F5ECE6" stroke="#B59E8D"/>
-                <circle cx="65" cy="155" r="6" fill="#F5ECE6" stroke="#B59E8D"/>
-                <circle cx="85" cy="175" r="4" fill="#F5ECE6" stroke="#B59E8D"/>
-                <circle cx="140" cy="135" r="5" fill="#F5ECE6" stroke="#B59E8D"/>
             </g>
 
             <g id="seal-embossed-bouquet">
                 <path d="M30,68 C30,52 32,35 30,15" fill="none" stroke="#B8A293" stroke-width="2" stroke-linecap="round"/>
                 <path d="M30,50 C22,43 16,36 14,26" fill="none" stroke="#B8A293" stroke-width="1.6" stroke-linecap="round"/>
                 <path d="M30,44 C38,37 44,30 46,20" fill="none" stroke="#B8A293" stroke-width="1.6" stroke-linecap="round"/>
-                <path d="M29,55 C20,54 14,48 16,42 C22,43 27,48 29,55 Z" fill="#F5ECE4" stroke="#C2AE9F" stroke-width="1"/>
-                <path d="M31,52 C40,51 46,45 44,39 C38,40 33,45 31,52 Z" fill="#F5ECE4" stroke="#C2AE9F" stroke-width="1"/>
-                <path d="M29,36 C21,33 17,26 20,20 C25,23 28,29 29,36 Z" fill="#F5ECE4" stroke="#C2AE9F" stroke-width="1"/>
-                <g transform="translate(15, 25)">
-                    <circle cx="0" cy="-5" r="4.5" fill="#FBF6F2" stroke="#C5B0A0" stroke-width="0.8"/>
-                    <circle cx="5" cy="0" r="4.5" fill="#FBF6F2" stroke="#C5B0A0" stroke-width="0.8"/>
-                    <circle cx="0" cy="5" r="4.5" fill="#FBF6F2" stroke="#C5B0A0" stroke-width="0.8"/>
-                    <circle cx="-5" cy="0" r="4.5" fill="#FBF6F2" stroke="#C5B0A0" stroke-width="0.8"/>
-                    <circle cx="0" cy="0" r="3" fill="#E3D2C4" stroke="#A89080" stroke-width="0.8"/>
-                </g>
-                <g transform="translate(45, 21)">
-                    <circle cx="0" cy="-5" r="4.5" fill="#FBF6F2" stroke="#C5B0A0" stroke-width="0.8"/>
-                    <circle cx="5" cy="0" r="4.5" fill="#FBF6F2" stroke="#C5B0A0" stroke-width="0.8"/>
-                    <circle cx="0" cy="5" r="4.5" fill="#FBF6F2" stroke="#C5B0A0" stroke-width="0.8"/>
-                    <circle cx="-5" cy="0" r="4.5" fill="#FBF6F2" stroke="#C5B0A0" stroke-width="0.8"/>
-                    <circle cx="0" cy="0" r="3" fill="#E3D2C4" stroke="#A89080" stroke-width="0.8"/>
-                </g>
                 <g transform="translate(30, 14)">
                     <circle cx="0" cy="-6" r="5.5" fill="#FBF6F2" stroke="#C5B0A0" stroke-width="0.9"/>
                     <circle cx="6" cy="0" r="5.5" fill="#FBF6F2" stroke="#C5B0A0" stroke-width="0.9"/>
                     <circle cx="0" cy="6" r="5.5" fill="#FBF6F2" stroke="#C5B0A0" stroke-width="0.9"/>
                     <circle cx="-6" cy="0" r="5.5" fill="#FBF6F2" stroke="#C5B0A0" stroke-width="0.9"/>
-                    <circle cx="-4" cy="-4" r="5" fill="#FDF9F6" stroke="#C5B0A0" stroke-width="0.8"/>
-                    <circle cx="4" cy="-4" r="5" fill="#FDF9F6" stroke="#C5B0A0" stroke-width="0.8"/>
-                    <circle cx="4" cy="4" r="5" fill="#FDF9F6" stroke="#C5B0A0" stroke-width="0.8"/>
-                    <circle cx="-4" cy="4" r="5" fill="#FDF9F6" stroke="#C5B0A0" stroke-width="0.8"/>
                     <circle cx="0" cy="0" r="3.8" fill="#DFCBB9" stroke="#9E8576" stroke-width="1"/>
                 </g>
-                <path d="M24,61 Q30,58 36,61" fill="none" stroke="#A68E7E" stroke-width="1.8" stroke-linecap="round"/>
             </g>
         </defs>
     </svg>
 
     <audio id="bg-music" loop preload="auto"></audio>
 
+    <!-- ================= DAVETİYE ÖN YÜZÜ (ORİJİNAL TASARIM) ================= -->
     <div id="app-wrapper">
-
-        <!-- AÇILIR KAPI VE SOL KAPIYA SABİTLENMİŞ 3D MÜHÜR -->
         <div id="door-container">
             <div class="door left">
                 <div class="door-inner">
@@ -438,7 +351,6 @@
                     <svg class="embossed-floral" style="top: 36%; left: -35px; width: 190px; height: 190px; transform: rotate(-35deg);" viewBox="0 0 240 240"><use href="#floral-cluster"/></svg>
                     <svg class="embossed-floral" style="bottom: -15px; left: -15px; width: 230px; height: 230px; transform: scaleY(-1);" viewBox="0 0 240 240"><use href="#floral-cluster"/></svg>
                 </div>
-
                 <div class="seal-wrapper" onclick="openInvitation()">
                     <div class="door-seal">
                         <div class="door-seal-inner">
@@ -449,7 +361,6 @@
                     <div class="seal-prompt" id="v_sealText">Dokun Aç</div>
                 </div>
             </div>
-
             <div class="door right">
                 <div class="door-inner">
                     <svg class="embossed-floral" style="top: -15px; right: -15px; width: 230px; height: 230px; transform: scaleX(-1);" viewBox="0 0 240 240"><use href="#floral-cluster"/></svg>
@@ -459,7 +370,6 @@
             </div>
         </div>
 
-        <!-- SABİT KEMERLİ ÇERÇEVE -->
         <div id="inner-frame-layer">
             <svg class="embossed-floral" style="top: -10px; left: -10px; width: 185px; height: 185px;" viewBox="0 0 240 240"><use href="#floral-cluster"/></svg>
             <svg class="embossed-floral" style="bottom: -10px; right: -10px; width: 185px; height: 185px; transform: scale(-1, -1);" viewBox="0 0 240 240"><use href="#floral-cluster"/></svg>
@@ -472,7 +382,6 @@
         <button id="scroll-down-btn" class="floating-btn" onclick="scrollNextSlide()"><span id="v_scrollBtnText">Aşağı Kaydır</span> &nbsp;↓</button>
         <button id="music-btn" class="floating-btn" onclick="toggleAudio()" title="Müziği Aç/Kapat">🔊</button>
 
-        <!-- 9 SAHNE -->
         <div class="scroll-container" id="slides-container">
 
             <section class="slide active">
@@ -488,9 +397,7 @@
 
             <section class="slide">
                 <div class="couple-names-md anim-item d-1">
-                    <span class="b-name-sync">Meltem Alkış</span>
-                    <span class="ve-script">ve</span>
-                    <span class="g-name-sync">Yunus Emre Kumsal</span>
+                    <span class="b-name-sync">Meltem Alkış</span> <span class="ve-script">ve</span> <span class="g-name-sync">Yunus Emre Kumsal</span>
                 </div>
                 <p class="anim-item d-2" id="v_inviteText" style="font-size: 19px; line-height: 1.6; margin: 22px 0; max-width: 310px;">
                     Bu anın şahidi olmak için sizi yanımızda görmek istiyoruz
@@ -523,12 +430,8 @@
                 <div class="map-frame anim-item d-2">
                     <iframe id="v_mapIframe" src="https://maps.google.com/maps?q=Four%20Seasons%20Hotel%20Bosphorus%20Istanbul&t=&z=14&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe>
                 </div>
-                <h3 class="anim-item d-3" id="v_venueName" style="font-family: 'Playfair Display', serif; font-size: 21px; font-weight: 500; margin-bottom: 6px;">
-                    Four Seasons Hotel Istanbul
-                </h3>
-                <p class="anim-item d-3" id="v_venueAddress" style="font-size: 14px; color: var(--text-muted); margin-bottom: 18px; max-width: 300px;">
-                    Beşiktaş/İstanbul
-                </p>
+                <h3 class="anim-item d-3" id="v_venueName" style="font-family: 'Playfair Display', serif; font-size: 21px; margin-bottom: 6px;">Four Seasons Hotel Istanbul</h3>
+                <p class="anim-item d-3" id="v_venueAddress" style="font-size: 14px; color: var(--text-muted); margin-bottom: 18px;">Beşiktaş/İstanbul</p>
                 <button class="btn-outline anim-item d-4" onclick="openMapUrl()">📍 <span id="v_mapBtnText">YOL TARİFİ AL</span></button>
             </section>
 
@@ -542,9 +445,7 @@
                     <div class="cd-box"><span class="num" id="cd_secs">40</span><span class="lbl">SANİYE</span></div>
                 </div>
                 <div class="ornament-line anim-item d-4"><div class="ornament-diamond"></div></div>
-                <p class="anim-item d-4" id="v_s5Quote" style="font-size: 18px; font-style: italic; max-width: 280px; margin-top: 8px;">
-                    İki ruh birleşiyor.
-                </p>
+                <p class="anim-item d-4" id="v_s5Quote" style="font-size: 18px; font-style: italic; max-width: 280px; margin-top: 8px;">İki ruh birleşiyor.</p>
             </section>
 
             <section class="slide">
@@ -560,10 +461,13 @@
             <section class="slide">
                 <div class="ribbon-title anim-item d-1" id="v_s8Title">En güzel anlarımız</div>
                 <p class="anim-item d-1" id="v_s8Desc" style="font-size: 14px; color: var(--text-muted); margin-bottom: 6px;">Birlikte biriktirdiğimiz en özel kareler</p>
-                
                 <div class="glass-card anim-item d-2" style="padding: 14px; margin-bottom: 14px;">
                     <div id="v_photoNotice" style="font-family: 'Playfair Display', serif; font-size: 16px; margin-bottom: 4px;">Fotoğraf yükleme davet saatinde aktif olacak.</div>
                     <p id="v_photoSub" style="font-size: 13px; color: var(--text-muted);">Davet başlar başlamaz fotoğraflarınızı bu alandan yükleyebileceksiniz.</p>
+                    <div id="live-photo-upload-box" style="margin-top: 10px; display: none;">
+                        <input type="file" id="photo-upload-input" accept="image/*" style="display:none;" onchange="handlePhotoUpload(event)">
+                        <button type="button" class="btn-outline" onclick="document.getElementById('photo-upload-input').click()" style="padding: 8px 18px; font-size: 12px;">📷 FOTOĞRAF SEÇ & YÜKLE</button>
+                    </div>
                 </div>
 
                 <h3 class="anim-item d-3" id="v_funTitle" style="font-family: 'Playfair Display', serif; font-size: 20px; margin-top: 6px;">Biraz Eğlence!</h3>
@@ -580,12 +484,10 @@
                 <div class="ribbon-title anim-item d-1" id="v_s9Title">RSVP</div>
                 <div class="sub-label anim-item d-1" id="v_s9Sub">KATILIMINIZ</div>
                 <p class="anim-item d-2" id="v_s9Desc" style="font-size: 14px; color: var(--text-muted); margin-bottom: 10px;">Lütfen davetimize katılım durumunuzu bizimle paylaşın.</p>
-
                 <form id="rsvp-form" class="anim-item d-3" onsubmit="submitRSVPForm(event)" style="width: 100%;">
                     <input type="text" id="rsvp_name" class="styled-input" placeholder="İsim Soyisim..." required>
                     <label class="radio-btn-label"><input type="radio" name="rsvp_status" value="Katılacağım" checked onchange="toggleGuestStepper(true)"><span id="v_rsvpYes">Katılacağım</span></label>
                     <label class="radio-btn-label"><input type="radio" name="rsvp_status" value="Maalesef katılamıyorum" onchange="toggleGuestStepper(false)"><span id="v_rsvpNo">Maalesef katılamıyorum</span></label>
-
                     <div id="guest-stepper-box">
                         <div class="sub-label" style="margin: 8px 0 2px 0; font-size: 10px;">KİŞİ SAYISI</div>
                         <div class="stepper-wrap">
@@ -596,13 +498,9 @@
                     </div>
                     <button type="submit" class="btn-outline" style="width: 100%; max-width: 280px; justify-content: center; margin-top: 6px;"><span id="v_rsvpBtn">GÖNDER</span> &nbsp;→</button>
                 </form>
-
                 <div id="rsvp-thankyou" class="glass-card" style="display:none; max-width:280px;">Katılım durumunuz kaydedildi. Çok teşekkür ederiz!</div>
-
                 <div class="anim-item d-4" style="margin-top: 22px;">
-                    <div class="couple-names-md" style="font-size: 22px;">
-                        <span class="b-name-sync">Meltem Alkış</span> <span class="ve-script" style="font-size: 20px;">ve</span> <span class="g-name-sync">Yunus Emre Kumsal</span>
-                    </div>
+                    <div class="couple-names-md" style="font-size: 22px;"><span class="b-name-sync">Meltem Alkış</span> <span class="ve-script" style="font-size: 20px;">ve</span> <span class="g-name-sync">Yunus Emre Kumsal</span></div>
                     <div id="v_footerDate" style="font-size: 11px; letter-spacing: 2.5px; color: var(--text-muted); margin-top: 4px;">08 AĞUSTOS 2026</div>
                 </div>
             </section>
@@ -610,12 +508,10 @@
         </div>
     </div>
 
-
-    <!-- ================= YENİ NESİL PREMİUM ADMİN PANELİ (#admin) ================= -->
+    <!-- ================= YENİ NESİL PREMİUM ADMİN PANELİ ================= -->
     <div id="admin-panel">
         <div class="adm-shell">
 
-            <!-- Üst Header Bar -->
             <div class="adm-header">
                 <div class="adm-brand">
                     <div class="adm-logo">M&Y</div>
@@ -630,63 +526,36 @@
                 </div>
             </div>
 
-            <!-- KPI İstatistik Kartları -->
             <div class="adm-kpi-grid">
                 <div class="adm-kpi-card">
                     <div class="adm-kpi-icon" style="color: #059669; background: #D1FAE5;">🥂</div>
-                    <div class="adm-kpi-info">
-                        <p>Toplam Gelecek Kişi</p>
-                        <h3 id="adm_total_guests">0</h3>
-                    </div>
+                    <div class="adm-kpi-info"><p>Toplam Gelecek Kişi</p><h3 id="adm_total_guests">0</h3></div>
                 </div>
                 <div class="adm-kpi-card">
                     <div class="adm-kpi-icon" style="color: #3B82F6; background: #DBEAFE;">🎵</div>
-                    <div class="adm-kpi-info">
-                        <p>Gelen Şarkı İstekleri</p>
-                        <h3 id="adm_songs_count">0</h3>
-                    </div>
-                </div>
-                <div class="adm-kpi-card">
-                    <div class="adm-kpi-icon" style="color: #8B5CF6; background: #EDE9FE;">📷</div>
-                    <div class="adm-kpi-info">
-                        <p>Yüklenen Fotoğraflar</p>
-                        <h3 id="adm_photos_count">0</h3>
-                    </div>
+                    <div class="adm-kpi-info"><p>Gelen Şarkı İstekleri</p><h3 id="adm_songs_count">0</h3></div>
                 </div>
             </div>
 
-            <!-- Sekme Menüsü -->
             <div class="adm-tabs">
                 <button class="adm-tab active" onclick="switchAdmTab('tab-dashboard', this)">📋 LCV & Misafirler</button>
                 <button class="adm-tab" onclick="switchAdmTab('tab-content', this)">📝 Metinler & İçerik</button>
                 <button class="adm-tab" onclick="switchAdmTab('tab-program', this)">📅 Program & Menü</button>
-                <button class="adm-tab" onclick="switchAdmTab('tab-media', this)">🎵 Medya & İstekler</button>
+                <button class="adm-tab" onclick="switchAdmTab('tab-media', this)">🎵 Şarkılar & Ayarlar</button>
             </div>
 
-            <!-- TAB 1: LCV YÖNETİMİ -->
             <div id="tab-dashboard" class="adm-tab-content active">
                 <div class="adm-card">
-                    <div class="adm-card-header">
-                        <h2>📋 LCV (Katılımcı) Listesi</h2>
-                    </div>
+                    <div class="adm-card-header"><h2>📋 LCV (Katılımcı) Listesi</h2></div>
                     <div class="adm-table-container">
                         <table class="adm-table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Ad Soyad</th>
-                                    <th>Durum</th>
-                                    <th>Kişi</th>
-                                    <th>İşlem</th>
-                                </tr>
-                            </thead>
+                            <thead><tr><th>#</th><th>Ad Soyad</th><th>Durum</th><th>Kişi Sayısı</th><th>İşlem</th></tr></thead>
                             <tbody id="adm_rsvp_tbody"></tbody>
                         </table>
                     </div>
                 </div>
             </div>
 
-            <!-- TAB 2: METİNLER VE İÇERİK -->
             <div id="tab-content" class="adm-tab-content">
                 <div class="adm-form-grid">
                     <div class="adm-card">
@@ -695,52 +564,32 @@
                         <div class="adm-form-group"><label>Mühür Altı Yazı:</label><input type="text" class="adm-input" id="in_sealText"></div>
                         <div class="adm-form-group"><label>1. Sahne Üst Başlık:</label><input type="text" class="adm-input" id="in_s1TopTitle"></div>
                         <div class="adm-form-group"><label>Gelin Adı Soyadı:</label><input type="text" class="adm-input" id="in_brideName"></div>
-                        <div class="adm-form-group"><label>Bağlaç (ve):</label><input type="text" class="adm-input" id="in_andWord"></div>
                         <div class="adm-form-group"><label>Damat Adı Soyadı:</label><input type="text" class="adm-input" id="in_groomName"></div>
-                        <div class="adm-form-group"><label>Arka Plan Müzik (MP3 Linki):</label><input type="text" class="adm-input" id="in_musicUrl"></div>
                     </div>
-
                     <div class="adm-card">
                         <div class="adm-card-header"><h2>2. Aileler & Davet Metni</h2></div>
                         <div class="adm-form-group"><label>Davet Karşılama Sözü:</label><textarea class="adm-input" id="in_inviteText"></textarea></div>
-                        <div class="adm-form-group"><label>Aileler Başlığı:</label><input type="text" class="adm-input" id="in_familyHeader"></div>
-                        <div style="display:flex; gap:10px;">
-                            <div class="adm-form-group" style="flex:1;"><label>Gelin Soyadı:</label><input type="text" class="adm-input" id="in_brideFamily"></div>
-                            <div class="adm-form-group" style="flex:1;"><label>Alt Metin:</label><input type="text" class="adm-input" id="in_brideFamilySub"></div>
-                        </div>
-                        <div style="display:flex; gap:10px;">
-                            <div class="adm-form-group" style="flex:1;"><label>Damat Soyadı:</label><input type="text" class="adm-input" id="in_groomFamily"></div>
-                            <div class="adm-form-group" style="flex:1;"><label>Alt Metin:</label><input type="text" class="adm-input" id="in_groomFamilySub"></div>
-                        </div>
+                        <div class="adm-form-group"><label>Gelin Soyadı (Aile):</label><input type="text" class="adm-input" id="in_brideFamily"></div>
+                        <div class="adm-form-group"><label>Damat Soyadı (Aile):</label><input type="text" class="adm-input" id="in_groomFamily"></div>
                     </div>
-
                     <div class="adm-card">
                         <div class="adm-card-header"><h2>3. Tarih & Saat</h2></div>
-                        <div class="adm-form-group"><label>Tarih Başlığı:</label><input type="text" class="adm-input" id="in_s3Title"></div>
                         <div style="display:flex; gap:10px;">
                             <div class="adm-form-group" style="flex:1;"><label>Gün:</label><input type="text" class="adm-input" id="in_dateDay"></div>
                             <div class="adm-form-group" style="flex:1.5;"><label>Ay:</label><input type="text" class="adm-input" id="in_dateMonth"></div>
                             <div class="adm-form-group" style="flex:1;"><label>Yıl:</label><input type="text" class="adm-input" id="in_dateYear"></div>
                         </div>
-                        <div style="display:flex; gap:10px;">
-                            <div class="adm-form-group" style="flex:1.5;"><label>Gün Adı:</label><input type="text" class="adm-input" id="in_dateDayName"></div>
-                            <div class="adm-form-group" style="flex:1;"><label>Saat:</label><input type="text" class="adm-input" id="in_dateTime"></div>
-                        </div>
                         <div class="adm-form-group"><label>Geri Sayım Hedef (YYYY-AA-GG):</label><input type="text" class="adm-input" id="in_countdownTarget"></div>
                     </div>
-
                     <div class="adm-card">
                         <div class="adm-card-header"><h2>4. Konum & Harita</h2></div>
-                        <div class="adm-form-group"><label>Konum Başlığı:</label><input type="text" class="adm-input" id="in_s4Title"></div>
                         <div class="adm-form-group"><label>Mekan Adı:</label><input type="text" class="adm-input" id="in_venueName"></div>
                         <div class="adm-form-group"><label>Mekan Adresi:</label><textarea class="adm-input" id="in_venueAddress"></textarea></div>
                         <div class="adm-form-group"><label>Harita (Iframe) Linki:</label><input type="text" class="adm-input" id="in_mapIframe"></div>
-                        <div class="adm-form-group"><label>Yol Tarifi Linki:</label><input type="text" class="adm-input" id="in_mapLinkUrl"></div>
                     </div>
                 </div>
             </div>
 
-            <!-- TAB 3: PROGRAM & MENÜ -->
             <div id="tab-program" class="adm-tab-content">
                 <div class="adm-form-grid">
                     <div class="adm-card">
@@ -750,7 +599,6 @@
                         </div>
                         <div id="admin-timeline-rows"></div>
                     </div>
-
                     <div class="adm-card">
                         <div class="adm-card-header">
                             <h2>🍽️ Düğün Menüsü</h2>
@@ -761,24 +609,25 @@
                 </div>
             </div>
 
-            <!-- TAB 4: MEDYA & İSTEKLER -->
             <div id="tab-media" class="adm-tab-content">
                 <div class="adm-grid">
-                    <div class="adm-card">
+                    <div class="adm-card" style="grid-column: 1 / -1;">
+                        <div class="adm-card-header"><h2>⚙️ Fotoğraf Yükleme ve Müzik</h2></div>
+                        <div class="adm-form-group">
+                            <label>Misafirler İçin Canlı Fotoğraf Yükleme İzni:</label>
+                            <select class="adm-input" id="in_photoUploadActive" onchange="saveAllSiteSettings()">
+                                <option value="false">🔒 Kapalı (Sadece "Fotoğraf yükleme davet saatinde aktif olacak" yazısı görünür)</option>
+                                <option value="true">🔓 Açık (Misafirler fotoğraf yükleyebilir)</option>
+                            </select>
+                        </div>
+                        <div class="adm-form-group"><label>Arka Plan Müzik MP3 Linki:</label><input type="text" class="adm-input" id="in_musicUrl"></div>
+                    </div>
+                    <div class="adm-card" style="grid-column: 1 / -1;">
                         <div class="adm-card-header"><h2>🎵 Gelen Şarkı İstekleri</h2></div>
                         <div class="adm-table-container">
                             <table class="adm-table">
                                 <thead><tr><th>Gönderen</th><th>Şarkı / Not</th><th>İşlem</th></tr></thead>
                                 <tbody id="adm_songs_tbody"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="adm-card">
-                        <div class="adm-card-header"><h2>📷 Yüklenen Fotoğraflar</h2></div>
-                        <div class="adm-table-container">
-                            <table class="adm-table">
-                                <thead><tr><th>Önizleme</th><th>Fotoğraf Adı</th><th>Sil</th></tr></thead>
-                                <tbody id="adm_photos_tbody"></tbody>
                             </table>
                         </div>
                     </div>
@@ -788,10 +637,10 @@
         </div>
     </div>
 
-    <!-- Sağ Alt Bildirim (Toast) -->
+    <!-- Bildirim -->
     <div id="adm-toast">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-        <span>✅ Değişiklikler kaydedildi!</span>
+        <span>✅ Değişiklikler başarıyla kaydedildi!</span>
     </div>
 
     <!-- Firebase SDK -->
@@ -800,128 +649,47 @@
 
     <script>
         const defaultSettings = {
-            sealInitials: "M & Y",
-            sealText: "Dokun Aç",
-            s1TopTitle: "Düğün Davetiyesi",
-            brideName: "Meltem Alkış",
-            andWord: "ve",
-            groomName: "Yunus Emre Kumsal",
-            scrollBtnText: "Aşağı Kaydır",
-            musicUrl: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3",
-            inviteText: "Bu anın şahidi olmak için sizi yanımızda görmek istiyoruz",
-            familyHeader: "AİLELERİMİZ",
-            brideFamily: "Alkış",
-            brideFamilySub: "AİLESİ",
-            groomFamily: "Kumsal",
-            groomFamilySub: "AİLESİ",
-            s3Title: "TARİH",
-            dateDay: "08",
-            dateMonth: "AĞUSTOS",
-            dateYear: "2026",
-            dateDayName: "CUMARTESİ",
-            dateTime: "19.00",
-            countdownTarget: "2026-08-08T19:00:00",
-            s4Title: "Konum",
-            venueName: "Four Seasons Hotel Istanbul",
-            venueAddress: "Beşiktaş/İstanbul",
-            mapIframe: "https://maps.google.com/maps?q=Four%20Seasons%20Hotel%20Bosphorus%20Istanbul&t=&z=14&ie=UTF8&iwloc=&output=embed",
-            mapLinkUrl: "https://maps.google.com/?q=Four+Seasons+Hotel+Bosphorus+Istanbul",
-            mapBtnText: "YOL TARİFİ AL",
-            s5Title: "BULUŞMAYA KALAN",
-            s5Quote: "İki ruh birleşiyor.",
-            s6Title: "Günün çizgisi",
-            timeline: [
-                { time: "19:00", title: "Nikah Töreni" },
-                { time: "19:30", title: "Kokteyl" },
-                { time: "21:00", title: "Kutlama ve Yemek" }
-            ],
-            s7Title: "Menü",
-            menu: [
-                { cat: "BAŞLANGIÇ", name: "Karşılama Kokteyli", desc: "Mini atıştırmalıklar ve içecekler" },
-                { cat: "ANA YEMEK", name: "Gecenin İmza Lezzeti", desc: "Şefin gecemiz için hazırladığı özel tabak" },
-                { cat: "TATLI", name: "Kutlama Pastası", desc: "Tatlı bir kapanış ve kahve/çay ikramı" }
-            ],
-            s8Title: "En güzel anlarımız",
-            s8Desc: "Birlikte biriktirdiğimiz en özel kareler",
-            photoNotice: "Fotoğraf yükleme davet saatinde aktif olacak.",
-            photoSub: "Davet başlar başlamaz fotoğraflarınızı bu alandan yükleyebileceksiniz.",
-            funTitle: "Biraz Eğlence!",
-            funDesc: "Favori düğün şarkınızı veya notunuzu bizimle paylaşın!",
-            s9Title: "RSVP",
-            s9Sub: "KATILIMINIZ",
-            s9Desc: "Lütfen davetimize katılım durumunuzu bizimle paylaşın.",
-            footerDate: "08 AĞUSTOS 2026"
+            sealInitials: "M & Y", sealText: "Dokun Aç", s1TopTitle: "Düğün Davetiyesi", brideName: "Meltem Alkış",
+            andWord: "ve", groomName: "Yunus Emre Kumsal", scrollBtnText: "Aşağı Kaydır", musicUrl: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3",
+            inviteText: "Bu anın şahidi olmak için sizi yanımızda görmek istiyoruz", familyHeader: "AİLELERİMİZ", brideFamily: "Alkış", brideFamilySub: "AİLESİ",
+            groomFamily: "Kumsal", groomFamilySub: "AİLESİ", s3Title: "TARİH", dateDay: "08", dateMonth: "AĞUSTOS", dateYear: "2026", dateDayName: "CUMARTESİ",
+            dateTime: "19.00", countdownTarget: "2026-08-08T19:00:00", s4Title: "Konum", venueName: "Four Seasons Hotel Istanbul", venueAddress: "Beşiktaş/İstanbul",
+            mapIframe: "https://maps.google.com/maps?q=Four%20Seasons%20Hotel%20Bosphorus%20Istanbul&t=&z=14&ie=UTF8&iwloc=&output=embed", mapLinkUrl: "https://maps.google.com/?q=Four+Seasons+Hotel+Bosphorus+Istanbul", mapBtnText: "YOL TARİFİ AL",
+            s5Title: "BULUŞMAYA KALAN", s5Quote: "İki ruh birleşiyor.", s6Title: "Günün çizgisi",
+            timeline: [{ time: "19:00", title: "Nikah Töreni" }, { time: "19:30", title: "Kokteyl" }, { time: "21:00", title: "Kutlama ve Yemek" }],
+            s7Title: "Menü", menu: [{ cat: "BAŞLANGIÇ", name: "Karşılama Kokteyli", desc: "Mini atıştırmalıklar ve içecekler" }, { cat: "ANA YEMEK", name: "Gecenin İmza Lezzeti", desc: "Şefin gecemiz için hazırladığı özel tabak" }, { cat: "TATLI", name: "Kutlama Pastası", desc: "Tatlı bir kapanış ve kahve/çay ikramı" }],
+            s8Title: "En güzel anlarımız", s8Desc: "Birlikte biriktirdiğimiz en özel kareler", photoNotice: "Fotoğraf yükleme davet saatinde aktif olacak.", photoSub: "Davet başlar başlamaz fotoğraflarınızı bu alandan yükleyebileceksiniz.",
+            photoUploadActive: "false", funTitle: "Biraz Eğlence!", funDesc: "Favori düğün şarkınızı veya notunuzu bizimle paylaşın!", funBtn: "Gönder",
+            s9Title: "RSVP", s9Sub: "KATILIMINIZ", s9Desc: "Lütfen davetimize katılım durumunuzu bizimle paylaşın.", rsvpYes: "Katılacağım", rsvpNo: "Maalesef katılamıyorum", rsvpBtn: "GÖNDER", footerDate: "08 AĞUSTOS 2026"
         };
 
         const firebaseConfig = {
-            apiKey: "AIzaSyBGw65gJhXPs2a219GKjdYiOPnzhamVqJY",
-            authDomain: "davetiye-dabbc.firebaseapp.com",
-            databaseURL: "https://davetiye-dabbc-default-rtdb.firebaseio.com",
-            projectId: "davetiye-dabbc"
+            apiKey: "AIzaSyBGw65gJhXPs2a219GKjdYiOPnzhamVqJY", authDomain: "davetiye-dabbc.firebaseapp.com",
+            databaseURL: "https://davetiye-dabbc-default-rtdb.firebaseio.com", projectId: "davetiye-dabbc",
+            storageBucket: "davetiye-dabbc.firebasestorage.app", messagingSenderId: "927684969636",
+            appId: "1:927684969636:web:8159e2aa33bc5fcf589231", measurementId: "G-P0P2VPC5YJ"
         };
 
-        let useFirebase = false;
-        let db = null;
-        try {
-            if (typeof firebase !== 'undefined') {
-                firebase.initializeApp(firebaseConfig);
-                db = firebase.database();
-                useFirebase = true;
-            }
-        } catch (e) { useFirebase = false; }
+        let useFirebase = false; let db = null;
+        try { if (typeof firebase !== 'undefined') { firebase.initializeApp(firebaseConfig); db = firebase.database(); useFirebase = true; } } catch (e) { useFirebase = false; }
 
-        let currentSettings = { ...defaultSettings };
-        let allRSVPs = [];
-        let allSongs = [];
-        let allPhotos = [];
+        let currentSettings = { ...defaultSettings }; let allRSVPs = []; let allSongs = [];
 
-        /* --- Admin UI Fonksiyonları --- */
-        function showToast() {
-            const t = document.getElementById('adm-toast');
-            t.classList.add('show');
-            setTimeout(() => t.classList.remove('show'), 3500);
-        }
-
-        function switchAdmTab(tabId, btn) {
-            document.querySelectorAll('.adm-tab-content').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.adm-tab').forEach(b => b.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            btn.classList.add('active');
-        }
+        function showToast() { const t = document.getElementById('adm-toast'); t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3500); }
+        function switchAdmTab(tabId, btn) { document.querySelectorAll('.adm-tab-content').forEach(c => c.classList.remove('active')); document.querySelectorAll('.adm-tab').forEach(b => b.classList.remove('active')); document.getElementById(tabId).classList.add('active'); btn.classList.add('active'); }
 
         function loadAllData() {
             if (useFirebase && db) {
                 document.getElementById('adm-db-status').innerText = "🟢 Realtime Veritabanı Bağlı";
-                db.ref('settings').on('value', snap => {
-                    if (snap.val()) currentSettings = { ...defaultSettings, ...snap.val() };
-                    applySettingsToDOM();
-                });
-                db.ref('rsvps').on('value', snap => {
-                    allRSVPs = [];
-                    snap.forEach(c => allRSVPs.push({ ...c.val(), fbKey: c.key }));
-                    renderAdminRSVPs();
-                });
-                db.ref('songs').on('value', snap => {
-                    allSongs = [];
-                    snap.forEach(c => allSongs.push({ ...c.val(), fbKey: c.key }));
-                    renderAdminSongs();
-                });
-                db.ref('photos').on('value', snap => {
-                    allPhotos = [];
-                    snap.forEach(c => allPhotos.push({ ...c.val(), fbKey: c.key }));
-                    renderGalleryAndAdmin();
-                });
+                db.ref('settings').on('value', snap => { if (snap.val()) currentSettings = { ...defaultSettings, ...snap.val() }; applySettingsToDOM(); });
+                db.ref('rsvps').on('value', snap => { allRSVPs = []; snap.forEach(c => allRSVPs.push({ ...c.val(), fbKey: c.key })); renderAdminRSVPs(); });
+                db.ref('songs').on('value', snap => { allSongs = []; snap.forEach(c => allSongs.push({ ...c.val(), fbKey: c.key })); renderAdminSongs(); });
             } else {
                 document.getElementById('adm-db-status').innerText = "🟡 Yerel Tarayıcı Bağlı";
-                const saved = localStorage.getItem('wedding_cms_settings');
-                if (saved) currentSettings = { ...defaultSettings, ...JSON.parse(saved) };
+                const saved = localStorage.getItem('wedding_cms_settings'); if (saved) currentSettings = { ...defaultSettings, ...JSON.parse(saved) };
                 applySettingsToDOM();
-                allRSVPs = JSON.parse(localStorage.getItem('wedding_rsvps') || '[]');
-                allSongs = JSON.parse(localStorage.getItem('wedding_songs') || '[]');
-                allPhotos = JSON.parse(localStorage.getItem('wedding_photos') || '[]');
-                renderAdminRSVPs();
-                renderAdminSongs();
-                renderGalleryAndAdmin();
+                allRSVPs = JSON.parse(localStorage.getItem('wedding_rsvps') || '[]'); allSongs = JSON.parse(localStorage.getItem('wedding_songs') || '[]');
+                renderAdminRSVPs(); renderAdminSongs();
             }
         }
 
@@ -929,302 +697,117 @@
             Object.keys(currentSettings).forEach(key => {
                 if (key === 'timeline' || key === 'menu') return;
                 const viewEl = document.getElementById('v_' + key);
-                if (viewEl) {
-                    if (key === 'mapIframe') {
-                        if (viewEl.src !== currentSettings[key]) viewEl.src = currentSettings[key];
-                    } else { viewEl.innerText = currentSettings[key]; }
-                }
-                const adminInput = document.getElementById('in_' + key);
-                if (adminInput) adminInput.value = currentSettings[key];
+                if (viewEl) { if (key === 'mapIframe') { if (viewEl.src !== currentSettings[key]) viewEl.src = currentSettings[key]; } else { viewEl.innerText = currentSettings[key]; } }
+                const adminInput = document.getElementById('in_' + key); if (adminInput) adminInput.value = currentSettings[key];
             });
-
             document.querySelectorAll('.b-name-sync').forEach(el => el.innerText = currentSettings.brideName);
             document.querySelectorAll('.g-name-sync').forEach(el => el.innerText = currentSettings.groomName);
 
-            renderTimeline(currentSettings.timeline || []);
-            renderMenu(currentSettings.menu || []);
-            renderAdminDynamicLists(currentSettings.timeline || [], currentSettings.menu || []);
+            const uploadBox = document.getElementById('live-photo-upload-box');
+            if (uploadBox) { uploadBox.style.display = (String(currentSettings.photoUploadActive) === 'true') ? 'block' : 'none'; }
 
-            const audio = document.getElementById('bg-music');
-            if (currentSettings.musicUrl && audio.src !== currentSettings.musicUrl) {
-                audio.src = currentSettings.musicUrl;
-            }
+            renderTimeline(currentSettings.timeline || []); renderMenu(currentSettings.menu || []); renderAdminDynamicLists(currentSettings.timeline || [], currentSettings.menu || []);
+            const audio = document.getElementById('bg-music'); if (currentSettings.musicUrl && audio.src !== currentSettings.musicUrl) { audio.src = currentSettings.musicUrl; }
         }
 
-        /* --- Ön Yüz (Frontend) İşleme --- */
         function renderTimeline(list) {
-            const container = document.getElementById('v_timelineContainer');
-            if(!container) return;
-            container.innerHTML = '';
+            const container = document.getElementById('v_timelineContainer'); if(!container) return; container.innerHTML = '';
             list.forEach((item, idx) => {
-                container.innerHTML += `
-                    <div class="timeline-item anim-item d-2">
-                        <div class="timeline-time">${item.time}</div>
-                        <div class="timeline-title">${item.title}</div>
-                    </div>
-                    ${idx < list.length - 1 ? '<div class="ornament-diamond" style="margin: 6px auto;"></div>' : ''}
-                `;
+                container.innerHTML += `<div class="timeline-item anim-item d-2"><div class="timeline-time">${item.time}</div><div class="timeline-title">${item.title}</div></div>${idx < list.length - 1 ? '<div class="ornament-diamond" style="margin: 6px auto;"></div>' : ''}`;
             });
         }
 
         function renderMenu(list) {
-            const container = document.getElementById('v_menuContainer');
-            if(!container) return;
-            container.innerHTML = '';
+            const container = document.getElementById('v_menuContainer'); if(!container) return; container.innerHTML = '';
             list.forEach((item, idx) => {
-                container.innerHTML += `
-                    <div class="menu-item anim-item d-2" style="margin-bottom:12px;">
-                        <div class="menu-cat">${item.cat}</div>
-                        <div class="menu-name">${item.name}</div>
-                        <div class="menu-desc">${item.desc}</div>
-                    </div>
-                    ${idx < list.length - 1 ? '<div class="ornament-diamond" style="margin: 6px auto;"></div>' : ''}
-                `;
+                container.innerHTML += `<div class="menu-item anim-item d-2" style="margin-bottom:12px;"><div class="menu-cat">${item.cat}</div><div class="menu-name">${item.name}</div><div class="menu-desc">${item.desc}</div></div>${idx < list.length - 1 ? '<div class="ornament-diamond" style="margin: 6px auto;"></div>' : ''}`;
             });
         }
 
-        /* --- Admin Dinamik Satırlar (Timeline & Menü) --- */
         function renderAdminDynamicLists(timeline, menu) {
             const tContainer = document.getElementById('admin-timeline-rows');
-            if(tContainer) {
-                tContainer.innerHTML = '';
-                timeline.forEach((item) => {
-                    tContainer.innerHTML += `
-                        <div class="adm-dynamic-row">
-                            <input type="text" class="adm-input t-time" value="${item.time}" placeholder="Saat (Örn: 19:00)">
-                            <input type="text" class="adm-input t-title" value="${item.title}" placeholder="Etkinlik (Örn: Nikah)" style="flex:1;">
-                            <button type="button" class="btn-adm btn-adm-danger" onclick="this.parentElement.remove()">Sil</button>
-                        </div>
-                    `;
-                });
-            }
-
+            if(tContainer) { tContainer.innerHTML = ''; timeline.forEach((item) => { tContainer.innerHTML += `<div class="adm-dynamic-row"><input type="text" class="adm-input t-time" value="${item.time}" placeholder="Saat (Örn: 19:00)" style="width:25%;"><input type="text" class="adm-input t-title" value="${item.title}" placeholder="Etkinlik (Örn: Nikah)" style="flex:1;"><button type="button" class="btn-adm btn-adm-danger" onclick="this.parentElement.remove()">Sil</button></div>`; }); }
             const mContainer = document.getElementById('admin-menu-rows');
-            if(mContainer) {
-                mContainer.innerHTML = '';
-                menu.forEach((item) => {
-                    mContainer.innerHTML += `
-                        <div class="adm-dynamic-row" style="flex-direction:column; align-items:stretch;">
-                            <div style="display:flex; gap:10px; margin-bottom:8px;">
-                                <input type="text" class="adm-input m-cat" value="${item.cat}" placeholder="Kategori" style="flex:1;">
-                                <button type="button" class="btn-adm btn-adm-danger" onclick="this.closest('.adm-dynamic-row').remove()">Sil</button>
-                            </div>
-                            <input type="text" class="adm-input m-name" value="${item.name}" placeholder="Yemek Adı" style="margin-bottom:8px;">
-                            <input type="text" class="adm-input m-desc" value="${item.desc}" placeholder="Açıklama">
-                        </div>
-                    `;
-                });
-            }
+            if(mContainer) { mContainer.innerHTML = ''; menu.forEach((item) => { mContainer.innerHTML += `<div class="adm-dynamic-row" style="flex-direction:column; align-items:stretch;"><div style="display:flex; gap:10px; margin-bottom:8px;"><input type="text" class="adm-input m-cat" value="${item.cat}" placeholder="Kategori" style="flex:1;"><button type="button" class="btn-adm btn-adm-danger" onclick="this.closest('.adm-dynamic-row').remove()">Sil</button></div><input type="text" class="adm-input m-name" value="${item.name}" placeholder="Yemek Adı" style="margin-bottom:8px;"><input type="text" class="adm-input m-desc" value="${item.desc}" placeholder="Açıklama"></div>`; }); }
         }
 
         function addTimelineRow(time, title) {
-            const tContainer = document.getElementById('admin-timeline-rows');
-            const div = document.createElement('div');
-            div.className = 'adm-dynamic-row';
-            div.innerHTML = `
-                <input type="text" class="adm-input t-time" value="${time}" placeholder="Saat">
-                <input type="text" class="adm-input t-title" value="${title}" placeholder="Etkinlik" style="flex:1;">
-                <button type="button" class="btn-adm btn-adm-danger" onclick="this.parentElement.remove()">Sil</button>
-            `;
-            tContainer.appendChild(div);
+            const tContainer = document.getElementById('admin-timeline-rows'); const div = document.createElement('div'); div.className = 'adm-dynamic-row';
+            div.innerHTML = `<input type="text" class="adm-input t-time" value="${time}" placeholder="Saat" style="width:25%;"><input type="text" class="adm-input t-title" value="${title}" placeholder="Etkinlik" style="flex:1;"><button type="button" class="btn-adm btn-adm-danger" onclick="this.parentElement.remove()">Sil</button>`; tContainer.appendChild(div);
         }
 
         function addMenuRow(cat, name, desc) {
-            const mContainer = document.getElementById('admin-menu-rows');
-            const div = document.createElement('div');
-            div.className = 'adm-dynamic-row';
-            div.style.cssText = "flex-direction:column; align-items:stretch;";
-            div.innerHTML = `
-                <div style="display:flex; gap:10px; margin-bottom:8px;">
-                    <input type="text" class="adm-input m-cat" value="${cat}" placeholder="Kategori" style="flex:1;">
-                    <button type="button" class="btn-adm btn-adm-danger" onclick="this.closest('.adm-dynamic-row').remove()">Sil</button>
-                </div>
-                <input type="text" class="adm-input m-name" value="${name}" placeholder="Yemek Adı" style="margin-bottom:8px;">
-                <input type="text" class="adm-input m-desc" value="${desc}" placeholder="Açıklama">
-            `;
-            mContainer.appendChild(div);
+            const mContainer = document.getElementById('admin-menu-rows'); const div = document.createElement('div'); div.className = 'adm-dynamic-row'; div.style.cssText = "flex-direction:column; align-items:stretch;";
+            div.innerHTML = `<div style="display:flex; gap:10px; margin-bottom:8px;"><input type="text" class="adm-input m-cat" value="${cat}" placeholder="Kategori" style="flex:1;"><button type="button" class="btn-adm btn-adm-danger" onclick="this.closest('.adm-dynamic-row').remove()">Sil</button></div><input type="text" class="adm-input m-name" value="${name}" placeholder="Yemek Adı" style="margin-bottom:8px;"><input type="text" class="adm-input m-desc" value="${desc}" placeholder="Açıklama">`; mContainer.appendChild(div);
         }
 
         function saveAllSiteSettings() {
             const newSettings = {};
             Object.keys(defaultSettings).forEach(key => {
-                if (key === 'timeline' || key === 'menu') return;
-                const input = document.getElementById('in_' + key);
-                if (input) newSettings[key] = input.value;
+                if (key === 'timeline' || key === 'menu') return; const input = document.getElementById('in_' + key); if (input) newSettings[key] = input.value;
             });
-
-            const newTimeline = [];
-            document.querySelectorAll('#admin-timeline-rows .adm-dynamic-row').forEach(row => {
-                const time = row.querySelector('.t-time').value;
-                const title = row.querySelector('.t-title').value;
-                if(time || title) newTimeline.push({ time, title });
-            });
-            newSettings.timeline = newTimeline;
-
-            const newMenu = [];
-            document.querySelectorAll('#admin-menu-rows .adm-dynamic-row').forEach(row => {
-                const cat = row.querySelector('.m-cat').value;
-                const name = row.querySelector('.m-name').value;
-                const desc = row.querySelector('.m-desc').value;
-                if(name) newMenu.push({ cat, name, desc });
-            });
-            newSettings.menu = newMenu;
-
+            const newTimeline = []; document.querySelectorAll('#admin-timeline-rows .adm-dynamic-row').forEach(row => { const time = row.querySelector('.t-time').value; const title = row.querySelector('.t-title').value; if(time || title) newTimeline.push({ time, title }); }); newSettings.timeline = newTimeline;
+            const newMenu = []; document.querySelectorAll('#admin-menu-rows .adm-dynamic-row').forEach(row => { const cat = row.querySelector('.m-cat').value; const name = row.querySelector('.m-name').value; const desc = row.querySelector('.m-desc').value; if(name) newMenu.push({ cat, name, desc }); }); newSettings.menu = newMenu;
             currentSettings = newSettings;
-
-            if (useFirebase && db) {
-                db.ref('settings').set(newSettings).then(() => { showToast(); }).catch(e => alert(e));
-            } else {
-                localStorage.setItem('wedding_cms_settings', JSON.stringify(newSettings));
-                applySettingsToDOM();
-                showToast();
-            }
+            if (useFirebase && db) { db.ref('settings').set(newSettings).then(() => { showToast(); }).catch(e => alert(e)); } else { localStorage.setItem('wedding_cms_settings', JSON.stringify(newSettings)); applySettingsToDOM(); showToast(); }
         }
 
-        /* --- Admin Tablo İşlemleri (Silme ve Listeleme) --- */
         function renderAdminRSVPs() {
-            const tbody = document.getElementById('adm_rsvp_tbody');
-            if(!tbody) return;
-            tbody.innerHTML = '';
-            let total = 0;
+            const tbody = document.getElementById('adm_rsvp_tbody'); if(!tbody) return; tbody.innerHTML = ''; let total = 0;
             allRSVPs.forEach((item, index) => {
-                const isAttending = item.status === 'Katılacağım';
-                total += Number(item.count || 0);
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${index + 1}</td>
-                        <td><strong>${item.name}</strong></td>
-                        <td><span class="${isAttending ? 'adm-badge-success' : 'adm-badge-error'}">${isAttending ? '✅ Katılıyor' : '❌ Katılamıyor'}</span></td>
-                        <td>${item.count}</td>
-                        <td><button type="button" onclick="deleteRSVP('${item.fbKey || ''}', ${index})" class="btn-adm btn-adm-danger">Sil</button></td>
-                    </tr>
-                `;
+                const isAttending = item.status === 'Katılacağım'; total += Number(item.count || 0);
+                tbody.innerHTML += `<tr><td>${index + 1}</td><td><strong>${item.name}</strong></td><td><span class="${isAttending ? 'adm-badge-success' : 'adm-badge-error'}">${isAttending ? '✅ Katılıyor' : '❌ Katılamıyor'}</span></td><td>${item.count}</td><td><button type="button" onclick="deleteRSVP('${item.fbKey || ''}', ${index})" class="btn-adm btn-adm-danger">Sil</button></td></tr>`;
             });
             document.getElementById('adm_total_guests').innerText = total;
         }
 
         function renderAdminSongs() {
-            const tbody = document.getElementById('adm_songs_tbody');
-            if(!tbody) return;
-            tbody.innerHTML = '';
-            allSongs.forEach((item, index) => {
-                tbody.innerHTML += `
-                    <tr>
-                        <td><strong>${item.sender}</strong></td>
-                        <td style="white-space:normal;">${item.song}</td>
-                        <td><button type="button" onclick="deleteSong('${item.fbKey || ''}', ${index})" class="btn-adm btn-adm-danger">Sil</button></td>
-                    </tr>
-                `;
-            });
+            const tbody = document.getElementById('adm_songs_tbody'); if(!tbody) return; tbody.innerHTML = '';
+            allSongs.forEach((item, index) => { tbody.innerHTML += `<tr><td><strong>${item.sender}</strong></td><td style="white-space:normal;">${item.song}</td><td><button type="button" onclick="deleteSong('${item.fbKey || ''}', ${index})" class="btn-adm btn-adm-danger">Sil</button></td></tr>`; });
             document.getElementById('adm_songs_count').innerText = allSongs.length;
         }
 
-        function renderGalleryAndAdmin() {
-            const tbody = document.getElementById('adm_photos_tbody');
-            if(tbody) {
-                tbody.innerHTML = '';
-                allPhotos.forEach((item, index) => {
-                    tbody.innerHTML += `
-                        <tr>
-                            <td><img src="${item.url}" style="width:45px; height:45px; border-radius:6px; object-fit:cover;"></td>
-                            <td>Fotoğraf #${index + 1}</td>
-                            <td><button type="button" onclick="deletePhoto('${item.fbKey || ''}', ${index})" class="btn-adm btn-adm-danger">Sil</button></td>
-                        </tr>
-                    `;
-                });
-                document.getElementById('adm_photos_count').innerText = allPhotos.length;
-            }
-        }
-
-        /* --- Silme Fonksiyonları --- */
         function deleteRSVP(fbKey, idx) {
-            if (useFirebase && db && fbKey && !fbKey.startsWith('local_')) {
-                db.ref('rsvps/' + fbKey).remove().then(() => showToast());
-            } else {
-                allRSVPs.splice(idx, 1);
-                localStorage.setItem('wedding_rsvps', JSON.stringify(allRSVPs));
-                renderAdminRSVPs();
-                showToast();
-            }
+            if (useFirebase && db && fbKey && !fbKey.startsWith('local_')) { db.ref('rsvps/' + fbKey).remove().then(() => showToast()); } else { allRSVPs.splice(idx, 1); localStorage.setItem('wedding_rsvps', JSON.stringify(allRSVPs)); renderAdminRSVPs(); showToast(); }
         }
 
         function deleteSong(fbKey, idx) {
-            if (useFirebase && db && fbKey && !fbKey.startsWith('local_')) {
-                db.ref('songs/' + fbKey).remove().then(() => showToast());
-            } else {
-                allSongs.splice(idx, 1);
-                localStorage.setItem('wedding_songs', JSON.stringify(allSongs));
-                renderAdminSongs();
-                showToast();
-            }
+            if (useFirebase && db && fbKey && !fbKey.startsWith('local_')) { db.ref('songs/' + fbKey).remove().then(() => showToast()); } else { allSongs.splice(idx, 1); localStorage.setItem('wedding_songs', JSON.stringify(allSongs)); renderAdminSongs(); showToast(); }
         }
 
-        function deletePhoto(fbKey, idx) {
-            if (useFirebase && db && fbKey && !fbKey.startsWith('local_')) {
-                db.ref('photos/' + fbKey).remove().then(() => showToast());
-            } else {
-                allPhotos.splice(idx, 1);
-                localStorage.setItem('wedding_photos', JSON.stringify(allPhotos));
-                renderGalleryAndAdmin();
-                showToast();
-            }
-        }
-
-        /* --- Ön Yüz Gönderim ve Ekstra Fonksiyonlar --- */
         function submitRSVPForm(e) {
-            e.preventDefault();
-            const name = document.getElementById('rsvp_name').value;
-            const status = document.querySelector('input[name="rsvp_status"]:checked').value;
-            const count = status === 'Katılacağım' ? guestCount : 0;
-            const record = { name, status, count };
-
-            if (useFirebase && db) { db.ref('rsvps').push(record); } 
-            else {
-                allRSVPs.push({ fbKey: 'local_' + Date.now(), ...record });
-                localStorage.setItem('wedding_rsvps', JSON.stringify(allRSVPs));
-                renderAdminRSVPs();
-            }
-            document.getElementById('rsvp-form').style.display = 'none';
-            document.getElementById('rsvp-thankyou').style.display = 'block';
+            e.preventDefault(); const name = document.getElementById('rsvp_name').value; const status = document.querySelector('input[name="rsvp_status"]:checked').value; const count = status === 'Katılacağım' ? guestCount : 0; const record = { name, status, count, createdAt: Date.now() };
+            if (useFirebase && db) { db.ref('rsvps').push(record); } else { allRSVPs.push({ fbKey: 'local_' + Date.now(), ...record }); localStorage.setItem('wedding_rsvps', JSON.stringify(allRSVPs)); renderAdminRSVPs(); }
+            document.getElementById('rsvp-form').style.display = 'none'; document.getElementById('rsvp-thankyou').style.display = 'block';
         }
 
         function submitSongForm(e) {
-            e.preventDefault();
-            const sender = document.getElementById('song_sender').value;
-            const song = document.getElementById('song_request').value;
-            const record = { sender, song };
-
-            if (useFirebase && db) { db.ref('songs').push(record); } 
-            else {
-                allSongs.push({ fbKey: 'local_' + Date.now(), ...record });
-                localStorage.setItem('wedding_songs', JSON.stringify(allSongs));
-                renderAdminSongs();
-            }
-            e.target.reset();
-            const fb = document.getElementById('song-feedback');
-            fb.style.display = 'block';
-            setTimeout(() => fb.style.display = 'none', 3000);
+            e.preventDefault(); const sender = document.getElementById('song_sender').value; const song = document.getElementById('song_request').value; const record = { sender, song, createdAt: Date.now() };
+            if (useFirebase && db) { db.ref('songs').push(record); } else { allSongs.push({ fbKey: 'local_' + Date.now(), ...record }); localStorage.setItem('wedding_songs', JSON.stringify(allSongs)); renderAdminSongs(); }
+            e.target.reset(); const fb = document.getElementById('song-feedback'); fb.style.display = 'block'; setTimeout(() => fb.style.display = 'none', 3000);
         }
 
-        let guestCount = 1;
-        function changeGuestCount(delta) {
-            guestCount = Math.min(10, Math.max(1, guestCount + delta));
-            document.getElementById('rsvp_count_val').innerText = guestCount;
-        }
-
+        let guestCount = 1; function changeGuestCount(delta) { guestCount = Math.min(10, Math.max(1, guestCount + delta)); document.getElementById('rsvp_count_val').innerText = guestCount; }
         function toggleGuestStepper(show) { document.getElementById('guest-stepper-box').style.display = show ? 'block' : 'none'; }
         function openMapUrl() { window.open(currentSettings.mapLinkUrl || 'https://maps.google.com', '_blank'); }
 
-        function handleRouting() {
-            if (window.location.hash === '#admin') {
-                document.getElementById('admin-panel').style.display = 'block';
-            } else {
-                document.getElementById('admin-panel').style.display = 'none';
-            }
-        }
+        const audioEl = document.getElementById('bg-music'); let isMusicPlaying = false;
+        function openInvitation() { document.getElementById('door-container').classList.add('open'); document.getElementById('app-wrapper').classList.add('doors-opened'); if (audioEl.src) { audioEl.play().then(() => { isMusicPlaying = true; document.getElementById('music-btn').innerText = '🔊'; }).catch(() => {}); } }
+        function toggleAudio() { if (isMusicPlaying) { audioEl.pause(); isMusicPlaying = false; document.getElementById('music-btn').innerText = '🔇'; } else { audioEl.play(); isMusicPlaying = true; document.getElementById('music-btn').innerText = '🔊'; } }
 
-        window.addEventListener('hashchange', handleRouting);
-        window.addEventListener('DOMContentLoaded', () => { loadAllData(); handleRouting(); });
+        const slides = document.querySelectorAll('section.slide'); const scrollContainer = document.getElementById('slides-container');
+        const slideObserver = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); }); }, { root: scrollContainer, threshold: 0.45 });
+        slides.forEach(s => slideObserver.observe(s));
+        function scrollNextSlide() { const h = window.innerHeight; const currentScroll = scrollContainer.scrollTop; const nextPos = Math.round(currentScroll / h + 1) * h; if (nextPos >= scrollContainer.scrollHeight) { scrollContainer.scrollTo({ top: 0, behavior: 'smooth' }); } else { scrollContainer.scrollTo({ top: nextPos, behavior: 'smooth' }); } }
+
+        function updateCountdown() {
+            const target = new Date(currentSettings.countdownTarget).getTime(); const now = new Date().getTime(); const diff = Math.max(0, target - now);
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24)); const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)); const s = Math.floor((diff % (1000 * 60)) / 1000);
+            document.getElementById('cd_days').innerText = isNaN(d) ? 0 : d; document.getElementById('cd_hours').innerText = String(isNaN(h) ? 0 : h).padStart(2, '0'); document.getElementById('cd_mins').innerText = String(isNaN(m) ? 0 : m).padStart(2, '0'); document.getElementById('cd_secs').innerText = String(isNaN(s) ? 0 : s).padStart(2, '0');
+        } setInterval(updateCountdown, 1000);
+
+        function handleRouting() { if (window.location.hash === '#admin') { document.getElementById('admin-panel').style.display = 'block'; } else { document.getElementById('admin-panel').style.display = 'none'; } }
+        window.addEventListener('hashchange', handleRouting); window.addEventListener('DOMContentLoaded', () => { loadAllData(); handleRouting(); });
     </script>
 </body>
 </html>
