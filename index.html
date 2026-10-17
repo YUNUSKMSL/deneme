@@ -3,821 +3,2172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Meltem & Yunus Emre Davetiyesi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&display=swap" rel="stylesheet">
+    <title>Meltem & Yunus Emre Düğün Davetiyesi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
     
     <style>
         /* ==========================================================================
-           1. ROYAL BLACK & GOLD ŞATAFATLI DAVETİYE STİLLERİ
+           1. DAVETİYE ÖN YÜZ STİLLERİ (COUTURE LUXURY EDITION)
            ========================================================================== */
         :root {
-            --bg-dark: #0A0A0A;
-            --bg-card: rgba(20, 20, 20, 0.7);
-            --gold-light: #F9DF9F;
-            --gold-base: #D4AF37;
-            --gold-dark: #997A15;
-            --gold-gradient: linear-gradient(135deg, #F9DF9F 0%, #D4AF37 50%, #997A15 100%);
-            --text-light: #F4F4F4;
-            --text-muted: #A8A8A8;
-            --glass-border: rgba(212, 175, 55, 0.25);
+            --bg-cream: #F3EAE3;
+            --door-bg: #EFE5DC;
+            --text-dark: #4A382E;
+            --text-muted: #7D685C;
+            --border-brown: #9E8576;
+            --accent-brown: #6E5547;
+            --gold-shimmer: #C8A97E;
+            --card-bg: rgba(255, 252, 249, 0.65);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
         body {
             font-family: 'Cormorant Garamond', serif;
-            background-color: #000;
-            color: var(--text-light);
-            overflow: hidden; height: 100vh; width: 100vw;
-            display: flex; justify-content: center; align-items: center;
-            -webkit-font-smoothing: antialiased;
+            background: radial-gradient(circle at center, #3a2d28 0%, #1d1613 100%);
+            color: var(--text-dark);
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         #app-wrapper {
-            width: 100%; max-width: 480px; height: 100vh;
-            background-color: var(--bg-dark); position: relative; overflow: hidden;
-            box-shadow: 0 0 60px rgba(212,175,55,0.15);
-            background-image: radial-gradient(circle at 50% 0%, #2A2515 0%, #0A0A0A 80%);
+            width: 100%; max-width: 480px; height: 100vh; background-color: var(--bg-cream);
+            position: relative; overflow: hidden;
+            box-shadow: 0 0 70px rgba(0,0,0,0.75), 0 0 0 1px rgba(200, 169, 126, 0.25);
+            background-image:
+                radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.55) 0%, transparent 65%),
+                radial-gradient(rgba(158, 133, 118, 0.09) 1px, transparent 0);
+            background-size: 100% 100%, 20px 20px;
+            transition: background-color 0.5s ease;
         }
 
-        .stardust {
+        /* ALTIN PIRILTI PARTİKÜL KATMANI */
+        #luxury-particles {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
-            opacity: 0.15; z-index: 0; pointer-events: none;
-            animation: twinkle 15s linear infinite;
+            pointer-events: none; z-index: 45; opacity: 0; transition: opacity 1.5s ease 0.4s;
         }
-        @keyframes twinkle { 0% { opacity: 0.1; transform: scale(1); } 50% { opacity: 0.25; transform: scale(1.05); } 100% { opacity: 0.1; transform: scale(1); } }
+        .doors-opened #luxury-particles { opacity: 1; }
 
-        /* --- ŞATAFATLI FOTOĞRAF KAPI ANİMASYONU --- */
+        /* KAPI AÇILIŞ IŞIK PATLAMASI */
+        #door-light-glow {
+            position: absolute; inset: 0; pointer-events: none; z-index: 890;
+            background: radial-gradient(circle at center, rgba(255, 248, 235, 0.9) 0%, rgba(200, 169, 126, 0.25) 45%, transparent 75%);
+            opacity: 0; transition: opacity 1.4s ease;
+        }
+        #door-light-glow.burst { opacity: 1; }
+
         #door-container {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 900; display: flex; pointer-events: auto;
-            transition: visibility 0s 2.2s; background-color: #000;
+            z-index: 900; display: flex; pointer-events: auto; transition: visibility 0s 1.8s;
+            perspective: 1200px;
         }
         #door-container.open { visibility: hidden; pointer-events: none; }
 
         .door {
-            width: 50%; height: 100%; position: relative;
-            background-color: #000;
-            transition: transform 2.2s cubic-bezier(0.77, 0, 0.175, 1);
-            background-size: 200% 100%;
-            background-repeat: no-repeat;
-            box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
-        }
-        
-        .door.left {
-            background-position: left center;
-            transform-origin: left; z-index: 3;
-            border-right: 1.5px solid rgba(212,175,55,0.5);
-            box-shadow: 15px 0 40px rgba(0,0,0,0.8);
-        }
-        .door.right {
-            background-position: right center;
-            transform-origin: right; z-index: 2;
-            border-left: 1.5px solid rgba(212,175,55,0.5);
-            box-shadow: -15px 0 40px rgba(0,0,0,0.8);
+            width: 50%; height: 100%; background-color: var(--door-bg); position: relative;
+            transition: transform 1.65s cubic-bezier(0.77, 0, 0.175, 1), box-shadow 1.65s ease;
+            background-image:
+                linear-gradient(180deg, rgba(255,255,255,0.35) 0%, transparent 40%, rgba(74, 56, 46, 0.06) 100%),
+                radial-gradient(rgba(110, 85, 71, 0.06) 1px, transparent 0);
+            background-size: 100% 100%, 16px 16px;
         }
 
-        #door-container.open .door.left { transform: translateX(-105%) perspective(1200px) rotateY(-15deg); }
-        #door-container.open .door.right { transform: translateX(105%) perspective(1200px) rotateY(15deg); }
+        .door-inner { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; }
+        .door.left { border-right: 1px solid rgba(158, 133, 118, 0.5); box-shadow: 12px 0 35px rgba(74, 56, 46, 0.25), inset -2px 0 8px rgba(255,255,255,0.75); z-index: 3; }
+        .door.right { border-left: 1px solid rgba(158, 133, 118, 0.5); box-shadow: -10px 0 30px rgba(74, 56, 46, 0.18), inset 3px 0 8px rgba(255,255,255,0.65); z-index: 2; }
+        #door-container.open .door.left { transform: translateX(-115%); }
+        #door-container.open .door.right { transform: translateX(115%); }
 
-        /* 3D Premium Mühür */
+        .embossed-floral {
+            position: absolute; pointer-events: none; opacity: 0.98;
+            filter:
+                drop-shadow(3px 5px 5px rgba(68, 49, 38, 0.26))
+                drop-shadow(-2px -2px 3px rgba(255, 255, 255, 0.96))
+                drop-shadow(0px 1px 1px rgba(158, 133, 118, 0.35));
+            transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), filter 0.6s ease;
+        }
+        .door-panel-molding {
+            position: absolute; top: 14px; bottom: 14px; left: 12px; right: 12px;
+            border: 1px solid rgba(184, 155, 114, 0.38);
+            box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.45), inset 0 0 0 4px rgba(158, 133, 118, 0.22);
+            pointer-events: none; border-radius: 4px;
+        }
+        .inner-motif-top {
+            animation: motifFloatTop 6s infinite ease-in-out;
+        }
+        .inner-motif-bottom {
+            animation: motifFloatBottom 6s infinite ease-in-out;
+        }
+        @keyframes motifFloatTop {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(2px, 3px) scale(1.015); }
+        }
+        @keyframes motifFloatBottom {
+            0%, 100% { transform: scale(-1, -1) translate(0, 0); }
+            50% { transform: scale(-1.015, -1.015) translate(2px, 3px); }
+        }
+
         .seal-wrapper {
-            position: absolute; top: 50%; right: 0; transform: translate(50%, -50%);
-            z-index: 10; display: flex; flex-direction: column; align-items: center;
-            cursor: pointer; pointer-events: auto;
+            position: absolute; top: 50%; right: 0; transform: translate(50%, -50%); z-index: 10;
+            display: flex; flex-direction: column; align-items: center; cursor: pointer; pointer-events: auto; -webkit-tap-highlight-color: transparent;
         }
+
         .door-seal {
-            width: 110px; height: 110px; border-radius: 50%;
-            background: var(--gold-gradient);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.8), inset 0 2px 6px rgba(255,255,255,0.6), inset 0 -4px 10px rgba(100,70,0,0.6);
-            display: flex; align-items: center; justify-content: center; position: relative;
-            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.8s ease;
+            width: 96px; height: 126px; border-radius: 50%;
+            background: linear-gradient(135deg, #FBF6F0 0%, #E7D8C9 48%, #CBB59F 100%);
+            box-shadow: 6px 12px 26px rgba(60, 44, 35, 0.32), -2px -2px 10px rgba(255, 255, 255, 0.9), inset 2px 2px 5px rgba(255, 255, 255, 0.95), inset -2px -3px 7px rgba(130, 105, 90, 0.5);
+            display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
         }
+
+        /* MÜHÜR ÜZERİNDE ALTIN IŞILTI GEÇİŞİ */
+        .door-seal::before {
+            content: ''; position: absolute; top: -50%; left: -60%; width: 55%; height: 200%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+            transform: rotate(25deg); animation: sealShine 3.8s infinite ease-in-out; pointer-events: none;
+        }
+        @keyframes sealShine {
+            0%, 30% { left: -70%; }
+            65%, 100% { left: 140%; }
+        }
+
         .door-seal-inner {
-            width: 92px; height: 92px; border-radius: 50%;
-            background: #111;
-            box-shadow: inset 0 3px 10px rgba(0,0,0,0.9), 0 2px 4px rgba(255,255,255,0.3);
-            border: 2px solid var(--gold-base);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            position: relative;
+            width: 80px; height: 108px; border-radius: 50%;
+            background: linear-gradient(145deg, #E8DBD0 0%, #F7F0E8 100%);
+            box-shadow: inset 2px 3px 6px rgba(115, 90, 75, 0.38), inset -2px -2px 4px rgba(255, 255, 255, 0.92), 0 1px 2px rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(158, 133, 118, 0.42); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px 4px; position: relative;
         }
-        .seal-initials {
-            display: flex; align-items: center; justify-content: center;
-            width: 100%; height: 100%; font-family: 'Cinzel', serif; font-size: 32px; font-weight: 700;
-            background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            line-height: 1; letter-spacing: 0; white-space: nowrap; text-align: center;
-        }
-        .seal-prompt {
-            margin-top: 25px; background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(5px);
-            border: 1px solid var(--gold-base); padding: 8px 24px; border-radius: 30px;
-            font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 4px;
-            text-transform: uppercase; color: var(--gold-light); font-weight: 600;
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.25);
-            animation: pulseGold 2s infinite ease-in-out; white-space: nowrap;
-        }
-        @keyframes pulseGold { 0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); } 50% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); } }
-        
-        .seal-wrapper:hover .door-seal { transform: scale(1.08); }
-        #door-container.open .door-seal { transform: scale(1.5) rotate(180deg); opacity: 0; transition: all 1.2s ease; }
-        #door-container.open .seal-prompt { opacity: 0; transition: 0.3s; }
 
-        /* İNCE ALTIN ÇERÇEVE */
-        #inner-frame-layer {
-            position: absolute; top: 15px; left: 15px; right: 15px; bottom: 15px;
-            border: 1.5px solid var(--gold-dark); border-radius: 4px; pointer-events: none; z-index: 50; opacity: 0; transition: opacity 2s ease 1s;
+        .door-seal-inner::after {
+            content: ''; position: absolute; top: 4px; left: 4px; right: 4px; bottom: 4px;
+            border-radius: 50%; border: 0.9px dashed rgba(158, 133, 118, 0.38); pointer-events: none;
         }
-        #inner-frame-layer::before {
-            content:''; position: absolute; top: 6px; left: 6px; right: 6px; bottom: 6px;
-            border: 1px dashed rgba(212, 175, 55, 0.4); border-radius: 2px;
-        }
+
+        .seal-flower-svg { width: 44px; height: 54px; filter: drop-shadow(1.5px 2px 1.5px rgba(90, 68, 55, 0.28)) drop-shadow(-1px -1px 1px rgba(255, 255, 255, 0.95)); margin-bottom: 2px; }
+        .seal-initials { font-family: 'Playfair Display', serif; font-size: 13.5px; font-weight: 600; letter-spacing: 2.2px; color: #5B4437; text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.95), -0.5px -0.5px 0px rgba(74, 56, 46, 0.2); line-height: 1; margin-top: 2px; }
+        .seal-prompt { margin-top: 13px; background: rgba(248, 241, 235, 0.95); border: 1px solid rgba(158, 133, 118, 0.6); padding: 6px 16px; border-radius: 20px; font-family: 'Playfair Display', serif; font-size: 10px; letter-spacing: 2.8px; text-transform: uppercase; color: var(--text-dark); box-shadow: 0 5px 14px rgba(74, 56, 46, 0.16); animation: gentlePulse 2.2s infinite ease-in-out; transition: opacity 0.4s ease; white-space: nowrap; }
+
+        .seal-wrapper:hover .door-seal { transform: scale(1.06); box-shadow: 8px 14px 28px rgba(60, 44, 35, 0.36), -2px -2px 8px rgba(255, 255, 255, 0.95); }
+        .seal-wrapper:active .door-seal { transform: scale(0.97); }
+        #door-container.open .seal-prompt { opacity: 0; }
+
+        @keyframes gentlePulse { 0%, 100% { transform: translateY(0); opacity: 0.88; } 50% { transform: translateY(-4px); opacity: 1; } }
+
+        #inner-frame-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; opacity: 0; transition: opacity 1.2s ease 0.5s; }
         .doors-opened #inner-frame-layer { opacity: 1; }
+        .arch-svg-frame { position: absolute; top: 18px; left: 18px; right: 18px; bottom: 18px; width: calc(100% - 36px); height: calc(100% - 36px); }
 
-        /* YÜZEN KONTROLLER */
-        .floating-controls { position: absolute; bottom: 25px; right: 25px; z-index: 100; }
-        .circle-btn {
-            width: 45px; height: 45px; border-radius: 50%; background: rgba(10,10,10,0.8);
-            backdrop-filter: blur(10px); border: 1px solid var(--gold-base); color: var(--gold-light);
-            display: flex; justify-content: center; align-items: center; font-size: 18px; cursor: pointer;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.15); transition: transform 0.3s;
+        /* SAĞ KENAR ZARİF SAHNE NAVİGASYON NOKTALARI */
+        #slide-nav-dots {
+            position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+            z-index: 95; display: flex; flex-direction: column; gap: 8px;
+            opacity: 0; pointer-events: none; transition: opacity 0.8s ease 0.8s;
         }
-        .circle-btn:active { transform: scale(0.9); }
-        .scroll-hint {
-            position: absolute; bottom: 35px; left: 50%; transform: translateX(-50%);
-            color: var(--gold-light); font-size: 11px; letter-spacing: 4px; font-family: 'Cinzel', serif;
-            text-transform: uppercase; animation: bounce 2s infinite; opacity: 0; pointer-events: none; z-index: 100;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.8); font-weight: 600;
+        .doors-opened #slide-nav-dots { opacity: 1; pointer-events: auto; }
+        .slide-dot {
+            width: 7px; height: 7px; border-radius: 50%;
+            background: rgba(158, 133, 118, 0.35); border: 1px solid var(--border-brown);
+            cursor: pointer; transition: all 0.3s ease; padding: 0;
         }
-        .doors-opened .scroll-hint { opacity: 1; }
-        @keyframes bounce { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, -8px); } }
+        .slide-dot.active {
+            background: var(--accent-brown); transform: scale(1.35) rotate(45deg);
+            border-radius: 1px; box-shadow: 0 0 6px rgba(110, 85, 71, 0.4);
+        }
 
-        /* SCROLL YAPISI */
-        .scroll-container { height: 100vh; width: 100%; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; scrollbar-width: none; position: relative; z-index: 5; }
+        .floating-btn {
+            position: absolute; z-index: 100; background: rgba(246, 238, 231, 0.88); border: 1px solid var(--border-brown); color: var(--text-dark);
+            backdrop-filter: blur(6px); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; box-shadow: 0 4px 14px rgba(74, 56, 46, 0.14);
+        }
+        .floating-btn:hover { background: var(--accent-brown); color: #fff; }
+        #scroll-down-btn {
+            bottom: 32px; left: 50%; transform: translateX(-50%); padding: 8px 22px; border-radius: 25px;
+            font-family: 'Playfair Display', serif; font-size: 12.5px; letter-spacing: 1.5px; opacity: 0; pointer-events: none;
+            animation: floatBtn 2.6s infinite ease-in-out;
+        }
+        @keyframes floatBtn {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, -4px); }
+        }
+        .doors-opened #scroll-down-btn { opacity: 1; pointer-events: auto; }
+        #music-btn { bottom: 28px; right: 26px; width: 40px; height: 40px; border-radius: 50%; font-size: 16px; }
+        #music-btn.playing {
+            box-shadow: 0 0 0 4px rgba(200, 169, 126, 0.25), 0 4px 14px rgba(74, 56, 46, 0.2);
+            animation: musicPulse 2s infinite ease-out;
+        }
+        @keyframes musicPulse {
+            0% { box-shadow: 0 0 0 0 rgba(158, 133, 118, 0.45); }
+            70% { box-shadow: 0 0 0 10px rgba(158, 133, 118, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(158, 133, 118, 0); }
+        }
+        #admin-quick-btn { top: 26px; right: 26px; width: 34px; height: 34px; border-radius: 50%; font-size: 14px; opacity: 0.5; }
+        #admin-quick-btn:hover { opacity: 1; }
+        #replay-door-btn { top: 26px; left: 26px; width: 34px; height: 34px; border-radius: 50%; font-size: 13px; opacity: 0; pointer-events: none; }
+        .doors-opened #replay-door-btn { opacity: 0.5; pointer-events: auto; }
+        .doors-opened #replay-door-btn:hover { opacity: 1; }
+
+        .scroll-container { height: 100vh; width: 100%; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; scrollbar-width: none; position: relative; z-index: 48; }
         .scroll-container::-webkit-scrollbar { display: none; }
+
         section.slide {
             height: 100vh; width: 100%; scroll-snap-align: start; scroll-snap-stop: always;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 40px 30px; text-align: center; position: relative;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 62px 38px 82px 38px; text-align: center; position: relative;
         }
 
-        /* SAHNE 1: HERO SCENE */
-        #hero-slide { padding: 0; justify-content: flex-end; }
-        .hero-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;
-            background-size: cover; background-position: center; opacity: 0.7; filter: contrast(1.1) sepia(0.3);
-        }
-        .hero-gradient {
-            position: absolute; bottom: 0; left: 0; width: 100%; height: 75%;
-            background: linear-gradient(to top, rgba(10, 10, 10, 1) 0%, rgba(10, 10, 10, 0.8) 40%, rgba(10, 10, 10, 0) 100%); z-index: 0;
-        }
-        .hero-content { position: relative; z-index: 1; padding-bottom: 90px; width: 100%; }
-        .hero-date { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 8px; color: var(--gold-light); text-transform: uppercase; margin-bottom: 20px; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
-        .hero-names { font-family: 'Playfair Display', serif; font-size: 46px; color: #fff; line-height: 1.2; text-shadow: 0 4px 20px rgba(0,0,0,0.9); }
-        .hero-names .ve { font-family: 'Great Vibes', cursive; font-size: 38px; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0 10px; }
-
-        /* ŞATAFATLI SİYAH CAM PANELLER */
-        .glass-panel {
-            background: var(--bg-card); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border); border-radius: 8px;
-            padding: 35px 25px; width: 100%; box-shadow: 0 15px 40px rgba(0,0,0,0.5), inset 0 0 20px rgba(212,175,55,0.05);
-            position: relative; overflow: hidden;
-        }
-        .glass-panel::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
-            background: var(--gold-gradient); opacity: 0.8;
-        }
-        
-        .anim-item { opacity: 0; transform: translateY(35px); transition: opacity 1s ease-out, transform 1s cubic-bezier(0.21, 1.02, 0.73, 1); }
+        .anim-item { opacity: 0; transform: translateY(28px); transition: opacity 0.9s ease-out, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
         section.slide.active .anim-item { opacity: 1; transform: translateY(0); }
-        .d-1 { transition-delay: 0.15s; } .d-2 { transition-delay: 0.3s; } .d-3 { transition-delay: 0.45s; }
+        .d-1 { transition-delay: 0.12s; } .d-2 { transition-delay: 0.26s; } .d-3 { transition-delay: 0.4s; } .d-4 { transition-delay: 0.54s; }
 
-        .gold-title {
-            font-family: 'Cinzel', serif; font-size: 22px; background: var(--gold-gradient);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            margin-bottom: 15px; text-transform: uppercase; letter-spacing: 5px; font-weight: 700;
+        .couple-names-lg {
+            font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 400; color: var(--text-dark);
+            line-height: 1.15; letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8);
         }
-        .sub-text { font-size: 17px; line-height: 1.6; color: var(--text-muted); font-style: italic; }
-        .thin-divider { width: 80px; height: 1px; background: var(--gold-gradient); margin: 20px auto; opacity: 0.5; }
+        .couple-names-md { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 400; color: var(--text-dark); }
+        .ve-script { font-family: 'Great Vibes', cursive; font-size: 32px; color: var(--text-muted); display: inline-block; margin: 2px 8px; }
 
-        /* Kraliyet Butonu */
-        .btn-luxury {
-            background: transparent; color: var(--gold-light); border: 1px solid var(--gold-base);
-            padding: 14px 30px; border-radius: 4px; font-family: 'Cinzel', serif; font-size: 13px; font-weight: 600;
-            letter-spacing: 4px; text-transform: uppercase; cursor: pointer;
-            transition: all 0.4s ease; width: 100%; max-width: 260px;
-            display: inline-flex; justify-content: center; align-items: center; gap: 10px; box-shadow: inset 0 0 0 0 var(--gold-base);
+        /* ÇİFT FOTOĞRAFI ÇERÇEVESİ (COUTURE ÇİFT KATMANLI KEMER ÇERÇEVE) */
+        .couple-photo-wrap {
+            width: 158px; height: 210px; margin: 8px auto 14px auto;
+            border-radius: 90px; padding: 7px;
+            border: 1.5px solid var(--border-brown);
+            background: linear-gradient(145deg, rgba(255,255,255,0.85), rgba(235, 222, 210, 0.65));
+            box-shadow: 0 12px 30px rgba(74, 56, 46, 0.18), inset 0 0 0 4px var(--bg-cream), inset 0 0 0 5px rgba(158, 133, 118, 0.35);
+            display: none; align-items: center; justify-content: center; overflow: hidden; position: relative;
         }
-        .btn-luxury:hover { box-shadow: inset 0 0 20px 0 rgba(212,175,55,0.3); background: rgba(212,175,55,0.1); }
-
-        .styled-input {
-            width: 100%; max-width: 260px; padding: 12px 0; border: none; border-bottom: 1px solid rgba(212, 175, 55, 0.4);
-            background: transparent; font-family: 'Cormorant Garamond', serif; font-size: 18px;
-            color: var(--text-light); text-align: center; outline: none; margin-bottom: 18px; transition: 0.3s;
+        .couple-photo-wrap.has-photo { display: flex; }
+        .couple-photo-wrap::after {
+            content: ''; position: absolute; inset: 3px; border-radius: 86px;
+            border: 1px dashed rgba(158, 133, 118, 0.45); pointer-events: none;
         }
-        .styled-input::placeholder { color: rgba(168, 168, 168, 0.5); font-style: italic; }
-        .styled-input:focus { border-bottom-color: var(--gold-light); }
-
-        .radio-group { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 260px; margin: 15px auto; }
-        .radio-label {
-            display: flex; align-items: center; gap: 12px; padding: 14px 20px;
-            border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 4px; background: rgba(20,20,20,0.8);
-            cursor: pointer; font-family: 'Cormorant Garamond', serif; font-size: 17px; transition: 0.3s; color: var(--text-muted);
+        .couple-photo-wrap img {
+            width: 100%; height: 100%; object-fit: cover; border-radius: 82px;
+            display: block; filter: contrast(1.02) saturate(1.03);
         }
-        .radio-label:hover { border-color: var(--gold-base); color: var(--gold-light); }
-        .radio-label input { accent-color: var(--gold-base); transform: scale(1.2); }
 
-        .stepper-wrap {
-            display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 260px;
-            padding: 5px 15px; border-bottom: 1px solid rgba(212, 175, 55, 0.4); margin: 0 auto 25px auto;
+        /* MONOGRAM BADGE */
+        .monogram-crest {
+            font-family: 'Great Vibes', cursive; font-size: 26px; color: var(--accent-brown);
+            margin-bottom: 4px; opacity: 0.85; letter-spacing: 1px;
         }
-        .step-btn { width: 30px; height: 30px; background: transparent; border: none; font-size: 22px; color: var(--gold-base); cursor: pointer; }
 
-        .list-item { margin-bottom: 18px; }
-        .list-cat { font-size: 11px; letter-spacing: 4px; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 4px; font-family: 'Cinzel', serif;}
-        .list-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 500; color: var(--gold-light); line-height: 1.2; }
-        .list-desc { font-size: 15px; font-style: italic; color: var(--text-muted); margin-top: 4px; }
+        .ribbon-title {
+            display: inline-block; border: 1px solid var(--border-brown); padding: 7px 28px; border-radius: 30px; font-family: 'Playfair Display', serif;
+            font-size: 15px; letter-spacing: 2.2px; text-transform: uppercase; color: var(--text-dark); margin-bottom: 14px;
+            background: linear-gradient(180deg, rgba(255, 253, 250, 0.85) 0%, rgba(243, 234, 227, 0.65) 100%);
+            box-shadow: 0 4px 12px rgba(74, 56, 46, 0.07); position: relative;
+        }
+        .ribbon-title::before, .ribbon-title::after { content: '✦'; position: absolute; top: 50%; transform: translateY(-50%); color: var(--border-brown); font-size: 10px; }
+        .ribbon-title::before { left: 10px; } .ribbon-title::after { right: 10px; }
 
-        /* --- ADMİN PANELİ (CSS) --- */
-        #admin-panel { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #111; z-index: 99999; overflow-y: auto; color: #F4F4F4; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        .adm-shell { max-width: 1000px; margin: 0 auto; padding: 24px; }
-        .adm-header { background: #1A1A1A; border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; border: 1px solid #333; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
-        .adm-brand { display: flex; align-items: center; gap: 16px; }
-        .adm-logo { width: 48px; height: 48px; border-radius: 8px; background: linear-gradient(135deg, #D4AF37, #997A15); color: #000; display: flex; align-items: center; justify-content: center; font-family: 'Cinzel', serif; font-weight: 700; font-size: 18px; }
-        .adm-title h1 { font-size: 20px; font-weight: 700; margin: 0 0 4px 0; color: #fff; }
-        .adm-status { display: inline-block; font-size: 12px; font-weight: 600; background: rgba(212,175,55,0.2); color: #D4AF37; padding: 4px 10px; border-radius: 4px; border: 1px solid #D4AF37; }
-        .btn-adm { padding: 10px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; transition: 0.2s; }
-        .btn-adm-primary { background: linear-gradient(135deg, #D4AF37, #997A15); color: #000; }
-        .btn-adm-primary:hover { opacity:0.9; }
-        .btn-adm-secondary { background: #2A2A2A; color: #D4AF37; border: 1px solid #444; }
-        .adm-tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 24px; border-bottom: 1px solid #333; scrollbar-width: none; }
-        .adm-tab { background: transparent; border: none; padding: 12px 20px; font-size: 14px; font-weight: 600; color: #888; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap; }
-        .adm-tab.active { color: #D4AF37; border-bottom-color: #D4AF37; }
-        .adm-tab-content { display: none; animation: fadeIn 0.3s ease; } .adm-tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-        .adm-card { background: #1A1A1A; border-radius: 12px; border: 1px solid #333; padding: 24px; margin-bottom: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-        .adm-form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .f-row { margin-bottom: 16px; } .f-row label { display: block; font-size: 13px; font-weight: 600; color: #CCC; margin-bottom: 6px; }
-        .adm-input { width: 100%; padding: 10px 14px; border: 1px solid #444; border-radius: 6px; font-size: 14px; background: #0A0A0A; color: #FFF; outline: none; transition: border 0.3s; }
-        .adm-input:focus { border-color: #D4AF37; }
-        .adm-table-container { overflow-x: auto; border: 1px solid #333; border-radius: 8px; }
-        .adm-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; color:#ddd; }
-        .adm-table th { background: #222; padding: 12px 16px; font-weight: 600; color: #D4AF37; text-transform: uppercase; font-size: 11px; border-bottom: 1px solid #333; }
-        .adm-table td { padding: 14px 16px; border-bottom: 1px solid #333; }
-        .adm-dynamic-row { display: flex; gap: 10px; align-items: center; background: #222; padding: 12px; border: 1px solid #333; border-radius: 8px; margin-bottom: 10px; }
-        .btn-adm-danger { background: #500; color: #F99; border:1px solid #800; padding: 8px 12px; border-radius: 6px; font-size:12px; cursor: pointer; transition: 0.3s; }
-        .btn-adm-danger:hover { background: #700; color: #FFF; }
+        .sub-label { font-size: 11.5px; letter-spacing: 3.2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; font-weight: 600; }
+        .ornament-line { width: 135px; height: 14px; margin: 8px auto; display: flex; align-items: center; justify-content: center; }
+        .ornament-line::before, .ornament-line::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--border-brown), transparent); opacity: 0.75; }
+        .ornament-diamond { width: 6px; height: 6px; background: var(--border-brown); transform: rotate(45deg); margin: 0 8px; position: relative; }
+
+        .families-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; width: 100%; margin-top: 14px; }
+        .family-box {
+            padding: 14px 10px; border-radius: 16px; border: 1px solid rgba(158, 133, 118, 0.35);
+            background: var(--card-bg); box-shadow: 0 4px 14px rgba(74, 56, 46, 0.05);
+        }
+        .family-box strong { display: block; font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 500; margin-bottom: 4px; color: var(--text-dark); }
+        .family-box span { font-size: 11px; letter-spacing: 2.2px; text-transform: uppercase; color: var(--text-muted); }
+
+        .date-oval-badge {
+            width: 186px; height: 236px; border: 1.5px solid var(--border-brown); border-radius: 100px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            margin: 10px auto 18px auto; background: linear-gradient(180deg, rgba(255,253,250,0.8) 0%, rgba(243,234,227,0.5) 100%);
+            box-shadow: 0 10px 26px rgba(74, 56, 46, 0.1), inset 0 0 0 5px var(--bg-cream), inset 0 0 0 6px rgba(158, 133, 118, 0.45); padding: 18px;
+        }
+        .date-oval-badge .day-num { font-family: 'Playfair Display', serif; font-size: 60px; line-height: 1; color: var(--text-dark); }
+        .date-oval-badge .month-txt { font-family: 'Playfair Display', serif; font-size: 18px; letter-spacing: 3px; text-transform: uppercase; margin: 10px 0 6px 0; }
+        .date-oval-badge .year-txt { font-size: 16px; letter-spacing: 2.5px; color: var(--text-muted); }
+        .pill-row { display: flex; gap: 12px; justify-content: center; width: 100%; }
+        .info-pill { border: 1px solid var(--border-brown); border-radius: 25px; padding: 8px 18px; font-size: 12.5px; letter-spacing: 1.5px; text-transform: uppercase; background: var(--card-bg); min-width: 120px; box-shadow: 0 3px 10px rgba(74, 56, 46, 0.05); }
+
+        .map-frame { width: 100%; height: 170px; border: 1.5px solid var(--border-brown); border-radius: 16px; overflow: hidden; margin: 10px 0 14px 0; position: relative; background: #e5ddd5; box-shadow: 0 8px 20px rgba(74, 56, 46, 0.1); }
+        .map-frame iframe { width: 100%; height: 100%; border: none; filter: sepia(0.22) contrast(0.96); }
+
+        .btn-outline { background: var(--card-bg); color: var(--text-dark); border: 1px solid var(--border-brown); padding: 9px 24px; border-radius: 25px; font-family: 'Playfair Display', serif; font-size: 12.5px; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 12px rgba(74, 56, 46, 0.06); }
+        .btn-outline:hover, .btn-solid:hover { background: var(--accent-brown); color: #fff; transform: translateY(-1px); box-shadow: 0 6px 16px rgba(74, 56, 46, 0.18); }
+        .btn-solid { background: linear-gradient(135deg, var(--accent-brown), var(--text-dark)); color: #fff; border: 1px solid var(--accent-brown); padding: 10px 26px; border-radius: 25px; font-family: 'Playfair Display', serif; font-size: 12.5px; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; width: 100%; max-width: 280px; box-shadow: 0 4px 14px rgba(74, 56, 46, 0.18); }
+
+        .cd-big-days { font-family: 'Playfair Display', serif; font-size: 66px; line-height: 1; color: var(--text-dark); text-shadow: 0 2px 10px rgba(255,255,255,0.7); }
+        .cd-hms-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; width: 100%; max-width: 290px; margin: 16px auto; }
+        .cd-box {
+            background: var(--card-bg); border: 1px solid rgba(158, 133, 118, 0.45);
+            border-radius: 14px; padding: 10px 6px; box-shadow: 0 4px 12px rgba(74, 56, 46, 0.05);
+        }
+        .cd-box .num { font-family: 'Playfair Display', serif; font-size: 26px; display: block; line-height: 1.1; }
+        .cd-box .lbl { font-size: 9.5px; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; margin-top: 3px; display: block; }
+
+        .timeline-item {
+            margin: 6px 0; padding: 10px 16px; border-radius: 14px;
+            background: var(--card-bg); border: 1px solid rgba(158, 133, 118, 0.32);
+            box-shadow: 0 3px 10px rgba(74, 56, 46, 0.04);
+        }
+        .menu-item {
+            margin: 6px 0; padding: 10px 14px; border-radius: 14px;
+            background: var(--card-bg); border: 1px solid rgba(158, 133, 118, 0.32);
+        }
+        .timeline-time { font-size: 12px; letter-spacing: 2.2px; color: var(--accent-brown); font-weight: 700; }
+        .timeline-title { font-family: 'Playfair Display', serif; font-size: 20px; margin-top: 2px; }
+        .menu-cat { font-size: 10.5px; letter-spacing: 2.5px; color: var(--accent-brown); text-transform: uppercase; font-weight: 700; }
+        .menu-name { font-family: 'Playfair Display', serif; font-size: 19px; margin: 2px 0; }
+        .menu-desc { font-size: 13.5px; font-style: italic; color: var(--text-muted); }
+
+        .glass-card { border: 1px solid rgba(158, 133, 118, 0.55); border-radius: 16px; padding: 14px 14px; background: var(--card-bg); backdrop-filter: blur(4px); width: 100%; margin: 6px 0; box-shadow: 0 6px 18px rgba(74, 56, 46, 0.06); }
+        .styled-input { width: 100%; max-width: 280px; padding: 9px 14px; border: 1px solid var(--border-brown); border-radius: 25px; background: rgba(255,255,255,0.75); font-family: 'Cormorant Garamond', serif; font-size: 15px; color: var(--text-dark); text-align: center; outline: none; margin: 4px 0; transition: all 0.25s; }
+        .styled-input:focus { background: #fff; box-shadow: 0 0 0 3px rgba(158, 133, 118, 0.22); }
+        .radio-btn-label { display: flex; align-items: center; justify-content: flex-start; gap: 10px; width: 100%; max-width: 280px; padding: 10px 18px; margin: 6px auto; border: 1px solid var(--border-brown); border-radius: 25px; background: var(--card-bg); cursor: pointer; font-size: 16px; transition: all 0.2s; }
+        .radio-btn-label:hover { background: rgba(255,255,255,0.85); }
+        .radio-btn-label input { accent-color: var(--accent-brown); transform: scale(1.2); }
+        .stepper-wrap { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 280px; border: 1px solid var(--border-brown); border-radius: 25px; padding: 4px 8px; margin: 8px auto 16px auto; background: var(--card-bg); }
+        .step-btn { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border-brown); background: transparent; font-size: 18px; color: var(--text-dark); cursor: pointer; transition: 0.2s; }
+        .step-btn:hover { background: var(--accent-brown); color: #fff; }
+
+        /* ÖN YÜZ MİNİ FOTOĞRAF VE ŞARKI LİSTESİ */
+        .mini-gallery-strip {
+            display: flex; gap: 8px; overflow-x: auto; padding: 6px 2px; margin-top: 8px;
+            max-width: 100%; scrollbar-width: thin;
+        }
+        .mini-gallery-strip img {
+            width: 54px; height: 54px; object-fit: cover; border-radius: 10px;
+            border: 1.5px solid var(--border-brown); cursor: pointer; flex-shrink: 0;
+            box-shadow: 0 2px 6px rgba(74, 56, 46, 0.15); transition: transform 0.2s;
+        }
+        .mini-gallery-strip img:hover { transform: scale(1.08); }
+        .guest-songs-feed {
+            width: 100%; max-width: 300px; max-height: 92px; overflow-y: auto;
+            margin-top: 8px; border-top: 1px dashed rgba(158, 133, 118, 0.45); padding-top: 6px;
+            text-align: left; font-size: 13px; scrollbar-width: thin;
+        }
+        .guest-song-row {
+            padding: 4px 10px; border-radius: 10px; background: rgba(255,255,255,0.55);
+            border: 1px solid rgba(158, 133, 118, 0.2);
+            margin-bottom: 4px; display: flex; justify-content: space-between; gap: 6px;
+        }
+        .guest-song-row strong { color: var(--text-dark); font-weight: 700; }
+        .guest-song-row span { color: var(--text-muted); flex: 1; text-align: right; }
+
+        /* ==========================================================================
+           2. YENİ NESİL PREMİUM ADMİN PANELİ STİLLERİ
+           ========================================================================== */
+        #admin-panel {
+            display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #F4F7F6; z-index: 99999; overflow-y: auto;
+            color: #1F2937; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
         
-        /* Fotoğraf Sıkıştırma Önizleme Resmi (Admin) */
-        .photo-preview-img { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; border: 1px solid #444; }
+        .adm-shell { max-width: 1080px; margin: 0 auto; padding: 24px; }
+        
+        .adm-header {
+            background: #ffffff; border-radius: 16px; padding: 20px 24px; margin-bottom: 24px;
+            display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid #E5E7EB;
+        }
+        .adm-brand { display: flex; align-items: center; gap: 16px; }
+        .adm-logo {
+            width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, #6E5547, #4A382E);
+            color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 600; font-size: 18px; box-shadow: 0 4px 10px rgba(74, 56, 46, 0.2);
+        }
+        .adm-title h1 { font-size: 20px; font-weight: 700; color: #111827; margin: 0 0 4px 0; letter-spacing: -0.5px; }
+        .adm-status { display: inline-block; font-size: 12px; font-weight: 600; background: #D1FAE5; color: #065F46; padding: 4px 10px; border-radius: 20px; }
+        
+        .adm-header-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+        .btn-adm {
+            padding: 10px 16px; border-radius: 8px; font-weight: 600; font-size: 13px; border: none; cursor: pointer;
+            display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; text-decoration: none; font-family: inherit;
+        }
+        .btn-adm-primary { background: linear-gradient(135deg, #6E5547, #4A382E); color: #fff; box-shadow: 0 4px 10px rgba(74, 56, 46, 0.2); }
+        .btn-adm-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 14px rgba(74, 56, 46, 0.3); }
+        .btn-adm-secondary { background: #F3F4F6; color: #374151; border: 1px solid #E5E7EB; }
+        .btn-adm-secondary:hover { background: #E5E7EB; }
+        .btn-adm-success { background: #059669; color: #fff; }
+        .btn-adm-success:hover { background: #047857; }
+        .btn-adm-danger { background: #FEE2E2; color: #991B1B; padding: 6px 12px; font-size: 12px; border-radius: 6px; }
+        .btn-adm-danger:hover { background: #FECACA; }
+        
+        .adm-kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+        .adm-kpi-card { background: #fff; padding: 20px; border-radius: 16px; border: 1px solid #E5E7EB; box-shadow: 0 2px 10px rgba(0,0,0,0.02); display: flex; align-items: center; gap: 16px; }
+        .adm-kpi-icon { width: 48px; height: 48px; border-radius: 12px; background: #F3F4F6; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .adm-kpi-info p { font-size: 12px; color: #6B7280; font-weight: 600; text-transform: uppercase; margin: 0 0 4px 0; letter-spacing: 0.5px; }
+        .adm-kpi-info h3 { font-size: 26px; color: #111827; font-weight: 800; margin: 0; line-height: 1; }
 
-        #adm-toast { position: fixed; top: 24px; right: 24px; z-index: 100000; background: #D4AF37; color: #000; padding: 14px 24px; border-radius: 8px; font-weight: 600; font-size: 14px; transform: translateX(120%); transition: transform 0.4s; display: flex; align-items: center; gap: 10px; }
+        .adm-tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 24px; border-bottom: 2px solid #E5E7EB; scrollbar-width: none; }
+        .adm-tabs::-webkit-scrollbar { display: none; }
+        .adm-tab {
+            background: transparent; border: none; padding: 12px 20px; font-size: 14px; font-weight: 600; color: #6B7280; cursor: pointer;
+            border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all 0.2s; white-space: nowrap; font-family: inherit;
+        }
+        .adm-tab:hover { color: #4A382E; }
+        .adm-tab.active { color: #4A382E; border-bottom-color: #4A382E; }
+
+        .adm-tab-content { display: none; animation: fadeIn 0.3s ease; }
+        .adm-tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        .adm-card { background: #fff; border-radius: 16px; border: 1px solid #E5E7EB; padding: 24px; margin-bottom: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
+        .adm-card-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 20px; border-bottom: 1px solid #F3F4F6; padding-bottom: 16px; }
+        .adm-card-header h2 { font-size: 16px; font-weight: 700; color: #111827; margin: 0; display: flex; align-items: center; gap: 8px; }
+        
+        .adm-form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .adm-form-group { margin-bottom: 16px; }
+        .adm-form-group label { display: block; font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 6px; }
+        .adm-input {
+            width: 100%; padding: 10px 14px; border: 1px solid #D1D5DB; border-radius: 8px; font-size: 14px;
+            font-family: inherit; background: #F9FAFB; color: #111827; transition: all 0.2s; outline: none;
+        }
+        .adm-input:focus { border-color: #A89080; background: #fff; box-shadow: 0 0 0 3px rgba(168, 144, 128, 0.15); }
+        textarea.adm-input { resize: vertical; min-height: 80px; }
+
+        .adm-table-container { overflow-x: auto; border: 1px solid #E5E7EB; border-radius: 12px; }
+        .adm-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; white-space: nowrap; }
+        .adm-table th { background: #F9FAFB; padding: 12px 16px; font-weight: 600; color: #4B5563; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; border-bottom: 1px solid #E5E7EB; }
+        .adm-table td { padding: 14px 16px; border-bottom: 1px solid #F3F4F6; color: #1F2937; vertical-align: middle; }
+        .adm-table tr:hover td { background: #F9FAFB; }
+        .adm-badge-success { background: #D1FAE5; color: #065F46; padding: 4px 10px; border-radius: 20px; font-weight: 600; font-size: 12px; }
+        .adm-badge-error { background: #FEE2E2; color: #991B1B; padding: 4px 10px; border-radius: 20px; font-weight: 600; font-size: 12px; }
+
+        .adm-photo-thumb {
+            width: 64px; height: 64px; object-fit: cover; border-radius: 8px; border: 1px solid #D1D5DB; cursor: pointer; transition: transform 0.2s;
+        }
+        .adm-photo-thumb:hover { transform: scale(1.08); }
+
+        .adm-dynamic-row { display: flex; gap: 10px; align-items: center; background: #F9FAFB; padding: 12px; border: 1px solid #E5E7EB; border-radius: 10px; margin-bottom: 10px; }
+
+        #adm-toast {
+            position: fixed; top: 24px; right: 24px; z-index: 100001; background: #10B981; color: #fff; padding: 14px 24px; border-radius: 12px;
+            font-weight: 600; font-size: 14px; box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3); transform: translateX(130%); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; align-items: center; gap: 10px;
+        }
         #adm-toast.show { transform: translateX(0); }
+
+        /* LIGHTBOX MODAL */
+        #photo-lightbox {
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100002;
+            align-items: center; justify-content: center; flex-direction: column; padding: 20px;
+        }
+        #photo-lightbox.open { display: flex; }
+        #photo-lightbox img { max-width: 92vw; max-height: 80vh; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); object-fit: contain; }
+
+        @media (max-width: 768px) {
+            .adm-shell { padding: 16px; }
+            .adm-header { padding: 16px; flex-direction: column; align-items: stretch; gap: 16px; }
+            .adm-header-actions { justify-content: stretch; }
+            .btn-adm { flex: 1; justify-content: center; }
+            .adm-dynamic-row { flex-direction: column; align-items: stretch; }
+        }
+
+        .svg-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
     </style>
 </head>
 <body>
 
-    <div class="stardust"></div>
-    <audio id="bg-music" loop preload="auto"></audio>
+    <!-- GÖMÜLÜ COUTURE 3D KABARTMALI KRALİYET BOTANİK & BAROK MOTİFLERİ -->
+    <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <!-- 3D Porselen & Fildişi Kabartma Gradyanları -->
+            <linearGradient id="ivory-petal-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFFFFF"/>
+                <stop offset="45%" stop-color="#F7EFE8"/>
+                <stop offset="85%" stop-color="#E5D5C5"/>
+                <stop offset="100%" stop-color="#D4BFAE"/>
+            </linearGradient>
+
+            <linearGradient id="blush-silk-grad" x1="15%" y1="0%" x2="85%" y2="100%">
+                <stop offset="0%" stop-color="#FFFDFB"/>
+                <stop offset="50%" stop-color="#F2E6DC"/>
+                <stop offset="100%" stop-color="#DAC6B4"/>
+            </linearGradient>
+
+            <linearGradient id="sculpted-leaf-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FAF4EE"/>
+                <stop offset="55%" stop-color="#E9DCD0"/>
+                <stop offset="100%" stop-color="#CBB8A6"/>
+            </linearGradient>
+
+            <linearGradient id="champagne-gold-foil" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#D6B785"/>
+                <stop offset="30%" stop-color="#FFF2D6"/>
+                <stop offset="60%" stop-color="#B69056"/>
+                <stop offset="85%" stop-color="#EAD2A8"/>
+                <stop offset="100%" stop-color="#9A7640"/>
+            </linearGradient>
+
+            <radialGradient id="rose-heart-grad" cx="45%" cy="45%" r="55%">
+                <stop offset="0%" stop-color="#B69378"/>
+                <stop offset="45%" stop-color="#DECBB9"/>
+                <stop offset="80%" stop-color="#F5ECE4"/>
+                <stop offset="100%" stop-color="#FFFFFF"/>
+            </radialGradient>
+
+            <!-- Tekil 3D Kabartma Yaprak Parçası -->
+            <g id="embossed-leaf">
+                <path d="M0,0 C12,-14 34,-16 52,-4 C38,10 18,14 0,0 Z" fill="url(#sculpted-leaf-grad)" stroke="#BDA795" stroke-width="0.9"/>
+                <path d="M2,-0.5 C18,-4 34,-4 49,-3.8" fill="none" stroke="url(#champagne-gold-foil)" stroke-width="0.8" opacity="0.85"/>
+                <path d="M16,-3 L24,-8 M26,-3.5 L34,-7 M18,-2.5 L25,2" fill="none" stroke="#C6B19F" stroke-width="0.55" opacity="0.7"/>
+            </g>
+
+            <!-- Couture Katmerli Şakayık / İngiliz Gülü (Ana Çiçek) -->
+            <g id="couture-peony-rose">
+                <!-- Dış Geniş İpek Yapraklar -->
+                <path d="M0,-36 C14,-40 28,-30 28,-16 C28,-6 18,4 0,4 C-18,4 -28,-6 -28,-16 C-28,-30 -14,-40 0,-36 Z" fill="url(#ivory-petal-grad)" stroke="#C2AD9B" stroke-width="0.9"/>
+                <path d="M36,0 C40,14 30,28 16,28 C6,28 -4,18 -4,0 C-4,-18 6,-28 16,-28 C30,-28 40,-14 36,0 Z" fill="url(#ivory-petal-grad)" stroke="#C2AD9B" stroke-width="0.9"/>
+                <path d="M0,36 C-14,40 -28,30 -28,16 C-28,6 -18,-4 0,-4 C18,-4 28,6 28,16 C28,30 14,40 0,36 Z" fill="url(#ivory-petal-grad)" stroke="#C2AD9B" stroke-width="0.9"/>
+                <path d="M-36,0 C-40,-14 -30,-28 -16,-28 C-6,-28 4,-18 4,0 C4,18 -6,28 -16,28 C-30,28 -40,14 -36,0 Z" fill="url(#ivory-petal-grad)" stroke="#C2AD9B" stroke-width="0.9"/>
+                <!-- Çapraz Ara Katman Yapraklar -->
+                <g transform="rotate(45)">
+                    <path d="M0,-33 C12,-36 24,-26 24,-14 C24,-4 14,4 0,4 C-14,4 -24,-4 -24,-14 C-24,-26 -12,-36 0,-33 Z" fill="url(#blush-silk-grad)" stroke="#BFA997" stroke-width="0.85"/>
+                    <path d="M33,0 C36,12 26,24 14,24 C4,24 -4,14 -4,0 C-4,-14 4,-24 14,-24 C26,-24 36,-12 33,0 Z" fill="url(#blush-silk-grad)" stroke="#BFA997" stroke-width="0.85"/>
+                    <path d="M0,33 C-12,36 -24,26 -24,14 C-24,4 -14,-4 0,-4 C14,-4 24,4 24,14 C24,26 12,36 0,33 Z" fill="url(#blush-silk-grad)" stroke="#BFA997" stroke-width="0.85"/>
+                    <path d="M-33,0 C-36,-12 -26,-24 -14,-24 C-4,-24 4,-14 4,0 C4,14 -4,24 -14,24 C-26,24 -36,12 -33,0 Z" fill="url(#blush-silk-grad)" stroke="#BFA997" stroke-width="0.85"/>
+                </g>
+                <!-- İç Kıvrımlı Gonca Katmanı -->
+                <g transform="rotate(22) scale(0.68)">
+                    <path d="M0,-30 C14,-32 25,-20 22,-8 C19,4 8,10 0,10 C-8,10 -19,4 -22,-8 C-25,-20 -14,-32 0,-30 Z" fill="url(#ivory-petal-grad)" stroke="#B8A08E" stroke-width="1"/>
+                    <path d="M30,0 C32,14 20,25 8,22 C-4,19 -10,8 -10,0 C-10,-8 -4,-19 8,-22 C20,-25 32,-14 30,0 Z" fill="url(#ivory-petal-grad)" stroke="#B8A08E" stroke-width="1"/>
+                    <path d="M0,30 C-14,32 -25,20 -22,8 C-19,-4 -8,-10 0,-10 C8,-10 19,-4 22,8 C25,20 14,32 0,30 Z" fill="url(#ivory-petal-grad)" stroke="#B8A08E" stroke-width="1"/>
+                    <path d="M-30,0 C-32,-14 -20,-25 -8,-22 C4,-19 10,-8 10,0 C10,8 4,19 -8,22 C-20,25 -32,14 -30,0 Z" fill="url(#ivory-petal-grad)" stroke="#B8A08E" stroke-width="1"/>
+                </g>
+                <!-- Gül Kalbi & Altın Polen Tomurcukları -->
+                <circle cx="0" cy="0" r="12" fill="url(#rose-heart-grad)" stroke="url(#champagne-gold-foil)" stroke-width="1.1"/>
+                <path d="M-7,-3 C-3,-9 5,-9 8,-2 C10,4 3,9 -4,7 C-9,5 -8,-1 -3,-4 C1,-6 5,-2 3,2" fill="none" stroke="url(#champagne-gold-foil)" stroke-width="1.1" stroke-linecap="round"/>
+                <circle cx="-4" cy="-5" r="1.4" fill="url(#champagne-gold-foil)"/>
+                <circle cx="5" cy="-4" r="1.4" fill="url(#champagne-gold-foil)"/>
+                <circle cx="6" cy="4" r="1.4" fill="url(#champagne-gold-foil)"/>
+                <circle cx="-5" cy="5" r="1.4" fill="url(#champagne-gold-foil)"/>
+                <circle cx="0" cy="0" r="2.2" fill="#8C6D46"/>
+            </g>
+
+            <!-- Zarif Manolya / Zambak Çiçeği (İkincil Çiçek) -->
+            <g id="couture-magnolia">
+                <g transform="rotate(0)"><path d="M0,0 C-10,-12 -8,-26 0,-32 C8,-26 10,-12 0,0 Z" fill="url(#ivory-petal-grad)" stroke="#C2AD9B" stroke-width="0.9"/><path d="M0,-4 L0,-24" stroke="url(#champagne-gold-foil)" stroke-width="0.7" opacity="0.75"/></g>
+                <g transform="rotate(60)"><path d="M0,0 C-10,-12 -8,-26 0,-32 C8,-26 10,-12 0,0 Z" fill="url(#blush-silk-grad)" stroke="#C2AD9B" stroke-width="0.9"/><path d="M0,-4 L0,-24" stroke="url(#champagne-gold-foil)" stroke-width="0.7" opacity="0.75"/></g>
+                <g transform="rotate(120)"><path d="M0,0 C-10,-12 -8,-26 0,-32 C8,-26 10,-12 0,0 Z" fill="url(#ivory-petal-grad)" stroke="#C2AD9B" stroke-width="0.9"/><path d="M0,-4 L0,-24" stroke="url(#champagne-gold-foil)" stroke-width="0.7" opacity="0.75"/></g>
+                <g transform="rotate(180)"><path d="M0,0 C-10,-12 -8,-26 0,-32 C8,-26 10,-12 0,0 Z" fill="url(#blush-silk-grad)" stroke="#C2AD9B" stroke-width="0.9"/><path d="M0,-4 L0,-24" stroke="url(#champagne-gold-foil)" stroke-width="0.7" opacity="0.75"/></g>
+                <g transform="rotate(240)"><path d="M0,0 C-10,-12 -8,-26 0,-32 C8,-26 10,-12 0,0 Z" fill="url(#ivory-petal-grad)" stroke="#C2AD9B" stroke-width="0.9"/><path d="M0,-4 L0,-24" stroke="url(#champagne-gold-foil)" stroke-width="0.7" opacity="0.75"/></g>
+                <g transform="rotate(300)"><path d="M0,0 C-10,-12 -8,-26 0,-32 C8,-26 10,-12 0,0 Z" fill="url(#blush-silk-grad)" stroke="#C2AD9B" stroke-width="0.9"/><path d="M0,-4 L0,-24" stroke="url(#champagne-gold-foil)" stroke-width="0.7" opacity="0.75"/></g>
+                <circle cx="0" cy="0" r="6.5" fill="url(#rose-heart-grad)" stroke="url(#champagne-gold-foil)" stroke-width="1"/>
+                <circle cx="0" cy="0" r="2.5" fill="url(#champagne-gold-foil)"/>
+            </g>
+
+            <!-- 1. ANA KÖŞE KABARTMA MOTİFİ (KAPI 4 KÖŞE & İÇ DAVETİYE KÖŞELERİ) -->
+            <g id="floral-cluster">
+                <!-- Barok Altın & Kabartma Arka Plan Kıvrımlı Akantus Yaprakları -->
+                <path d="M4,4 C55,2 115,18 158,52 C192,78 212,118 222,162 C188,136 146,112 96,102 C48,92 14,55 4,4 Z" fill="url(#sculpted-leaf-grad)" stroke="#C5B09E" stroke-width="1.1" opacity="0.92"/>
+                <path d="M4,4 C2,58 18,118 52,162 C78,195 118,215 160,224 C134,190 112,148 102,98 C92,50 55,14 4,4 Z" fill="url(#sculpted-leaf-grad)" stroke="#C5B09E" stroke-width="1.1" opacity="0.92"/>
+
+                <!-- İnce İşlemeli Altın Barok Filigran Sarmaşık Dalları -->
+                <path d="M8,8 C65,14 125,42 175,92 C202,118 220,152 232,192" fill="none" stroke="url(#champagne-gold-foil)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M8,8 C14,65 42,125 92,175 C118,202 152,220 192,232" fill="none" stroke="url(#champagne-gold-foil)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M12,12 Q85,55 145,145 T218,218" fill="none" stroke="#B69B84" stroke-width="1.3" stroke-dasharray="3,2.5"/>
+
+                <!-- Zarif Barok Helezon Kıvrımları (Scrollwork) -->
+                <path d="M95,22 C132,12 168,28 178,56 C185,74 170,92 152,86 C138,81 136,64 148,58" fill="none" stroke="url(#champagne-gold-foil)" stroke-width="1.4" stroke-linecap="round"/>
+                <path d="M22,95 C12,132 28,168 56,178 C74,185 92,170 86,152 C81,138 64,136 58,148" fill="none" stroke="url(#champagne-gold-foil)" stroke-width="1.4" stroke-linecap="round"/>
+
+                <!-- Okaliptüs ve Zeytin Yaprağı Dizileri (Üst Dal) -->
+                <use href="#embossed-leaf" transform="translate(88, 28) rotate(12) scale(0.95)"/>
+                <use href="#embossed-leaf" transform="translate(132, 42) rotate(28) scale(0.85)"/>
+                <use href="#embossed-leaf" transform="translate(168, 72) rotate(42) scale(0.75)"/>
+                <use href="#embossed-leaf" transform="translate(115, 58) rotate(-22) scale(0.78)"/>
+
+                <!-- Okaliptüs ve Zeytin Yaprağı Dizileri (Sol Dal) -->
+                <use href="#embossed-leaf" transform="translate(28, 88) rotate(78) scale(0.95)"/>
+                <use href="#embossed-leaf" transform="translate(42, 132) rotate(62) scale(0.85)"/>
+                <use href="#embossed-leaf" transform="translate(72, 168) rotate(48) scale(0.75)"/>
+                <use href="#embossed-leaf" transform="translate(58, 115) rotate(112) scale(0.78)"/>
+
+                <!-- Merkez Diyagonal Yapraklar -->
+                <use href="#embossed-leaf" transform="translate(82, 82) rotate(45) scale(1.05)"/>
+                <use href="#embossed-leaf" transform="translate(122, 118) rotate(32) scale(0.82)"/>
+                <use href="#embossed-leaf" transform="translate(118, 122) rotate(58) scale(0.82)"/>
+
+                <!-- Altın İnci Tomurcuk Salkımları (Gypsophila / Cipso) -->
+                <g fill="url(#champagne-gold-foil)" stroke="#FFFDF9" stroke-width="0.5">
+                    <circle cx="195" cy="98" r="3.2"/><circle cx="206" cy="108" r="2.5"/><circle cx="188" cy="112" r="2.2"/><circle cx="215" cy="122" r="1.9"/>
+                    <circle cx="98" cy="195" r="3.2"/><circle cx="108" cy="206" r="2.5"/><circle cx="112" cy="188" r="2.2"/><circle cx="122" cy="215" r="1.9"/>
+                    <circle cx="158" cy="158" r="3.4"/><circle cx="170" cy="166" r="2.6"/><circle cx="166" cy="170" r="2.6"/><circle cx="180" cy="178" r="2"/>
+                </g>
+
+                <!-- İkincil Manolya Çiçekleri (Üst, Sol ve Diyagonal) -->
+                <use href="#couture-magnolia" transform="translate(128, 38) scale(0.82)"/>
+                <use href="#couture-magnolia" transform="translate(38, 128) scale(0.82)"/>
+                <use href="#couture-magnolia" transform="translate(116, 116) rotate(15) scale(0.72)"/>
+
+                <!-- Küçük Gonca Güller -->
+                <use href="#couture-peony-rose" transform="translate(166, 68) scale(0.42)"/>
+                <use href="#couture-peony-rose" transform="translate(68, 166) scale(0.42)"/>
+
+                <!-- Ana Odak Couture Kraliyet Gülü (Köşe Kalbi) -->
+                <use href="#couture-peony-rose" transform="translate(58, 58) scale(1.12)"/>
+            </g>
+
+            <!-- 2. KAPI ORTA KUŞAK (BEL) ÖZEL BUKET MOTİFİ -->
+            <g id="floral-waist-cluster">
+                <path d="M10,120 C45,65 110,35 185,45 C145,82 115,125 110,185 C65,165 32,145 10,120 Z" fill="url(#sculpted-leaf-grad)" stroke="#C5B09E" stroke-width="1" opacity="0.9"/>
+                <path d="M8,120 Q85,75 175,65" fill="none" stroke="url(#champagne-gold-foil)" stroke-width="1.7" stroke-linecap="round"/>
+                <path d="M8,120 Q75,155 155,185" fill="none" stroke="url(#champagne-gold-foil)" stroke-width="1.5" stroke-linecap="round"/>
+                <use href="#embossed-leaf" transform="translate(45, 75) rotate(-25) scale(0.95)"/>
+                <use href="#embossed-leaf" transform="translate(95, 55) rotate(-10) scale(0.85)"/>
+                <use href="#embossed-leaf" transform="translate(45, 145) rotate(35) scale(0.95)"/>
+                <use href="#embossed-leaf" transform="translate(95, 165) rotate(20) scale(0.85)"/>
+                <use href="#embossed-leaf" transform="translate(105, 110) rotate(5) scale(0.9)"/>
+                <use href="#couture-magnolia" transform="translate(115, 78) scale(0.78)"/>
+                <use href="#couture-magnolia" transform="translate(108, 148) scale(0.75)"/>
+                <use href="#couture-peony-rose" transform="translate(58, 115) scale(1.05)"/>
+                <g fill="url(#champagne-gold-foil)">
+                    <circle cx="152" cy="82" r="2.8"/><circle cx="164" cy="90" r="2.2"/><circle cx="146" cy="138" r="2.8"/><circle cx="158" cy="148" r="2.2"/>
+                </g>
+            </g>
+
+            <!-- 3. BALMUMU MÜHÜR ÜZERİ KABARTMA BUKET -->
+            <g id="seal-embossed-bouquet">
+                <!-- Altın & Fildişi Çelenk Dalları -->
+                <path d="M30,66 C30,50 31,34 30,12" fill="none" stroke="url(#champagne-gold-foil)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M30,52 C18,46 11,34 14,20" fill="none" stroke="#B59E8C" stroke-width="1.4" stroke-linecap="round"/>
+                <path d="M30,52 C42,46 49,34 46,20" fill="none" stroke="#B59E8C" stroke-width="1.4" stroke-linecap="round"/>
+                <!-- Sol ve Sağ Minyatür Zeytin Yaprakları -->
+                <path d="M29,44 C21,42 16,36 18,30 C24,33 28,38 29,44 Z" fill="url(#ivory-petal-grad)" stroke="#C2AD9B" stroke-width="0.7"/>
+                <path d="M31,44 C39,42 44,36 42,30 C36,33 32,38 31,44 Z" fill="url(#ivory-petal-grad)" stroke="#C2AD9B" stroke-width="0.7"/>
+                <path d="M29,33 C20,30 17,23 20,18 C25,21 28,27 29,33 Z" fill="url(#ivory-petal-grad)" stroke="#C2AD9B" stroke-width="0.7"/>
+                <path d="M31,33 C40,30 43,23 40,18 C35,21 32,27 31,33 Z" fill="url(#ivory-petal-grad)" stroke="#C2AD9B" stroke-width="0.7"/>
+                <!-- Mühür Kurdele Fiyongu -->
+                <path d="M30,56 C24,53 20,57 23,60 C26,62 29,58 30,56 C31,58 34,62 37,60 C40,57 36,53 30,56 Z" fill="url(#champagne-gold-foil)"/>
+                <!-- Mühür Tepesi Couture Gül -->
+                <use href="#couture-peony-rose" transform="translate(30, 18) scale(0.32)"/>
+                <circle cx="15" cy="22" r="1.8" fill="url(#champagne-gold-foil)"/>
+                <circle cx="45" cy="22" r="1.8" fill="url(#champagne-gold-foil)"/>
+            </g>
+        </defs>
+    </svg>
+
+    <audio id="bg-music" loop preload="auto" referrerpolicy="no-referrer"></audio>
 
     <!-- ================= DAVETİYE ÖN YÜZÜ ================= -->
     <div id="app-wrapper">
+        <canvas id="luxury-particles"></canvas>
+        <div id="door-light-glow"></div>
 
-        <!-- FOTOĞRAF KAPI VE MÜHÜR -->
         <div id="door-container">
-            <div class="door left"></div>
-            
-            <div class="seal-wrapper" onclick="openInvitation()">
-                <div class="door-seal">
-                    <div class="door-seal-inner">
-                        <div class="seal-initials" id="v_sealInitials">M&Y</div>
-                    </div>
+            <div class="door left">
+                <div class="door-inner">
+                    <div class="door-panel-molding"></div>
+                    <!-- Sol Kapı 3'lü Kraliyet Kabartma Motif Seti -->
+                    <svg class="embossed-floral" style="top: -12px; left: -12px; width: 245px; height: 245px;" viewBox="0 0 240 240"><use href="#floral-cluster"/></svg>
+                    <svg class="embossed-floral" style="top: 34%; left: -24px; width: 205px; height: 205px;" viewBox="0 0 240 240"><use href="#floral-waist-cluster"/></svg>
+                    <svg class="embossed-floral" style="bottom: -12px; left: -12px; width: 245px; height: 245px; transform: scaleY(-1);" viewBox="0 0 240 240"><use href="#floral-cluster"/></svg>
                 </div>
-                <div class="seal-prompt" id="v_sealText">Mührü Kır</div>
+                <div class="seal-wrapper" onclick="openInvitation()">
+                    <div class="door-seal">
+                        <div class="door-seal-inner">
+                            <svg class="seal-flower-svg" viewBox="0 0 60 72"><use href="#seal-embossed-bouquet"/></svg>
+                            <div class="seal-initials" id="v_sealInitials">M & Y</div>
+                        </div>
+                    </div>
+                    <div class="seal-prompt" id="v_sealText">Dokun Aç</div>
+                </div>
             </div>
-
-            <div class="door right"></div>
+            <div class="door right">
+                <div class="door-inner">
+                    <div class="door-panel-molding"></div>
+                    <!-- Sağ Kapı 3'lü Kraliyet Kabartma Motif Seti -->
+                    <svg class="embossed-floral" style="top: -12px; right: -12px; width: 245px; height: 245px; transform: scaleX(-1);" viewBox="0 0 240 240"><use href="#floral-cluster"/></svg>
+                    <svg class="embossed-floral" style="top: 34%; right: -24px; width: 205px; height: 205px; transform: scaleX(-1);" viewBox="0 0 240 240"><use href="#floral-waist-cluster"/></svg>
+                    <svg class="embossed-floral" style="bottom: -12px; right: -12px; width: 245px; height: 245px; transform: scale(-1, -1);" viewBox="0 0 240 240"><use href="#floral-cluster"/></svg>
+                </div>
+            </div>
         </div>
 
-        <!-- İNCE ALTIN ÇERÇEVE & YÜZEN BUTON -->
-        <div id="inner-frame-layer"></div>
-        <div class="scroll-hint" id="v_scrollBtnText">Aşağı Kaydır</div>
-        
-        <div class="floating-controls">
-            <button id="music-btn" class="circle-btn" onclick="toggleAudio()">🎵</button>
+        <div id="inner-frame-layer">
+            <!-- İç Davetiye 2'li Couture Kabartma Köşe Motifleri -->
+            <svg class="embossed-floral inner-motif-top" style="top: -8px; left: -8px; width: 215px; height: 215px; z-index: 2;" viewBox="0 0 240 240"><use href="#floral-cluster"/></svg>
+            <svg class="embossed-floral inner-motif-bottom" style="bottom: -8px; right: -8px; width: 215px; height: 215px; transform: scale(-1, -1); z-index: 2;" viewBox="0 0 240 240"><use href="#floral-cluster"/></svg>
+            <!-- Lüks Kemer Çerçeve & Köşe Altın İşlemeleri -->
+            <svg class="arch-svg-frame" viewBox="0 0 400 760" preserveAspectRatio="none">
+                <path d="M 8,150 C 8,65 85,8 200,8 C 315,8 392,65 392,150 L 392,725 C 392,740 380,752 365,752 L 35,752 C 20,752 8,740 8,725 Z" fill="none" stroke="url(#champagne-gold-foil)" stroke-width="1.6"/>
+                <path d="M 15,152 C 15,72 90,15 200,15 C 310,15 385,72 385,152 L 385,718 C 385,733 373,745 358,745 L 42,745 C 27,745 15,733 15,718 Z" fill="none" stroke="#9E8576" stroke-width="0.8" stroke-dasharray="3,2.5"/>
+                <!-- Kemer Tepe Taç Süsü -->
+                <circle cx="200" cy="8" r="3.5" fill="url(#champagne-gold-foil)"/>
+                <circle cx="188" cy="9" r="2" fill="url(#champagne-gold-foil)"/>
+                <circle cx="212" cy="9" r="2" fill="url(#champagne-gold-foil)"/>
+                <!-- Sol Alt & Sağ Üst Zarif Köşe Filigranları -->
+                <path d="M 18,690 C 18,722 28,740 58,740" fill="none" stroke="url(#champagne-gold-foil)" stroke-width="1.2" stroke-linecap="round"/>
+                <circle cx="24" cy="734" r="2.5" fill="url(#champagne-gold-foil)"/>
+            </svg>
         </div>
+
+        <!-- Sahne Navigasyon Noktaları -->
+        <div id="slide-nav-dots">
+            <button type="button" class="slide-dot active" onclick="scrollToSlideIndex(0)" title="Kapak"></button>
+            <button type="button" class="slide-dot" onclick="scrollToSlideIndex(1)" title="Ailelerimiz"></button>
+            <button type="button" class="slide-dot" onclick="scrollToSlideIndex(2)" title="Tarih"></button>
+            <button type="button" class="slide-dot" onclick="scrollToSlideIndex(3)" title="Konum"></button>
+            <button type="button" class="slide-dot" onclick="scrollToSlideIndex(4)" title="Geri Sayım"></button>
+            <button type="button" class="slide-dot" onclick="scrollToSlideIndex(5)" title="Program"></button>
+            <button type="button" class="slide-dot" onclick="scrollToSlideIndex(6)" title="Menü"></button>
+            <button type="button" class="slide-dot" onclick="scrollToSlideIndex(7)" title="Anılar & Şarkı"></button>
+            <button type="button" class="slide-dot" onclick="scrollToSlideIndex(8)" title="LCV"></button>
+        </div>
+
+        <button id="replay-door-btn" class="floating-btn" onclick="replayDoorAnimation()" title="Kapı Açılışını Tekrar İzle">🚪</button>
+        <button id="admin-quick-btn" class="floating-btn" onclick="openAdminPanel()" title="Yönetim Paneli">⚙️</button>
+        <button id="scroll-down-btn" class="floating-btn" onclick="scrollNextSlide()"><span id="v_scrollBtnText">Aşağı Kaydır</span> &nbsp;↓</button>
+        <button id="music-btn" class="floating-btn" onclick="toggleAudio()" title="Müziği Aç/Kapat">🔊</button>
 
         <div class="scroll-container" id="slides-container">
 
-            <!-- SAHNE 1: ÇİFT FOTOĞRAFI (HERO SCENE) -->
-            <section class="slide active" id="hero-slide">
-                <div class="hero-bg" id="v_heroImage"></div>
-                <div class="hero-gradient"></div>
-                <div class="hero-content">
-                    <div class="hero-date anim-item d-1" id="v_heroDate">08.08.2026</div>
-                    <div class="hero-names anim-item d-2">
-                        <span id="v_brideName">Meltem</span><br>
-                        <span class="ve">&</span><br>
-                        <span id="v_groomName">Yunus Emre</span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SAHNE 2: AİLELER VE DAVET METNİ -->
-            <section class="slide">
-                <div class="glass-panel anim-item d-1">
-                    <div class="gold-title" id="v_s1TopTitle">Davetlisiniz</div>
-                    <p class="sub-text" id="v_inviteText" style="margin-bottom: 25px;">
-                        Bu en mutlu günümüzde sizleri de aramızda görmekten onur duyarız.
-                    </p>
-                    
-                    <div class="thin-divider"></div>
-                    
-                    <div style="font-family:'Cinzel',serif; font-size:11px; letter-spacing:5px; color:var(--gold-dark); text-transform:uppercase; margin-bottom:15px;" id="v_familyHeader">AİLELER</div>
-                    <div style="display: flex; justify-content: space-around; width: 100%;">
-                        <div>
-                            <div style="font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:500; color:var(--gold-light);" id="v_brideFamily">Alkış</div>
-                            <div style="font-size:10px; color:var(--text-muted); letter-spacing:3px; margin-top:4px;" id="v_brideFamilySub">AİLESİ</div>
-                        </div>
-                        <div style="width: 1px; background: var(--gold-dark); opacity: 0.4;"></div>
-                        <div>
-                            <div style="font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:500; color:var(--gold-light);" id="v_groomFamily">Kumsal</div>
-                            <div style="font-size:10px; color:var(--text-muted); letter-spacing:3px; margin-top:4px;" id="v_groomFamilySub">AİLESİ</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SAHNE 3: TARİH VE SAYAÇ -->
-            <section class="slide">
-                <div class="glass-panel anim-item d-1">
-                    <div class="gold-title" id="v_s3Title">Tarih & Saat</div>
-                    <div style="font-family:'Cormorant Garamond',serif; font-size:65px; color:var(--text-light); line-height:1; font-weight:300;" id="v_dateDay">08</div>
-                    <div style="font-family:'Cinzel',serif; font-size:16px; letter-spacing:6px; text-transform:uppercase; background:var(--gold-gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin:10px 0;" id="v_dateMonth">AĞUSTOS</div>
-                    <div style="font-size:20px; color:var(--text-muted); font-style:italic;" id="v_dateYear">2026</div>
-                    
-                    <div class="thin-divider"></div>
-                    
-                    <div style="display:flex; justify-content:center; gap:20px; font-size:15px; font-weight:500; letter-spacing:3px; text-transform:uppercase; color:var(--gold-light);">
-                        <span id="v_dateDayName">CUMARTESİ</span>
-                        <span style="color:var(--text-muted);">|</span>
-                        <span id="v_dateTime">19:00</span>
-                    </div>
-                </div>
-
-                <div class="glass-panel anim-item d-2" style="margin-top: 20px; padding: 20px;">
-                    <div style="font-family:'Cinzel',serif; font-size:11px; letter-spacing:4px; color:var(--gold-dark); text-transform:uppercase; margin-bottom:15px;" id="v_s5Title">Buluşmaya Kalan</div>
-                    <div style="display:flex; justify-content:space-between; text-align:center; padding: 0 10px;">
-                        <div><div style="font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:300; color:var(--gold-light);" id="cd_days">0</div><div style="font-size:9px; letter-spacing:2px; color:var(--text-muted);">GÜN</div></div>
-                        <div><div style="font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:300; color:var(--gold-light);" id="cd_hours">0</div><div style="font-size:9px; letter-spacing:2px; color:var(--text-muted);">SAAT</div></div>
-                        <div><div style="font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:300; color:var(--gold-light);" id="cd_mins">0</div><div style="font-size:9px; letter-spacing:2px; color:var(--text-muted);">DAKİKA</div></div>
-                        <div><div style="font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:300; color:var(--gold-base);" id="cd_secs">0</div><div style="font-size:9px; letter-spacing:2px; color:var(--gold-base);">SANİYE</div></div>
-                    </div>
-                    <div id="v_s5Quote" style="font-size: 16px; font-style: italic; color:var(--text-muted); margin-top: 15px;">İki ruh birleşiyor.</div>
-                </div>
-            </section>
-
-            <!-- SAHNE 4: KONUM -->
-            <section class="slide">
-                <div class="glass-panel anim-item d-1">
-                    <div class="gold-title" id="v_s4Title">Konum</div>
-                    <div style="border-radius:4px; overflow:hidden; border:1px solid rgba(212, 175, 55, 0.3); height:180px; margin-bottom:20px; box-shadow:inset 0 0 20px rgba(0,0,0,0.8);">
-                        <iframe id="v_mapIframe" src="https://maps.google.com/maps?q=Four%20Seasons%20Hotel%20Bosphorus%20Istanbul&t=&z=14&ie=UTF8&iwloc=&output=embed" style="width:100%; height:100%; border:none; filter: grayscale(50%) sepia(30%) invert(90%) hue-rotate(180deg); opacity:0.8;"></iframe>
-                    </div>
-                    <h3 style="font-family:'Cormorant Garamond',serif; font-size:24px; font-weight:500; margin-bottom:5px; color:var(--gold-light);" id="v_venueName">Four Seasons Hotel Istanbul</h3>
-                    <p class="sub-text" style="font-size:15px; margin-bottom:20px;" id="v_venueAddress">Beşiktaş / İstanbul</p>
-                    <button class="btn-luxury" onclick="openMapUrl()">📍 <span id="v_mapBtnText" style="margin-left:5px;">Yol Tarifi Al</span></button>
-                </div>
-            </section>
-
-            <!-- SAHNE 5: PROGRAM VE MENÜ -->
-            <section class="slide">
-                <div class="glass-panel anim-item d-1" style="margin-bottom: 20px;">
-                    <div class="gold-title" style="font-size:20px; letter-spacing:5px;" id="v_s6Title">Program</div>
-                    <div class="thin-divider" style="margin: 10px auto 15px auto;"></div>
-                    <div id="v_timelineContainer"></div>
-                </div>
+            <!-- 1. SAHNE: AÇILIŞ & ÇİFT FOTOĞRAFI (CATBOX LİNKİ) -->
+            <section class="slide active">
+                <div class="monogram-crest anim-item d-1" id="v_monogramCrest">M & Y</div>
+                <div class="sub-label anim-item d-1" id="v_s1TopTitle">Düğün Davetiyesi</div>
+                <div class="ornament-line anim-item d-2"><div class="ornament-diamond"></div></div>
                 
-                <div class="glass-panel anim-item d-2">
-                    <div class="gold-title" style="font-size:20px; letter-spacing:5px;" id="v_s7Title">Menü</div>
-                    <div class="thin-divider" style="margin: 10px auto 15px auto;"></div>
-                    <div id="v_menuContainer" style="max-height:200px; overflow-y:auto; padding-right:5px;"></div>
+                <!-- Çiftin Fotoğrafı (Catbox Linki girildiğinde otomatik görünür) -->
+                <div class="couple-photo-wrap anim-item d-2" id="v_couplePhotoWrap">
+                    <img id="v_couplePhotoImg" src="" alt="Çift Fotoğrafı" referrerpolicy="no-referrer" onerror="this.parentElement.classList.remove('has-photo')">
+                </div>
+
+                <div class="couple-names-lg anim-item d-3">
+                    <div id="v_brideName">Meltem Alkış</div>
+                    <div class="ve-script" id="v_andWord">ve</div>
+                    <div id="v_groomName">Yunus Emre Kumsal</div>
+                </div>
+                <div class="ornament-line anim-item d-4"><div class="ornament-diamond"></div></div>
+                <div class="sub-label anim-item d-4" style="font-size: 10px; letter-spacing: 3.5px; margin-top: 6px; opacity: 0.75;" id="v_s1DateBadge">08 . 08 . 2026</div>
+            </section>
+
+            <!-- 2. SAHNE: AİLELER -->
+            <section class="slide">
+                <div class="couple-names-md anim-item d-1">
+                    <span class="b-name-sync">Meltem Alkış</span> <span class="ve-script">ve</span> <span class="g-name-sync">Yunus Emre Kumsal</span>
+                </div>
+                <p class="anim-item d-2" id="v_inviteText" style="font-size: 19px; line-height: 1.6; margin: 22px 0; max-width: 310px; font-style: italic;">
+                    Bu anın şahidi olmak için sizi yanımızda görmek istiyoruz
+                </p>
+                <div class="sub-label anim-item d-3" id="v_familyHeader" style="margin-top: 10px;">AİLELERİMİZ</div>
+                <div class="ornament-line anim-item d-3"><div class="ornament-diamond"></div></div>
+                <div class="families-grid anim-item d-4">
+                    <div class="family-box"><strong id="v_brideFamily">Alkış</strong><span id="v_brideFamilySub">AİLESİ</span></div>
+                    <div class="family-box"><strong id="v_groomFamily">Kumsal</strong><span id="v_groomFamilySub">AİLESİ</span></div>
                 </div>
             </section>
 
-            <!-- SAHNE 6: FOTOĞRAF VE ŞARKI -->
+            <!-- 3. SAHNE: TARİH -->
             <section class="slide">
-                <div class="glass-panel anim-item d-1" style="margin-bottom: 20px;">
-                    <div class="gold-title" style="font-size:20px;" id="v_s8Title">Anı Paylaşımı</div>
-                    <p class="sub-text" style="font-size:15px; margin-bottom:15px;" id="v_s8Desc">Bu geceye ait çektiğiniz kareleri bizimle paylaşın.</p>
-                    
-                    <div id="live-photo-upload-box" style="display:none;">
-                        <input type="file" id="photo-upload-input" accept="image/*" style="display:none;" onchange="handlePhotoUpload(event)">
-                        <button type="button" class="btn-luxury" style="padding:12px; font-size:11px;" onclick="document.getElementById('photo-upload-input').click()">📷 Fotoğraf Yükle</button>
-                    </div>
-                    <div id="v_photoNotice" style="font-size:14px; color:var(--gold-dark); font-style:italic;">Fotoğraf yükleme özelliği düğün saatinde açılacaktır.</div>
+                <div class="sub-label anim-item d-1" id="v_s3Title">TARİH</div>
+                <div class="date-oval-badge anim-item d-2">
+                    <div class="ornament-diamond" style="margin-bottom: 10px;"></div>
+                    <div class="day-num" id="v_dateDay">08</div>
+                    <div class="month-txt" id="v_dateMonth">AĞUSTOS</div>
+                    <div class="ornament-diamond" style="margin: 8px 0;"></div>
+                    <div class="year-txt" id="v_dateYear">2026</div>
                 </div>
-
-                <div class="glass-panel anim-item d-2">
-                    <div class="gold-title" style="font-size:20px;" id="v_funTitle">Şarkı İsteği</div>
-                    <p class="sub-text" style="font-size:15px; margin-bottom:15px;" id="v_funDesc">Beraber dans etmek istediğiniz şarkı nedir?</p>
-                    <form onsubmit="submitSongForm(event)">
-                        <input type="text" id="song_sender" class="styled-input" placeholder="Adınız Soyadınız" required>
-                        <input type="text" id="song_request" class="styled-input" placeholder="Şarkı Adı ve Sanatçı" required>
-                        <button type="submit" class="btn-luxury" style="padding:12px; font-size:11px; margin-top:5px;" id="v_funBtn">Gönder</button>
-                    </form>
-                    <p id="song-feedback" style="display:none; color:var(--gold-base); font-size:14px; margin-top:10px; font-style:italic;">İsteğiniz DJ'e iletildi!</p>
+                <div class="pill-row anim-item d-3">
+                    <div class="info-pill" id="v_dateDayName">CUMARTESİ</div>
+                    <div class="info-pill" id="v_dateTime">19.00</div>
                 </div>
+                <button type="button" class="btn-outline anim-item d-4" onclick="addToCalendar()" style="margin-top: 14px; padding: 8px 20px; font-size: 11.5px;">📅 TAKVİME EKLE</button>
             </section>
 
-            <!-- SAHNE 7: LCV (RSVP) VE KAPANIŞ -->
+            <!-- 4. SAHNE: KONUM -->
             <section class="slide">
-                <div class="glass-panel anim-item d-1">
-                    <div class="gold-title" id="v_s9Title">L.C.V.</div>
-                    <p class="sub-text" style="margin-bottom:20px;" id="v_s9Desc">Lütfen katılım durumunuzu bildiriniz.</p>
-
-                    <form id="rsvp-form" onsubmit="submitRSVPForm(event)">
-                        <input type="text" id="rsvp_name" class="styled-input" placeholder="Adınız Soyadınız..." required>
-                        
-                        <div class="radio-group">
-                            <label class="radio-label">
-                                <input type="radio" name="rsvp_status" value="Katılacağım" checked onchange="toggleGuestStepper(true)">
-                                <span id="v_rsvpYes" style="color:var(--gold-light);">Evet, Katılacağım</span>
-                            </label>
-                            <label class="radio-label">
-                                <input type="radio" name="rsvp_status" value="Katılamıyorum" onchange="toggleGuestStepper(false)">
-                                <span id="v_rsvpNo">Maalesef Katılamıyorum</span>
-                            </label>
-                        </div>
-
-                        <div id="guest-stepper-box">
-                            <div style="font-size:10px; letter-spacing:4px; text-transform:uppercase; margin-bottom:5px; color:var(--gold-dark);">KİŞİ SAYISI</div>
-                            <div class="stepper-wrap">
-                                <button type="button" class="step-btn" onclick="changeGuestCount(-1)">−</button>
-                                <span id="rsvp_count_val" style="font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:500; color:var(--gold-light);">1</span>
-                                <button type="button" class="step-btn" onclick="changeGuestCount(1)">+</button>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn-luxury" style="margin-top:10px;"><span id="v_rsvpBtn">Yanıtı Gönder</span></button>
-                    </form>
-
-                    <div id="rsvp-thankyou" style="display:none; padding:20px; font-family:'Playfair Display',serif; font-size:22px; color:var(--gold-base); font-style:italic;">
-                        Yanıtınız alınmıştır.<br>Teşekkür ederiz!
-                    </div>
+                <div class="ribbon-title anim-item d-1" id="v_s4Title">Konum</div>
+                <div class="map-frame anim-item d-2">
+                    <iframe id="v_mapIframe" src="https://maps.google.com/maps?q=Four%20Seasons%20Hotel%20Bosphorus%20Istanbul&t=&z=14&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe>
                 </div>
+                <h3 class="anim-item d-3" id="v_venueName" style="font-family: 'Playfair Display', serif; font-size: 21px; margin-bottom: 6px;">Four Seasons Hotel Istanbul</h3>
+                <p class="anim-item d-3" id="v_venueAddress" style="font-size: 14px; color: var(--text-muted); margin-bottom: 18px;">Beşiktaş/İstanbul</p>
+                <button class="btn-outline anim-item d-4" onclick="openMapUrl()">📍 <span id="v_mapBtnText">YOL TARİFİ AL</span></button>
+            </section>
+
+            <!-- 5. SAHNE: GERİ SAYIM -->
+            <section class="slide">
+                <div class="sub-label anim-item d-1" id="v_s5Title">BULUŞMAYA KALAN</div>
+                <div class="cd-big-days anim-item d-2" id="cd_days">114</div>
+                <div class="sub-label anim-item d-2" style="margin-top: 4px;">GÜN</div>
+                <div class="cd-hms-grid anim-item d-3">
+                    <div class="cd-box"><span class="num" id="cd_hours">05</span><span class="lbl">SAAT</span></div>
+                    <div class="cd-box"><span class="num" id="cd_mins">26</span><span class="lbl">DAKİKA</span></div>
+                    <div class="cd-box"><span class="num" id="cd_secs">40</span><span class="lbl">SANİYE</span></div>
+                </div>
+                <div class="ornament-line anim-item d-4"><div class="ornament-diamond"></div></div>
+                <p class="anim-item d-4" id="v_s5Quote" style="font-size: 18px; font-style: italic; max-width: 280px; margin-top: 8px;">İki ruh birleşiyor.</p>
+            </section>
+
+            <!-- 6. SAHNE: PROGRAM -->
+            <section class="slide">
+                <div class="ribbon-title anim-item d-1" id="v_s6Title">Günün çizgisi</div>
+                <div id="v_timelineContainer" style="width: 100%; max-width: 320px;"></div>
+            </section>
+
+            <!-- 7. SAHNE: MENÜ -->
+            <section class="slide">
+                <div class="ribbon-title anim-item d-1" id="v_s7Title">Menü</div>
+                <div id="v_menuContainer" style="width: 100%; max-width: 320px; max-height: 380px; overflow-y: auto;"></div>
+            </section>
+
+            <!-- 8. SAHNE: FOTOĞRAF YÜKLEME & ŞARKI İSTEKLERİ -->
+            <section class="slide">
+                <div class="ribbon-title anim-item d-1" id="v_s8Title" style="margin-bottom: 8px;">En güzel anlarımız</div>
+                <p class="anim-item d-1" id="v_s8Desc" style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Birlikte biriktirdiğimiz en özel kareler</p>
                 
-                <div class="anim-item d-3" style="margin-top:30px;">
-                    <div class="hero-names" style="font-size: 38px;">Meltem <span class="ve" style="font-size:28px;">&</span> Yunus Emre</div>
-                    <div id="v_footerDate" style="font-family:'Cinzel',serif; font-size:11px; letter-spacing:6px; color:var(--gold-dark); margin-top:10px;">08.08.2026</div>
+                <div class="glass-card anim-item d-2" style="padding: 10px 12px; margin-bottom: 8px;">
+                    <div id="v_photoNotice" style="font-family: 'Playfair Display', serif; font-size: 14px; margin-bottom: 2px;">Anılarımızı Paylaşın</div>
+                    <p id="v_photoSub" style="font-size: 12px; color: var(--text-muted);">Çektiğiniz fotoğrafları buradan yükleyebilirsiniz.</p>
+                    <div id="live-photo-upload-box" style="margin-top: 8px;">
+                        <input type="text" id="photo_sender" class="styled-input" placeholder="Adınız Soyadınız (İsteğe Bağlı)" style="padding: 6px 12px; font-size: 13px; margin-bottom: 6px;">
+                        <input type="file" id="photo-upload-input" accept="image/*" multiple style="display:none;" onchange="handlePhotoUpload(event)">
+                        <div>
+                            <button type="button" class="btn-outline" onclick="document.getElementById('photo-upload-input').click()" style="padding: 7px 16px; font-size: 11px;">📷 FOTOĞRAF SEÇ & YÜKLE</button>
+                        </div>
+                        <p id="photo-upload-feedback" style="display:none; font-size:12px; color:#2e7d32; margin-top:4px; font-weight:600;"></p>
+                    </div>
+                    <div id="v_guestPhotoStrip" class="mini-gallery-strip" style="display:none;"></div>
+                </div>
+
+                <h3 class="anim-item d-3" id="v_funTitle" style="font-family: 'Playfair Display', serif; font-size: 18px; margin-top: 2px;">Biraz Eğlence!</h3>
+                <p class="anim-item d-3" id="v_funDesc" style="font-size: 12px; color: var(--text-muted); margin-bottom: 4px;">Favori düğün şarkınızı veya notunuzu bizimle paylaşın!</p>
+                <form class="anim-item d-4" onsubmit="submitSongForm(event)" style="width: 100%;">
+                    <input type="text" id="song_sender" class="styled-input" placeholder="Adınız Soyadınız" required style="padding: 7px 14px; font-size: 14px;">
+                    <input type="text" id="song_request" class="styled-input" placeholder="Şarkı İsteğiniz / Notunuz" required style="padding: 7px 14px; font-size: 14px;">
+                    <button type="submit" class="btn-solid" id="v_funBtn" style="margin-top: 4px; padding: 8px 20px; font-size: 12px;">Gönder</button>
+                </form>
+                <p id="song-feedback" style="display:none; font-size:13px; color:#2e7d32; margin-top:4px; font-weight:600;">Harika! İsteğiniz listeye eklendi.</p>
+                
+                <!-- Gönderilen tüm isteklerin ön yüzde canlı listesi -->
+                <div id="v_guestSongsFeed" class="guest-songs-feed anim-item d-4" style="display:none;"></div>
+            </section>
+
+            <!-- 9. SAHNE: LCV / RSVP -->
+            <section class="slide">
+                <div class="ribbon-title anim-item d-1" id="v_s9Title">RSVP</div>
+                <div class="sub-label anim-item d-1" id="v_s9Sub">KATILIMINIZ</div>
+                <p class="anim-item d-2" id="v_s9Desc" style="font-size: 14px; color: var(--text-muted); margin-bottom: 10px;">Lütfen davetimize katılım durumunuzu bizimle paylaşın.</p>
+                <form id="rsvp-form" class="anim-item d-3" onsubmit="submitRSVPForm(event)" style="width: 100%;">
+                    <input type="text" id="rsvp_name" class="styled-input" placeholder="İsim Soyisim..." required>
+                    <label class="radio-btn-label"><input type="radio" name="rsvp_status" value="Katılacağım" checked onchange="toggleGuestStepper(true)"><span id="v_rsvpYes">Katılacağım</span></label>
+                    <label class="radio-btn-label"><input type="radio" name="rsvp_status" value="Maalesef katılamıyorum" onchange="toggleGuestStepper(false)"><span id="v_rsvpNo">Maalesef katılamıyorum</span></label>
+                    <div id="guest-stepper-box">
+                        <div class="sub-label" style="margin: 8px 0 2px 0; font-size: 10px;">KİŞİ SAYISI</div>
+                        <div class="stepper-wrap">
+                            <button type="button" class="step-btn" onclick="changeGuestCount(-1)">−</button>
+                            <span id="rsvp_count_val" style="font-family: 'Playfair Display', serif; font-size: 18px;">1</span>
+                            <button type="button" class="step-btn" onclick="changeGuestCount(1)">+</button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-outline" style="width: 100%; max-width: 280px; justify-content: center; margin-top: 6px;"><span id="v_rsvpBtn">GÖNDER</span> &nbsp;→</button>
+                </form>
+                <div id="rsvp-thankyou" class="glass-card" style="display:none; max-width:280px;">
+                    <div style="margin-bottom: 10px;">Katılım durumunuz kaydedildi. Çok teşekkür ederiz!</div>
+                    <button type="button" class="btn-outline" onclick="resetRSVPForm()" style="padding: 6px 14px; font-size: 11px;">+ Yeni Katılım Bildir</button>
+                </div>
+                <div class="anim-item d-4" style="margin-top: 22px;">
+                    <div class="couple-names-md" style="font-size: 22px;"><span class="b-name-sync">Meltem Alkış</span> <span class="ve-script" style="font-size: 20px;">ve</span> <span class="g-name-sync">Yunus Emre Kumsal</span></div>
+                    <div id="v_footerDate" style="font-size: 11px; letter-spacing: 2.5px; color: var(--text-muted); margin-top: 4px;">08 AĞUSTOS 2026</div>
                 </div>
             </section>
 
         </div>
     </div>
 
-
-    <!-- ================= ADMİN PANELİ (CMS) ================= -->
+    <!-- ================= YENİ NESİL PREMİUM ADMİN PANELİ ================= -->
     <div id="admin-panel">
         <div class="adm-shell">
+
             <div class="adm-header">
-                <div>
-                    <h1 style="color:#D4AF37;">👑 Kraliyet Yönetim Süiti</h1>
-                    <span class="adm-status" id="adm-db-status">Sistem Aktif</span>
+                <div class="adm-brand">
+                    <div class="adm-logo">M&Y</div>
+                    <div class="adm-title">
+                        <h1>Düğün Yönetim Süiti</h1>
+                        <span class="adm-status" id="adm-db-status">Sistem Aktif</span>
+                    </div>
                 </div>
-                <div style="display:flex; gap:10px;">
-                    <button class="btn-adm btn-adm-secondary" onclick="window.location.hash=''">👁️ Davetiyeyi Gör</button>
-                    <button class="btn-adm btn-adm-primary" onclick="saveAllSiteSettings()">💾 Değişiklikleri Kaydet</button>
+                <div class="adm-header-actions">
+                    <button class="btn-adm btn-adm-secondary" onclick="closeAdminPanel()">👁️ Davetiyeyi Gör</button>
+                    <button class="btn-adm btn-adm-primary" onclick="saveAllSiteSettings()">💾 Tümünü Kaydet</button>
+                </div>
+            </div>
+
+            <div class="adm-kpi-grid">
+                <div class="adm-kpi-card">
+                    <div class="adm-kpi-icon" style="color: #059669; background: #D1FAE5;">🥂</div>
+                    <div class="adm-kpi-info"><p>Toplam Gelecek Kişi</p><h3 id="adm_total_guests">0</h3></div>
+                </div>
+                <div class="adm-kpi-card">
+                    <div class="adm-kpi-icon" style="color: #3B82F6; background: #DBEAFE;">🎵</div>
+                    <div class="adm-kpi-info"><p>Gelen Şarkı İstekleri</p><h3 id="adm_songs_count">0</h3></div>
+                </div>
+                <div class="adm-kpi-card">
+                    <div class="adm-kpi-icon" style="color: #D97706; background: #FEF3C7;">📸</div>
+                    <div class="adm-kpi-info"><p>Yüklenen Fotoğraflar</p><h3 id="adm_photos_count">0</h3></div>
                 </div>
             </div>
 
             <div class="adm-tabs">
-                <button class="adm-tab active" onclick="switchAdmTab('tab-dash', this)">📋 LCV Listesi</button>
-                <button class="adm-tab" onclick="switchAdmTab('tab-media', this)">📷 Fotoğraf & Şarkılar</button>
-                <button class="adm-tab" onclick="switchAdmTab('tab-content', this)">✏️ Davetiye Bilgileri Düzenle</button>
-                <button class="adm-tab" onclick="switchAdmTab('tab-lists', this)">📅 Menü & Program</button>
+                <button class="adm-tab active" onclick="switchAdmTab('tab-dashboard', this)">📋 LCV & Misafirler</button>
+                <button class="adm-tab" onclick="switchAdmTab('tab-photos', this)">📸 Fotoğraflar & İndirme</button>
+                <button class="adm-tab" onclick="switchAdmTab('tab-media', this)">🎵 Şarkı İstekleri & Müzik</button>
+                <button class="adm-tab" onclick="switchAdmTab('tab-content', this)">📝 Metinler & Çift Fotoğrafı</button>
+                <button class="adm-tab" onclick="switchAdmTab('tab-program', this)">📅 Program & Menü</button>
             </div>
 
-            <!-- TAB: LCV -->
-            <div id="tab-dash" class="adm-tab-content active">
+            <!-- SEKME 1: LCV LİSTESİ -->
+            <div id="tab-dashboard" class="adm-tab-content active">
                 <div class="adm-card">
-                    <h3 style="margin-bottom:15px; color:#D4AF37;">Katılımcı Listesi (Toplam <span id="adm_total_guests">0</span> Kişi)</h3>
+                    <div class="adm-card-header">
+                        <h2>📋 LCV (Katılımcı) Listesi (<span id="adm_rsvp_records_count">0</span> Kayıt)</h2>
+                        <button type="button" class="btn-adm btn-adm-secondary" onclick="exportRSVPsCSV()">📥 Excel / CSV İndir</button>
+                    </div>
                     <div class="adm-table-container">
                         <table class="adm-table">
-                            <thead><tr><th>Ad Soyad</th><th>Durum</th><th>Kişi</th><th>İşlem</th></tr></thead>
+                            <thead><tr><th>#</th><th>Ad Soyad</th><th>Durum</th><th>Kişi Sayısı</th><th>Tarih</th><th>İşlem</th></tr></thead>
                             <tbody id="adm_rsvp_tbody"></tbody>
                         </table>
                     </div>
                 </div>
             </div>
 
-            <!-- TAB: MEDYA (FOTO & ŞARKI) -->
+            <!-- SEKME 2: YÜKLENEN FOTOĞRAFLAR LİSTESİ & TOPLU İNDİRME -->
+            <div id="tab-photos" class="adm-tab-content">
+                <div class="adm-card">
+                    <div class="adm-card-header">
+                        <h2>📸 Misafirlerin Yüklediği Fotoğraflar Listesi</h2>
+                        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                            <button type="button" class="btn-adm btn-adm-success" onclick="downloadAllPhotosZip()">📦 Tümünü İndir (ZIP)</button>
+                            <button type="button" class="btn-adm btn-adm-primary" onclick="downloadAllPhotosSequential()">⬇️ Tümünü Tek Tek İndir</button>
+                        </div>
+                    </div>
+                    <div class="adm-form-group" style="margin-bottom: 20px;">
+                        <label>Misafirler İçin Canlı Fotoğraf Yükleme İzni:</label>
+                        <select class="adm-input" id="in_photoUploadActive" onchange="saveAllSiteSettings()">
+                            <option value="true">🔓 Açık (Misafirler fotoğraf seçip yükleyebilir - Otomatik sıkıştırılır)</option>
+                            <option value="false">🔒 Kapalı (Yükleme butonu gizlenir, sadece bilgilendirme yazısı görünür)</option>
+                        </select>
+                    </div>
+                    <div class="adm-table-container">
+                        <table class="adm-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Önizleme</th>
+                                    <th>Gönderen</th>
+                                    <th>Dosya / Boyut</th>
+                                    <th>Tarih</th>
+                                    <th>İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adm_photos_tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEKME 3: ŞARKI İSTEKLERİ & MÜZİK -->
             <div id="tab-media" class="adm-tab-content">
                 <div class="adm-card">
-                    <h3 style="margin-bottom:15px; color:#D4AF37;">Açılış Kapısı & İç Fotoğraf</h3>
-                    <p style="font-size:12px; color:#888; margin-bottom:10px;">Kapı görseli HTML dosyasıyla aynı klasörde olmalı veya doğrudan Catbox/Resim URL'si girilmelidir.</p>
-                    <div class="f-row"><label>Açılış Kapısı Görseli (Dosya adı veya Catbox Linki):</label><input type="text" class="adm-input" id="in_doorImage" placeholder="Örn: image_23aa9d.jpg veya https://files.catbox.moe/..."></div>
-                    <div class="f-row"><label>1. Sahne Çift Fotoğrafı (Catbox URL):</label><input type="text" class="adm-input" id="in_heroImage" placeholder="Örn: https://files.catbox.moe/resim.jpg"></div>
-                    <div class="f-row"><label>Arka Plan Müziği MP3 Linki:</label><input type="text" class="adm-input" id="in_musicUrl"></div>
+                    <div class="adm-card-header">
+                        <h2>🎵 Gelen Şarkı İstekleri ve Notlar Listesi</h2>
+                        <button type="button" class="btn-adm btn-adm-secondary" onclick="exportSongsCSV()">📥 Listeyi İndir (CSV)</button>
+                    </div>
+                    <div class="adm-table-container">
+                        <table class="adm-table">
+                            <thead><tr><th>#</th><th>Gönderen Adı Soyadı</th><th>Şarkı İsteği / Notu</th><th>Tarih</th><th>İşlem</th></tr></thead>
+                            <tbody id="adm_songs_tbody"></tbody>
+                        </table>
+                    </div>
                 </div>
-
                 <div class="adm-card">
-                    <h3 style="margin-bottom:15px; color:#D4AF37;">📷 Ziyaretçi Fotoğraf Galerisi</h3>
-                    <label style="font-size:12px; font-weight:bold; color:#CCC;">Fotoğraf Yükleme İzni (Misafirler için):</label>
-                    <select class="adm-input" id="in_photoUploadActive" onchange="saveAllSiteSettings()">
-                        <option value="false">🔒 Kapalı (Düğün saatinde açılacak uyarısı verir)</option>
-                        <option value="true">🔓 Açık (Misafirler fotoğraf yükleyebilir)</option>
-                    </select>
-                    <table class="adm-table" style="margin-top:15px;">
-                        <thead><tr><th>Önizleme</th><th>Dosya</th><th>İşlem</th></tr></thead>
-                        <tbody id="adm_photos_tbody"></tbody>
-                    </table>
-                </div>
-
-                <div class="adm-card">
-                    <h3 style="margin-bottom:15px; color:#D4AF37;">🎵 Şarkı İstekleri</h3>
-                    <table class="adm-table">
-                        <thead><tr><th>Gönderen</th><th>İstek</th><th>İşlem</th></tr></thead>
-                        <tbody id="adm_songs_tbody"></tbody>
-                    </table>
+                    <div class="adm-card-header"><h2>🎶 Arka Plan Müziği ve Fotoğraf Alanı Yazıları</h2></div>
+                    <div class="adm-form-group">
+                        <label>Arka Plan Müzik MP3 Linki (Catbox veya Direkt MP3 URL):</label>
+                        <input type="text" class="adm-input" id="in_musicUrl" placeholder="https://files.catbox.moe/....mp3">
+                    </div>
+                    <div class="adm-form-grid">
+                        <div class="adm-form-group"><label>Fotoğraf Kutusu Başlığı:</label><input type="text" class="adm-input" id="in_photoNotice"></div>
+                        <div class="adm-form-group"><label>Fotoğraf Kutusu Alt Açıklaması:</label><input type="text" class="adm-input" id="in_photoSub"></div>
+                    </div>
                 </div>
             </div>
 
-            <!-- TAB: İÇERİK (METİNLER) -->
+            <!-- SEKME 4: METİNLER & ÇİFT FOTOĞRAFI (CATBOX) -->
             <div id="tab-content" class="adm-tab-content">
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+                <div class="adm-form-grid">
                     <div class="adm-card">
-                        <h3 style="margin-bottom:15px; color:#D4AF37;">İsimler ve Aileler</h3>
-                        <input type="text" class="adm-input" id="in_brideName" placeholder="Gelin Adı">
-                        <input type="text" class="adm-input" id="in_groomName" placeholder="Damat Adı">
-                        <input type="text" class="adm-input" id="in_brideFamily" placeholder="Gelin Soyadı (Aile)">
-                        <input type="text" class="adm-input" id="in_groomFamily" placeholder="Damat Soyadı (Aile)">
-                        <input type="text" class="adm-input" id="in_sealInitials" placeholder="Mühür Baş Harfler (M&Y)">
-                        <input type="text" class="adm-input" id="in_sealText" placeholder="Mühür Altı Yazı">
-                    </div>
-                    <div class="adm-card">
-                        <h3 style="margin-bottom:15px; color:#D4AF37;">Tarih ve Sayaç</h3>
-                        <div style="display:flex; gap:10px;">
-                            <input type="text" class="adm-input" id="in_dateDay" placeholder="Gün (08)">
-                            <input type="text" class="adm-input" id="in_dateMonth" placeholder="Ay (AĞUSTOS)">
+                        <div class="adm-card-header"><h2>1. Kapı, Çift Fotoğrafı & Lüks Tema</h2></div>
+                        <div class="adm-form-group">
+                            <label>🎨 Davetiye Renk & Atmosfer Teması:</label>
+                            <select class="adm-input" id="in_themePreset" onchange="saveAllSiteSettings()">
+                                <option value="classic">✨ Klasik Toprak & Sıcak Krem (Orijinal)</option>
+                                <option value="champagne">🥂 Kraliyet Şampanya & Altın</option>
+                                <option value="sage">🌿 Bohem Adaçayı Yeşili & Fildişi</option>
+                                <option value="rose">🌸 Romantik Gül Kurusu & İnci</option>
+                            </select>
                         </div>
-                        <input type="text" class="adm-input" id="in_dateYear" placeholder="Yıl (2026)">
-                        <input type="text" class="adm-input" id="in_dateTime" placeholder="Saat (19:00)">
-                        <input type="text" class="adm-input" id="in_countdownTarget" placeholder="Sayaç Hedefi (2026-08-08T19:00:00)">
+                        <div class="adm-form-group">
+                            <label>📸 Çiftin Fotoğrafı (Catbox Linki / Direkt Resim URL):</label>
+                            <input type="text" class="adm-input" id="in_couplePhotoUrl" placeholder="https://files.catbox.moe/ornek.jpg" oninput="updateAdminCouplePhotoPreview(this.value)">
+                            <small style="color:#6B7280; display:block; margin-top:4px;">Davetiye kapısı açıldıktan sonra ilk ekranda özel kemer çerçeve içinde görünür.</small>
+                            <div id="adm_couple_photo_preview_box" style="margin-top:10px; display:none; align-items:center; gap:12px;">
+                                <img id="adm_couple_photo_preview" src="" alt="Önizleme" referrerpolicy="no-referrer" style="width:64px; height:84px; object-fit:cover; border-radius:40px; border:2px solid #6E5547;">
+                                <button type="button" class="btn-adm btn-adm-danger" onclick="document.getElementById('in_couplePhotoUrl').value=''; updateAdminCouplePhotoPreview(''); saveAllSiteSettings();">Fotoğrafı Kaldır</button>
+                            </div>
+                        </div>
+                        <div class="adm-form-group"><label>Kapı Mührü Harfleri:</label><input type="text" class="adm-input" id="in_sealInitials"></div>
+                        <div class="adm-form-group"><label>Mühür Altı Yazı:</label><input type="text" class="adm-input" id="in_sealText"></div>
+                        <div class="adm-form-group"><label>1. Sahne Üst Başlık:</label><input type="text" class="adm-input" id="in_s1TopTitle"></div>
+                        <div class="adm-form-group"><label>Gelin Adı Soyadı:</label><input type="text" class="adm-input" id="in_brideName"></div>
+                        <div class="adm-form-group"><label>Damat Adı Soyadı:</label><input type="text" class="adm-input" id="in_groomName"></div>
                     </div>
-                </div>
-                <div class="adm-card">
-                    <h3 style="margin-bottom:15px; color:#D4AF37;">Konum Bilgileri</h3>
-                    <input type="text" class="adm-input" id="in_venueName" placeholder="Mekan Adı">
-                    <input type="text" class="adm-input" id="in_venueAddress" placeholder="Adres İl/İlçe">
-                    <input type="text" class="adm-input" id="in_mapIframe" placeholder="Harita Embed (Iframe) Linki">
-                    <input type="text" class="adm-input" id="in_mapLinkUrl" placeholder="Yol Tarifi Linki">
+                    <div class="adm-card">
+                        <div class="adm-card-header"><h2>2. Aileler & Davet Metni</h2></div>
+                        <div class="adm-form-group"><label>Davet Karşılama Sözü:</label><textarea class="adm-input" id="in_inviteText"></textarea></div>
+                        <div class="adm-form-group"><label>Gelin Soyadı (Aile):</label><input type="text" class="adm-input" id="in_brideFamily"></div>
+                        <div class="adm-form-group"><label>Damat Soyadı (Aile):</label><input type="text" class="adm-input" id="in_groomFamily"></div>
+                        <div class="adm-form-group"><label>Geri Sayım Alt Sözü:</label><input type="text" class="adm-input" id="in_s5Quote"></div>
+                    </div>
+                    <div class="adm-card">
+                        <div class="adm-card-header"><h2>3. Tarih & Saat</h2></div>
+                        <div style="display:flex; gap:10px;">
+                            <div class="adm-form-group" style="flex:1;"><label>Gün:</label><input type="text" class="adm-input" id="in_dateDay"></div>
+                            <div class="adm-form-group" style="flex:1.5;"><label>Ay:</label><input type="text" class="adm-input" id="in_dateMonth"></div>
+                            <div class="adm-form-group" style="flex:1;"><label>Yıl:</label><input type="text" class="adm-input" id="in_dateYear"></div>
+                        </div>
+                        <div style="display:flex; gap:10px;">
+                            <div class="adm-form-group" style="flex:1.5;"><label>Gün Adı:</label><input type="text" class="adm-input" id="in_dateDayName"></div>
+                            <div class="adm-form-group" style="flex:1;"><label>Saat:</label><input type="text" class="adm-input" id="in_dateTime"></div>
+                        </div>
+                        <div class="adm-form-group"><label>Alt Bilgi (Footer) Tarihi:</label><input type="text" class="adm-input" id="in_footerDate"></div>
+                        <div class="adm-form-group"><label>Geri Sayım Hedef (YYYY-AA-GGTHH:DD:SS):</label><input type="text" class="adm-input" id="in_countdownTarget"></div>
+                    </div>
+                    <div class="adm-card">
+                        <div class="adm-card-header"><h2>4. Konum & Harita</h2></div>
+                        <div class="adm-form-group"><label>Mekan Adı:</label><input type="text" class="adm-input" id="in_venueName"></div>
+                        <div class="adm-form-group"><label>Mekan Adresi:</label><textarea class="adm-input" id="in_venueAddress"></textarea></div>
+                        <div class="adm-form-group"><label>Harita (Iframe) Linki:</label><input type="text" class="adm-input" id="in_mapIframe"></div>
+                        <div class="adm-form-group"><label>Yol Tarifi Butonu Linki:</label><input type="text" class="adm-input" id="in_mapLinkUrl"></div>
+                    </div>
                 </div>
             </div>
 
-            <!-- TAB: PROGRAM VE MENÜ (DİNAMİK) -->
-            <div id="tab-lists" class="adm-tab-content">
-                <div class="adm-card">
-                    <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
-                        <h3 style="color:#D4AF37;">Program Akışı</h3>
-                        <button class="btn-adm btn-adm-secondary" onclick="addTimelineRow('','')">+ Ekle</button>
+            <!-- SEKME 5: PROGRAM & MENÜ -->
+            <div id="tab-program" class="adm-tab-content">
+                <div class="adm-form-grid">
+                    <div class="adm-card">
+                        <div class="adm-card-header">
+                            <h2>📅 Günün Çizgisi (Program)</h2>
+                            <button type="button" class="btn-adm btn-adm-secondary" onclick="addTimelineRow('','')" style="padding: 6px 12px;">+ Etkinlik Ekle</button>
+                        </div>
+                        <div id="admin-timeline-rows"></div>
                     </div>
-                    <div id="admin-timeline-rows"></div>
-                </div>
-                <div class="adm-card">
-                    <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
-                        <h3 style="color:#D4AF37;">Menü Listesi</h3>
-                        <button class="btn-adm btn-adm-secondary" onclick="addMenuRow('','','')">+ Ekle</button>
+                    <div class="adm-card">
+                        <div class="adm-card-header">
+                            <h2>🍽️ Düğün Menüsü</h2>
+                            <button type="button" class="btn-adm btn-adm-secondary" onclick="addMenuRow('','','')" style="padding: 6px 12px;">+ Menü Ekle</button>
+                        </div>
+                        <div id="admin-menu-rows"></div>
                     </div>
-                    <div id="admin-menu-rows"></div>
                 </div>
             </div>
 
         </div>
     </div>
 
-    <!-- Bildirim -->
-    <div id="adm-toast">
-        <span>👑 Değişiklikler başarıyla kaydedildi!</span>
+    <!-- Fotoğraf Büyütme (Lightbox) Modalı -->
+    <div id="photo-lightbox" onclick="closePhotoLightbox()">
+        <img id="photo-lightbox-img" src="" alt="Büyük Fotoğraf">
+        <div style="margin-top: 14px; display: flex; gap: 10px;" onclick="event.stopPropagation()">
+            <a id="photo-lightbox-download" href="#" download="dugun-fotografi.jpg" class="btn-adm btn-adm-success">⬇️ Fotoğrafı İndir</a>
+            <button type="button" class="btn-adm btn-adm-secondary" onclick="closePhotoLightbox()">✕ Kapat</button>
+        </div>
     </div>
 
-    <!-- Firebase SDK -->
+    <!-- Bildirim -->
+    <div id="adm-toast">
+        <span id="adm-toast-text">✅ Değişiklikler başarıyla kaydedildi!</span>
+    </div>
+
+    <!-- JSZip & Firebase SDK -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
 
     <script>
-        /* Varsayılan Başlangıç Ayarları */
+        const themePalettes = {
+            classic: {
+                bgCream: '#F3EAE3',
+                doorBg: '#EFE5DC',
+                textDark: '#4A382E',
+                textMuted: '#7D685C',
+                borderBrown: '#9E8576',
+                accentBrown: '#6E5547'
+            },
+            champagne: {
+                bgCream: '#FBF8F1',
+                doorBg: '#F5EFE2',
+                textDark: '#3E3224',
+                textMuted: '#7A6852',
+                borderBrown: '#B89B72',
+                accentBrown: '#8C6D46'
+            },
+            sage: {
+                bgCream: '#F2F4F0',
+                doorBg: '#E7ECE4',
+                textDark: '#2E3B30',
+                textMuted: '#5C6E5E',
+                borderBrown: '#879888',
+                accentBrown: '#4A5D4C'
+            },
+            rose: {
+                bgCream: '#F9F1F0',
+                doorBg: '#F3E5E3',
+                textDark: '#4A2E30',
+                textMuted: '#825E61',
+                borderBrown: '#B5898D',
+                accentBrown: '#7C4D52'
+            }
+        };
+
         const defaultSettings = {
-            doorImage: "image_23aa9d.jpg",
-            heroImage: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop",
+            themePreset: "classic",
+            sealInitials: "M & Y",
+            sealText: "Dokun Aç",
+            s1TopTitle: "Düğün Davetiyesi",
+            couplePhotoUrl: "",
+            brideName: "Meltem Alkış",
+            andWord: "ve",
+            groomName: "Yunus Emre Kumsal",
+            scrollBtnText: "Aşağı Kaydır",
             musicUrl: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3",
-            sealInitials: "M&Y", sealText: "Mührü Kır", s1TopTitle: "Davetlisiniz", 
-            brideName: "Meltem", andWord: "ve", groomName: "Yunus Emre", scrollBtnText: "Aşağı Kaydır",
-            inviteText: "Bu en mutlu günümüzde sizleri de aramızda görmekten onur duyarız.", 
-            familyHeader: "AİLELER", brideFamily: "Alkış", brideFamilySub: "AİLESİ", groomFamily: "Kumsal", groomFamilySub: "AİLESİ",
-            s3Title: "Tarih & Saat", dateDay: "08", dateMonth: "AĞUSTOS", dateYear: "2026", dateDayName: "CUMARTESİ", dateTime: "19:00",
-            countdownTarget: "2026-08-08T19:00:00", s4Title: "Konum", venueName: "Four Seasons Hotel Istanbul", venueAddress: "Beşiktaş / İstanbul",
-            mapIframe: "https://maps.google.com/maps?q=Four%20Seasons%20Hotel%20Bosphorus%20Istanbul&t=&z=14&ie=UTF8&iwloc=&output=embed", mapLinkUrl: "https://maps.google.com/?q=Four+Seasons+Hotel+Bosphorus+Istanbul", mapBtnText: "Yol Tarifi Al",
-            s6Title: "Program", timeline: [{ time: "19:00", title: "Nikah Töreni" }, { time: "19:30", title: "Kokteyl" }, { time: "21:00", title: "Yemek ve Eğlence" }],
-            s7Title: "Menü", menu: [{ cat: "BAŞLANGIÇ", name: "Karşılama Tabağı", desc: "Zeytinyağlı çeşitleri" }, { cat: "ANA YEMEK", name: "Dana Antrikot", desc: "Patates püresi yatağında" }, { cat: "TATLI", name: "Düğün Pastası", desc: "Çikolata ve orman meyveli" }],
-            s8Title: "Anı Paylaşımı", s8Desc: "Bu geceye ait çektiğiniz kareleri bizimle paylaşın.", photoNotice: "Fotoğraf yükleme özelliği düğün saatinde açılacaktır.", photoSub: "", photoUploadActive: "false",
-            funTitle: "Şarkı İsteği", funDesc: "Beraber dans etmek istediğiniz şarkı nedir?", funBtn: "Gönder",
-            s9Title: "L.C.V.", s9Sub: "", s9Desc: "Lütfen katılım durumunuzu bildiriniz.", rsvpYes: "Evet, Katılacağım", rsvpNo: "Maalesef Katılamıyorum", rsvpBtn: "Yanıtı Gönder", footerDate: "08.08.2026"
+            inviteText: "Bu anın şahidi olmak için sizi yanımızda görmek istiyoruz",
+            familyHeader: "AİLELERİMİZ",
+            brideFamily: "Alkış",
+            brideFamilySub: "AİLESİ",
+            groomFamily: "Kumsal",
+            groomFamilySub: "AİLESİ",
+            s3Title: "TARİH",
+            dateDay: "08",
+            dateMonth: "AĞUSTOS",
+            dateYear: "2026",
+            dateDayName: "CUMARTESİ",
+            dateTime: "19.00",
+            countdownTarget: "2026-08-08T19:00:00",
+            s4Title: "Konum",
+            venueName: "Four Seasons Hotel Istanbul",
+            venueAddress: "Beşiktaş/İstanbul",
+            mapIframe: "https://maps.google.com/maps?q=Four%20Seasons%20Hotel%20Bosphorus%20Istanbul&t=&z=14&ie=UTF8&iwloc=&output=embed",
+            mapLinkUrl: "https://maps.google.com/?q=Four+Seasons+Hotel+Bosphorus+Istanbul",
+            mapBtnText: "YOL TARİFİ AL",
+            s5Title: "BULUŞMAYA KALAN",
+            s5Quote: "İki ruh birleşiyor.",
+            s6Title: "Günün çizgisi",
+            timeline: [
+                { time: "19:00", title: "Nikah Töreni" },
+                { time: "19:30", title: "Kokteyl" },
+                { time: "21:00", title: "Kutlama ve Yemek" }
+            ],
+            s7Title: "Menü",
+            menu: [
+                { cat: "BAŞLANGIÇ", name: "Karşılama Kokteyli", desc: "Mini atıştırmalıklar ve içecekler" },
+                { cat: "ANA YEMEK", name: "Gecenin İmza Lezzeti", desc: "Şefin gecemiz için hazırladığı özel tabak" },
+                { cat: "TATLI", name: "Kutlama Pastası", desc: "Tatlı bir kapanış ve kahve/çay ikramı" }
+            ],
+            s8Title: "En güzel anlarımız",
+            s8Desc: "Birlikte biriktirdiğimiz en özel kareler",
+            photoNotice: "Anılarımızı Paylaşın",
+            photoSub: "Çektiğiniz fotoğrafları bu alandan yükleyebilirsiniz.",
+            photoUploadActive: "true",
+            funTitle: "Biraz Eğlence!",
+            funDesc: "Favori düğün şarkınızı veya notunuzu bizimle paylaşın!",
+            funBtn: "Gönder",
+            s9Title: "RSVP",
+            s9Sub: "KATILIMINIZ",
+            s9Desc: "Lütfen davetimize katılım durumunuzu bizimle paylaşın.",
+            rsvpYes: "Katılacağım",
+            rsvpNo: "Maalesef katılamıyorum",
+            rsvpBtn: "GÖNDER",
+            footerDate: "08 AĞUSTOS 2026",
+            updatedAt: 0
         };
 
         const firebaseConfig = {
-            apiKey: "AIzaSyBGw65gJhXPs2a219GKjdYiOPnzhamVqJY", authDomain: "davetiye-dabbc.firebaseapp.com",
-            databaseURL: "https://davetiye-dabbc-default-rtdb.firebaseio.com", projectId: "davetiye-dabbc"
+            apiKey: "AIzaSyBGw65gJhXPs2a219GKjdYiOPnzhamVqJY",
+            authDomain: "davetiye-dabbc.firebaseapp.com",
+            databaseURL: "https://davetiye-dabbc-default-rtdb.firebaseio.com",
+            projectId: "davetiye-dabbc",
+            storageBucket: "davetiye-dabbc.firebasestorage.app",
+            messagingSenderId: "927684969636",
+            appId: "1:927684969636:web:8159e2aa33bc5fcf589231",
+            measurementId: "G-P0P2VPC5YJ"
         };
 
-        let useFirebase = false; let db = null;
-        try { if (typeof firebase !== 'undefined') { firebase.initializeApp(firebaseConfig); db = firebase.database(); useFirebase = true; } } catch(e){}
+        // Güvenli LocalStorage Yardımcıları (Veri kaybını %100 önler)
+        function safeGetLocal(key, fallback) {
+            try {
+                const raw = localStorage.getItem(key);
+                return raw ? JSON.parse(raw) : fallback;
+            } catch (e) {
+                return fallback;
+            }
+        }
 
-        let currentSettings = { ...defaultSettings }; let allRSVPs = []; let allSongs = []; let allPhotos = [];
+        function safeSetLocal(key, val) {
+            try {
+                localStorage.setItem(key, JSON.stringify(val));
+            } catch (e) {}
+        }
+
+        let useFirebase = false;
+        let db = null;
+        try {
+            if (typeof firebase !== 'undefined') {
+                if (!firebase.apps.length) {
+                    firebase.initializeApp(firebaseConfig);
+                }
+                db = firebase.database();
+                useFirebase = true;
+            }
+        } catch (e) {
+            useFirebase = false;
+        }
+
+        let currentSettings = { ...defaultSettings, ...safeGetLocal('wedding_cms_settings', {}) };
+        let allRSVPs = safeGetLocal('wedding_rsvps', []);
+        let allSongs = safeGetLocal('wedding_songs', []);
+        let allPhotos = safeGetLocal('wedding_photos', []);
+        let deletedIds = safeGetLocal('wedding_deleted_ids', {});
+
+        function showToast(msg, isError) {
+            const t = document.getElementById('adm-toast');
+            const txt = document.getElementById('adm-toast-text');
+            if (txt) txt.innerText = msg || '✅ Değişiklikler başarıyla kaydedildi!';
+            t.style.background = isError ? '#EF4444' : '#10B981';
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3500);
+        }
 
         function switchAdmTab(tabId, btn) {
             document.querySelectorAll('.adm-tab-content').forEach(c => c.classList.remove('active'));
             document.querySelectorAll('.adm-tab').forEach(b => b.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active'); btn.classList.add('active');
+            const target = document.getElementById(tabId);
+            if (target) target.classList.add('active');
+            if (btn) btn.classList.add('active');
         }
 
-        /* --- VERİLERİ YÜKLEME VE ORTAK HAFIZA YÖNETİMİ --- */
-        function loadAllData() {
+        function openAdminPanel() {
+            window.location.hash = '#admin';
+            document.getElementById('admin-panel').style.display = 'block';
+        }
+
+        function closeAdminPanel() {
+            window.location.hash = '';
+            document.getElementById('admin-panel').style.display = 'none';
+        }
+
+        // Firebase & LocalStorage Çift Yönlü Kalıcı Senkronizasyon
+        function mergeCollection(remoteObj, localArr, storageKey, fbNodeName) {
+            const map = new Map();
+            (localArr || []).forEach(item => {
+                const key = item.fbKey || item.id;
+                if (key && !deletedIds[key]) {
+                    map.set(key, { ...item, fbKey: key });
+                }
+            });
+            if (remoteObj && typeof remoteObj === 'object') {
+                Object.entries(remoteObj).forEach(([k, val]) => {
+                    if (val && typeof val === 'object' && !deletedIds[k]) {
+                        map.set(k, { ...val, fbKey: k });
+                    }
+                });
+            }
+            const merged = Array.from(map.values()).sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
+            safeSetLocal(storageKey, merged);
+
             if (useFirebase && db) {
-                db.ref('settings').on('value', snap => { if (snap.val()) currentSettings = { ...defaultSettings, ...snap.val() }; applySettingsToDOM(); });
-                db.ref('rsvps').on('value', snap => { allRSVPs = []; snap.forEach(c => allRSVPs.push({ ...c.val(), fbKey: c.key })); renderAdminRSVPs(); });
-                db.ref('songs').on('value', snap => { allSongs = []; snap.forEach(c => allSongs.push({ ...c.val(), fbKey: c.key })); renderAdminSongs(); });
-                db.ref('photos').on('value', snap => { allPhotos = []; snap.forEach(c => allPhotos.push({ ...c.val(), fbKey: c.key })); renderAdminPhotos(); });
+                merged.forEach(item => {
+                    const key = item.fbKey;
+                    if (key && (!remoteObj || !remoteObj[key])) {
+                        db.ref(fbNodeName + '/' + key).set(item).catch(() => {});
+                    }
+                });
+            }
+            return merged;
+        }
+
+        function loadAllData() {
+            applySettingsToDOM();
+            renderAdminRSVPs();
+            renderAdminSongs();
+            renderAdminPhotos();
+
+            if (useFirebase && db) {
+                const statusEl = document.getElementById('adm-db-status');
+                statusEl.innerText = "🟢 Realtime Veritabanı + Yerel Yedek Aktif";
+
+                db.ref('settings').on('value', snap => {
+                    const remoteSettings = snap.val();
+                    const localSaved = safeGetLocal('wedding_cms_settings', null);
+                    if (remoteSettings) {
+                        const remoteTime = Number(remoteSettings.updatedAt || 0);
+                        const localTime = Number((localSaved && localSaved.updatedAt) || 0);
+                        if (localSaved && localTime > remoteTime) {
+                            currentSettings = { ...defaultSettings, ...remoteSettings, ...localSaved };
+                            db.ref('settings').set(currentSettings).catch(() => {});
+                        } else {
+                            currentSettings = { ...defaultSettings, ...(localSaved || {}), ...remoteSettings };
+                            safeSetLocal('wedding_cms_settings', currentSettings);
+                        }
+                    } else if (localSaved) {
+                        currentSettings = { ...defaultSettings, ...localSaved };
+                        db.ref('settings').set(currentSettings).catch(() => {});
+                    }
+                    applySettingsToDOM();
+                });
+
+                db.ref('rsvps').on('value', snap => {
+                    allRSVPs = mergeCollection(snap.val(), safeGetLocal('wedding_rsvps', []), 'wedding_rsvps', 'rsvps');
+                    renderAdminRSVPs();
+                });
+
+                db.ref('songs').on('value', snap => {
+                    allSongs = mergeCollection(snap.val(), safeGetLocal('wedding_songs', []), 'wedding_songs', 'songs');
+                    renderAdminSongs();
+                });
+
+                db.ref('photos').on('value', snap => {
+                    allPhotos = mergeCollection(snap.val(), safeGetLocal('wedding_photos', []), 'wedding_photos', 'photos');
+                    renderAdminPhotos();
+                });
             } else {
-                // LOCAL STORAGE BÖLÜMÜ (HATA GİDERİLDİ: Tek isimle okuyup yazma yapılıyor)
-                const s = localStorage.getItem('db_settings'); if (s) currentSettings = { ...defaultSettings, ...JSON.parse(s) }; applySettingsToDOM();
-                allRSVPs = JSON.parse(localStorage.getItem('db_rsvps') || '[]');
-                allSongs = JSON.parse(localStorage.getItem('db_songs') || '[]');
-                allPhotos = JSON.parse(localStorage.getItem('db_photos') || '[]');
-                renderAdminRSVPs(); renderAdminSongs(); renderAdminPhotos();
+                document.getElementById('adm-db-status').innerText = "🟡 Yerel Veritabanı Aktif";
+            }
+        }
+
+        function applyThemePalette(presetName) {
+            const p = themePalettes[presetName] || themePalettes.classic;
+            const root = document.documentElement;
+            root.style.setProperty('--bg-cream', p.bgCream);
+            root.style.setProperty('--door-bg', p.doorBg);
+            root.style.setProperty('--text-dark', p.textDark);
+            root.style.setProperty('--text-muted', p.textMuted);
+            root.style.setProperty('--border-brown', p.borderBrown);
+            root.style.setProperty('--accent-brown', p.accentBrown);
+        }
+
+        function updateAdminCouplePhotoPreview(url) {
+            const box = document.getElementById('adm_couple_photo_preview_box');
+            const img = document.getElementById('adm_couple_photo_preview');
+            const cleanUrl = (url || '').trim();
+            if (cleanUrl) {
+                img.src = cleanUrl;
+                box.style.display = 'flex';
+            } else {
+                img.src = '';
+                box.style.display = 'none';
             }
         }
 
         function applySettingsToDOM() {
-            Object.keys(currentSettings).forEach(k => {
-                if (k === 'timeline' || k === 'menu') return;
-                const el = document.getElementById('v_' + k);
-                if (el) {
-                    if (k === 'mapIframe') el.src = currentSettings[k];
-                    else if (k === 'heroImage') el.style.backgroundImage = `url('${currentSettings[k]}')`;
-                    else el.innerText = currentSettings[k];
+            applyThemePalette(currentSettings.themePreset || 'classic');
+
+            Object.keys(defaultSettings).forEach(key => {
+                if (key === 'timeline' || key === 'menu' || key === 'updatedAt') return;
+                const val = currentSettings[key] !== undefined ? currentSettings[key] : defaultSettings[key];
+                const viewEl = document.getElementById('v_' + key);
+                if (viewEl) {
+                    if (key === 'mapIframe') {
+                        if (viewEl.src !== val) viewEl.src = val;
+                    } else {
+                        viewEl.innerText = val;
+                    }
                 }
-                const inp = document.getElementById('in_' + k); if (inp) inp.value = currentSettings[k];
+                const adminInput = document.getElementById('in_' + key);
+                if (adminInput && document.activeElement !== adminInput) {
+                    adminInput.value = val;
+                }
             });
-            document.getElementById('v_heroDate').innerText = `${currentSettings.dateDay}.${currentSettings.dateMonth === 'AĞUSTOS' ? '08' : '10'}.${currentSettings.dateYear}`;
-            
-            // KAPI GÖRSELİ UYGULAMASI
-            const doorLeft = document.querySelector('.door.left');
-            const doorRight = document.querySelector('.door.right');
-            if(doorLeft && doorRight && currentSettings.doorImage) {
-                doorLeft.style.backgroundImage = `url('${currentSettings.doorImage}')`;
-                doorRight.style.backgroundImage = `url('${currentSettings.doorImage}')`;
+
+            const crestEl = document.getElementById('v_monogramCrest');
+            if (crestEl) crestEl.innerText = currentSettings.sealInitials || defaultSettings.sealInitials;
+
+            const s1DateBadge = document.getElementById('v_s1DateBadge');
+            if (s1DateBadge) {
+                s1DateBadge.innerText = `${currentSettings.dateDay || '08'} • ${currentSettings.dateMonth || 'AĞUSTOS'} • ${currentSettings.dateYear || '2026'}`;
             }
 
-            const upBox = document.getElementById('live-photo-upload-box'); const nBox = document.getElementById('v_photoNotice');
-            if (String(currentSettings.photoUploadActive) === 'true') { if(upBox) upBox.style.display = 'block'; if(nBox) nBox.style.display = 'none'; } 
-            else { if(upBox) upBox.style.display = 'none'; if(nBox) nBox.style.display = 'block'; }
+            // Çiftin Fotoğrafı (Catbox Linki)
+            const photoWrap = document.getElementById('v_couplePhotoWrap');
+            const photoImg = document.getElementById('v_couplePhotoImg');
+            const coupleUrl = (currentSettings.couplePhotoUrl || '').trim();
+            if (photoWrap && photoImg) {
+                if (coupleUrl) {
+                    if (photoImg.getAttribute('src') !== coupleUrl) {
+                        photoImg.setAttribute('src', coupleUrl);
+                    }
+                    photoWrap.classList.add('has-photo');
+                } else {
+                    photoImg.setAttribute('src', '');
+                    photoWrap.classList.remove('has-photo');
+                }
+            }
+            updateAdminCouplePhotoPreview(coupleUrl);
 
-            renderTimeline(); renderMenu(); renderAdmDyn();
-            const au = document.getElementById('bg-music'); if (currentSettings.musicUrl && au.src !== currentSettings.musicUrl) au.src = currentSettings.musicUrl;
+            document.querySelectorAll('.b-name-sync').forEach(el => el.innerText = currentSettings.brideName || defaultSettings.brideName);
+            document.querySelectorAll('.g-name-sync').forEach(el => el.innerText = currentSettings.groomName || defaultSettings.groomName);
+
+            const uploadBox = document.getElementById('live-photo-upload-box');
+            if (uploadBox) {
+                uploadBox.style.display = (String(currentSettings.photoUploadActive) === 'true') ? 'block' : 'none';
+            }
+
+            renderTimeline(currentSettings.timeline || []);
+            renderMenu(currentSettings.menu || []);
+            renderAdminDynamicLists(currentSettings.timeline || [], currentSettings.menu || []);
+
+            const audio = document.getElementById('bg-music');
+            if (currentSettings.musicUrl && audio.src !== currentSettings.musicUrl) {
+                audio.src = currentSettings.musicUrl;
+            }
         }
 
-        function renderTimeline() {
-            const c = document.getElementById('v_timelineContainer'); if(!c) return; c.innerHTML = '';
-            (currentSettings.timeline || []).forEach((t, i) => { 
-                c.innerHTML += `<div class="list-item"><div class="list-cat" style="color:var(--gold-dark);">${t.time}</div><div class="list-title">${t.title}</div></div>${i < currentSettings.timeline.length-1 ? '<div class="thin-divider"></div>':''}`; 
+        function renderTimeline(list) {
+            const container = document.getElementById('v_timelineContainer');
+            if (!container) return;
+            container.innerHTML = '';
+            list.forEach((item, idx) => {
+                container.innerHTML += `<div class="timeline-item anim-item d-2" style="opacity:1;transform:none;"><div class="timeline-time">${escapeHtml(item.time)}</div><div class="timeline-title">${escapeHtml(item.title)}</div></div>${idx < list.length - 1 ? '<div class="ornament-diamond" style="margin: 6px auto;"></div>' : ''}`;
             });
         }
-        function renderMenu() {
-            const c = document.getElementById('v_menuContainer'); if(!c) return; c.innerHTML = '';
-            (currentSettings.menu || []).forEach((m, i) => { 
-                c.innerHTML += `<div class="list-item"><div class="list-cat">${m.cat}</div><div class="list-title">${m.name}</div><div class="list-desc">${m.desc}</div></div>${i < currentSettings.menu.length-1 ? '<div class="thin-divider"></div>':''}`; 
+
+        function renderMenu(list) {
+            const container = document.getElementById('v_menuContainer');
+            if (!container) return;
+            container.innerHTML = '';
+            list.forEach((item, idx) => {
+                container.innerHTML += `<div class="menu-item anim-item d-2" style="margin-bottom:10px;opacity:1;transform:none;"><div class="menu-cat">${escapeHtml(item.cat)}</div><div class="menu-name">${escapeHtml(item.name)}</div><div class="menu-desc">${escapeHtml(item.desc)}</div></div>${idx < list.length - 1 ? '<div class="ornament-diamond" style="margin: 6px auto;"></div>' : ''}`;
             });
         }
 
-        function renderAdmDyn() {
-            const tc = document.getElementById('admin-timeline-rows'); if(tc){ tc.innerHTML=''; (currentSettings.timeline||[]).forEach(t => { tc.innerHTML += `<div class="adm-dynamic-row"><input type="text" class="adm-input t-time" value="${t.time}" placeholder="Saat" style="width:70px;"><input type="text" class="adm-input t-title" value="${t.title}" placeholder="Etkinlik Adı" style="flex:1;"><button type="button" class="btn-adm-danger" onclick="this.parentElement.remove()">X</button></div>`; });}
-            const mc = document.getElementById('admin-menu-rows'); if(mc){ mc.innerHTML=''; (currentSettings.menu||[]).forEach(m => { mc.innerHTML += `<div class="adm-dynamic-row"><input type="text" class="adm-input m-cat" value="${m.cat}" placeholder="Kategori" style="width:100px;"><input type="text" class="adm-input m-name" value="${m.name}" placeholder="Yemek Adı" style="flex:1;"><input type="text" class="adm-input m-desc" value="${m.desc}" placeholder="Açıklama" style="flex:1;"><button type="button" class="btn-adm-danger" onclick="this.parentElement.remove()">X</button></div>`; });}
+        function renderAdminDynamicLists(timeline, menu) {
+            const tContainer = document.getElementById('admin-timeline-rows');
+            if (tContainer) {
+                tContainer.innerHTML = '';
+                timeline.forEach((item) => {
+                    tContainer.innerHTML += `<div class="adm-dynamic-row"><input type="text" class="adm-input t-time" value="${escapeAttr(item.time)}" placeholder="Saat (Örn: 19:00)" style="width:28%;"><input type="text" class="adm-input t-title" value="${escapeAttr(item.title)}" placeholder="Etkinlik (Örn: Nikah)" style="flex:1;"><button type="button" class="btn-adm btn-adm-danger" onclick="this.parentElement.remove()">Sil</button></div>`;
+                });
+            }
+            const mContainer = document.getElementById('admin-menu-rows');
+            if (mContainer) {
+                mContainer.innerHTML = '';
+                menu.forEach((item) => {
+                    mContainer.innerHTML += `<div class="adm-dynamic-row" style="flex-direction:column; align-items:stretch;"><div style="display:flex; gap:10px; margin-bottom:8px;"><input type="text" class="adm-input m-cat" value="${escapeAttr(item.cat)}" placeholder="Kategori" style="flex:1;"><button type="button" class="btn-adm btn-adm-danger" onclick="this.closest('.adm-dynamic-row').remove()">Sil</button></div><input type="text" class="adm-input m-name" value="${escapeAttr(item.name)}" placeholder="Yemek Adı" style="margin-bottom:8px;"><input type="text" class="adm-input m-desc" value="${escapeAttr(item.desc)}" placeholder="Açıklama"></div>`;
+                });
+            }
         }
-        function addTimelineRow(){ document.getElementById('admin-timeline-rows').innerHTML += `<div class="adm-dynamic-row"><input type="text" class="adm-input t-time" placeholder="Saat" style="width:70px;"><input type="text" class="adm-input t-title" placeholder="Etkinlik Adı" style="flex:1;"><button type="button" class="btn-adm-danger" onclick="this.parentElement.remove()">X</button></div>`; }
-        function addMenuRow(){ document.getElementById('admin-menu-rows').innerHTML += `<div class="adm-dynamic-row"><input type="text" class="adm-input m-cat" placeholder="Kategori" style="width:100px;"><input type="text" class="adm-input m-name" placeholder="Yemek Adı" style="flex:1;"><input type="text" class="adm-input m-desc" placeholder="Açıklama" style="flex:1;"><button type="button" class="btn-adm-danger" onclick="this.parentElement.remove()">X</button></div>`; }
+
+        function addTimelineRow(time, title) {
+            const tContainer = document.getElementById('admin-timeline-rows');
+            const div = document.createElement('div');
+            div.className = 'adm-dynamic-row';
+            div.innerHTML = `<input type="text" class="adm-input t-time" value="${escapeAttr(time)}" placeholder="Saat" style="width:28%;"><input type="text" class="adm-input t-title" value="${escapeAttr(title)}" placeholder="Etkinlik" style="flex:1;"><button type="button" class="btn-adm btn-adm-danger" onclick="this.parentElement.remove()">Sil</button>`;
+            tContainer.appendChild(div);
+        }
+
+        function addMenuRow(cat, name, desc) {
+            const mContainer = document.getElementById('admin-menu-rows');
+            const div = document.createElement('div');
+            div.className = 'adm-dynamic-row';
+            div.style.cssText = "flex-direction:column; align-items:stretch;";
+            div.innerHTML = `<div style="display:flex; gap:10px; margin-bottom:8px;"><input type="text" class="adm-input m-cat" value="${escapeAttr(cat)}" placeholder="Kategori" style="flex:1;"><button type="button" class="btn-adm btn-adm-danger" onclick="this.closest('.adm-dynamic-row').remove()">Sil</button></div><input type="text" class="adm-input m-name" value="${escapeAttr(name)}" placeholder="Yemek Adı" style="margin-bottom:8px;"><input type="text" class="adm-input m-desc" value="${escapeAttr(desc)}" placeholder="Açıklama">`;
+            mContainer.appendChild(div);
+        }
 
         function saveAllSiteSettings() {
-            const ns = {}; Object.keys(defaultSettings).forEach(k => { if(k==='timeline'||k==='menu')return; const i=document.getElementById('in_'+k); if(i) ns[k]=i.value; });
-            const tl=[]; document.querySelectorAll('#admin-timeline-rows .adm-dynamic-row').forEach(r=>{ const i=r.querySelectorAll('input'); if(i[0].value) tl.push({time:i[0].value, title:i[1].value}); }); ns.timeline=tl;
-            const mn=[]; document.querySelectorAll('#admin-menu-rows .adm-dynamic-row').forEach(r=>{ const i=r.querySelectorAll('input'); if(i[1].value) mn.push({cat:i[0].value, name:i[1].value, desc:i[2].value}); }); ns.menu=mn;
-            currentSettings=ns;
-            if (useFirebase && db) { db.ref('settings').set(ns).then(() => { showToast(); }); } else { localStorage.setItem('db_settings', JSON.stringify(ns)); applySettingsToDOM(); showToast(); }
-        }
-        function showToast() { const t = document.getElementById('adm-toast'); t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3500); }
+            const newSettings = { ...defaultSettings, ...currentSettings };
+            Object.keys(defaultSettings).forEach(key => {
+                if (key === 'timeline' || key === 'menu' || key === 'updatedAt') return;
+                const input = document.getElementById('in_' + key);
+                if (input) newSettings[key] = input.value;
+            });
 
-        /* --- VİDEO/MÜZİK VE SCROLL FONKSİYONLARI --- */
-        const au = document.getElementById('bg-music'); let playing = false;
-        function openInvitation() { document.getElementById('door-container').classList.add('open'); document.getElementById('app-wrapper').classList.add('doors-opened'); if(au.src){ au.play().catch(()=>{}); playing=true; } }
-        function toggleAudio() { if(playing){ au.pause(); playing=false; document.getElementById('music-btn').innerText='🔇'; } else { au.play(); playing=true; document.getElementById('music-btn').innerText='🔊'; } }
-        
-        const sc=document.getElementById('slides-container');
-        new IntersectionObserver((e) => { e.forEach(en => { if(en.isIntersecting) en.target.classList.add('active'); }); }, {root:sc, threshold:0.3}).observe(document.querySelectorAll('.slide')[0]); 
-        document.querySelectorAll('.slide').forEach(s => new IntersectionObserver((e)=>{e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('active');})},{root:sc,threshold:0.3}).observe(s));
-        
-        function scrollNextSlide() { const h=window.innerHeight; const np=Math.round(sc.scrollTop/h+1)*h; sc.scrollTo({top:np, behavior:'smooth'}); }
-        function openMapUrl() { window.open(currentSettings.mapLinkUrl, '_blank'); }
+            const newTimeline = [];
+            document.querySelectorAll('#admin-timeline-rows .adm-dynamic-row').forEach(row => {
+                const time = row.querySelector('.t-time').value;
+                const title = row.querySelector('.t-title').value;
+                if (time || title) newTimeline.push({ time, title });
+            });
+            newSettings.timeline = newTimeline;
 
-        setInterval(()=>{
-            const d = Math.max(0, new Date(currentSettings.countdownTarget).getTime() - Date.now());
-            document.getElementById('cd_days').innerText=Math.floor(d/(86400000)); document.getElementById('cd_hours').innerText=String(Math.floor((d%86400000)/3600000)).padStart(2,'0');
-            document.getElementById('cd_mins').innerText=String(Math.floor((d%3600000)/60000)).padStart(2,'0'); document.getElementById('cd_secs').innerText=String(Math.floor((d%60000)/1000)).padStart(2,'0');
-        },1000);
+            const newMenu = [];
+            document.querySelectorAll('#admin-menu-rows .adm-dynamic-row').forEach(row => {
+                const cat = row.querySelector('.m-cat').value;
+                const name = row.querySelector('.m-name').value;
+                const desc = row.querySelector('.m-desc').value;
+                if (name || cat) newMenu.push({ cat, name, desc });
+            });
+            newSettings.menu = newMenu;
+            newSettings.updatedAt = Date.now();
 
-        let gCount=1; function changeGuestCount(d){ gCount=Math.max(1,Math.min(10,gCount+d)); document.getElementById('rsvp_count_val').innerText=gCount; }
-        function toggleGuestStepper(s){ document.getElementById('guest-stepper-box').style.display=s?'block':'none'; }
+            currentSettings = newSettings;
+            safeSetLocal('wedding_cms_settings', newSettings);
+            applySettingsToDOM();
 
-        /* --- FORM GÖNDERİMLERİ (RSVP & ŞARKI) --- */
-        function submitRSVPForm(e){ 
-            e.preventDefault(); const n=document.getElementById('rsvp_name').value; const s=document.querySelector('input[name="rsvp_status"]:checked').value; const c=s==='Katılacağım'?gCount:0;
-            if(useFirebase){ db.ref('rsvps').push({name:n, status:s, count:c}); } 
-            else { allRSVPs.push({fbKey:'local_' + Date.now(), name:n, status:s, count:c}); localStorage.setItem('db_rsvps', JSON.stringify(allRSVPs)); renderAdminRSVPs(); }
-            document.getElementById('rsvp-form').style.display='none'; document.getElementById('rsvp-thankyou').style.display='block';
-        }
-
-        function submitSongForm(e){ 
-            e.preventDefault(); const sn=document.getElementById('song_sender').value; const sg=document.getElementById('song_request').value;
-            if(useFirebase){ db.ref('songs').push({sender:sn, song:sg}); } 
-            else { allSongs.push({fbKey:'local_' + Date.now() + Math.random(), sender:sn, song:sg}); localStorage.setItem('db_songs', JSON.stringify(allSongs)); renderAdminSongs(); }
-            e.target.reset(); document.getElementById('song-feedback').style.display='block'; setTimeout(()=>document.getElementById('song-feedback').style.display='none',3000);
+            if (useFirebase && db) {
+                db.ref('settings').set(newSettings)
+                    .then(() => showToast('✅ Tüm ayarlar veritabanına kaydedildi!'))
+                    .catch(() => showToast('✅ Ayarlar yerel hafızaya kaydedildi!', false));
+            } else {
+                showToast('✅ Tüm ayarlar başarıyla kaydedildi!');
+            }
         }
 
-        /* --- FOTOĞRAF YÜKLEME VE CANVAS İLE OTOMATİK SIKIŞTIRMA (VERİTABANI DOSTU) --- */
-        function handlePhotoUpload(e){ 
-            const f=e.target.files[0]; if(!f)return; 
-            const r=new FileReader(); 
-            r.onload = function(ev){
-                const img = new Image();
-                img.onload = function() {
-                    const canvas = document.createElement('canvas');
-                    const MAX_WIDTH = 800; const MAX_HEIGHT = 800;
-                    let width = img.width; let height = img.height;
-                    
-                    if (width > height) { if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; } } 
-                    else { if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; } }
-                    
-                    canvas.width = width; canvas.height = height;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, width, height);
-                    const base64Url = canvas.toDataURL('image/jpeg', 0.7); // Görüntüyü %70 kalite ile sıkıştır
+        function formatDateStr(ts) {
+            if (!ts) return '-';
+            const d = new Date(ts);
+            if (isNaN(d.getTime())) return '-';
+            return d.toLocaleDateString('tr-TR') + ' ' + d.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
+        }
 
-                    if(useFirebase){ db.ref('photos').push({url:base64Url}); } 
-                    else { 
-                        allPhotos.push({fbKey:'local_' + Date.now(), url:base64Url}); 
-                        localStorage.setItem('db_photos', JSON.stringify(allPhotos)); 
-                        renderAdminPhotos(); 
-                    } 
-                    alert("Fotoğrafınız başarıyla yüklendi!");
+        function escapeHtml(str) {
+            return String(str || '').replace(/[&<>"']/g, s => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[s]));
+        }
+
+        function escapeAttr(str) {
+            return String(str || '').replace(/"/g, '&quot;');
+        }
+
+        // ================= LCV / RSVP LİSTELEME VE KAYIT =================
+        function renderAdminRSVPs() {
+            const tbody = document.getElementById('adm_rsvp_tbody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            let total = 0;
+
+            if (allRSVPs.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:#6B7280; padding:24px;">Henüz LCV katılım bildirimi bulunmuyor.</td></tr>`;
+            } else {
+                allRSVPs.forEach((item, index) => {
+                    const isAttending = item.status === 'Katılacağım';
+                    if (isAttending) total += Number(item.count || 0);
+                    const key = item.fbKey || ('idx_' + index);
+                    tbody.innerHTML += `<tr>
+                        <td>${index + 1}</td>
+                        <td><strong>${escapeHtml(item.name)}</strong></td>
+                        <td><span class="${isAttending ? 'adm-badge-success' : 'adm-badge-error'}">${isAttending ? '✅ Katılıyor' : '❌ Katılamıyor'}</span></td>
+                        <td>${isAttending ? Number(item.count || 1) : 0}</td>
+                        <td>${formatDateStr(item.createdAt)}</td>
+                        <td><button type="button" onclick="deleteRSVP('${escapeAttr(key)}', ${index})" class="btn-adm btn-adm-danger">Sil</button></td>
+                    </tr>`;
+                });
+            }
+
+            const totalEl = document.getElementById('adm_total_guests');
+            if (totalEl) totalEl.innerText = total;
+            const recCountEl = document.getElementById('adm_rsvp_records_count');
+            if (recCountEl) recCountEl.innerText = allRSVPs.length;
+        }
+
+        function submitRSVPForm(e) {
+            e.preventDefault();
+            const name = document.getElementById('rsvp_name').value.trim();
+            if (!name) return;
+            const status = document.querySelector('input[name="rsvp_status"]:checked').value;
+            const count = status === 'Katılacağım' ? guestCount : 0;
+            const uniqueKey = 'rsvp_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7);
+            const record = { fbKey: uniqueKey, name, status, count, createdAt: Date.now() };
+
+            allRSVPs.push(record);
+            safeSetLocal('wedding_rsvps', allRSVPs);
+            renderAdminRSVPs();
+
+            if (useFirebase && db) {
+                db.ref('rsvps/' + uniqueKey).set(record).catch(() => {});
+            }
+
+            burstGoldParticles();
+            document.getElementById('rsvp-form').style.display = 'none';
+            document.getElementById('rsvp-thankyou').style.display = 'block';
+        }
+
+        function resetRSVPForm() {
+            document.getElementById('rsvp-form').reset();
+            guestCount = 1;
+            document.getElementById('rsvp_count_val').innerText = '1';
+            toggleGuestStepper(true);
+            document.getElementById('rsvp-thankyou').style.display = 'none';
+            document.getElementById('rsvp-form').style.display = 'block';
+        }
+
+        function deleteRSVP(fbKey, idx) {
+            if (fbKey) {
+                deletedIds[fbKey] = true;
+                safeSetLocal('wedding_deleted_ids', deletedIds);
+            }
+            allRSVPs.splice(idx, 1);
+            safeSetLocal('wedding_rsvps', allRSVPs);
+            renderAdminRSVPs();
+            if (useFirebase && db && fbKey) {
+                db.ref('rsvps/' + fbKey).remove().catch(() => {});
+            }
+            showToast('🗑️ Katılımcı kaydı silindi.');
+        }
+
+        // ================= ŞARKI İSTEKLERİ LİSTELEME VE KAYIT =================
+        function renderAdminSongs() {
+            const tbody = document.getElementById('adm_songs_tbody');
+            const guestFeed = document.getElementById('v_guestSongsFeed');
+
+            if (tbody) {
+                tbody.innerHTML = '';
+                if (allSongs.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#6B7280; padding:24px;">Henüz şarkı isteği veya not gönderilmedi.</td></tr>`;
+                } else {
+                    allSongs.forEach((item, index) => {
+                        const key = item.fbKey || ('idx_' + index);
+                        tbody.innerHTML += `<tr>
+                            <td>${index + 1}</td>
+                            <td><strong>${escapeHtml(item.sender)}</strong></td>
+                            <td style="white-space:normal; max-width:360px;">${escapeHtml(item.song)}</td>
+                            <td>${formatDateStr(item.createdAt)}</td>
+                            <td><button type="button" onclick="deleteSong('${escapeAttr(key)}', ${index})" class="btn-adm btn-adm-danger">Sil</button></td>
+                        </tr>`;
+                    });
+                }
+            }
+
+            if (guestFeed) {
+                if (allSongs.length === 0) {
+                    guestFeed.style.display = 'none';
+                    guestFeed.innerHTML = '';
+                } else {
+                    guestFeed.style.display = 'block';
+                    const reversed = [...allSongs].reverse();
+                    guestFeed.innerHTML = `<div style="font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-muted); margin-bottom:4px; text-align:center;">🎵 Gelen İstekler (${allSongs.length})</div>` +
+                        reversed.map(item => `<div class="guest-song-row"><strong>${escapeHtml(item.sender)}:</strong> <span>${escapeHtml(item.song)}</span></div>`).join('');
+                }
+            }
+
+            const countEl = document.getElementById('adm_songs_count');
+            if (countEl) countEl.innerText = allSongs.length;
+        }
+
+        function submitSongForm(e) {
+            e.preventDefault();
+            const sender = document.getElementById('song_sender').value.trim();
+            const song = document.getElementById('song_request').value.trim();
+            if (!sender || !song) return;
+
+            const uniqueKey = 'song_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7);
+            const record = { fbKey: uniqueKey, sender, song, createdAt: Date.now() };
+
+            allSongs.push(record);
+            safeSetLocal('wedding_songs', allSongs);
+            renderAdminSongs();
+
+            if (useFirebase && db) {
+                db.ref('songs/' + uniqueKey).set(record).catch(() => {});
+            }
+
+            burstGoldParticles();
+            document.getElementById('song_request').value = '';
+            const fb = document.getElementById('song-feedback');
+            fb.style.display = 'block';
+            setTimeout(() => fb.style.display = 'none', 3000);
+        }
+
+        function deleteSong(fbKey, idx) {
+            if (fbKey) {
+                deletedIds[fbKey] = true;
+                safeSetLocal('wedding_deleted_ids', deletedIds);
+            }
+            allSongs.splice(idx, 1);
+            safeSetLocal('wedding_songs', allSongs);
+            renderAdminSongs();
+            if (useFirebase && db && fbKey) {
+                db.ref('songs/' + fbKey).remove().catch(() => {});
+            }
+            showToast('🗑️ Şarkı isteği silindi.');
+        }
+
+        // ================= FOTOĞRAF SIKIŞTIRMA, LİSTELEME VE İNDİRME =================
+        function compressImageFile(file, maxWidth = 1100, quality = 0.72) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = new Image();
+                    img.onload = function() {
+                        let w = img.width;
+                        let h = img.height;
+                        if (w > maxWidth || h > maxWidth) {
+                            if (w > h) {
+                                h = Math.round((h * maxWidth) / w);
+                                w = maxWidth;
+                            } else {
+                                w = Math.round((w * maxWidth) / h);
+                                h = maxWidth;
+                            }
+                        }
+                        const canvas = document.createElement('canvas');
+                        canvas.width = w;
+                        canvas.height = h;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, w, h);
+                        const dataUrl = canvas.toDataURL('image/jpeg', quality);
+                        resolve({
+                            dataUrl,
+                            width: w,
+                            height: h,
+                            sizeKB: Math.round((dataUrl.length * 3) / 4 / 1024)
+                        });
+                    };
+                    img.onerror = reject;
+                    img.src = event.target.result;
                 };
-                img.src = ev.target.result;
-            }; 
-            r.readAsDataURL(f); 
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
         }
 
-        /* --- ADMİN TABLOLARINI RENDER ETME --- */
-        function renderAdminRSVPs(){ 
-            const tb=document.getElementById('adm_rsvp_tbody'); if(!tb)return; tb.innerHTML=''; let t=0; 
-            allRSVPs.forEach((r,i)=>{ t+=Number(r.count||0); tb.innerHTML+=`<tr><td style="color:#FFF;">${r.name}</td><td>${r.status}</td><td>${r.count}</td><td><button onclick="delR('${r.fbKey}',${i})" class="btn-adm-danger">Sil</button></td></tr>`; }); 
-            document.getElementById('adm_total_guests').innerText=t; 
+        async function handlePhotoUpload(event) {
+            const files = Array.from(event.target.files || []);
+            if (files.length === 0) return;
+
+            const senderInput = document.getElementById('photo_sender');
+            const sender = (senderInput && senderInput.value.trim()) ? senderInput.value.trim() : 'Misafir';
+            const feedback = document.getElementById('photo-upload-feedback');
+            if (feedback) {
+                feedback.style.display = 'block';
+                feedback.style.color = '#6E5547';
+                feedback.innerText = `⏳ ${files.length} fotoğraf sıkıştırılıp yükleniyor...`;
+            }
+
+            let uploadedCount = 0;
+            for (const file of files) {
+                try {
+                    const compressed = await compressImageFile(file, 1100, 0.72);
+                    const uniqueKey = 'photo_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7);
+                    const cleanName = (file.name || 'fotograf.jpg').replace(/\.[^/.]+$/, '') + '.jpg';
+                    const record = {
+                        fbKey: uniqueKey,
+                        sender,
+                        fileName: cleanName,
+                        dataUrl: compressed.dataUrl,
+                        sizeKB: compressed.sizeKB,
+                        createdAt: Date.now()
+                    };
+
+                    allPhotos.push(record);
+                    safeSetLocal('wedding_photos', allPhotos);
+                    if (useFirebase && db) {
+                        db.ref('photos/' + uniqueKey).set(record).catch(() => {});
+                    }
+                    uploadedCount++;
+                } catch (err) {}
+            }
+
+            renderAdminPhotos();
+            burstGoldParticles();
+            event.target.value = '';
+
+            if (feedback) {
+                feedback.style.color = '#2e7d32';
+                feedback.innerText = `✅ ${uploadedCount} fotoğraf başarıyla kaydedildi!`;
+                setTimeout(() => { feedback.style.display = 'none'; }, 4000);
+            }
         }
 
-        function renderAdminSongs(){ 
-            const tb=document.getElementById('adm_songs_tbody'); if(!tb)return; tb.innerHTML=''; 
-            allSongs.forEach((s,i)=>{ tb.innerHTML+=`<tr><td style="color:#FFF;">${s.sender}</td><td style="white-space:normal;">${s.song}</td><td><button onclick="delS('${s.fbKey}',${i})" class="btn-adm-danger">Sil</button></td></tr>`; }); 
+        function renderAdminPhotos() {
+            const tbody = document.getElementById('adm_photos_tbody');
+            const strip = document.getElementById('v_guestPhotoStrip');
+            const countEl = document.getElementById('adm_photos_count');
+
+            if (countEl) countEl.innerText = allPhotos.length;
+
+            if (tbody) {
+                tbody.innerHTML = '';
+                if (allPhotos.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:#6B7280; padding:24px;">Henüz yüklenen fotoğraf bulunmuyor.</td></tr>`;
+                } else {
+                    allPhotos.forEach((item, index) => {
+                        const key = item.fbKey || ('idx_' + index);
+                        tbody.innerHTML += `<tr>
+                            <td>${index + 1}</td>
+                            <td>
+                                <img src="${item.dataUrl}" alt="Fotoğraf ${index + 1}" class="adm-photo-thumb" onclick="openPhotoLightbox(${index})">
+                            </td>
+                            <td><strong>${escapeHtml(item.sender || 'Misafir')}</strong></td>
+                            <td>${escapeHtml(item.fileName || 'fotograf.jpg')} <span style="color:#6B7280;">(${item.sizeKB || '~80'} KB)</span></td>
+                            <td>${formatDateStr(item.createdAt)}</td>
+                            <td>
+                                <div style="display:flex; gap:6px;">
+                                    <button type="button" class="btn-adm btn-adm-success" style="padding:6px 12px; font-size:12px;" onclick="downloadSinglePhoto(${index})">⬇️ İndir</button>
+                                    <button type="button" class="btn-adm btn-adm-danger" onclick="deletePhoto('${escapeAttr(key)}', ${index})">Sil</button>
+                                </div>
+                            </td>
+                        </tr>`;
+                    });
+                }
+            }
+
+            if (strip) {
+                if (allPhotos.length === 0) {
+                    strip.style.display = 'none';
+                    strip.innerHTML = '';
+                } else {
+                    strip.style.display = 'flex';
+                    strip.innerHTML = allPhotos.map((item, idx) =>
+                        `<img src="${item.dataUrl}" title="${escapeAttr(item.sender || 'Misafir')}" alt="Anı ${idx + 1}" onclick="openPhotoLightbox(${idx})">`
+                    ).join('');
+                }
+            }
         }
 
-        function renderAdminPhotos(){ 
-            const tb=document.getElementById('adm_photos_tbody'); if(!tb)return; tb.innerHTML=''; 
-            allPhotos.forEach((p,i)=>{ tb.innerHTML+=`<tr><td><img src="${p.url}" class="photo-preview-img"></td><td><a href="${p.url}" download="dügün-anı-${i+1}.jpg" style="color:#D4AF37; text-decoration:none; font-weight:bold;">📥 İndir</a></td><td><button onclick="delP('${p.fbKey}',${i})" class="btn-adm-danger">Sil</button></td></tr>`; }); 
+        function openPhotoLightbox(index) {
+            const item = allPhotos[index];
+            if (!item) return;
+            const modal = document.getElementById('photo-lightbox');
+            const img = document.getElementById('photo-lightbox-img');
+            const dl = document.getElementById('photo-lightbox-download');
+            img.src = item.dataUrl;
+            dl.href = item.dataUrl;
+            dl.download = `${String(index + 1).padStart(2, '0')}_${(item.sender || 'Misafir').replace(/\s+/g, '_')}.jpg`;
+            modal.classList.add('open');
         }
 
-        /* --- SİLME İŞLEMLERİ --- */
-        function delR(k,i){ 
-            if(useFirebase && !k.startsWith('local_')){ db.ref('rsvps/'+k).remove(); }
-            else{ allRSVPs = allRSVPs.filter(item => item.fbKey !== k); localStorage.setItem('db_rsvps',JSON.stringify(allRSVPs)); renderAdminRSVPs(); } 
+        function closePhotoLightbox() {
+            document.getElementById('photo-lightbox').classList.remove('open');
         }
 
-        function delS(k,i){ 
-            if(useFirebase && !k.startsWith('local_')){ db.ref('songs/'+k).remove(); }
-            else{ allSongs = allSongs.filter(item => item.fbKey !== k); localStorage.setItem('db_songs',JSON.stringify(allSongs)); renderAdminSongs(); } 
+        function downloadSinglePhoto(index) {
+            const item = allPhotos[index];
+            if (!item || !item.dataUrl) return;
+            const a = document.createElement('a');
+            a.href = item.dataUrl;
+            a.download = `${String(index + 1).padStart(2, '0')}_${(item.sender || 'Misafir').replace(/\s+/g, '_')}.jpg`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
         }
 
-        function delP(k,i){ 
-            if(useFirebase && !k.startsWith('local_')){ db.ref('photos/'+k).remove(); }
-            else{ allPhotos = allPhotos.filter(item => item.fbKey !== k); localStorage.setItem('db_photos',JSON.stringify(allPhotos)); renderAdminPhotos(); } 
+        function downloadAllPhotosSequential() {
+            if (allPhotos.length === 0) {
+                showToast('⚠️ İndirilecek fotoğraf bulunamadı.', true);
+                return;
+            }
+            showToast(`⬇️ ${allPhotos.length} fotoğraf sırayla indiriliyor...`);
+            allPhotos.forEach((item, idx) => {
+                setTimeout(() => {
+                    downloadSinglePhoto(idx);
+                }, idx * 350);
+            });
         }
 
-        function hr(){ document.getElementById('admin-panel').style.display=window.location.hash==='#admin'?'block':'none'; }
-        window.addEventListener('hashchange', hr); window.addEventListener('DOMContentLoaded', ()=>{ loadAllData(); hr(); });
+        async function downloadAllPhotosZip() {
+            if (allPhotos.length === 0) {
+                showToast('⚠️ İndirilecek fotoğraf bulunamadı.', true);
+                return;
+            }
+            if (typeof JSZip === 'undefined') {
+                downloadAllPhotosSequential();
+                return;
+            }
+            try {
+                showToast('📦 Fotoğraflar ZIP paketi yapılıyor...');
+                const zip = new JSZip();
+                allPhotos.forEach((item, idx) => {
+                    if (item.dataUrl && item.dataUrl.includes(',')) {
+                        const base64Data = item.dataUrl.split(',')[1];
+                        const safeSender = (item.sender || 'Misafir').replace(/[^a-zA-Z0-9ğüşıöçĞÜŞİÖÇ_-]/g, '_');
+                        const fileName = `${String(idx + 1).padStart(3, '0')}_${safeSender}.jpg`;
+                        zip.file(fileName, base64Data, { base64: true });
+                    }
+                });
+                const blob = await zip.generateAsync({ type: 'blob' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'dugun_fotograflari_hepsi.zip';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                setTimeout(() => URL.revokeObjectURL(url), 5000);
+                showToast('✅ Tüm fotoğraflar ZIP olarak indirildi!');
+            } catch (e) {
+                downloadAllPhotosSequential();
+            }
+        }
+
+        function deletePhoto(fbKey, idx) {
+            if (fbKey) {
+                deletedIds[fbKey] = true;
+                safeSetLocal('wedding_deleted_ids', deletedIds);
+            }
+            allPhotos.splice(idx, 1);
+            safeSetLocal('wedding_photos', allPhotos);
+            renderAdminPhotos();
+            if (useFirebase && db && fbKey) {
+                db.ref('photos/' + fbKey).remove().catch(() => {});
+            }
+            showToast('🗑️ Fotoğraf silindi.');
+        }
+
+        // CSV Dışa Aktarma Yardımcıları
+        function exportRSVPsCSV() {
+            if (allRSVPs.length === 0) {
+                showToast('⚠️ Dışa aktarılacak LCV kaydı yok.', true);
+                return;
+            }
+            let csv = '\uFEFFSıra,Ad Soyad,Katılım Durumu,Kişi Sayısı,Tarih\n';
+            allRSVPs.forEach((r, i) => {
+                csv += `${i + 1},"${(r.name || '').replace(/"/g, '""')}","${r.status}",${r.count},"${formatDateStr(r.createdAt)}"\n`;
+            });
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'lcv_katilimci_listesi.csv';
+            a.click();
+        }
+
+        function exportSongsCSV() {
+            if (allSongs.length === 0) {
+                showToast('⚠️ Dışa aktarılacak şarkı isteği yok.', true);
+                return;
+            }
+            let csv = '\uFEFFSıra,Gönderen,Şarkı İsteği / Not,Tarih\n';
+            allSongs.forEach((s, i) => {
+                csv += `${i + 1},"${(s.sender || '').replace(/"/g, '""')}","${(s.song || '').replace(/"/g, '""')}","${formatDateStr(s.createdAt)}"\n`;
+            });
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'sarki_istekleri_listesi.csv';
+            a.click();
+        }
+
+        // TAKVİME EKLE (.ICS İNDİR)
+        function addToCalendar() {
+            const title = `${currentSettings.brideName || 'Meltem'} & ${currentSettings.groomName || 'Yunus Emre'} Düğün Töreni`;
+            const location = `${currentSettings.venueName || ''}, ${currentSettings.venueAddress || ''}`;
+            const targetDate = new Date(currentSettings.countdownTarget || '2026-08-08T19:00:00');
+            const start = isNaN(targetDate.getTime()) ? new Date('2026-08-08T19:00:00') : targetDate;
+            const end = new Date(start.getTime() + 4 * 60 * 60 * 1000);
+            const fmt = d => d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+            const ics = [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'BEGIN:VEVENT',
+                `DTSTART:${fmt(start)}`,
+                `DTEND:${fmt(end)}`,
+                `SUMMARY:${title}`,
+                `DESCRIPTION:${currentSettings.inviteText || ''}`,
+                `LOCATION:${location}`,
+                'END:VEVENT',
+                'END:VCALENDAR'
+            ].join('\r\n');
+            const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'dugun_davetiyesi_takvim.ics';
+            a.click();
+        }
+
+        let guestCount = 1;
+        function changeGuestCount(delta) {
+            guestCount = Math.min(10, Math.max(1, guestCount + delta));
+            document.getElementById('rsvp_count_val').innerText = guestCount;
+        }
+        function toggleGuestStepper(show) {
+            document.getElementById('guest-stepper-box').style.display = show ? 'block' : 'none';
+        }
+        function openMapUrl() {
+            window.open(currentSettings.mapLinkUrl || 'https://maps.google.com', '_blank');
+        }
+
+        const audioEl = document.getElementById('bg-music');
+        let isMusicPlaying = false;
+        function openInvitation() {
+            const glow = document.getElementById('door-light-glow');
+            if (glow) {
+                glow.classList.add('burst');
+                setTimeout(() => glow.classList.remove('burst'), 1500);
+            }
+            document.getElementById('door-container').classList.add('open');
+            document.getElementById('app-wrapper').classList.add('doors-opened');
+            burstGoldParticles();
+            if (audioEl.src) {
+                audioEl.play().then(() => {
+                    isMusicPlaying = true;
+                    const mBtn = document.getElementById('music-btn');
+                    mBtn.innerText = '🔊';
+                    mBtn.classList.add('playing');
+                }).catch(() => {});
+            }
+        }
+
+        function replayDoorAnimation() {
+            scrollToSlideIndex(0);
+            document.getElementById('door-container').classList.remove('open');
+            document.getElementById('app-wrapper').classList.remove('doors-opened');
+        }
+
+        function toggleAudio() {
+            const mBtn = document.getElementById('music-btn');
+            if (isMusicPlaying) {
+                audioEl.pause();
+                isMusicPlaying = false;
+                mBtn.innerText = '🔇';
+                mBtn.classList.remove('playing');
+            } else {
+                audioEl.play().catch(() => {});
+                isMusicPlaying = true;
+                mBtn.innerText = '🔊';
+                mBtn.classList.add('playing');
+            }
+        }
+
+        const slides = document.querySelectorAll('section.slide');
+        const navDots = document.querySelectorAll('#slide-nav-dots .slide-dot');
+        const scrollContainer = document.getElementById('slides-container');
+        const slideObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    const idx = Array.from(slides).indexOf(entry.target);
+                    if (idx !== -1) {
+                        navDots.forEach((d, i) => d.classList.toggle('active', i === idx));
+                    }
+                }
+            });
+        }, { root: scrollContainer, threshold: 0.45 });
+        slides.forEach(s => slideObserver.observe(s));
+
+        function scrollToSlideIndex(idx) {
+            const h = window.innerHeight;
+            scrollContainer.scrollTo({ top: idx * h, behavior: 'smooth' });
+        }
+
+        function scrollNextSlide() {
+            const h = window.innerHeight;
+            const currentScroll = scrollContainer.scrollTop;
+            const nextPos = Math.round(currentScroll / h + 1) * h;
+            if (nextPos >= scrollContainer.scrollHeight) {
+                scrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                scrollContainer.scrollTo({ top: nextPos, behavior: 'smooth' });
+            }
+        }
+
+        function updateCountdown() {
+            const target = new Date(currentSettings.countdownTarget).getTime();
+            const now = new Date().getTime();
+            const diff = Math.max(0, target - now);
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+            document.getElementById('cd_days').innerText = isNaN(d) ? 0 : d;
+            document.getElementById('cd_hours').innerText = String(isNaN(h) ? 0 : h).padStart(2, '0');
+            document.getElementById('cd_mins').innerText = String(isNaN(m) ? 0 : m).padStart(2, '0');
+            document.getElementById('cd_secs').innerText = String(isNaN(s) ? 0 : s).padStart(2, '0');
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // ================= LÜKS ALTIN TOZU & KUTLAMA PARTİKÜL SİSTEMİ =================
+        const pCanvas = document.getElementById('luxury-particles');
+        const pCtx = pCanvas ? pCanvas.getContext('2d') : null;
+        let particles = [];
+
+        function resizeParticlesCanvas() {
+            if (!pCanvas) return;
+            const wrap = document.getElementById('app-wrapper');
+            pCanvas.width = wrap ? wrap.clientWidth : 480;
+            pCanvas.height = wrap ? wrap.clientHeight : window.innerHeight;
+        }
+
+        function initAmbientParticles() {
+            resizeParticlesCanvas();
+            particles = [];
+            for (let i = 0; i < 28; i++) {
+                particles.push({
+                    x: Math.random() * (pCanvas ? pCanvas.width : 400),
+                    y: Math.random() * (pCanvas ? pCanvas.height : 800),
+                    r: Math.random() * 2.2 + 0.8,
+                    vx: (Math.random() - 0.5) * 0.25,
+                    vy: -Math.random() * 0.35 - 0.1,
+                    alpha: Math.random() * 0.55 + 0.2,
+                    pulse: Math.random() * Math.PI * 2
+                });
+            }
+        }
+
+        function burstGoldParticles() {
+            if (!pCanvas) return;
+            const cx = pCanvas.width / 2;
+            const cy = pCanvas.height / 2;
+            for (let i = 0; i < 24; i++) {
+                const angle = (Math.PI * 2 * i) / 24 + (Math.random() - 0.5) * 0.3;
+                const speed = Math.random() * 2.5 + 0.8;
+                particles.push({
+                    x: cx,
+                    y: cy,
+                    r: Math.random() * 2.8 + 1.2,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed - 0.5,
+                    alpha: 0.9,
+                    pulse: Math.random() * Math.PI,
+                    temp: true
+                });
+            }
+        }
+
+        function animateParticles() {
+            if (!pCanvas || !pCtx) return;
+            pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.pulse += 0.03;
+                if (p.temp) {
+                    p.alpha -= 0.012;
+                    p.vy += 0.03;
+                    if (p.alpha <= 0) {
+                        particles.splice(i, 1);
+                        continue;
+                    }
+                } else {
+                    if (p.y < -10) p.y = pCanvas.height + 10;
+                    if (p.x < -10) p.x = pCanvas.width + 10;
+                    if (p.x > pCanvas.width + 10) p.x = -10;
+                }
+                const currentAlpha = Math.max(0.05, p.alpha * (0.7 + 0.3 * Math.sin(p.pulse)));
+                pCtx.beginPath();
+                pCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                pCtx.fillStyle = `rgba(198, 163, 118, ${currentAlpha})`;
+                pCtx.fill();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('resize', resizeParticlesCanvas);
+
+        function handleRouting() {
+            if (window.location.hash === '#admin') {
+                document.getElementById('admin-panel').style.display = 'block';
+            } else {
+                document.getElementById('admin-panel').style.display = 'none';
+            }
+        }
+        window.addEventListener('hashchange', handleRouting);
+        window.addEventListener('DOMContentLoaded', () => {
+            loadAllData();
+            handleRouting();
+            initAmbientParticles();
+            animateParticles();
+        });
     </script>
 </body>
 </html>
