@@ -3,644 +3,538 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Meltem & Yunus Emre Düğün Davetiyesi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+    <title>Meltem & Yunus Emre Davetiyesi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
     
     <style>
         /* ==========================================================================
-           1. DAVETİYE ÖN YÜZ STİLLERİ
+           1. PREMIUM DAVETİYE STİLLERİ (GOLD VARAK VE GLASSMORPHISM)
            ========================================================================== */
         :root {
-            --bg-cream: #F3EAE3;
-            --door-bg: #EFE5DC;
-            --text-dark: #4A382E;
-            --text-muted: #7D685C;
-            --border-brown: #9E8576;
-            --accent-brown: #6E5547;
-            --card-bg: rgba(255, 252, 249, 0.55);
+            --bg-cream: #F8F5F2; /* Daha parlak bir krem */
+            --door-bg: #EFE8E1;
+            --text-dark: #3A2B24;
+            --text-muted: #8A7B72;
+            --gold-light: #D4AF37;
+            --gold-dark: #AA7E2D;
+            --gold-gradient: linear-gradient(135deg, #E6C27A 0%, #D4AF37 50%, #B68D2C 100%);
+            --glass-bg: rgba(255, 255, 255, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.5);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
         body {
             font-family: 'Cormorant Garamond', serif;
-            background-color: #2c221e;
+            background-color: #1A1311; /* Siyah/Kahve çok koyu arka plan (telefonda çerçeve gibi durur) */
             color: var(--text-dark);
             overflow: hidden;
-            height: 100vh;
-            width: 100vw;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            height: 100vh; width: 100vw;
+            display: flex; justify-content: center; align-items: center;
         }
 
         #app-wrapper {
-            width: 100%; max-width: 480px; height: 100vh; background-color: var(--bg-cream);
-            position: relative; overflow: hidden; box-shadow: 0 0 50px rgba(0,0,0,0.6);
-            background-image: radial-gradient(rgba(158, 133, 118, 0.08) 1px, transparent 0);
-            background-size: 20px 20px;
+            width: 100%; max-width: 480px; height: 100vh;
+            background-color: var(--bg-cream); position: relative; overflow: hidden;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png'); /* Kağıt dokusu */
         }
 
+        /* --- SİNEMATİK KAPI ANİMASYONU --- */
         #door-container {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 900; display: flex; pointer-events: auto; transition: visibility 0s 1.8s;
+            z-index: 900; display: flex; pointer-events: auto;
+            transition: visibility 0s 2s; /* Animasyon bitiminde gizle */
         }
         #door-container.open { visibility: hidden; pointer-events: none; }
 
         .door {
             width: 50%; height: 100%; background-color: var(--door-bg); position: relative;
-            transition: transform 1.6s cubic-bezier(0.77, 0, 0.175, 1);
-            background-image: radial-gradient(rgba(110, 85, 71, 0.06) 1px, transparent 0);
-            background-size: 16px 16px;
+            transition: transform 1.8s cubic-bezier(0.86, 0, 0.07, 1); /* Daha sinematik yavaşlık */
+            background-image: url('https://www.transparenttextures.com/patterns/floral-flourishes.png');
+            background-blend-mode: multiply; opacity: 0.98;
         }
-
-        .door-inner { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; }
-        .door.left { border-right: 1px solid rgba(158, 133, 118, 0.45); box-shadow: 10px 0 30px rgba(74, 56, 46, 0.22), inset -2px 0 6px rgba(255,255,255,0.7); z-index: 3; }
-        .door.right { border-left: 1px solid rgba(158, 133, 118, 0.45); box-shadow: -8px 0 25px rgba(74, 56, 46, 0.15), inset 3px 0 8px rgba(255,255,255,0.6); z-index: 2; }
-        #door-container.open .door.left { transform: translateX(-115%); }
-        #door-container.open .door.right { transform: translateX(115%); }
-
-        .embossed-floral {
-            position: absolute; pointer-events: none; opacity: 0.95;
-            filter: drop-shadow(2px 3px 3px rgba(74, 56, 46, 0.22)) drop-shadow(-2px -2px 2px rgba(255, 255, 255, 0.9));
+        .door.left {
+            border-right: 1.5px solid var(--gold-dark);
+            box-shadow: 15px 0 40px rgba(58, 43, 36, 0.3), inset -2px 0 10px rgba(255,255,255,0.5); z-index: 3;
         }
+        .door.right {
+            border-left: 1.5px solid var(--gold-dark);
+            box-shadow: -15px 0 40px rgba(58, 43, 36, 0.2), inset 2px 0 10px rgba(255,255,255,0.5); z-index: 2;
+        }
+        #door-container.open .door.left { transform: translateX(-105%); }
+        #door-container.open .door.right { transform: translateX(105%); }
 
+        /* 3D Premium Mühür */
         .seal-wrapper {
-            position: absolute; top: 50%; right: 0; transform: translate(50%, -50%); z-index: 10;
-            display: flex; flex-direction: column; align-items: center; cursor: pointer; pointer-events: auto; -webkit-tap-highlight-color: transparent;
+            position: absolute; top: 50%; right: 0; transform: translate(50%, -50%);
+            z-index: 10; display: flex; flex-direction: column; align-items: center;
+            cursor: pointer; pointer-events: auto;
         }
-
         .door-seal {
-            width: 92px; height: 122px; border-radius: 50%;
-            background: linear-gradient(135deg, #F6EFE8 0%, #E5D6C8 55%, #D3C0B0 100%);
-            box-shadow: 6px 10px 22px rgba(60, 44, 35, 0.28), -2px -2px 8px rgba(255, 255, 255, 0.85), inset 2px 2px 4px rgba(255, 255, 255, 0.95), inset -2px -3px 6px rgba(130, 105, 90, 0.45);
-            display: flex; align-items: center; justify-content: center; position: relative; transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+            width: 100px; height: 100px; border-radius: 50%;
+            background: var(--gold-gradient);
+            box-shadow: 0 10px 30px rgba(58, 43, 36, 0.4), inset 0 2px 8px rgba(255,255,255,0.6), inset 0 -4px 8px rgba(0,0,0,0.2);
+            display: flex; align-items: center; justify-content: center; position: relative;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.8s ease;
         }
-
         .door-seal-inner {
-            width: 78px; height: 106px; border-radius: 50%;
-            background: linear-gradient(145deg, #E8DBD0 0%, #F4ECE4 100%);
-            box-shadow: inset 2px 3px 5px rgba(115, 90, 75, 0.35), inset -2px -2px 4px rgba(255, 255, 255, 0.9), 0 1px 2px rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(158, 133, 118, 0.35); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px 4px; position: relative;
+            width: 86px; height: 86px; border-radius: 50%;
+            background: #FDFBF8;
+            box-shadow: inset 0 3px 8px rgba(170, 126, 45, 0.5);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            border: 2px solid var(--gold-light);
         }
-
-        .door-seal-inner::after {
-            content: ''; position: absolute; top: 4px; left: 4px; right: 4px; bottom: 4px;
-            border-radius: 50%; border: 0.8px solid rgba(158, 133, 118, 0.28); pointer-events: none;
+        .seal-initials {
+            font-family: 'Great Vibes', cursive; font-size: 38px; color: var(--gold-dark);
+            line-height: 1; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
-
-        .seal-flower-svg { width: 44px; height: 54px; filter: drop-shadow(1.5px 2px 1.5px rgba(90, 68, 55, 0.28)) drop-shadow(-1px -1px 1px rgba(255, 255, 255, 0.95)); margin-bottom: 2px; }
-        .seal-initials { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 600; letter-spacing: 2px; color: #634D40; text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.9), -0.5px -0.5px 0px rgba(74, 56, 46, 0.2); line-height: 1; margin-top: 2px; }
-        .seal-prompt { margin-top: 12px; background: rgba(243, 234, 227, 0.92); border: 1px solid rgba(158, 133, 118, 0.55); padding: 5px 14px; border-radius: 20px; font-family: 'Playfair Display', serif; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--text-dark); box-shadow: 0 4px 10px rgba(74, 56, 46, 0.12); animation: gentlePulse 2.2s infinite ease-in-out; transition: opacity 0.4s ease; white-space: nowrap; }
-
-        .seal-wrapper:hover .door-seal { transform: scale(1.05); box-shadow: 8px 14px 26px rgba(60, 44, 35, 0.34), -2px -2px 8px rgba(255, 255, 255, 0.9); }
-        .seal-wrapper:active .door-seal { transform: scale(0.97); }
+        .seal-prompt {
+            margin-top: 16px; background: rgba(255, 255, 255, 0.95);
+            border: 1px solid var(--gold-light); padding: 6px 18px; border-radius: 20px;
+            font-family: 'Playfair Display', serif; font-size: 11px; letter-spacing: 3px;
+            text-transform: uppercase; color: var(--gold-dark); font-weight: 600;
+            box-shadow: 0 6px 15px rgba(212, 175, 55, 0.2);
+            animation: pulseGold 2s infinite ease-in-out; white-space: nowrap;
+        }
+        @keyframes pulseGold { 0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); } 50% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); } }
+        
+        .seal-wrapper:hover .door-seal { transform: scale(1.08) rotate(5deg); }
+        /* Kapı açılırken mührün eriyerek kaybolması */
+        #door-container.open .door-seal { transform: scale(1.5); opacity: 0; transition: all 1s ease; }
         #door-container.open .seal-prompt { opacity: 0; }
 
-        @keyframes gentlePulse { 0%, 100% { transform: translateY(0); opacity: 0.85; } 50% { transform: translateY(-3px); opacity: 1; } }
-
-        #inner-frame-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; opacity: 0; transition: opacity 1.2s ease 0.5s; }
+        /* --- İNCE ALTIN ÇERÇEVE --- */
+        #inner-frame-layer {
+            position: absolute; top: 12px; left: 12px; right: 12px; bottom: 12px;
+            border: 1px solid var(--gold-light); border-radius: 12px;
+            pointer-events: none; z-index: 50; opacity: 0; transition: opacity 2s ease 1s;
+        }
+        #inner-frame-layer::after {
+            content:''; position: absolute; top: 6px; left: 6px; right: 6px; bottom: 6px;
+            border: 1px dashed rgba(212, 175, 55, 0.5); border-radius: 8px;
+        }
         .doors-opened #inner-frame-layer { opacity: 1; }
-        .arch-svg-frame { position: absolute; top: 18px; left: 18px; right: 18px; bottom: 18px; width: calc(100% - 36px); height: calc(100% - 36px); }
 
-        .floating-btn {
-            position: absolute; z-index: 100; background: rgba(239, 229, 220, 0.85); border: 1px solid var(--border-brown); color: var(--text-dark);
-            backdrop-filter: blur(4px); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(74, 56, 46, 0.12);
+        /* --- KAYDIRILABİLİR 9 SAHNE --- */
+        .scroll-container {
+            height: 100vh; width: 100%; overflow-y: scroll;
+            scroll-snap-type: y mandatory; scroll-behavior: smooth; scrollbar-width: none;
         }
-        #scroll-down-btn {
-            bottom: 34px; left: 50%; transform: translateX(-50%); padding: 8px 22px; border-radius: 25px;
-            font-family: 'Playfair Display', serif; font-size: 13px; letter-spacing: 1px; opacity: 0; pointer-events: none;
-        }
-        .doors-opened #scroll-down-btn { opacity: 1; pointer-events: auto; }
-        #music-btn { bottom: 30px; right: 30px; width: 40px; height: 40px; border-radius: 50%; font-size: 16px; }
-
-        .scroll-container { height: 100vh; width: 100%; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; scrollbar-width: none; }
         .scroll-container::-webkit-scrollbar { display: none; }
 
         section.slide {
             height: 100vh; width: 100%; scroll-snap-align: start; scroll-snap-stop: always;
-            display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 75px 45px 90px 45px; text-align: center; position: relative;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 40px; text-align: center; position: relative;
         }
 
-        .anim-item { opacity: 0; transform: translateY(30px); transition: opacity 0.9s ease-out, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+        /* --- SAHNE 1: ÇİFT FOTOĞRAFI (HERO SCENE) --- */
+        #hero-slide { padding: 0; justify-content: flex-end; }
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: -1;
+            /* Admin panelinden değişecek fotoğraf buraya gelecek. Varsayılan şık bir görsel */
+            background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+        }
+        .hero-gradient {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 60%;
+            background: linear-gradient(to top, rgba(26, 19, 17, 0.95) 0%, rgba(26, 19, 17, 0) 100%);
+            z-index: 0;
+        }
+        .hero-content {
+            position: relative; z-index: 1; padding-bottom: 80px; width: 100%;
+        }
+        .hero-names {
+            font-family: 'Playfair Display', serif; font-size: 48px; color: #fff;
+            line-height: 1.1; margin-bottom: 10px; text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        .hero-date {
+            font-size: 16px; letter-spacing: 5px; color: var(--gold-light);
+            text-transform: uppercase; margin-bottom: 20px; font-weight: 600;
+        }
+
+        /* --- GLASSMORPHISM (CAM EFEKTİ) KARTLAR --- */
+        .glass-panel {
+            background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border); border-radius: 20px;
+            padding: 25px 20px; width: 100%; box-shadow: 0 8px 32px rgba(0,0,0,0.05);
+        }
+
+        /* --- GENEL TİPOGRAFİ VE ANİMASYONLAR --- */
+        .anim-item { opacity: 0; transform: translateY(40px); transition: opacity 1s ease-out, transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
         section.slide.active .anim-item { opacity: 1; transform: translateY(0); }
-        .d-1 { transition-delay: 0.15s; } .d-2 { transition-delay: 0.3s; } .d-3 { transition-delay: 0.45s; } .d-4 { transition-delay: 0.6s; }
+        .d-1 { transition-delay: 0.2s; } .d-2 { transition-delay: 0.4s; } .d-3 { transition-delay: 0.6s; }
 
-        .couple-names-lg { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 400; color: var(--text-dark); line-height: 1.15; letter-spacing: 1px; }
-        .couple-names-md { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 400; color: var(--text-dark); }
-        .ve-script { font-family: 'Great Vibes', cursive; font-size: 32px; color: var(--text-muted); display: inline-block; margin: 4px 8px; }
-
-        .ribbon-title {
-            display: inline-block; border: 1px solid var(--border-brown); padding: 7px 26px; border-radius: 30px; font-family: 'Playfair Display', serif;
-            font-size: 16px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dark); margin-bottom: 22px; background: var(--card-bg); position: relative;
+        .gold-title {
+            font-family: 'Playfair Display', serif; font-size: 26px;
+            background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 15px; text-transform: uppercase; letter-spacing: 3px;
         }
-        .ribbon-title::before, .ribbon-title::after { content: '•'; position: absolute; top: 50%; transform: translateY(-50%); color: var(--border-brown); font-size: 14px; }
-        .ribbon-title::before { left: 10px; } .ribbon-title::after { right: 10px; }
-
-        .sub-label { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; font-weight: 600; }
-        .ornament-line { width: 120px; height: 12px; margin: 14px auto; display: flex; align-items: center; justify-content: center; }
-        .ornament-line::before, .ornament-line::after { content: ''; flex: 1; height: 1px; background: var(--border-brown); opacity: 0.6; }
-        .ornament-diamond { width: 6px; height: 6px; background: var(--border-brown); transform: rotate(45deg); margin: 0 8px; }
-
-        .families-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; margin-top: 15px; }
-        .family-box strong { display: block; font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 500; margin-bottom: 3px; }
-        .family-box span { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); }
-
-        .date-oval-badge {
-            width: 190px; height: 245px; border: 1.5px solid var(--border-brown); border-radius: 100px; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            margin: 15px auto 25px auto; background: var(--card-bg); box-shadow: inset 0 0 0 5px var(--bg-cream), inset 0 0 0 6px rgba(158, 133, 118, 0.4); padding: 20px;
-        }
-        .date-oval-badge .day-num { font-family: 'Playfair Display', serif; font-size: 62px; line-height: 1; color: var(--text-dark); }
-        .date-oval-badge .month-txt { font-family: 'Playfair Display', serif; font-size: 19px; letter-spacing: 3px; text-transform: uppercase; margin: 10px 0 6px 0; }
-        .date-oval-badge .year-txt { font-size: 16px; letter-spacing: 2px; color: var(--text-muted); }
-        .pill-row { display: flex; gap: 15px; justify-content: center; width: 100%; }
-        .info-pill { border: 1px solid var(--border-brown); border-radius: 25px; padding: 8px 20px; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; background: var(--card-bg); min-width: 125px; }
-
-        .map-frame { width: 100%; height: 170px; border: 1.5px solid var(--border-brown); border-radius: 14px; overflow: hidden; margin: 12px 0 16px 0; position: relative; background: #e5ddd5; }
-        .map-frame iframe { width: 100%; height: 100%; border: none; filter: sepia(0.25) contrast(0.95); }
-
-        .btn-outline { background: var(--card-bg); color: var(--text-dark); border: 1px solid var(--border-brown); padding: 10px 26px; border-radius: 25px; font-family: 'Playfair Display', serif; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px; }
-        .btn-outline:hover, .btn-solid:hover { background: var(--accent-brown); color: #fff; }
-        .btn-solid { background: var(--accent-brown); color: #fff; border: 1px solid var(--accent-brown); padding: 12px 30px; border-radius: 25px; font-family: 'Playfair Display', serif; font-size: 14px; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: 0.3s; width: 100%; max-width: 280px; }
-
-        .cd-big-days { font-family: 'Playfair Display', serif; font-size: 68px; line-height: 1; }
-        .cd-hms-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; width: 100%; max-width: 280px; margin: 18px auto; }
-        .cd-box .num { font-family: 'Playfair Display', serif; font-size: 28px; display: block; }
-        .cd-box .lbl { font-size: 10px; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; }
-
-        .timeline-item, .menu-item { margin: 10px 0; }
-        .timeline-time { font-size: 13px; letter-spacing: 2px; color: var(--text-muted); }
-        .timeline-title { font-family: 'Playfair Display', serif; font-size: 22px; margin-top: 2px; }
-        .menu-cat { font-size: 11px; letter-spacing: 2.5px; color: var(--text-muted); text-transform: uppercase; }
-        .menu-name { font-family: 'Playfair Display', serif; font-size: 20px; margin: 3px 0; }
-        .menu-desc { font-size: 14px; font-style: italic; color: var(--text-muted); }
-
-        .glass-card { border: 1px solid var(--border-brown); border-radius: 16px; padding: 22px 18px; background: var(--card-bg); width: 100%; margin: 12px 0; }
-        .styled-input { width: 100%; max-width: 280px; padding: 11px 16px; border: 1px solid var(--border-brown); border-radius: 25px; background: rgba(255,255,255,0.65); font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--text-dark); text-align: center; outline: none; margin: 8px 0; }
-        .radio-btn-label { display: flex; align-items: center; justify-content: flex-start; gap: 10px; width: 100%; max-width: 280px; padding: 10px 18px; margin: 6px auto; border: 1px solid var(--border-brown); border-radius: 25px; background: var(--card-bg); cursor: pointer; font-size: 16px; }
-        .radio-btn-label input { accent-color: var(--accent-brown); transform: scale(1.2); }
-        .stepper-wrap { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 280px; border: 1px solid var(--border-brown); border-radius: 25px; padding: 4px 8px; margin: 8px auto 16px auto; background: var(--card-bg); }
-        .step-btn { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border-brown); background: transparent; font-size: 18px; color: var(--text-dark); cursor: pointer; }
-
-        /* ==========================================================================
-           2. YENİ NESİL PREMİUM ADMİN PANELİ STİLLERİ
-           ========================================================================== */
-        #admin-panel {
-            display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: #F4F7F6; z-index: 99999; overflow-y: auto;
-            color: #1F2937; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
+        .script-text { font-family: 'Great Vibes', cursive; font-size: 38px; color: var(--gold-dark); margin: 5px 0; }
+        .sub-text { font-size: 15px; line-height: 1.7; color: var(--text-muted); }
         
+        .ornament-divider {
+            width: 100%; height: 20px; background-image: radial-gradient(circle, var(--gold-light) 2px, transparent 2px);
+            background-size: 15px 20px; background-position: center; background-repeat: repeat-x; margin: 15px 0; opacity: 0.6;
+        }
+
+        /* --- BUTONLAR VE FORMLAR --- */
+        .btn-gold {
+            background: var(--gold-gradient); color: #fff; border: none; padding: 14px 35px;
+            border-radius: 30px; font-family: 'Playfair Display', serif; font-size: 15px;
+            letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3); transition: all 0.3s ease;
+            width: 100%; max-width: 280px; display: inline-flex; justify-content: center; align-items: center; gap: 8px;
+        }
+        .btn-gold:active { transform: scale(0.96); }
+
+        .styled-input {
+            width: 100%; max-width: 280px; padding: 14px; border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 12px; background: rgba(255,255,255,0.7); font-family: 'Cormorant Garamond', serif;
+            font-size: 16px; color: var(--text-dark); outline: none; margin-bottom: 12px; transition: border 0.3s;
+        }
+        .styled-input:focus { border-color: var(--gold-dark); background: #fff; }
+
+        .radio-group { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 280px; margin: 10px auto; }
+        .radio-label {
+            display: flex; align-items: center; gap: 10px; padding: 12px 18px;
+            border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 12px; background: rgba(255,255,255,0.5); cursor: pointer;
+        }
+        .radio-label input { accent-color: var(--gold-dark); transform: scale(1.3); }
+
+        .stepper-wrap {
+            display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 280px;
+            padding: 8px 15px; background: #fff; border-radius: 12px; border: 1px solid rgba(212, 175, 55, 0.4); margin: 0 auto 15px auto;
+        }
+        .step-btn { width: 36px; height: 36px; border-radius: 8px; background: var(--bg-cream); border: 1px solid var(--gold-light); font-size: 20px; color: var(--gold-dark); cursor: pointer; }
+
+        /* Yüzen Kontroller */
+        .floating-controls { position: absolute; bottom: 25px; right: 25px; z-index: 100; display: flex; gap: 12px; }
+        .circle-btn { width: 45px; height: 45px; border-radius: 50%; background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid var(--gold-light); color: var(--gold-dark); display: flex; justify-content: center; align-items: center; font-size: 18px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .scroll-hint { position: absolute; bottom: 35px; left: 50%; transform: translateX(-50%); color: #fff; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; animation: bounce 2s infinite; opacity: 0; pointer-events: none; z-index: 100; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .doors-opened .scroll-hint { opacity: 0.8; }
+        @keyframes bounce { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, -10px); } }
+
+        /* --- ADMİN PANELİ (KISA CSS) --- */
+        #admin-panel { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #F4F7F6; z-index: 99999; overflow-y: auto; color: #1F2937; font-family: sans-serif; }
         .adm-shell { max-width: 1000px; margin: 0 auto; padding: 24px; }
-        
-        .adm-header {
-            background: #ffffff; border-radius: 16px; padding: 20px 24px; margin-bottom: 24px;
-            display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid #E5E7EB;
-        }
-        .adm-brand { display: flex; align-items: center; gap: 16px; }
-        .adm-logo {
-            width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, #6E5547, #4A382E);
-            color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 600; font-size: 18px; box-shadow: 0 4px 10px rgba(74, 56, 46, 0.2);
-        }
-        .adm-title h1 { font-size: 20px; font-weight: 700; color: #111827; margin: 0 0 4px 0; letter-spacing: -0.5px; }
-        .adm-status { display: inline-block; font-size: 12px; font-weight: 600; background: #D1FAE5; color: #065F46; padding: 4px 10px; border-radius: 20px; }
-        
-        .adm-header-actions { display: flex; gap: 12px; }
-        .btn-adm {
-            padding: 10px 18px; border-radius: 8px; font-weight: 600; font-size: 13px; border: none; cursor: pointer;
-            display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; text-decoration: none; font-family: inherit;
-        }
-        .btn-adm-primary { background: linear-gradient(135deg, #6E5547, #4A382E); color: #fff; box-shadow: 0 4px 10px rgba(74, 56, 46, 0.2); }
-        .btn-adm-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 14px rgba(74, 56, 46, 0.3); }
-        .btn-adm-secondary { background: #F3F4F6; color: #374151; border: 1px solid #E5E7EB; }
-        .btn-adm-secondary:hover { background: #E5E7EB; }
-        .btn-adm-danger { background: #FEE2E2; color: #991B1B; padding: 6px 12px; font-size: 12px; border-radius: 6px; }
-        .btn-adm-danger:hover { background: #FECACA; }
-        
-        .adm-kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
-        .adm-kpi-card { background: #fff; padding: 20px; border-radius: 16px; border: 1px solid #E5E7EB; box-shadow: 0 2px 10px rgba(0,0,0,0.02); display: flex; align-items: center; gap: 16px; }
-        .adm-kpi-icon { width: 48px; height: 48px; border-radius: 12px; background: #F3F4F6; display: flex; align-items: center; justify-content: center; font-size: 20px; }
-        .adm-kpi-info p { font-size: 12px; color: #6B7280; font-weight: 600; text-transform: uppercase; margin: 0 0 4px 0; letter-spacing: 0.5px; }
-        .adm-kpi-info h3 { font-size: 26px; color: #111827; font-weight: 800; margin: 0; line-height: 1; }
-
-        .adm-tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 24px; border-bottom: 2px solid #E5E7EB; scrollbar-width: none; }
-        .adm-tabs::-webkit-scrollbar { display: none; }
-        .adm-tab {
-            background: transparent; border: none; padding: 12px 20px; font-size: 14px; font-weight: 600; color: #6B7280; cursor: pointer;
-            border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all 0.2s; white-space: nowrap; font-family: inherit;
-        }
-        .adm-tab:hover { color: #4A382E; }
-        .adm-tab.active { color: #4A382E; border-bottom-color: #4A382E; }
-
-        .adm-tab-content { display: none; animation: fadeIn 0.3s ease; }
-        .adm-tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-
-        .adm-card { background: #fff; border-radius: 16px; border: 1px solid #E5E7EB; padding: 24px; margin-bottom: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
-        .adm-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #F3F4F6; padding-bottom: 16px; }
-        .adm-card-header h2 { font-size: 16px; font-weight: 700; color: #111827; margin: 0; display: flex; align-items: center; gap: 8px; }
-        
-        .adm-form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .adm-form-group { margin-bottom: 16px; }
-        .adm-form-group label { display: block; font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 6px; }
-        .adm-input {
-            width: 100%; padding: 10px 14px; border: 1px solid #D1D5DB; border-radius: 8px; font-size: 14px;
-            font-family: inherit; background: #F9FAFB; color: #111827; transition: all 0.2s; outline: none;
-        }
-        .adm-input:focus { border-color: #A89080; background: #fff; box-shadow: 0 0 0 3px rgba(168, 144, 128, 0.15); }
-        textarea.adm-input { resize: vertical; min-height: 80px; }
-
-        .adm-table-container { overflow-x: auto; border: 1px solid #E5E7EB; border-radius: 12px; }
-        .adm-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; white-space: nowrap; }
-        .adm-table th { background: #F9FAFB; padding: 12px 16px; font-weight: 600; color: #4B5563; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; border-bottom: 1px solid #E5E7EB; }
-        .adm-table td { padding: 14px 16px; border-bottom: 1px solid #F3F4F6; color: #1F2937; }
-        .adm-table tr:hover td { background: #F9FAFB; }
-        .adm-badge-success { background: #D1FAE5; color: #065F46; padding: 4px 10px; border-radius: 20px; font-weight: 600; font-size: 12px; }
-        .adm-badge-error { background: #FEE2E2; color: #991B1B; padding: 4px 10px; border-radius: 20px; font-weight: 600; font-size: 12px; }
-
-        .adm-dynamic-row { display: flex; gap: 10px; align-items: center; background: #F9FAFB; padding: 12px; border: 1px solid #E5E7EB; border-radius: 10px; margin-bottom: 10px; }
-
-        #adm-toast {
-            position: fixed; top: 24px; right: 24px; z-index: 100000; background: #10B981; color: #fff; padding: 14px 24px; border-radius: 12px;
-            font-weight: 600; font-size: 14px; box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3); transform: translateX(120%); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; align-items: center; gap: 10px;
-        }
-        #adm-toast.show { transform: translateX(0); }
-
-        @media (max-width: 768px) {
-            .adm-shell { padding: 16px; }
-            .adm-header { padding: 16px; flex-direction: column; align-items: stretch; gap: 16px; }
-            .adm-header-actions { justify-content: stretch; }
-            .btn-adm { flex: 1; justify-content: center; }
-            .adm-dynamic-row { flex-direction: column; align-items: stretch; }
-        }
-
-        .svg-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+        .adm-header { background: #fff; border-radius: 16px; padding: 20px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+        .adm-tabs { display: flex; gap: 8px; margin-bottom: 24px; border-bottom: 2px solid #E5E7EB; }
+        .adm-tab { background: none; border: none; padding: 12px 20px; font-weight: 600; cursor: pointer; border-bottom: 3px solid transparent; }
+        .adm-tab.active { color: #D4AF37; border-bottom-color: #D4AF37; }
+        .adm-tab-content { display: none; } .adm-tab-content.active { display: block; }
+        .adm-card { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 20px; border: 1px solid #E5E7EB; }
+        .adm-input { width: 100%; padding: 10px; border: 1px solid #D1D5DB; border-radius: 8px; margin-bottom: 12px; }
+        .btn-adm { background: #111827; color: #fff; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+        .adm-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .adm-table th, .adm-table td { padding: 12px; border-bottom: 1px solid #E5E7EB; text-align: left; }
     </style>
 </head>
 <body>
 
-    <!-- GÖMÜLÜ KABARTMALI 3D MOTİFLER -->
-    <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-            <g id="floral-cluster">
-                <path d="M10,10 C40,5 80,20 110,50 C140,80 150,130 140,170 C120,140 90,120 50,110 C20,100 5,60 10,10 Z" fill="#EFE5DC" stroke="#C8B5A6" stroke-width="1.2"/>
-                <path d="M5,40 C30,45 60,70 75,105 C90,140 80,185 60,210 C50,175 35,145 10,125 C-5,100 0,65 5,40 Z" fill="#F3EAE3" stroke="#C8B5A6" stroke-width="1"/>
-                <path d="M40,5 C75,15 115,35 150,65 C185,95 205,135 200,175 C175,145 140,115 95,95 C60,80 35,40 40,5 Z" fill="#F3EAE3" stroke="#C8B5A6" stroke-width="1"/>
-                <path d="M15,15 Q70,40 120,90 T180,180" fill="none" stroke="#B59E8D" stroke-width="1.5" stroke-dasharray="3,2"/>
-                <path d="M25,60 Q60,95 85,150 T110,230" fill="none" stroke="#B59E8D" stroke-width="1.2"/>
-                <path d="M65,20 Q115,50 165,85 T230,130" fill="none" stroke="#B59E8D" stroke-width="1.2"/>
-                <g transform="translate(55, 55)">
-                    <circle cx="0" cy="-16" r="14" fill="#F5ECE6" stroke="#C2AE9F" stroke-width="1"/>
-                    <circle cx="16" cy="0" r="14" fill="#F5ECE6" stroke="#C2AE9F" stroke-width="1"/>
-                    <circle cx="0" cy="16" r="14" fill="#F5ECE6" stroke="#C2AE9F" stroke-width="1"/>
-                    <circle cx="-16" cy="0" r="14" fill="#F5ECE6" stroke="#C2AE9F" stroke-width="1"/>
-                    <circle cx="-11" cy="-11" r="13" fill="#F8F1EC" stroke="#C2AE9F" stroke-width="1"/>
-                    <circle cx="11" cy="-11" r="13" fill="#F8F1EC" stroke="#C2AE9F" stroke-width="1"/>
-                    <circle cx="11" cy="11" r="13" fill="#F8F1EC" stroke="#C2AE9F" stroke-width="1"/>
-                    <circle cx="-11" cy="11" r="13" fill="#F8F1EC" stroke="#C2AE9F" stroke-width="1"/>
-                    <circle cx="0" cy="0" r="10" fill="#E6D7CA" stroke="#A68E7E" stroke-width="1.2"/>
-                    <circle cx="0" cy="0" r="4" fill="#9E8576"/>
-                </g>
-                <g transform="translate(115, 35) scale(0.75)">
-                    <circle cx="0" cy="-14" r="12" fill="#F5ECE6" stroke="#C2AE9F"/>
-                    <circle cx="14" cy="0" r="12" fill="#F5ECE6" stroke="#C2AE9F"/>
-                    <circle cx="0" cy="14" r="12" fill="#F5ECE6" stroke="#C2AE9F"/>
-                    <circle cx="-14" cy="0" r="12" fill="#F5ECE6" stroke="#C2AE9F"/>
-                    <circle cx="0" cy="0" r="9" fill="#E6D7CA" stroke="#A68E7E"/>
-                </g>
-                <g transform="translate(35, 115) scale(0.75)">
-                    <circle cx="0" cy="-14" r="12" fill="#F5ECE6" stroke="#C2AE9F"/>
-                    <circle cx="14" cy="0" r="12" fill="#F5ECE6" stroke="#C2AE9F"/>
-                    <circle cx="0" cy="14" r="12" fill="#F5ECE6" stroke="#C2AE9F"/>
-                    <circle cx="-14" cy="0" r="12" fill="#F5ECE6" stroke="#C2AE9F"/>
-                    <circle cx="0" cy="0" r="9" fill="#E6D7CA" stroke="#A68E7E"/>
-                </g>
-                <g transform="translate(105, 105) scale(0.6)">
-                    <circle cx="0" cy="-14" r="12" fill="#F8F1EC" stroke="#C2AE9F"/>
-                    <circle cx="14" cy="0" r="12" fill="#F8F1EC" stroke="#C2AE9F"/>
-                    <circle cx="0" cy="14" r="12" fill="#F8F1EC" stroke="#C2AE9F"/>
-                    <circle cx="-14" cy="0" r="12" fill="#F8F1EC" stroke="#C2AE9F"/>
-                    <circle cx="0" cy="0" r="8" fill="#DECBB9"/>
-                </g>
-            </g>
-
-            <g id="seal-embossed-bouquet">
-                <path d="M30,68 C30,52 32,35 30,15" fill="none" stroke="#B8A293" stroke-width="2" stroke-linecap="round"/>
-                <path d="M30,50 C22,43 16,36 14,26" fill="none" stroke="#B8A293" stroke-width="1.6" stroke-linecap="round"/>
-                <path d="M30,44 C38,37 44,30 46,20" fill="none" stroke="#B8A293" stroke-width="1.6" stroke-linecap="round"/>
-                <g transform="translate(30, 14)">
-                    <circle cx="0" cy="-6" r="5.5" fill="#FBF6F2" stroke="#C5B0A0" stroke-width="0.9"/>
-                    <circle cx="6" cy="0" r="5.5" fill="#FBF6F2" stroke="#C5B0A0" stroke-width="0.9"/>
-                    <circle cx="0" cy="6" r="5.5" fill="#FBF6F2" stroke="#C5B0A0" stroke-width="0.9"/>
-                    <circle cx="-6" cy="0" r="5.5" fill="#FBF6F2" stroke="#C5B0A0" stroke-width="0.9"/>
-                    <circle cx="0" cy="0" r="3.8" fill="#DFCBB9" stroke="#9E8576" stroke-width="1"/>
-                </g>
-            </g>
-        </defs>
-    </svg>
-
     <audio id="bg-music" loop preload="auto"></audio>
 
-    <!-- ================= DAVETİYE ÖN YÜZÜ (ORİJİNAL TASARIM) ================= -->
+    <!-- ================= DAVETİYE ÖN YÜZÜ (SİNEMATİK) ================= -->
     <div id="app-wrapper">
+
+        <!-- KAPI VE MÜHÜR -->
         <div id="door-container">
-            <div class="door left">
-                <div class="door-inner">
-                    <svg class="embossed-floral" style="top: -15px; left: -15px; width: 230px; height: 230px;" viewBox="0 0 240 240"><use href="#floral-cluster"/></svg>
-                    <svg class="embossed-floral" style="top: 36%; left: -35px; width: 190px; height: 190px; transform: rotate(-35deg);" viewBox="0 0 240 240"><use href="#floral-cluster"/></svg>
-                    <svg class="embossed-floral" style="bottom: -15px; left: -15px; width: 230px; height: 230px; transform: scaleY(-1);" viewBox="0 0 240 240"><use href="#floral-cluster"/></svg>
-                </div>
-                <div class="seal-wrapper" onclick="openInvitation()">
-                    <div class="door-seal">
-                        <div class="door-seal-inner">
-                            <svg class="seal-flower-svg" viewBox="0 0 60 72"><use href="#seal-embossed-bouquet"/></svg>
-                            <div class="seal-initials" id="v_sealInitials">M & Y</div>
-                        </div>
+            <div class="door left"></div>
+            <div class="seal-wrapper" onclick="openInvitation()">
+                <div class="door-seal">
+                    <div class="door-seal-inner">
+                        <div class="seal-initials" id="v_sealInitials">M&Y</div>
                     </div>
-                    <div class="seal-prompt" id="v_sealText">Dokun Aç</div>
                 </div>
+                <div class="seal-prompt" id="v_sealText">Mührü Kır</div>
             </div>
-            <div class="door right">
-                <div class="door-inner">
-                    <svg class="embossed-floral" style="top: -15px; right: -15px; width: 230px; height: 230px; transform: scaleX(-1);" viewBox="0 0 240 240"><use href="#floral-cluster"/></svg>
-                    <svg class="embossed-floral" style="top: 36%; right: -35px; width: 190px; height: 190px; transform: scaleX(-1) rotate(-35deg);" viewBox="0 0 240 240"><use href="#floral-cluster"/></svg>
-                    <svg class="embossed-floral" style="bottom: -15px; right: -15px; width: 230px; height: 230px; transform: scale(-1, -1);" viewBox="0 0 240 240"><use href="#floral-cluster"/></svg>
-                </div>
-            </div>
+            <div class="door right"></div>
         </div>
 
-        <div id="inner-frame-layer">
-            <svg class="embossed-floral" style="top: -10px; left: -10px; width: 185px; height: 185px;" viewBox="0 0 240 240"><use href="#floral-cluster"/></svg>
-            <svg class="embossed-floral" style="bottom: -10px; right: -10px; width: 185px; height: 185px; transform: scale(-1, -1);" viewBox="0 0 240 240"><use href="#floral-cluster"/></svg>
-            <svg class="arch-svg-frame" viewBox="0 0 400 760" preserveAspectRatio="none">
-                <path d="M 8,150 C 8,65 85,8 200,8 C 315,8 392,65 392,150 L 392,725 C 392,740 380,752 365,752 L 35,752 C 20,752 8,740 8,725 Z" fill="none" stroke="#9E8576" stroke-width="1.3"/>
-                <path d="M 15,152 C 15,72 90,15 200,15 C 310,15 385,72 385,152 L 385,718 C 385,733 373,745 358,745 L 42,745 C 27,745 15,733 15,718 Z" fill="none" stroke="#9E8576" stroke-width="0.6" stroke-dasharray="2,2"/>
-            </svg>
+        <div id="inner-frame-layer"></div>
+        <div class="scroll-hint" id="v_scrollBtnText">Aşağı Kaydır ↓</div>
+        
+        <div class="floating-controls">
+            <button id="music-btn" class="circle-btn" onclick="toggleAudio()">🎵</button>
         </div>
-
-        <button id="scroll-down-btn" class="floating-btn" onclick="scrollNextSlide()"><span id="v_scrollBtnText">Aşağı Kaydır</span> &nbsp;↓</button>
-        <button id="music-btn" class="floating-btn" onclick="toggleAudio()" title="Müziği Aç/Kapat">🔊</button>
 
         <div class="scroll-container" id="slides-container">
 
-            <section class="slide active">
-                <div class="sub-label anim-item d-1" id="v_s1TopTitle">Düğün Davetiyesi</div>
-                <div class="ornament-line anim-item d-2"><div class="ornament-diamond"></div></div>
-                <div class="couple-names-lg anim-item d-3">
-                    <div id="v_brideName">Meltem Alkış</div>
-                    <div class="ve-script" id="v_andWord">ve</div>
-                    <div id="v_groomName">Yunus Emre Kumsal</div>
-                </div>
-                <div class="ornament-line anim-item d-4"><div class="ornament-diamond"></div></div>
-            </section>
-
-            <section class="slide">
-                <div class="couple-names-md anim-item d-1">
-                    <span class="b-name-sync">Meltem Alkış</span> <span class="ve-script">ve</span> <span class="g-name-sync">Yunus Emre Kumsal</span>
-                </div>
-                <p class="anim-item d-2" id="v_inviteText" style="font-size: 19px; line-height: 1.6; margin: 22px 0; max-width: 310px;">
-                    Bu anın şahidi olmak için sizi yanımızda görmek istiyoruz
-                </p>
-                <div class="sub-label anim-item d-3" id="v_familyHeader" style="margin-top: 10px;">AİLELERİMİZ</div>
-                <div class="ornament-line anim-item d-3"><div class="ornament-diamond"></div></div>
-                <div class="families-grid anim-item d-4">
-                    <div class="family-box"><strong id="v_brideFamily">Alkış</strong><span id="v_brideFamilySub">AİLESİ</span></div>
-                    <div class="family-box"><strong id="v_groomFamily">Kumsal</strong><span id="v_groomFamilySub">AİLESİ</span></div>
-                </div>
-            </section>
-
-            <section class="slide">
-                <div class="sub-label anim-item d-1" id="v_s3Title">TARİH</div>
-                <div class="date-oval-badge anim-item d-2">
-                    <div class="ornament-diamond" style="margin-bottom: 10px;"></div>
-                    <div class="day-num" id="v_dateDay">08</div>
-                    <div class="month-txt" id="v_dateMonth">AĞUSTOS</div>
-                    <div class="ornament-diamond" style="margin: 8px 0;"></div>
-                    <div class="year-txt" id="v_dateYear">2026</div>
-                </div>
-                <div class="pill-row anim-item d-3">
-                    <div class="info-pill" id="v_dateDayName">CUMARTESİ</div>
-                    <div class="info-pill" id="v_dateTime">19.00</div>
-                </div>
-            </section>
-
-            <section class="slide">
-                <div class="ribbon-title anim-item d-1" id="v_s4Title">Konum</div>
-                <div class="map-frame anim-item d-2">
-                    <iframe id="v_mapIframe" src="https://maps.google.com/maps?q=Four%20Seasons%20Hotel%20Bosphorus%20Istanbul&t=&z=14&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe>
-                </div>
-                <h3 class="anim-item d-3" id="v_venueName" style="font-family: 'Playfair Display', serif; font-size: 21px; margin-bottom: 6px;">Four Seasons Hotel Istanbul</h3>
-                <p class="anim-item d-3" id="v_venueAddress" style="font-size: 14px; color: var(--text-muted); margin-bottom: 18px;">Beşiktaş/İstanbul</p>
-                <button class="btn-outline anim-item d-4" onclick="openMapUrl()">📍 <span id="v_mapBtnText">YOL TARİFİ AL</span></button>
-            </section>
-
-            <section class="slide">
-                <div class="sub-label anim-item d-1" id="v_s5Title">BULUŞMAYA KALAN</div>
-                <div class="cd-big-days anim-item d-2" id="cd_days">114</div>
-                <div class="sub-label anim-item d-2" style="margin-top: 4px;">GÜN</div>
-                <div class="cd-hms-grid anim-item d-3">
-                    <div class="cd-box"><span class="num" id="cd_hours">05</span><span class="lbl">SAAT</span></div>
-                    <div class="cd-box"><span class="num" id="cd_mins">26</span><span class="lbl">DAKİKA</span></div>
-                    <div class="cd-box"><span class="num" id="cd_secs">40</span><span class="lbl">SANİYE</span></div>
-                </div>
-                <div class="ornament-line anim-item d-4"><div class="ornament-diamond"></div></div>
-                <p class="anim-item d-4" id="v_s5Quote" style="font-size: 18px; font-style: italic; max-width: 280px; margin-top: 8px;">İki ruh birleşiyor.</p>
-            </section>
-
-            <section class="slide">
-                <div class="ribbon-title anim-item d-1" id="v_s6Title">Günün çizgisi</div>
-                <div id="v_timelineContainer" style="width: 100%; max-width: 320px;"></div>
-            </section>
-
-            <section class="slide">
-                <div class="ribbon-title anim-item d-1" id="v_s7Title">Menü</div>
-                <div id="v_menuContainer" style="width: 100%; max-width: 320px; max-height: 380px; overflow-y: auto;"></div>
-            </section>
-
-            <section class="slide">
-                <div class="ribbon-title anim-item d-1" id="v_s8Title">En güzel anlarımız</div>
-                <p class="anim-item d-1" id="v_s8Desc" style="font-size: 14px; color: var(--text-muted); margin-bottom: 6px;">Birlikte biriktirdiğimiz en özel kareler</p>
-                <div class="glass-card anim-item d-2" style="padding: 14px; margin-bottom: 14px;">
-                    <div id="v_photoNotice" style="font-family: 'Playfair Display', serif; font-size: 16px; margin-bottom: 4px;">Fotoğraf yükleme davet saatinde aktif olacak.</div>
-                    <p id="v_photoSub" style="font-size: 13px; color: var(--text-muted);">Davet başlar başlamaz fotoğraflarınızı bu alandan yükleyebileceksiniz.</p>
-                    <div id="live-photo-upload-box" style="margin-top: 10px; display: none;">
-                        <input type="file" id="photo-upload-input" accept="image/*" style="display:none;" onchange="handlePhotoUpload(event)">
-                        <button type="button" class="btn-outline" onclick="document.getElementById('photo-upload-input').click()" style="padding: 8px 18px; font-size: 12px;">📷 FOTOĞRAF SEÇ & YÜKLE</button>
+            <!-- SAHNE 1: ÇİFT FOTOĞRAFI (HERO) -->
+            <section class="slide active" id="hero-slide">
+                <!-- Admin panelinden değişen görsel buraya işlenir -->
+                <div class="hero-bg" id="v_heroImage" style="background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop');"></div>
+                <div class="hero-gradient"></div>
+                <div class="hero-content">
+                    <div class="hero-date anim-item d-1" id="v_heroDate">08.08.2026</div>
+                    <div class="hero-names anim-item d-2">
+                        <span id="v_brideName">Meltem</span><br>
+                        <span style="font-family:'Great Vibes',cursive; font-size:40px; color:var(--gold-light);">&</span><br>
+                        <span id="v_groomName">Yunus Emre</span>
                     </div>
                 </div>
-
-                <h3 class="anim-item d-3" id="v_funTitle" style="font-family: 'Playfair Display', serif; font-size: 20px; margin-top: 6px;">Biraz Eğlence!</h3>
-                <p class="anim-item d-3" id="v_funDesc" style="font-size: 13px; color: var(--text-muted); margin-bottom: 6px;">Favori düğün şarkınızı veya notunuzu bizimle paylaşın!</p>
-                <form class="anim-item d-4" onsubmit="submitSongForm(event)" style="width: 100%;">
-                    <input type="text" id="song_sender" class="styled-input" placeholder="Adınız Soyadınız" required>
-                    <input type="text" id="song_request" class="styled-input" placeholder="Şarkı İsteğiniz / Notunuz" required>
-                    <button type="submit" class="btn-solid" id="v_funBtn" style="margin-top: 6px;">Gönder</button>
-                </form>
-                <p id="song-feedback" style="display:none; font-size:14px; color:#2e7d32; margin-top:6px;">Harika! Notunuz ulaştı.</p>
             </section>
 
+            <!-- SAHNE 2: DAVET & AİLELER -->
             <section class="slide">
-                <div class="ribbon-title anim-item d-1" id="v_s9Title">RSVP</div>
-                <div class="sub-label anim-item d-1" id="v_s9Sub">KATILIMINIZ</div>
-                <p class="anim-item d-2" id="v_s9Desc" style="font-size: 14px; color: var(--text-muted); margin-bottom: 10px;">Lütfen davetimize katılım durumunuzu bizimle paylaşın.</p>
-                <form id="rsvp-form" class="anim-item d-3" onsubmit="submitRSVPForm(event)" style="width: 100%;">
-                    <input type="text" id="rsvp_name" class="styled-input" placeholder="İsim Soyisim..." required>
-                    <label class="radio-btn-label"><input type="radio" name="rsvp_status" value="Katılacağım" checked onchange="toggleGuestStepper(true)"><span id="v_rsvpYes">Katılacağım</span></label>
-                    <label class="radio-btn-label"><input type="radio" name="rsvp_status" value="Maalesef katılamıyorum" onchange="toggleGuestStepper(false)"><span id="v_rsvpNo">Maalesef katılamıyorum</span></label>
-                    <div id="guest-stepper-box">
-                        <div class="sub-label" style="margin: 8px 0 2px 0; font-size: 10px;">KİŞİ SAYISI</div>
-                        <div class="stepper-wrap">
-                            <button type="button" class="step-btn" onclick="changeGuestCount(-1)">−</button>
-                            <span id="rsvp_count_val" style="font-family: 'Playfair Display', serif; font-size: 18px;">1</span>
-                            <button type="button" class="step-btn" onclick="changeGuestCount(1)">+</button>
+                <div class="glass-panel anim-item d-1">
+                    <div class="gold-title" id="v_s1TopTitle">Davetlisiniz</div>
+                    <p class="sub-text" id="v_inviteText" style="margin-bottom: 20px;">Bu en mutlu günümüzde sizleri de aramızda görmekten onur duyarız.</p>
+                    
+                    <div class="ornament-divider"></div>
+                    
+                    <div style="font-size: 11px; letter-spacing: 3px; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 10px;">AİLELER</div>
+                    <div style="display: flex; justify-content: space-around; width: 100%;">
+                        <div>
+                            <div style="font-family:'Playfair Display',serif; font-size:20px;" id="v_brideFamily">Alkış</div>
+                            <div style="font-size:10px; color:var(--text-muted);">AİLESİ</div>
+                        </div>
+                        <div>
+                            <div style="font-family:'Playfair Display',serif; font-size:20px;" id="v_groomFamily">Kumsal</div>
+                            <div style="font-size:10px; color:var(--text-muted);">AİLESİ</div>
                         </div>
                     </div>
-                    <button type="submit" class="btn-outline" style="width: 100%; max-width: 280px; justify-content: center; margin-top: 6px;"><span id="v_rsvpBtn">GÖNDER</span> &nbsp;→</button>
-                </form>
-                <div id="rsvp-thankyou" class="glass-card" style="display:none; max-width:280px;">Katılım durumunuz kaydedildi. Çok teşekkür ederiz!</div>
-                <div class="anim-item d-4" style="margin-top: 22px;">
-                    <div class="couple-names-md" style="font-size: 22px;"><span class="b-name-sync">Meltem Alkış</span> <span class="ve-script" style="font-size: 20px;">ve</span> <span class="g-name-sync">Yunus Emre Kumsal</span></div>
-                    <div id="v_footerDate" style="font-size: 11px; letter-spacing: 2.5px; color: var(--text-muted); margin-top: 4px;">08 AĞUSTOS 2026</div>
+                </div>
+            </section>
+
+            <!-- SAHNE 3: TARİH VE SAYAÇ (BİRLEŞTİRİLDİ) -->
+            <section class="slide">
+                <div class="glass-panel anim-item d-1">
+                    <div class="gold-title" id="v_s3Title">Tarih & Saat</div>
+                    <div style="font-family:'Playfair Display',serif; font-size:56px; color:var(--gold-dark); line-height:1;" id="v_dateDay">08</div>
+                    <div style="font-size:18px; letter-spacing:4px; text-transform:uppercase; margin:5px 0;" id="v_dateMonth">AĞUSTOS</div>
+                    <div style="font-size:16px; color:var(--text-muted);" id="v_dateYear">2026</div>
+                    
+                    <div class="ornament-divider"></div>
+                    
+                    <div style="display:flex; justify-content:center; gap:20px; font-size:14px; font-weight:600; text-transform:uppercase;">
+                        <span id="v_dateDayName">CUMARTESİ</span>
+                        <span style="color:var(--gold-dark);">|</span>
+                        <span id="v_dateTime">19:00</span>
+                    </div>
+                </div>
+
+                <div class="glass-panel anim-item d-2" style="margin-top: 15px; padding: 15px;">
+                    <div style="font-size:11px; letter-spacing:2px; color:var(--gold-dark); text-transform:uppercase; margin-bottom:10px;">Buluşmaya Kalan</div>
+                    <div style="display:flex; justify-content:space-between; text-align:center;">
+                        <div><div style="font-family:'Playfair Display',serif; font-size:26px;" id="cd_days">0</div><div style="font-size:9px;">GÜN</div></div>
+                        <div><div style="font-family:'Playfair Display',serif; font-size:26px;" id="cd_hours">0</div><div style="font-size:9px;">SAAT</div></div>
+                        <div><div style="font-family:'Playfair Display',serif; font-size:26px;" id="cd_mins">0</div><div style="font-size:9px;">DAKİKA</div></div>
+                        <div><div style="font-family:'Playfair Display',serif; font-size:26px; color:var(--gold-dark);" id="cd_secs">0</div><div style="font-size:9px;">SANİYE</div></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SAHNE 4: KONUM -->
+            <section class="slide">
+                <div class="glass-panel anim-item d-1">
+                    <div class="gold-title" id="v_s4Title">Konum</div>
+                    <div style="border-radius:12px; overflow:hidden; border:1px solid rgba(212, 175, 55, 0.3); height:160px; margin-bottom:15px;">
+                        <iframe id="v_mapIframe" src="https://maps.google.com/maps?q=Four%20Seasons%20Hotel%20Bosphorus%20Istanbul&t=&z=14&ie=UTF8&iwloc=&output=embed" style="width:100%; height:100%; border:none; filter: grayscale(20%) sepia(20%);"></iframe>
+                    </div>
+                    <h3 style="font-family:'Playfair Display',serif; font-size:20px; margin-bottom:5px;" id="v_venueName">Four Seasons Hotel Istanbul</h3>
+                    <p class="sub-text" style="font-size:13px; margin-bottom:15px;" id="v_venueAddress">Beşiktaş / İstanbul</p>
+                    <button class="btn-gold" onclick="openMapUrl()">📍 <span id="v_mapBtnText">Yol Tarifi Al</span></button>
+                </div>
+            </section>
+
+            <!-- SAHNE 5: PROGRAM VE MENÜ -->
+            <section class="slide">
+                <div class="glass-panel anim-item d-1" style="margin-bottom: 15px;">
+                    <div class="gold-title" style="font-size:20px;" id="v_s6Title">Program</div>
+                    <div id="v_timelineContainer"></div>
+                </div>
+                
+                <div class="glass-panel anim-item d-2">
+                    <div class="gold-title" style="font-size:20px;" id="v_s7Title">Menü</div>
+                    <div id="v_menuContainer" style="max-height:180px; overflow-y:auto; padding-right:5px;"></div>
+                </div>
+            </section>
+
+            <!-- SAHNE 6: FOTOĞRAF VE ŞARKI -->
+            <section class="slide">
+                <div class="glass-panel anim-item d-1" style="margin-bottom: 15px;">
+                    <div class="gold-title" style="font-size:20px;" id="v_s8Title">Anı Paylaşımı</div>
+                    <p class="sub-text" style="font-size:13px; margin-bottom:15px;" id="v_s8Desc">Bu geceye ait çektiğiniz kareleri bizimle paylaşın.</p>
+                    <div id="live-photo-upload-box" style="display:none;">
+                        <input type="file" id="photo-upload-input" accept="image/*" style="display:none;" onchange="handlePhotoUpload(event)">
+                        <button type="button" class="btn-gold" style="padding:10px; font-size:12px;" onclick="document.getElementById('photo-upload-input').click()">📷 Fotoğraf Yükle</button>
+                    </div>
+                    <div id="v_photoNotice" style="font-size:13px; color:var(--gold-dark); font-style:italic;">Fotoğraf yükleme özelliği düğün saatinde açılacaktır.</div>
+                </div>
+
+                <div class="glass-panel anim-item d-2">
+                    <div class="gold-title" style="font-size:20px;" id="v_funTitle">Şarkı İsteği</div>
+                    <p class="sub-text" style="font-size:13px; margin-bottom:10px;" id="v_funDesc">Beraber dans etmek istediğiniz şarkı nedir?</p>
+                    <form onsubmit="submitSongForm(event)">
+                        <input type="text" id="song_sender" class="styled-input" placeholder="Adınız Soyadınız" required>
+                        <input type="text" id="song_request" class="styled-input" placeholder="Şarkı Adı ve Sanatçı" required>
+                        <button type="submit" class="btn-gold" style="padding:10px; font-size:13px;" id="v_funBtn">Gönder</button>
+                    </form>
+                    <p id="song-feedback" style="display:none; color:var(--gold-dark); font-size:13px; margin-top:8px;">İsteğiniz DJ'e iletildi!</p>
+                </div>
+            </section>
+
+            <!-- SAHNE 7: LCV (RSVP) -->
+            <section class="slide">
+                <div class="glass-panel anim-item d-1">
+                    <div class="gold-title" id="v_s9Title">L.C.V.</div>
+                    <p class="sub-text" style="margin-bottom:20px;" id="v_s9Desc">Lütfen katılım durumunuzu bildiriniz.</p>
+
+                    <form id="rsvp-form" onsubmit="submitRSVPForm(event)">
+                        <input type="text" id="rsvp_name" class="styled-input" placeholder="Adınız Soyadınız..." required>
+                        
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="rsvp_status" value="Katılacağım" checked onchange="toggleGuestStepper(true)">
+                                <span id="v_rsvpYes">Evet, Katılacağım</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="rsvp_status" value="Katılamıyorum" onchange="toggleGuestStepper(false)">
+                                <span id="v_rsvpNo">Maalesef Katılamıyorum</span>
+                            </label>
+                        </div>
+
+                        <div id="guest-stepper-box">
+                            <div style="font-size:11px; letter-spacing:2px; text-transform:uppercase; margin-bottom:5px; color:var(--text-muted);">KİŞİ SAYISI</div>
+                            <div class="stepper-wrap">
+                                <button type="button" class="step-btn" onclick="changeGuestCount(-1)">−</button>
+                                <span id="rsvp_count_val" style="font-family:'Playfair Display',serif; font-size:22px;">1</span>
+                                <button type="button" class="step-btn" onclick="changeGuestCount(1)">+</button>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-gold"><span id="v_rsvpBtn">Yanıtı Gönder</span></button>
+                    </form>
+
+                    <div id="rsvp-thankyou" style="display:none; padding:20px; font-family:'Playfair Display',serif; font-size:20px; color:var(--gold-dark);">
+                        Yanıtınız alınmıştır.<br>Teşekkür ederiz!
+                    </div>
+                </div>
+                
+                <div class="anim-item d-3" style="margin-top:20px;">
+                    <div class="script-text">Meltem & Yunus Emre</div>
                 </div>
             </section>
 
         </div>
     </div>
 
-    <!-- ================= YENİ NESİL PREMİUM ADMİN PANELİ ================= -->
+
+    <!-- ================= ADMİN PANELİ (CMS) ================= -->
     <div id="admin-panel">
         <div class="adm-shell">
-
             <div class="adm-header">
-                <div class="adm-brand">
-                    <div class="adm-logo">M&Y</div>
-                    <div class="adm-title">
-                        <h1>Düğün Yönetim Süiti</h1>
-                        <span class="adm-status" id="adm-db-status">Sistem Aktif</span>
-                    </div>
+                <div>
+                    <h1 style="font-size:22px; color:#111827; margin-bottom:5px;">💍 Düğün Yönetim Süiti</h1>
+                    <span style="font-size:12px; background:#D1FAE5; color:#065F46; padding:4px 10px; border-radius:12px;" id="adm-db-status">Sistem Aktif</span>
                 </div>
-                <div class="adm-header-actions">
-                    <button class="btn-adm btn-adm-secondary" onclick="window.location.hash=''">👁️ Davetiyeyi Gör</button>
-                    <button class="btn-adm btn-adm-primary" onclick="saveAllSiteSettings()">💾 Tümünü Kaydet</button>
-                </div>
-            </div>
-
-            <div class="adm-kpi-grid">
-                <div class="adm-kpi-card">
-                    <div class="adm-kpi-icon" style="color: #059669; background: #D1FAE5;">🥂</div>
-                    <div class="adm-kpi-info"><p>Toplam Gelecek Kişi</p><h3 id="adm_total_guests">0</h3></div>
-                </div>
-                <div class="adm-kpi-card">
-                    <div class="adm-kpi-icon" style="color: #3B82F6; background: #DBEAFE;">🎵</div>
-                    <div class="adm-kpi-info"><p>Gelen Şarkı İstekleri</p><h3 id="adm_songs_count">0</h3></div>
+                <div style="display:flex; gap:10px;">
+                    <button class="btn-adm" style="background:#fff; color:#374151; border:1px solid #D1D5DB;" onclick="window.location.hash=''">👁️ Davetiyeyi Gör</button>
+                    <button class="btn-adm" style="background:#4A382E;" onclick="saveAllSiteSettings()">💾 Değişiklikleri Kaydet</button>
                 </div>
             </div>
 
             <div class="adm-tabs">
-                <button class="adm-tab active" onclick="switchAdmTab('tab-dashboard', this)">📋 LCV & Misafirler</button>
-                <button class="adm-tab" onclick="switchAdmTab('tab-content', this)">📝 Metinler & İçerik</button>
-                <button class="adm-tab" onclick="switchAdmTab('tab-program', this)">📅 Program & Menü</button>
-                <button class="adm-tab" onclick="switchAdmTab('tab-media', this)">🎵 Şarkılar & Ayarlar</button>
+                <button class="adm-tab active" onclick="switchAdmTab('tab-dash', this)">📋 LCV Listesi</button>
+                <button class="adm-tab" onclick="switchAdmTab('tab-media', this)">📷 Fotoğraf & Şarkılar</button>
+                <button class="adm-tab" onclick="switchAdmTab('tab-content', this)">✏️ Davetiye Bilgileri Düzenle</button>
+                <button class="adm-tab" onclick="switchAdmTab('tab-lists', this)">📅 Menü & Program</button>
             </div>
 
-            <div id="tab-dashboard" class="adm-tab-content active">
+            <!-- TAB: LCV -->
+            <div id="tab-dash" class="adm-tab-content active">
                 <div class="adm-card">
-                    <div class="adm-card-header"><h2>📋 LCV (Katılımcı) Listesi</h2></div>
-                    <div class="adm-table-container">
-                        <table class="adm-table">
-                            <thead><tr><th>#</th><th>Ad Soyad</th><th>Durum</th><th>Kişi Sayısı</th><th>İşlem</th></tr></thead>
-                            <tbody id="adm_rsvp_tbody"></tbody>
-                        </table>
-                    </div>
+                    <h3 style="margin-bottom:15px;">Katılımcı Listesi (Toplam <span id="adm_total_guests" style="color:#D4AF37;">0</span> Kişi)</h3>
+                    <table class="adm-table">
+                        <thead><tr><th>Ad Soyad</th><th>Durum</th><th>Kişi</th><th>İşlem</th></tr></thead>
+                        <tbody id="adm_rsvp_tbody"></tbody>
+                    </table>
                 </div>
             </div>
 
-            <div id="tab-content" class="adm-tab-content">
-                <div class="adm-form-grid">
-                    <div class="adm-card">
-                        <div class="adm-card-header"><h2>1. Kapı & Ana İsimler</h2></div>
-                        <div class="adm-form-group"><label>Kapı Mührü Harfleri:</label><input type="text" class="adm-input" id="in_sealInitials"></div>
-                        <div class="adm-form-group"><label>Mühür Altı Yazı:</label><input type="text" class="adm-input" id="in_sealText"></div>
-                        <div class="adm-form-group"><label>1. Sahne Üst Başlık:</label><input type="text" class="adm-input" id="in_s1TopTitle"></div>
-                        <div class="adm-form-group"><label>Gelin Adı Soyadı:</label><input type="text" class="adm-input" id="in_brideName"></div>
-                        <div class="adm-form-group"><label>Damat Adı Soyadı:</label><input type="text" class="adm-input" id="in_groomName"></div>
-                    </div>
-                    <div class="adm-card">
-                        <div class="adm-card-header"><h2>2. Aileler & Davet Metni</h2></div>
-                        <div class="adm-form-group"><label>Davet Karşılama Sözü:</label><textarea class="adm-input" id="in_inviteText"></textarea></div>
-                        <div class="adm-form-group"><label>Gelin Soyadı (Aile):</label><input type="text" class="adm-input" id="in_brideFamily"></div>
-                        <div class="adm-form-group"><label>Damat Soyadı (Aile):</label><input type="text" class="adm-input" id="in_groomFamily"></div>
-                    </div>
-                    <div class="adm-card">
-                        <div class="adm-card-header"><h2>3. Tarih & Saat</h2></div>
-                        <div style="display:flex; gap:10px;">
-                            <div class="adm-form-group" style="flex:1;"><label>Gün:</label><input type="text" class="adm-input" id="in_dateDay"></div>
-                            <div class="adm-form-group" style="flex:1.5;"><label>Ay:</label><input type="text" class="adm-input" id="in_dateMonth"></div>
-                            <div class="adm-form-group" style="flex:1;"><label>Yıl:</label><input type="text" class="adm-input" id="in_dateYear"></div>
-                        </div>
-                        <div class="adm-form-group"><label>Geri Sayım Hedef (YYYY-AA-GG):</label><input type="text" class="adm-input" id="in_countdownTarget"></div>
-                    </div>
-                    <div class="adm-card">
-                        <div class="adm-card-header"><h2>4. Konum & Harita</h2></div>
-                        <div class="adm-form-group"><label>Mekan Adı:</label><input type="text" class="adm-input" id="in_venueName"></div>
-                        <div class="adm-form-group"><label>Mekan Adresi:</label><textarea class="adm-input" id="in_venueAddress"></textarea></div>
-                        <div class="adm-form-group"><label>Harita (Iframe) Linki:</label><input type="text" class="adm-input" id="in_mapIframe"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="tab-program" class="adm-tab-content">
-                <div class="adm-form-grid">
-                    <div class="adm-card">
-                        <div class="adm-card-header">
-                            <h2>📅 Günün Çizgisi (Program)</h2>
-                            <button class="btn-adm btn-adm-secondary" onclick="addTimelineRow('','')" style="padding: 6px 12px;">+ Etkinlik Ekle</button>
-                        </div>
-                        <div id="admin-timeline-rows"></div>
-                    </div>
-                    <div class="adm-card">
-                        <div class="adm-card-header">
-                            <h2>🍽️ Düğün Menüsü</h2>
-                            <button class="btn-adm btn-adm-secondary" onclick="addMenuRow('','','')" style="padding: 6px 12px;">+ Menü Ekle</button>
-                        </div>
-                        <div id="admin-menu-rows"></div>
-                    </div>
-                </div>
-            </div>
-
+            <!-- TAB: MEDYA (FOTO & ŞARKI) -->
             <div id="tab-media" class="adm-tab-content">
-                <div class="adm-grid">
-                    <div class="adm-card" style="grid-column: 1 / -1;">
-                        <div class="adm-card-header"><h2>⚙️ Fotoğraf Yükleme ve Müzik</h2></div>
-                        <div class="adm-form-group">
-                            <label>Misafirler İçin Canlı Fotoğraf Yükleme İzni:</label>
-                            <select class="adm-input" id="in_photoUploadActive" onchange="saveAllSiteSettings()">
-                                <option value="false">🔒 Kapalı (Sadece "Fotoğraf yükleme davet saatinde aktif olacak" yazısı görünür)</option>
-                                <option value="true">🔓 Açık (Misafirler fotoğraf yükleyebilir)</option>
-                            </select>
-                        </div>
-                        <div class="adm-form-group"><label>Arka Plan Müzik MP3 Linki:</label><input type="text" class="adm-input" id="in_musicUrl"></div>
+                <div class="adm-card">
+                    <h3 style="margin-bottom:15px;">Açılış Fotoğrafı ve Müzik</h3>
+                    <div class="adm-input" style="border:none; padding:0; margin-bottom:10px;"><label style="font-size:12px; font-weight:bold;">1. Sahne (Kapak) Tam Ekran Fotoğraf Linki (URL):</label><input type="text" class="adm-input" id="in_heroImage" placeholder="Örn: https://resmim.com/gelindamat.jpg"></div>
+                    <div class="adm-input" style="border:none; padding:0;"><label style="font-size:12px; font-weight:bold;">Arka Plan Müziği MP3 Linki:</label><input type="text" class="adm-input" id="in_musicUrl"></div>
+                </div>
+
+                <div class="adm-card">
+                    <h3 style="margin-bottom:15px;">📷 Ziyaretçi Fotoğraf Galerisi</h3>
+                    <label style="font-size:12px; font-weight:bold;">Fotoğraf Yükleme İzni:</label>
+                    <select class="adm-input" id="in_photoUploadActive" onchange="saveAllSiteSettings()">
+                        <option value="false">🔒 Kapalı (Düğün saatinde açılacak uyarısı verir)</option>
+                        <option value="true">🔓 Açık (Misafirler fotoğraf yükleyebilir)</option>
+                    </select>
+                    <table class="adm-table" style="margin-top:15px;">
+                        <thead><tr><th>Önizleme</th><th>İşlem</th></tr></thead>
+                        <tbody id="adm_photos_tbody"></tbody>
+                    </table>
+                </div>
+
+                <div class="adm-card">
+                    <h3 style="margin-bottom:15px;">🎵 Şarkı İstekleri</h3>
+                    <table class="adm-table">
+                        <thead><tr><th>Gönderen</th><th>İstek</th><th>İşlem</th></tr></thead>
+                        <tbody id="adm_songs_tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB: İÇERİK (METİNLER) -->
+            <div id="tab-content" class="adm-tab-content">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+                    <div class="adm-card">
+                        <h3 style="margin-bottom:15px;">İsimler ve Aileler</h3>
+                        <input type="text" class="adm-input" id="in_brideName" placeholder="Gelin Adı">
+                        <input type="text" class="adm-input" id="in_groomName" placeholder="Damat Adı">
+                        <input type="text" class="adm-input" id="in_brideFamily" placeholder="Gelin Soyadı (Aile)">
+                        <input type="text" class="adm-input" id="in_groomFamily" placeholder="Damat Soyadı (Aile)">
+                        <input type="text" class="adm-input" id="in_sealInitials" placeholder="Mühür Baş Harfler (M&Y)">
                     </div>
-                    <div class="adm-card" style="grid-column: 1 / -1;">
-                        <div class="adm-card-header"><h2>🎵 Gelen Şarkı İstekleri</h2></div>
-                        <div class="adm-table-container">
-                            <table class="adm-table">
-                                <thead><tr><th>Gönderen</th><th>Şarkı / Not</th><th>İşlem</th></tr></thead>
-                                <tbody id="adm_songs_tbody"></tbody>
-                            </table>
+                    <div class="adm-card">
+                        <h3 style="margin-bottom:15px;">Tarih ve Sayaç</h3>
+                        <div style="display:flex; gap:10px;">
+                            <input type="text" class="adm-input" id="in_dateDay" placeholder="Gün (08)">
+                            <input type="text" class="adm-input" id="in_dateMonth" placeholder="Ay (AĞUSTOS)">
                         </div>
+                        <input type="text" class="adm-input" id="in_dateYear" placeholder="Yıl (2026)">
+                        <input type="text" class="adm-input" id="in_dateTime" placeholder="Saat (19:00)">
+                        <input type="text" class="adm-input" id="in_countdownTarget" placeholder="Sayaç Hedefi (2026-08-08T19:00:00)">
                     </div>
+                </div>
+                <div class="adm-card">
+                    <h3 style="margin-bottom:15px;">Konum Bilgileri</h3>
+                    <input type="text" class="adm-input" id="in_venueName" placeholder="Mekan Adı">
+                    <input type="text" class="adm-input" id="in_venueAddress" placeholder="Adres İl/İlçe">
+                    <input type="text" class="adm-input" id="in_mapIframe" placeholder="Harita Embed (Iframe) Linki">
+                    <input type="text" class="adm-input" id="in_mapLinkUrl" placeholder="Yol Tarifi Linki">
+                </div>
+            </div>
+
+            <!-- TAB: PROGRAM VE MENÜ (DİNAMİK) -->
+            <div id="tab-lists" class="adm-tab-content">
+                <div class="adm-card">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
+                        <h3>Program Akışı</h3>
+                        <button class="btn-adm" style="background:#E5E7EB; color:#374151;" onclick="addTimelineRow('','')">+ Ekle</button>
+                    </div>
+                    <div id="admin-timeline-rows"></div>
+                </div>
+                <div class="adm-card">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
+                        <h3>Menü Listesi</h3>
+                        <button class="btn-adm" style="background:#E5E7EB; color:#374151;" onclick="addMenuRow('','','')">+ Ekle</button>
+                    </div>
+                    <div id="admin-menu-rows"></div>
                 </div>
             </div>
 
         </div>
-    </div>
-
-    <!-- Bildirim -->
-    <div id="adm-toast">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-        <span>✅ Değişiklikler başarıyla kaydedildi!</span>
     </div>
 
     <!-- Firebase SDK -->
@@ -649,165 +543,139 @@
 
     <script>
         const defaultSettings = {
-            sealInitials: "M & Y", sealText: "Dokun Aç", s1TopTitle: "Düğün Davetiyesi", brideName: "Meltem Alkış",
-            andWord: "ve", groomName: "Yunus Emre Kumsal", scrollBtnText: "Aşağı Kaydır", musicUrl: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3",
-            inviteText: "Bu anın şahidi olmak için sizi yanımızda görmek istiyoruz", familyHeader: "AİLELERİMİZ", brideFamily: "Alkış", brideFamilySub: "AİLESİ",
-            groomFamily: "Kumsal", groomFamilySub: "AİLESİ", s3Title: "TARİH", dateDay: "08", dateMonth: "AĞUSTOS", dateYear: "2026", dateDayName: "CUMARTESİ",
-            dateTime: "19.00", countdownTarget: "2026-08-08T19:00:00", s4Title: "Konum", venueName: "Four Seasons Hotel Istanbul", venueAddress: "Beşiktaş/İstanbul",
-            mapIframe: "https://maps.google.com/maps?q=Four%20Seasons%20Hotel%20Bosphorus%20Istanbul&t=&z=14&ie=UTF8&iwloc=&output=embed", mapLinkUrl: "https://maps.google.com/?q=Four+Seasons+Hotel+Bosphorus+Istanbul", mapBtnText: "YOL TARİFİ AL",
-            s5Title: "BULUŞMAYA KALAN", s5Quote: "İki ruh birleşiyor.", s6Title: "Günün çizgisi",
-            timeline: [{ time: "19:00", title: "Nikah Töreni" }, { time: "19:30", title: "Kokteyl" }, { time: "21:00", title: "Kutlama ve Yemek" }],
-            s7Title: "Menü", menu: [{ cat: "BAŞLANGIÇ", name: "Karşılama Kokteyli", desc: "Mini atıştırmalıklar ve içecekler" }, { cat: "ANA YEMEK", name: "Gecenin İmza Lezzeti", desc: "Şefin gecemiz için hazırladığı özel tabak" }, { cat: "TATLI", name: "Kutlama Pastası", desc: "Tatlı bir kapanış ve kahve/çay ikramı" }],
-            s8Title: "En güzel anlarımız", s8Desc: "Birlikte biriktirdiğimiz en özel kareler", photoNotice: "Fotoğraf yükleme davet saatinde aktif olacak.", photoSub: "Davet başlar başlamaz fotoğraflarınızı bu alandan yükleyebileceksiniz.",
-            photoUploadActive: "false", funTitle: "Biraz Eğlence!", funDesc: "Favori düğün şarkınızı veya notunuzu bizimle paylaşın!", funBtn: "Gönder",
-            s9Title: "RSVP", s9Sub: "KATILIMINIZ", s9Desc: "Lütfen davetimize katılım durumunuzu bizimle paylaşın.", rsvpYes: "Katılacağım", rsvpNo: "Maalesef katılamıyorum", rsvpBtn: "GÖNDER", footerDate: "08 AĞUSTOS 2026"
+            heroImage: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop",
+            musicUrl: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3",
+            sealInitials: "M&Y", sealText: "Mührü Kır", s1TopTitle: "Davetlisiniz", 
+            brideName: "Meltem", andWord: "ve", groomName: "Yunus Emre", scrollBtnText: "Aşağı Kaydır",
+            inviteText: "Bu en mutlu günümüzde sizleri de aramızda görmekten onur duyarız.", 
+            familyHeader: "AİLELER", brideFamily: "Alkış", brideFamilySub: "AİLESİ", groomFamily: "Kumsal", groomFamilySub: "AİLESİ",
+            s3Title: "Tarih & Saat", dateDay: "08", dateMonth: "AĞUSTOS", dateYear: "2026", dateDayName: "CUMARTESİ", dateTime: "19:00",
+            countdownTarget: "2026-08-08T19:00:00", s4Title: "Konum", venueName: "Four Seasons Hotel Istanbul", venueAddress: "Beşiktaş / İstanbul",
+            mapIframe: "https://maps.google.com/maps?q=Four%20Seasons%20Hotel%20Bosphorus%20Istanbul&t=&z=14&ie=UTF8&iwloc=&output=embed", mapLinkUrl: "https://maps.google.com/?q=Four+Seasons+Hotel+Bosphorus+Istanbul", mapBtnText: "Yol Tarifi Al",
+            s6Title: "Program", timeline: [{ time: "19:00", title: "Nikah Töreni" }, { time: "19:30", title: "Kokteyl" }, { time: "21:00", title: "Yemek ve Eğlence" }],
+            s7Title: "Menü", menu: [{ cat: "BAŞLANGIÇ", name: "Karşılama Tabağı", desc: "Zeytinyağlı çeşitleri" }, { cat: "ANA YEMEK", name: "Dana Antrikot", desc: "Patates püresi yatağında" }, { cat: "TATLI", name: "Düğün Pastası", desc: "Çikolata ve orman meyveli" }],
+            s8Title: "Anı Paylaşımı", s8Desc: "Bu geceye ait çektiğiniz kareleri bizimle paylaşın.", photoNotice: "Fotoğraf yükleme özelliği düğün saatinde açılacaktır.", photoSub: "", photoUploadActive: "false",
+            funTitle: "Şarkı İsteği", funDesc: "Beraber dans etmek istediğiniz şarkı nedir?", funBtn: "Gönder",
+            s9Title: "L.C.V.", s9Sub: "", s9Desc: "Lütfen katılım durumunuzu bildiriniz.", rsvpYes: "Evet, Katılacağım", rsvpNo: "Maalesef Katılamıyorum", rsvpBtn: "Yanıtı Gönder", footerDate: "08.08.2026"
         };
 
         const firebaseConfig = {
             apiKey: "AIzaSyBGw65gJhXPs2a219GKjdYiOPnzhamVqJY", authDomain: "davetiye-dabbc.firebaseapp.com",
-            databaseURL: "https://davetiye-dabbc-default-rtdb.firebaseio.com", projectId: "davetiye-dabbc",
-            storageBucket: "davetiye-dabbc.firebasestorage.app", messagingSenderId: "927684969636",
-            appId: "1:927684969636:web:8159e2aa33bc5fcf589231", measurementId: "G-P0P2VPC5YJ"
+            databaseURL: "https://davetiye-dabbc-default-rtdb.firebaseio.com", projectId: "davetiye-dabbc"
         };
 
         let useFirebase = false; let db = null;
-        try { if (typeof firebase !== 'undefined') { firebase.initializeApp(firebaseConfig); db = firebase.database(); useFirebase = true; } } catch (e) { useFirebase = false; }
+        try { if (typeof firebase !== 'undefined') { firebase.initializeApp(firebaseConfig); db = firebase.database(); useFirebase = true; } } catch(e){}
 
-        let currentSettings = { ...defaultSettings }; let allRSVPs = []; let allSongs = [];
+        let currentSettings = { ...defaultSettings }; let allRSVPs = []; let allSongs = []; let allPhotos = [];
 
-        function showToast() { const t = document.getElementById('adm-toast'); t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3500); }
-        function switchAdmTab(tabId, btn) { document.querySelectorAll('.adm-tab-content').forEach(c => c.classList.remove('active')); document.querySelectorAll('.adm-tab').forEach(b => b.classList.remove('active')); document.getElementById(tabId).classList.add('active'); btn.classList.add('active'); }
+        function switchAdmTab(tabId, btn) {
+            document.querySelectorAll('.adm-tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.adm-tab').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active'); btn.classList.add('active');
+        }
 
         function loadAllData() {
             if (useFirebase && db) {
-                document.getElementById('adm-db-status').innerText = "🟢 Realtime Veritabanı Bağlı";
                 db.ref('settings').on('value', snap => { if (snap.val()) currentSettings = { ...defaultSettings, ...snap.val() }; applySettingsToDOM(); });
                 db.ref('rsvps').on('value', snap => { allRSVPs = []; snap.forEach(c => allRSVPs.push({ ...c.val(), fbKey: c.key })); renderAdminRSVPs(); });
                 db.ref('songs').on('value', snap => { allSongs = []; snap.forEach(c => allSongs.push({ ...c.val(), fbKey: c.key })); renderAdminSongs(); });
+                db.ref('photos').on('value', snap => { allPhotos = []; snap.forEach(c => allPhotos.push({ ...c.val(), fbKey: c.key })); renderAdminPhotos(); });
             } else {
-                document.getElementById('adm-db-status').innerText = "🟡 Yerel Tarayıcı Bağlı";
-                const saved = localStorage.getItem('wedding_cms_settings'); if (saved) currentSettings = { ...defaultSettings, ...JSON.parse(saved) };
-                applySettingsToDOM();
-                allRSVPs = JSON.parse(localStorage.getItem('wedding_rsvps') || '[]'); allSongs = JSON.parse(localStorage.getItem('wedding_songs') || '[]');
-                renderAdminRSVPs(); renderAdminSongs();
+                const s = localStorage.getItem('wedding_cms'); if (s) currentSettings = { ...defaultSettings, ...JSON.parse(s) }; applySettingsToDOM();
+                allRSVPs = JSON.parse(localStorage.getItem('w_rsvps') || '[]'); allSongs = JSON.parse(localStorage.getItem('w_songs') || '[]'); allPhotos = JSON.parse(localStorage.getItem('w_photos') || '[]');
+                renderAdminRSVPs(); renderAdminSongs(); renderAdminPhotos();
             }
         }
 
         function applySettingsToDOM() {
-            Object.keys(currentSettings).forEach(key => {
-                if (key === 'timeline' || key === 'menu') return;
-                const viewEl = document.getElementById('v_' + key);
-                if (viewEl) { if (key === 'mapIframe') { if (viewEl.src !== currentSettings[key]) viewEl.src = currentSettings[key]; } else { viewEl.innerText = currentSettings[key]; } }
-                const adminInput = document.getElementById('in_' + key); if (adminInput) adminInput.value = currentSettings[key];
+            Object.keys(currentSettings).forEach(k => {
+                if (k === 'timeline' || k === 'menu') return;
+                const el = document.getElementById('v_' + k);
+                if (el) {
+                    if (k === 'mapIframe') el.src = currentSettings[k];
+                    else if (k === 'heroImage') el.style.backgroundImage = `url('${currentSettings[k]}')`;
+                    else el.innerText = currentSettings[k];
+                }
+                const inp = document.getElementById('in_' + k); if (inp) inp.value = currentSettings[k];
             });
-            document.querySelectorAll('.b-name-sync').forEach(el => el.innerText = currentSettings.brideName);
-            document.querySelectorAll('.g-name-sync').forEach(el => el.innerText = currentSettings.groomName);
+            document.getElementById('v_heroDate').innerText = `${currentSettings.dateDay}.${currentSettings.dateMonth === 'AĞUSTOS' ? '08' : '10'}.${currentSettings.dateYear}`;
+            
+            const upBox = document.getElementById('live-photo-upload-box'); const nBox = document.getElementById('v_photoNotice');
+            if (String(currentSettings.photoUploadActive) === 'true') { if(upBox) upBox.style.display = 'block'; if(nBox) nBox.style.display = 'none'; } 
+            else { if(upBox) upBox.style.display = 'none'; if(nBox) nBox.style.display = 'block'; }
 
-            const uploadBox = document.getElementById('live-photo-upload-box');
-            if (uploadBox) { uploadBox.style.display = (String(currentSettings.photoUploadActive) === 'true') ? 'block' : 'none'; }
-
-            renderTimeline(currentSettings.timeline || []); renderMenu(currentSettings.menu || []); renderAdminDynamicLists(currentSettings.timeline || [], currentSettings.menu || []);
-            const audio = document.getElementById('bg-music'); if (currentSettings.musicUrl && audio.src !== currentSettings.musicUrl) { audio.src = currentSettings.musicUrl; }
+            renderTimeline(); renderMenu(); renderAdmDyn();
+            const au = document.getElementById('bg-music'); if (currentSettings.musicUrl && au.src !== currentSettings.musicUrl) au.src = currentSettings.musicUrl;
         }
 
-        function renderTimeline(list) {
-            const container = document.getElementById('v_timelineContainer'); if(!container) return; container.innerHTML = '';
-            list.forEach((item, idx) => {
-                container.innerHTML += `<div class="timeline-item anim-item d-2"><div class="timeline-time">${item.time}</div><div class="timeline-title">${item.title}</div></div>${idx < list.length - 1 ? '<div class="ornament-diamond" style="margin: 6px auto;"></div>' : ''}`;
-            });
+        function renderTimeline() {
+            const c = document.getElementById('v_timelineContainer'); if(!c) return; c.innerHTML = '';
+            (currentSettings.timeline || []).forEach((t, i) => { c.innerHTML += `<div style="margin:10px 0;"><div style="font-size:12px; color:var(--gold-dark);">${t.time}</div><div style="font-family:'Playfair Display',serif; font-size:18px;">${t.title}</div></div>${i < currentSettings.timeline.length-1 ? '<div class="ornament-divider" style="height:10px;"></div>':''}`; });
+        }
+        function renderMenu() {
+            const c = document.getElementById('v_menuContainer'); if(!c) return; c.innerHTML = '';
+            (currentSettings.menu || []).forEach((m, i) => { c.innerHTML += `<div style="margin:12px 0;"><div style="font-size:10px; color:var(--gold-dark); letter-spacing:2px;">${m.cat}</div><div style="font-family:'Playfair Display',serif; font-size:18px; margin:2px 0;">${m.name}</div><div style="font-size:13px; color:var(--text-muted); font-style:italic;">${m.desc}</div></div>${i < currentSettings.menu.length-1 ? '<div class="ornament-divider" style="height:10px;"></div>':''}`; });
         }
 
-        function renderMenu(list) {
-            const container = document.getElementById('v_menuContainer'); if(!container) return; container.innerHTML = '';
-            list.forEach((item, idx) => {
-                container.innerHTML += `<div class="menu-item anim-item d-2" style="margin-bottom:12px;"><div class="menu-cat">${item.cat}</div><div class="menu-name">${item.name}</div><div class="menu-desc">${item.desc}</div></div>${idx < list.length - 1 ? '<div class="ornament-diamond" style="margin: 6px auto;"></div>' : ''}`;
-            });
+        function renderAdmDyn() {
+            const tc = document.getElementById('admin-timeline-rows'); if(tc){ tc.innerHTML=''; (currentSettings.timeline||[]).forEach(t => { tc.innerHTML += `<div style="display:flex;gap:5px;margin-bottom:5px;"><input class="adm-input" value="${t.time}" style="width:70px;"><input class="adm-input" value="${t.title}" style="flex:1;"><button class="btn-adm" style="background:#dc2626;" onclick="this.parentElement.remove()">X</button></div>`; });}
+            const mc = document.getElementById('admin-menu-rows'); if(mc){ mc.innerHTML=''; (currentSettings.menu||[]).forEach(m => { mc.innerHTML += `<div style="display:flex;gap:5px;margin-bottom:5px;"><input class="adm-input" value="${m.cat}" style="width:100px;"><input class="adm-input" value="${m.name}" style="flex:1;"><input class="adm-input" value="${m.desc}" style="flex:1;"><button class="btn-adm" style="background:#dc2626;" onclick="this.parentElement.remove()">X</button></div>`; });}
         }
-
-        function renderAdminDynamicLists(timeline, menu) {
-            const tContainer = document.getElementById('admin-timeline-rows');
-            if(tContainer) { tContainer.innerHTML = ''; timeline.forEach((item) => { tContainer.innerHTML += `<div class="adm-dynamic-row"><input type="text" class="adm-input t-time" value="${item.time}" placeholder="Saat (Örn: 19:00)" style="width:25%;"><input type="text" class="adm-input t-title" value="${item.title}" placeholder="Etkinlik (Örn: Nikah)" style="flex:1;"><button type="button" class="btn-adm btn-adm-danger" onclick="this.parentElement.remove()">Sil</button></div>`; }); }
-            const mContainer = document.getElementById('admin-menu-rows');
-            if(mContainer) { mContainer.innerHTML = ''; menu.forEach((item) => { mContainer.innerHTML += `<div class="adm-dynamic-row" style="flex-direction:column; align-items:stretch;"><div style="display:flex; gap:10px; margin-bottom:8px;"><input type="text" class="adm-input m-cat" value="${item.cat}" placeholder="Kategori" style="flex:1;"><button type="button" class="btn-adm btn-adm-danger" onclick="this.closest('.adm-dynamic-row').remove()">Sil</button></div><input type="text" class="adm-input m-name" value="${item.name}" placeholder="Yemek Adı" style="margin-bottom:8px;"><input type="text" class="adm-input m-desc" value="${item.desc}" placeholder="Açıklama"></div>`; }); }
-        }
-
-        function addTimelineRow(time, title) {
-            const tContainer = document.getElementById('admin-timeline-rows'); const div = document.createElement('div'); div.className = 'adm-dynamic-row';
-            div.innerHTML = `<input type="text" class="adm-input t-time" value="${time}" placeholder="Saat" style="width:25%;"><input type="text" class="adm-input t-title" value="${title}" placeholder="Etkinlik" style="flex:1;"><button type="button" class="btn-adm btn-adm-danger" onclick="this.parentElement.remove()">Sil</button>`; tContainer.appendChild(div);
-        }
-
-        function addMenuRow(cat, name, desc) {
-            const mContainer = document.getElementById('admin-menu-rows'); const div = document.createElement('div'); div.className = 'adm-dynamic-row'; div.style.cssText = "flex-direction:column; align-items:stretch;";
-            div.innerHTML = `<div style="display:flex; gap:10px; margin-bottom:8px;"><input type="text" class="adm-input m-cat" value="${cat}" placeholder="Kategori" style="flex:1;"><button type="button" class="btn-adm btn-adm-danger" onclick="this.closest('.adm-dynamic-row').remove()">Sil</button></div><input type="text" class="adm-input m-name" value="${name}" placeholder="Yemek Adı" style="margin-bottom:8px;"><input type="text" class="adm-input m-desc" value="${desc}" placeholder="Açıklama">`; mContainer.appendChild(div);
-        }
+        function addTimelineRow(){ document.getElementById('admin-timeline-rows').innerHTML += `<div style="display:flex;gap:5px;margin-bottom:5px;"><input class="adm-input" placeholder="Saat" style="width:70px;"><input class="adm-input" placeholder="Etkinlik Adı" style="flex:1;"><button class="btn-adm" style="background:#dc2626;" onclick="this.parentElement.remove()">X</button></div>`; }
+        function addMenuRow(){ document.getElementById('admin-menu-rows').innerHTML += `<div style="display:flex;gap:5px;margin-bottom:5px;"><input class="adm-input" placeholder="Kat" style="width:100px;"><input class="adm-input" placeholder="Yemek" style="flex:1;"><input class="adm-input" placeholder="Açıklama" style="flex:1;"><button class="btn-adm" style="background:#dc2626;" onclick="this.parentElement.remove()">X</button></div>`; }
 
         function saveAllSiteSettings() {
-            const newSettings = {};
-            Object.keys(defaultSettings).forEach(key => {
-                if (key === 'timeline' || key === 'menu') return; const input = document.getElementById('in_' + key); if (input) newSettings[key] = input.value;
-            });
-            const newTimeline = []; document.querySelectorAll('#admin-timeline-rows .adm-dynamic-row').forEach(row => { const time = row.querySelector('.t-time').value; const title = row.querySelector('.t-title').value; if(time || title) newTimeline.push({ time, title }); }); newSettings.timeline = newTimeline;
-            const newMenu = []; document.querySelectorAll('#admin-menu-rows .adm-dynamic-row').forEach(row => { const cat = row.querySelector('.m-cat').value; const name = row.querySelector('.m-name').value; const desc = row.querySelector('.m-desc').value; if(name) newMenu.push({ cat, name, desc }); }); newSettings.menu = newMenu;
-            currentSettings = newSettings;
-            if (useFirebase && db) { db.ref('settings').set(newSettings).then(() => { showToast(); }).catch(e => alert(e)); } else { localStorage.setItem('wedding_cms_settings', JSON.stringify(newSettings)); applySettingsToDOM(); showToast(); }
+            const ns = {}; Object.keys(defaultSettings).forEach(k => { if(k==='timeline'||k==='menu')return; const i=document.getElementById('in_'+k); if(i) ns[k]=i.value; });
+            const tl=[]; document.querySelectorAll('#admin-timeline-rows > div').forEach(r=>{ const i=r.querySelectorAll('input'); if(i[0].value) tl.push({time:i[0].value, title:i[1].value}); }); ns.timeline=tl;
+            const mn=[]; document.querySelectorAll('#admin-menu-rows > div').forEach(r=>{ const i=r.querySelectorAll('input'); if(i[1].value) mn.push({cat:i[0].value, name:i[1].value, desc:i[2].value}); }); ns.menu=mn;
+            currentSettings=ns;
+            if (useFirebase && db) { db.ref('settings').set(ns); } else { localStorage.setItem('wedding_cms', JSON.stringify(ns)); applySettingsToDOM(); }
+            alert("Ayarlar Kaydedildi!");
         }
 
-        function renderAdminRSVPs() {
-            const tbody = document.getElementById('adm_rsvp_tbody'); if(!tbody) return; tbody.innerHTML = ''; let total = 0;
-            allRSVPs.forEach((item, index) => {
-                const isAttending = item.status === 'Katılacağım'; total += Number(item.count || 0);
-                tbody.innerHTML += `<tr><td>${index + 1}</td><td><strong>${item.name}</strong></td><td><span class="${isAttending ? 'adm-badge-success' : 'adm-badge-error'}">${isAttending ? '✅ Katılıyor' : '❌ Katılamıyor'}</span></td><td>${item.count}</td><td><button type="button" onclick="deleteRSVP('${item.fbKey || ''}', ${index})" class="btn-adm btn-adm-danger">Sil</button></td></tr>`;
-            });
-            document.getElementById('adm_total_guests').innerText = total;
+        const au = document.getElementById('bg-music'); let playing = false;
+        function openInvitation() { document.getElementById('door-container').classList.add('open'); document.getElementById('app-wrapper').classList.add('doors-opened'); if(au.src){ au.play().catch(()=>{}); playing=true; } }
+        function toggleAudio() { if(playing){ au.pause(); playing=false; document.getElementById('music-btn').innerText='🔇'; } else { au.play(); playing=true; document.getElementById('music-btn').innerText='🔊'; } }
+        
+        const sc=document.getElementById('slides-container');
+        new IntersectionObserver((e) => { e.forEach(en => { if(en.isIntersecting) en.target.classList.add('active'); }); }, {root:sc, threshold:0.3}).observe(document.querySelectorAll('.slide')[0]); /* Hack for all slides */
+        document.querySelectorAll('.slide').forEach(s => new IntersectionObserver((e)=>{e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('active');})},{root:sc,threshold:0.3}).observe(s));
+        
+        function scrollNextSlide() { const h=window.innerHeight; const np=Math.round(sc.scrollTop/h+1)*h; sc.scrollTo({top:np, behavior:'smooth'}); }
+        function openMapUrl() { window.open(currentSettings.mapLinkUrl, '_blank'); }
+
+        setInterval(()=>{
+            const d = Math.max(0, new Date(currentSettings.countdownTarget).getTime() - Date.now());
+            document.getElementById('cd_days').innerText=Math.floor(d/(86400000)); document.getElementById('cd_hours').innerText=String(Math.floor((d%86400000)/3600000)).padStart(2,'0');
+            document.getElementById('cd_mins').innerText=String(Math.floor((d%3600000)/60000)).padStart(2,'0'); document.getElementById('cd_secs').innerText=String(Math.floor((d%60000)/1000)).padStart(2,'0');
+        },1000);
+
+        let gCount=1; function changeGuestCount(d){ gCount=Math.max(1,Math.min(10,gCount+d)); document.getElementById('rsvp_count_val').innerText=gCount; }
+        function toggleGuestStepper(s){ document.getElementById('guest-stepper-box').style.display=s?'block':'none'; }
+
+        function submitRSVPForm(e){ e.preventDefault(); const n=document.getElementById('rsvp_name').value; const s=document.querySelector('input[name="rsvp_status"]:checked').value; const c=s==='Katılacağım'?gCount:0;
+            if(useFirebase){ db.ref('rsvps').push({name:n, status:s, count:c}); } else { allRSVPs.push({fbKey:'l_'+Date.now(), name:n, status:s, count:c}); localStorage.setItem('w_rsvps', JSON.stringify(allRSVPs)); renderAdminRSVPs(); }
+            document.getElementById('rsvp-form').style.display='none'; document.getElementById('rsvp-thankyou').style.display='block';
         }
-
-        function renderAdminSongs() {
-            const tbody = document.getElementById('adm_songs_tbody'); if(!tbody) return; tbody.innerHTML = '';
-            allSongs.forEach((item, index) => { tbody.innerHTML += `<tr><td><strong>${item.sender}</strong></td><td style="white-space:normal;">${item.song}</td><td><button type="button" onclick="deleteSong('${item.fbKey || ''}', ${index})" class="btn-adm btn-adm-danger">Sil</button></td></tr>`; });
-            document.getElementById('adm_songs_count').innerText = allSongs.length;
+        function submitSongForm(e){ e.preventDefault(); const sn=document.getElementById('song_sender').value; const sg=document.getElementById('song_request').value;
+            if(useFirebase){ db.ref('songs').push({sender:sn, song:sg}); } else { allSongs.push({fbKey:'l_'+Date.now(), sender:sn, song:sg}); localStorage.setItem('w_songs', JSON.stringify(allSongs)); renderAdminSongs(); }
+            e.target.reset(); document.getElementById('song-feedback').style.display='block'; setTimeout(()=>document.getElementById('song-feedback').style.display='none',3000);
         }
+        function handlePhotoUpload(e){ const f=e.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=function(ev){
+            if(useFirebase){ db.ref('photos').push({url:ev.target.result}); } else { allPhotos.push({fbKey:'l_'+Date.now(), url:ev.target.result}); localStorage.setItem('w_photos', JSON.stringify(allPhotos)); renderAdminPhotos(); } alert("Yüklendi!");
+        }; r.readAsDataURL(f); }
 
-        function deleteRSVP(fbKey, idx) {
-            if (useFirebase && db && fbKey && !fbKey.startsWith('local_')) { db.ref('rsvps/' + fbKey).remove().then(() => showToast()); } else { allRSVPs.splice(idx, 1); localStorage.setItem('wedding_rsvps', JSON.stringify(allRSVPs)); renderAdminRSVPs(); showToast(); }
-        }
+        function renderAdminRSVPs(){ const tb=document.getElementById('adm_rsvp_tbody'); if(!tb)return; tb.innerHTML=''; let t=0; allRSVPs.forEach((r,i)=>{ t+=Number(r.count||0); tb.innerHTML+=`<tr><td>${r.name}</td><td>${r.status}</td><td>${r.count}</td><td><button onclick="delR('${r.fbKey}',${i})" style="color:red;border:none;background:none;">Sil</button></td></tr>`; }); document.getElementById('adm_total_guests').innerText=t; }
+        function renderAdminSongs(){ const tb=document.getElementById('adm_songs_tbody'); if(!tb)return; tb.innerHTML=''; allSongs.forEach((s,i)=>{ tb.innerHTML+=`<tr><td>${s.sender}</td><td>${s.song}</td><td><button onclick="delS('${s.fbKey}',${i})" style="color:red;border:none;background:none;">Sil</button></td></tr>`; }); }
+        function renderAdminPhotos(){ const tb=document.getElementById('adm_photos_tbody'); if(!tb)return; tb.innerHTML=''; allPhotos.forEach((p,i)=>{ tb.innerHTML+=`<tr><td><img src="${p.url}" width="40" height="40" style="object-fit:cover;"></td><td><a href="${p.url}" download="foto.jpg">İndir</a> | <button onclick="delP('${p.fbKey}',${i})" style="color:red;border:none;background:none;">Sil</button></td></tr>`; }); }
 
-        function deleteSong(fbKey, idx) {
-            if (useFirebase && db && fbKey && !fbKey.startsWith('local_')) { db.ref('songs/' + fbKey).remove().then(() => showToast()); } else { allSongs.splice(idx, 1); localStorage.setItem('wedding_songs', JSON.stringify(allSongs)); renderAdminSongs(); showToast(); }
-        }
+        function delR(k,i){ if(useFirebase&&!k.startsWith('l_')){ db.ref('rsvps/'+k).remove(); }else{ allRSVPs.splice(i,1); localStorage.setItem('w_rsvps',JSON.stringify(allRSVPs)); renderAdminRSVPs(); } }
+        function delS(k,i){ if(useFirebase&&!k.startsWith('l_')){ db.ref('songs/'+k).remove(); }else{ allSongs.splice(i,1); localStorage.setItem('w_songs',JSON.stringify(allSongs)); renderAdminSongs(); } }
+        function delP(k,i){ if(useFirebase&&!k.startsWith('l_')){ db.ref('photos/'+k).remove(); }else{ allPhotos.splice(i,1); localStorage.setItem('w_photos',JSON.stringify(allPhotos)); renderAdminPhotos(); } }
 
-        function submitRSVPForm(e) {
-            e.preventDefault(); const name = document.getElementById('rsvp_name').value; const status = document.querySelector('input[name="rsvp_status"]:checked').value; const count = status === 'Katılacağım' ? guestCount : 0; const record = { name, status, count, createdAt: Date.now() };
-            if (useFirebase && db) { db.ref('rsvps').push(record); } else { allRSVPs.push({ fbKey: 'local_' + Date.now(), ...record }); localStorage.setItem('wedding_rsvps', JSON.stringify(allRSVPs)); renderAdminRSVPs(); }
-            document.getElementById('rsvp-form').style.display = 'none'; document.getElementById('rsvp-thankyou').style.display = 'block';
-        }
-
-        function submitSongForm(e) {
-            e.preventDefault(); const sender = document.getElementById('song_sender').value; const song = document.getElementById('song_request').value; const record = { sender, song, createdAt: Date.now() };
-            if (useFirebase && db) { db.ref('songs').push(record); } else { allSongs.push({ fbKey: 'local_' + Date.now(), ...record }); localStorage.setItem('wedding_songs', JSON.stringify(allSongs)); renderAdminSongs(); }
-            e.target.reset(); const fb = document.getElementById('song-feedback'); fb.style.display = 'block'; setTimeout(() => fb.style.display = 'none', 3000);
-        }
-
-        let guestCount = 1; function changeGuestCount(delta) { guestCount = Math.min(10, Math.max(1, guestCount + delta)); document.getElementById('rsvp_count_val').innerText = guestCount; }
-        function toggleGuestStepper(show) { document.getElementById('guest-stepper-box').style.display = show ? 'block' : 'none'; }
-        function openMapUrl() { window.open(currentSettings.mapLinkUrl || 'https://maps.google.com', '_blank'); }
-
-        const audioEl = document.getElementById('bg-music'); let isMusicPlaying = false;
-        function openInvitation() { document.getElementById('door-container').classList.add('open'); document.getElementById('app-wrapper').classList.add('doors-opened'); if (audioEl.src) { audioEl.play().then(() => { isMusicPlaying = true; document.getElementById('music-btn').innerText = '🔊'; }).catch(() => {}); } }
-        function toggleAudio() { if (isMusicPlaying) { audioEl.pause(); isMusicPlaying = false; document.getElementById('music-btn').innerText = '🔇'; } else { audioEl.play(); isMusicPlaying = true; document.getElementById('music-btn').innerText = '🔊'; } }
-
-        const slides = document.querySelectorAll('section.slide'); const scrollContainer = document.getElementById('slides-container');
-        const slideObserver = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); }); }, { root: scrollContainer, threshold: 0.45 });
-        slides.forEach(s => slideObserver.observe(s));
-        function scrollNextSlide() { const h = window.innerHeight; const currentScroll = scrollContainer.scrollTop; const nextPos = Math.round(currentScroll / h + 1) * h; if (nextPos >= scrollContainer.scrollHeight) { scrollContainer.scrollTo({ top: 0, behavior: 'smooth' }); } else { scrollContainer.scrollTo({ top: nextPos, behavior: 'smooth' }); } }
-
-        function updateCountdown() {
-            const target = new Date(currentSettings.countdownTarget).getTime(); const now = new Date().getTime(); const diff = Math.max(0, target - now);
-            const d = Math.floor(diff / (1000 * 60 * 60 * 24)); const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)); const s = Math.floor((diff % (1000 * 60)) / 1000);
-            document.getElementById('cd_days').innerText = isNaN(d) ? 0 : d; document.getElementById('cd_hours').innerText = String(isNaN(h) ? 0 : h).padStart(2, '0'); document.getElementById('cd_mins').innerText = String(isNaN(m) ? 0 : m).padStart(2, '0'); document.getElementById('cd_secs').innerText = String(isNaN(s) ? 0 : s).padStart(2, '0');
-        } setInterval(updateCountdown, 1000);
-
-        function handleRouting() { if (window.location.hash === '#admin') { document.getElementById('admin-panel').style.display = 'block'; } else { document.getElementById('admin-panel').style.display = 'none'; } }
-        window.addEventListener('hashchange', handleRouting); window.addEventListener('DOMContentLoaded', () => { loadAllData(); handleRouting(); });
+        function hr(){ document.getElementById('admin-panel').style.display=window.location.hash==='#admin'?'block':'none'; }
+        window.addEventListener('hashchange', hr); window.addEventListener('DOMContentLoaded', ()=>{ loadAllData(); hr(); });
     </script>
 </body>
 </html>
