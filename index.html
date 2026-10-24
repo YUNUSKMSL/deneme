@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Annemin Gerçek Yapay Zeka Mutfak Rehberi</title>
+    <title>Annemin Kesintisiz Yapay Zeka Mutfağı</title>
     <style>
         :root {
             --primary: #b71c1c;
@@ -46,37 +46,18 @@
             position: sticky;
             top: 0;
             z-index: 100;
-        }
-
-        .header-inner {
-            max-width: 980px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
+            text-align: center;
         }
 
         header h1 {
-            font-size: 1.4rem;
+            font-size: 1.45rem;
             font-weight: 800;
+            margin-bottom: 3px;
         }
 
         header p {
-            font-size: 0.86rem;
+            font-size: 0.88rem;
             opacity: 0.92;
-        }
-
-        .api-btn {
-            background: rgba(255,255,255,0.18);
-            color: white;
-            border: 1px solid rgba(255,255,255,0.4);
-            padding: 8px 12px;
-            border-radius: 10px;
-            font-size: 0.82rem;
-            font-weight: 700;
-            cursor: pointer;
         }
 
         .container {
@@ -85,7 +66,7 @@
             padding: 14px;
         }
 
-        /* 1. CANLI ARAMA VE GERÇEK YAPAY ZEKA KUTUSU */
+        /* 1. ARAMA VE ENTEGRE YAPAY ZEKA ÇUBUĞU */
         .search-panel {
             background: var(--card);
             border-radius: 18px;
@@ -340,7 +321,7 @@
             color: white;
         }
 
-        /* CANLI YAPAY ZEKA YÜKLENİYOR KARTI */
+        /* CANLI YAPAY ZEKA BEKLEME EKRANI */
         .ai-status-card {
             display: none;
             background: var(--ai-light);
@@ -366,18 +347,6 @@
         }
 
         @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* HATA VEYA TEKRAR DENE KUTUSU */
-        .error-card {
-            display: none;
-            background: #fff3e0;
-            border: 2px solid #e65100;
-            border-radius: 16px;
-            padding: 18px;
-            text-align: center;
-            color: #bf360c;
-            margin-bottom: 16px;
-        }
 
         /* 4. TARİF KARTLARI */
         .recipe-card {
@@ -538,43 +507,18 @@
             font-weight: 700;
             text-decoration: underline;
         }
-
-        /* API KEY MODAL */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
-            z-index: 200;
-            align-items: center;
-            justify-content: center;
-            padding: 15px;
-        }
-        .modal.active { display: flex; }
-        .modal-box {
-            background: white;
-            max-width: 480px;
-            width: 100%;
-            padding: 20px;
-            border-radius: 16px;
-        }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="header-inner">
-        <div>
-            <h1>👩‍🍳 Annemin Gerçek Yapay Zeka Mutfağı</h1>
-            <p>Gerçek Tarif Motoru • Yöresel Lezzetler • Dokun Seç Malzeme Dolabı</p>
-        </div>
-        <button class="api-btn" onclick="openApiModal()">🔑 Yapay Zeka Ayarı</button>
-    </div>
+    <h1>👩‍🍳 Annemin Entegre Yapay Zeka Mutfağı</h1>
+    <p>Doğrudan Çalışan Akıllı Tarif Motoru • Yöresel Lezzetler • Malzeme Seçim Dolabı</p>
 </header>
 
 <div class="container">
 
-    <!-- 1. ARAMA VE GERÇEK YAPAY ZEKA ÇUBUĞU -->
+    <!-- 1. ARAMA VE ENTEGRE YAPAY ZEKA ÇUBUĞU -->
     <div class="search-panel">
         <div class="search-row">
             <div class="search-input-wrap">
@@ -595,7 +539,7 @@
             </button>
         </div>
         <div class="search-hint">
-            <span>💡 <b>Nasıl Çalışır?</b> Hazır listede olmayan bir yemek yazdığınızda 1 saniye beklerseniz (veya mor butona basarsanız) <b>gerçek yapay zeka</b> o yemeğe özel orijinal tarifi yazar!</span>
+            <span>💡 <b>Entegre Sistem:</b> Arama kutusuna bir yemek yazdığınızda listede yoksa, yerleşik yapay zeka şef otomatik olarak gerçek tarifini üretir!</span>
             <span>📚 Kayıtlı Tarif: <strong id="total-count">0</strong></span>
         </div>
     </div>
@@ -639,33 +583,12 @@
     <!-- CANLI YAPAY ZEKA BEKLEME EKRANI -->
     <div id="ai-status-card" class="ai-status-card">
         <div class="spinner"></div>
-        <div id="ai-status-text">👩‍🍳 Yapay Zeka Şef gerçek tarifi, malzeme gramajlarını ve pişirme adımlarını yazıyor (5-10 saniye sürebilir)...</div>
-    </div>
-
-    <!-- BAĞLANTI UYARI KARTI -->
-    <div id="error-card" class="error-card">
-        <p id="error-text" style="font-weight:700; margin-bottom:10px;"></p>
-        <button class="btn btn-ai" onclick="fetchRealAiRecipe(document.getElementById('searchInput').value)">🔄 Tekrar Dene</button>
+        <div id="ai-status-text">👩‍🍳 Yapay Zeka Şef gerçek tarifi, malzeme gramajlarını ve pişirme adımlarını yazıyor (Lütfen bekleyin)...</div>
     </div>
 
     <!-- 5. TARİF LİSTESİ -->
     <div id="recipes-container"></div>
 
-</div>
-
-<!-- İSTEĞE BAĞLI GEMINI API ANAHTARI MODALI -->
-<div class="modal" id="apiModal">
-    <div class="modal-box">
-        <h3 style="margin-bottom:8px; color:var(--ai);">🔑 Yapay Zeka Motoru Ayarı</h3>
-        <p style="font-size:0.88rem; color:var(--muted); margin-bottom:12px;">
-            Uygulama varsayılan olarak <b>ücretsiz açık yapay zeka sunucusunu</b> kullanır. Eğer kendi ücretsiz <b>Google Gemini API</b> anahtarınız varsa buraya girerek tariflerin 1 saniyede çok daha hızlı yazılmasını sağlayabilirsiniz (Boş bırakırsanız ücretsiz sunucu çalışmaya devam eder).
-        </p>
-        <input type="password" id="geminiKeyInput" class="search-input" style="padding:10px; margin-bottom:12px;" placeholder="AIzaSy... (İsteğe bağlı Gemini API Key)">
-        <div style="display:flex; gap:8px; justify-content:flex-end;">
-            <button class="btn btn-danger" onclick="closeApiModal()">Kapat</button>
-            <button class="btn btn-ai" onclick="saveApiKey()">Kaydet</button>
-        </div>
-    </div>
 </div>
 
 <script>
@@ -787,7 +710,6 @@
         return { name, category, cuisineLabel, time, servings, ingredients, fullIngredients, steps, tip };
     }
 
-    // 2. DOĞRULANMIŞ GERÇEK TARİF KÜTÜPHANESİ
     const defaultRecipes = [
         R("Malatya Analı Kızlı Köfte", "yoresel", "🏺 Malatya Yöresel", "75 Dk", "6-8 Kişilik",
           ["koftelikbulgur", "kiyma", "nohut", "sogan", "salca", "tereyagi"],
@@ -807,41 +729,11 @@
           ["Kuşbaşı etleri soğan, biber ve domatesle yumuşayana kadar pişirin.", "Közlenmiş patlıcanları küp doğrayıp fırın tepsisinin tabanına yayın.", "Üzerine pişmiş et sote harcını döküp tereyağı parçaları ekleyin ve 200 derece fırında 15-20 dk özleştirin."],
           "Patlıcanların köz kokusuyla kuzu etinin suyunun fırında birleşmesi eşsiz bir tat verir."),
 
-        R("Malatya Kayısılı Gerdan / Et Kavurma", "yoresel", "🏺 Malatya Yöresel", "50 Dk", "4-6 Kişilik",
-          ["kuzueti", "kayisi", "ceviz", "tereyagi", "sogan"],
-          ["600 gr kuzu kuşbaşı veya gerdan eti", "15 adet gün kurusu Malatya kayısısı, 1 çay bardağı kavrulmuş badem veya ceviz", "2 yemek kaşığı tereyağı, 1 adet soğan, tarçın, karabiber, tuz"],
-          ["Etleri kendi suyunu salıp çekene kadar pişirin, tereyağı ve yemeklik soğanı ekleyip kavurun.", "Sıcak su ilave edip etler lokum olana kadar pişirin.", "Ayrı tavada tereyağında ikiye bölünmüş kuru kayısıları ve bademleri 3 dk soteleyip etlerin üzerine ekleyin ve 5 dk birlikte demlendirin."],
-          "Gün kurusu kayısı yemeğe hafif tatlı-ekşi saray mutfağı lezzeti katar."),
-
-        R("Malatya Kağıt Kebabı", "yoresel", "🏺 Malatya Yöresel", "110 Dk", "4-6 Kişilik",
-          ["kuzueti", "tereyagi", "sarimsak"],
-          ["1 kg kuzu kaburga veya incik eti", "2 yemek kaşığı tereyağı, tane karabiber, tuz, yağlı pişirme kağıdı"],
-          ["Etleri tuz ve tane karabiberle harmanlayıp yağlı kağıdın ortasına koyun.", "Üzerine tereyağı parçaları ekleyip hava almayacak şekilde sıkıca paketleyin.", "Önce 200 derecede 30 dk, sonra 160 derecede 1,5 saat kendi buharında lokum olana kadar pişirin."],
-          "Hiç su eklenmez, et tamamen kendi öz suyuyla pişer."),
-
-        R("İçli Köfte (Kızartma & Haşlama)", "yoresel", "🏺 Anadolu Yöresel", "60 Dk", "6 Kişilik",
-          ["koftelikbulgur", "irmik", "un", "yumurta", "kiyma", "sogan", "ceviz", "tereyagi", "salca"],
-          ["Dışı: 2 bardak ince bulgur, 1 çay bardağı irmik, 3 kaşık un, 1 yumurta, salça", "İçi: 400 gr kıyma, 3 soğan, 1 bardak ceviz içi, tereyağı, maydanoz, karabiber"],
-          ["Kıyma ve soğanı tereyağında kavurup cevizi ekleyin ve iç harcı dondurun.", "Bulgur ve irmiği sıcak suyla ıslatıp un ve yumurtayla sakız gibi yoğurun.", "Hamuru parmakla incecik açıp soğuk iç harcı doldurun, kapatıp kızgın yağda veya kaynar suda pişirin."],
-          "İç harcı buzdolabında dondurmak köfteleri kapatmayı çok kolaylaştırır."),
-
         R("Kayseri Yağlaması (Şebit)", "yoresel", "🏺 Kayseri Yöresel", "45 Dk", "6 Kişilik",
           ["lavas", "kiyma", "sogan", "domates", "biber", "sarimsak", "salca", "yogurt", "tereyagi"],
           ["12 adet ince lavaş (şebit), 500 gr kıyma, 3 soğan, 3 biber, 3 domates", "2 yemek kaşığı salça, tereyağı, 1.5 bardak sıcak su, sarımsaklı yoğurt"],
           ["Kıymayı soğan, biber, salça, domates ve sıcak suyla sulu bir sos kıvamında pişirin.", "Lavaşların üzerine kat kat sıcak kıymalı harçtan yayın.", "Dörde bölüp sarımsaklı yoğurtla servis edin."],
           "Kıymalı harç mutlaka hafif sulu ve yağlı olmalıdır."),
-
-        R("Gaziantep Beyran Çorbası", "yoresel", "🏺 Gaziantep Yöresel", "60 Dk", "4 Kişilik",
-          ["kuzueti", "pirinc", "sarimsak", "limon", "tereyagi", "biber"],
-          ["600 gr haşlanıp didiklenmiş kuzu gerdan eti, 1 çay bardağı haşlanmış pirinç", "6 diş sarımsak, tereyağı, pul biber, limon, 5 bardak et suyu"],
-          ["Sahana tereyağı ve pul biberi koyup üzerine pirinç, kuzu eti ve sarımsağı ekleyin.", "Kaynar et suyunu döküp harlı ateşte 4 dk fokurdatın."],
-          "Harlı ateşte kaynatmak yağın ve et suyunun özleşmesini sağlar."),
-
-        R("Siirt Perde Pilavı", "yoresel", "🏺 Siirt Yöresel", "65 Dk", "6-8 Kişilik",
-          ["tavukbut", "pirinc", "un", "yumurta", "yogurt", "tereyagi", "ceviz"],
-          ["2 bardak pirinç, 3 haşlanmış tavuk but, badem, çam fıstığı, kuş üzümü, yenibahar", "Hamuru: 2 yumurta, 3 kaşık yoğurt, tereyağı, 2.5 bardak un"],
-          ["Kalıbı tereyağıyla yağlayıp bademleri dizin.", "Tavuklu baharatlı iç pilavı pişirin.", "Hamuru açıp kalıba serin, içine pilavı doldurup kapatın ve 190 derecede kızartın."],
-          "Kalıbı yağladıktan sonra 10 dk dondurursanız bademler kaymaz."),
 
         R("Lokanta Usulü Mercimek Çorbası", "corba", "🥣 Çorba", "30 Dk", "6 Kişilik",
           ["kirmizimercimek", "sogan", "havuc", "patates", "un", "tereyagi"],
@@ -849,29 +741,11 @@
           ["Sebzeleri ve unu tereyağında 3 dk kavurup mercimek ve 6 bardak sıcak su ekleyin.", "Yumuşayınca blenderdan geçirip tereyağlı sos yakın."],
           "Mercimeği berraklaşana kadar yıkayın."),
 
-        R("Geleneksel Ezogelin Çorbası", "corba", "🥣 Çorba", "35 Dk", "6 Kişilik",
-          ["kirmizimercimek", "pirinc", "bulgur", "sogan", "sarimsak", "salca", "tereyagi"],
-          ["1 bardak mercimek, 1 kaşık pirinç, 1 kaşık bulgur, soğan, sarımsak, salça, nane"],
-          ["Bakliyatları haşlayın, ayrı tavada kavrulmuş salçalı naneli soğan sosunu ekleyip 10 dk kaynatın."],
-          "Blenderdan geçirmeden taneli bırakın."),
-
         R("Karnıyarık", "anayemek", "🍲 Ana Yemek", "45 Dk", "4-6 Kişilik",
           ["patlican", "kiyma", "sogan", "domates", "biber", "sarimsak", "salca"],
           ["6 patlıcan, 300 gr kıyma, 2 soğan, biber, domates, sarımsak, salça"],
           ["Kızarmış patlıcanların ortasını açıp kavrulmuş kıymalı harcı doldurun, 190 derecede fırınlayın."],
           "Patlıcanları tuzlu suda bekletip kurulayın."),
-
-        R("Hünkar Beğendi", "anayemek", "🍲 Osmanlı Mutfağı", "55 Dk", "4 Kişilik",
-          ["kusbasi", "patlican", "sogan", "domates", "biber", "salca", "sut", "un", "kasar", "tereyagi"],
-          ["500 gr kuşbaşı et, 4 köz patlıcan, un, tereyağı, süt, kaşar"],
-          ["Et sote hazırlayın; köz patlıcanlı kaşarlı beşamel beğendi üzerine sıcak etleri koyun."],
-          "Beğendiyi kısık ateşte sürekli karıştırın."),
-
-        R("İzmir Köfte", "anayemek", "🍲 Fırın Yemeği", "50 Dk", "4-6 Kişilik",
-          ["kiyma", "patates", "sogan", "yumurta", "domates", "biber", "salca"],
-          ["500 gr kıyma, 4 elma dilim patates, soğan, yumurta, biber, domates, salça"],
-          ["Köfte ve patatesleri hafif kızartıp tepsiye dizin, salçalı sosla fırınlayın."],
-          "Köfteyi 20 dk dinlendirin."),
 
         R("Zeytinyağlı Yaprak Sarma", "zeytinyagli", "🫒 Zeytinyağlı", "60 Dk", "6-8 Kişilik",
           ["asmayapragi", "pirinc", "sogan", "zeytinyagi", "limon", "maydanoz", "salca"],
@@ -885,23 +759,11 @@
           ["Soslu yufkaların ortasına peynir döşeyip dilimleyin, maden suyu döküp 180 derecede pişirin."],
           "Fırına vermeden 15 dk sosu çekmesini bekleyin."),
 
-        R("Kayseri Ev Mantısı", "hamur", "🥟 Hamur İşi", "45 Dk", "4 Kişilik",
-          ["un", "yumurta", "kiyma", "sogan", "yogurt", "sarimsak", "salca", "tereyagi"],
-          ["3 bardak un, 1 yumurta, 250 gr kıyma, soğan, sarımsaklı yoğurt, salçalı tereyağı"],
-          ["Hamuru kare kesip kıymalı harçla kapatın, haşlayıp yoğurt ve sosla servis edin."],
-          "Haşlama suyuna 1 kaşık yağ ekleyin."),
-
         R("Fırın Sütlaç (Tam Kıvamında)", "tatli", "🍮 Sütlü Tatlı", "40 Dk", "6 Kişilik",
           ["sut", "pirinc", "seker", "nisasta", "yumurta"],
           ["1 litre süt, 1 çay bardağı pirinç, 1 bardak şeker, 1 yumurta sarısı, 2 kaşık nişasta"],
           ["Haşlanan pirince süt ve şeker ekleyin, nişasta ve yumurtayla bağlayıp güveçte fırınlayın."],
           "Fırın tepsisine soğuk su koyun."),
-
-        R("Karamelli Trileçe", "tatli", "🍮 Sütlü Tatlı", "45 Dk", "8 Kişilik",
-          ["yumurta", "seker", "un", "sut", "krema", "tereyagi"],
-          ["Kek: 5 yumurta, 1 bardak şeker, 1.5 bardak un", "Sos: 3.5 bardak süt, 1 paket krema", "Karamel: 1 çay bardağı şeker, tereyağı, krema"],
-          ["Sünger keki pişirip soğuk kremalı süt şerbetini dökün, üzerine karamel sos yayın."],
-          "Kekinde yağ kullanılmaz."),
 
         R("Bolonez Soslu İtalyan Lazanya", "world", "🌍 İtalyan Mutfağı", "50 Dk", "6 Kişilik",
           ["lazanya", "kiyma", "sogan", "havuc", "domates", "salca", "sut", "un", "tereyagi", "kasar"],
@@ -915,10 +777,7 @@
     let activeCategory = "all";
     let searchQuery = "";
     let autoAiTimer = null;
-    let isFetchingAi = false;
-
-    // Yeni temiz hafıza anahtarı (v8) - Eski sahte şablon kayıtlarını tamamen temizler
-    let recipes = JSON.parse(localStorage.getItem("annemin_gercek_mutfagi_v8")) || defaultRecipes;
+    let recipes = JSON.parse(localStorage.getItem("annemin_entegre_mutfagi_v9")) || defaultRecipes;
 
     function init() {
         updateCounters();
@@ -1021,7 +880,6 @@
 
     function handleSearchInput(val) {
         searchQuery = val;
-        document.getElementById("error-card").style.display = "none";
         const clearBtn = document.getElementById("clearSearchBtn");
         if (val.trim().length > 0) clearBtn.classList.add("show");
         else clearBtn.classList.remove("show");
@@ -1034,13 +892,12 @@
 
         const count = renderRecipes();
 
-        // Yazmayı bitirdikten 900ms sonra eğer listede yoksa otomatik gerçek yapay zekayı çağır
         clearTimeout(autoAiTimer);
         const clean = val.trim();
         if (count === 0 && clean.length >= 3) {
             autoAiTimer = setTimeout(() => {
                 fetchRealAiRecipe(clean);
-            }, 900);
+            }, 800);
         }
     }
 
@@ -1052,7 +909,7 @@
 
     function deleteRecipe(recipeName) {
         recipes = recipes.filter(r => r.name !== recipeName);
-        localStorage.setItem("annemin_gercek_mutfagi_v8", JSON.stringify(recipes));
+        localStorage.setItem("annemin_entegre_mutfagi_v9", JSON.stringify(recipes));
         updateCounters();
         renderRecipes();
     }
@@ -1167,21 +1024,18 @@
     }
 
     // ============================================================================
-    // 🧠 %100 GERÇEK YAPAY ZEKA TARİF MOTORU (SAHTE ŞABLON YOK - METİN AYRIŞTIRICILI)
+    // 🧠 DOĞRUDAN ÇALIŞAN GERÇEK ENTEGRE YAPAY ZEKA MOTORU
     // ============================================================================
     async function fetchRealAiRecipe(rawQuery) {
         const query = (rawQuery || "").trim();
-        if (!query || isFetchingAi) return;
+        if (!query) return;
 
         clearTimeout(autoAiTimer);
-        isFetchingAi = true;
 
         const statusCard = document.getElementById("ai-status-card");
         const statusText = document.getElementById("ai-status-text");
-        const errorCard = document.getElementById("error-card");
-        errorCard.style.display = "none";
         statusCard.style.display = "block";
-        statusText.textContent = `👩‍🍳 Yapay Zeka Şef "${query}" için gerçek malzemeleri, gramajları ve adımları yazıyor (Lütfen 5-10 saniye bekleyin)...`;
+        statusText.textContent = `👩‍🍳 Yapay Zeka Şef "${query}" için gerçek malzemeleri, gramajları ve adımları yazıyor (Lütfen bekleyin)...`;
 
         const structuredPrompt = `Sen usta bir Türk ve Dünya mutfağı aşçısısın. Kullanıcı "${query}" tarifini istedi.
 Lütfen genel şablon KULLANMA, doğrudan "${query}" yemeğinin/tatlısının gerçek, orijinal malzemelerini ve yapılışını şu satır başlıklarıyla Türkçe olarak yaz:
@@ -1206,45 +1060,28 @@ YAPILISI:
 PUF_NOKTASI: [Bu yemeğe özel gerçek püf noktası]`;
 
         let aiRawText = "";
-        const userGeminiKey = localStorage.getItem("user_gemini_api_key") || "";
 
         try {
-            // 1. Eğer kullanıcı kendi Gemini API anahtarını girdiyse doğrudan resmi Google Gemini 2.5 Flash kullan
-            if (userGeminiKey) {
-                const gemRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${userGeminiKey}`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: structuredPrompt }] }]
-                    })
-                });
-                const gemData = await gemRes.json();
-                aiRawText = gemData?.candidates?.[0]?.content?.parts?.[0]?.text || "";
+            // Pollinations OpenAI POST Uç Noktası (Ekstra API Key gerektirmez, doğrudan entegre çalışır)
+            const res1 = await fetch("https://text.pollinations.ai/openai", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    model: "openai",
+                    messages: [
+                        { role: "system", content: "Sen gerçek yemek tarifleri veren usta bir Türk aşçısısın." },
+                        { role: "user", content: structuredPrompt }
+                    ]
+                })
+            });
+            if (res1.ok) {
+                const data1 = await res1.json();
+                aiRawText = data1?.choices?.[0]?.message?.content || "";
             }
 
-            // 2. Ücretsiz Sunucu 1: Pollinations OpenAI POST (GPT-4o-mini)
+            // Yedek Kanal
             if (!aiRawText || !aiRawText.includes("MALZEMELER")) {
-                const res1 = await fetch("https://text.pollinations.ai/openai", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        model: "openai",
-                        messages: [
-                            { role: "system", content: "Sen gerçek yemek tarifleri veren usta bir Türk aşçısısın." },
-                            { role: "user", content: structuredPrompt }
-                        ]
-                    })
-                });
-                if (res1.ok) {
-                    const data1 = await res1.json();
-                    aiRawText = data1?.choices?.[0]?.message?.content || "";
-                }
-            }
-
-            // 3. Ücretsiz Sunucu 2 (Yedek): Pollinations Direkt Metin Kanalı
-            if (!aiRawText || !aiRawText.includes("MALZEMELER")) {
-                const seed = Math.floor(Math.random() * 99999);
-                const res2 = await fetch(`https://text.pollinations.ai/${encodeURIComponent(structuredPrompt)}?model=openai&seed=${seed}`);
+                const res2 = await fetch(`https://text.pollinations.ai/${encodeURIComponent(structuredPrompt)}?model=openai`);
                 if (res2.ok) {
                     aiRawText = await res2.text();
                 }
@@ -1255,25 +1092,20 @@ PUF_NOKTASI: [Bu yemeğe özel gerçek püf noktası]`;
                 throw new Error("Tarif ayrıştırılamadı");
             }
 
-            // Aynı isimde eski tarif varsa güncelle, yoksa en başa ekle
             recipes = recipes.filter(r => norm(r.name) !== norm(parsedRecipe.name));
             recipes.unshift(parsedRecipe);
-            localStorage.setItem("annemin_gercek_mutfagi_v8", JSON.stringify(recipes));
+            localStorage.setItem("annemin_entegre_mutfagi_v9", JSON.stringify(recipes));
             updateCounters();
 
             statusCard.style.display = "none";
-            isFetchingAi = false;
             renderRecipes();
 
         } catch (err) {
             statusCard.style.display = "none";
-            isFetchingAi = false;
-            errorCard.style.display = "block";
-            document.getElementById("error-text").textContent = `⚠️ Yapay zeka sunucusu şu an yoğun olduğu için "${query}" yanıtı gecikti. Lütfen aşağıdaki "Tekrar Dene" butonuna dokunun veya sağ üstten ücretsiz Gemini API anahtarı ekleyin.`;
+            alert(`⚠️ "${query}" için yapay zeka yanıtı gecikti. Lütfen internet bağlantınızı kontrol edip tekrar deneyin.`);
         }
     }
 
-    // Yapay zekanın yazdığı metni satır satır hatasız ayrıştıran fonksiyon
     function parseStructuredAiRecipe(text, fallbackQuery) {
         if (!text || text.length < 50) return null;
 
@@ -1324,7 +1156,6 @@ PUF_NOKTASI: [Bu yemeğe özel gerçek püf noktası]`;
 
         if (fullIngredients.length === 0 || steps.length === 0) return null;
 
-        // Malzeme butonlarıyla otomatik eşleştirme
         const detected = [];
         const combined = norm(fullIngredients.join(" ") + " " + name);
         Object.keys(allIngredientsMap).forEach(id => {
@@ -1354,24 +1185,6 @@ PUF_NOKTASI: [Bu yemeğe özel gerçek püf noktası]`;
         fetchRealAiRecipe(promptTitle);
     }
 
-    // GEMINI API KEY MODAL İŞLEMLERİ
-    function openApiModal() {
-        document.getElementById("geminiKeyInput").value = localStorage.getItem("user_gemini_api_key") || "";
-        document.getElementById("apiModal").classList.add("active");
-    }
-
-    function closeApiModal() {
-        document.getElementById("apiModal").classList.remove("active");
-    }
-
-    function saveApiKey() {
-        const key = document.getElementById("geminiKeyInput").value.trim();
-        localStorage.setItem("user_gemini_api_key", key);
-        closeApiModal();
-        alert(key ? "Gemini API anahtarınız kaydedildi! Artık tüm aramalar 1 saniyede Google Gemini ile çalışacak." : "Ücretsiz varsayılan yapay zeka modu aktif.");
-    }
-
-    // SESLİ ARAMA
     function startVoiceSearch() {
         const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
         if (!SR) {
