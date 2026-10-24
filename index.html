@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Annemin Akıllı Mutfağı</title>
+    <title>Annemin Büyük Mutfak Rehberi</title>
     <style>
         :root {
-            --primary: #d84315;
-            --primary-dark: #bf360c;
-            --primary-light: #fbe9e7;
+            --primary: #c62828;
+            --primary-dark: #8e0000;
+            --primary-light: #ffebee;
+            --world: #1565c0;
+            --world-light: #e3f2fd;
             --success: #2e7d32;
             --success-bg: #e8f5e9;
             --warning: #ef6c00;
             --warning-bg: #fff3e0;
-            --bg: #f9f6f0;
+            --bg: #f8f5f0;
             --card: #ffffff;
-            --text: #2c2c2c;
+            --text: #2b2b2b;
             --muted: #666666;
         }
 
@@ -33,22 +35,20 @@
             padding-bottom: 90px;
         }
 
-        /* Üst Başlık */
         header {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            padding: 22px 15px;
+            padding: 20px 15px;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
         header h1 {
-            font-size: 1.65rem;
+            font-size: 1.6rem;
             margin-bottom: 4px;
-            letter-spacing: 0.3px;
         }
 
         header p {
@@ -57,12 +57,12 @@
         }
 
         .container {
-            max-width: 850px;
+            max-width: 920px;
             margin: 0 auto;
             padding: 15px;
         }
 
-        /* Üst Butonlar ve Seçilen Malzeme Özeti */
+        /* Üst Kontroller */
         .top-bar {
             display: flex;
             justify-content: space-between;
@@ -74,104 +74,114 @@
 
         .btn {
             border: none;
-            padding: 12px 18px;
-            border-radius: 14px;
-            font-size: 1rem;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 0.98rem;
             font-weight: 700;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            transition: all 0.2s;
+            transition: 0.2s;
         }
 
-        .btn:active {
-            transform: scale(0.97);
-        }
+        .btn:active { transform: scale(0.97); }
+        .btn-clear { background: #ffebee; color: #c62828; border: 1px solid #ffcdd2; }
+        .btn-add { background: var(--primary); color: white; box-shadow: 0 3px 8px rgba(198,40,40,0.25); }
+        .btn-toggle-cat { background: #e0ded8; color: #333; }
 
-        .btn-clear {
-            background-color: #ffebee;
-            color: #c62828;
-            border: 1px solid #ffcdd2;
-        }
-
-        .btn-add {
-            background-color: var(--primary);
-            color: white;
-            box-shadow: 0 3px 8px rgba(216, 67, 21, 0.3);
-        }
-
-        /* Seçilenler Sepeti */
+        /* Seçilen Malzemeler Sepeti */
         .selected-basket {
             background: var(--card);
             border: 2px solid var(--success);
             border-radius: 16px;
-            padding: 12px 15px;
-            margin-bottom: 18px;
+            padding: 14px;
+            margin-bottom: 16px;
             display: none;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 10px;
-            box-shadow: 0 3px 10px rgba(46, 125, 50, 0.1);
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.12);
         }
 
-        .selected-basket.active {
-            display: flex;
-        }
+        .selected-basket.active { display: block; }
 
         .basket-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
+            margin-top: 8px;
         }
 
         .basket-tag {
             background: var(--success-bg);
             color: var(--success);
-            padding: 6px 12px;
+            padding: 7px 13px;
             border-radius: 20px;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.95rem;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 6px;
             cursor: pointer;
+            border: 1px solid #a5d6a7;
         }
 
-        /* Kategori Kutuları */
+        /* Akordeon Malzeme Kategorileri */
         .category-box {
             background: var(--card);
-            border-radius: 18px;
-            padding: 16px;
-            margin-bottom: 16px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-radius: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            overflow: hidden;
+            border: 1px solid #eee;
         }
 
-        .category-title {
-            font-size: 1.15rem;
-            color: var(--primary-dark);
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid var(--primary-light);
+        .category-header {
+            padding: 15px 18px;
+            font-size: 1.12rem;
             font-weight: 800;
+            color: var(--primary-dark);
+            background: #fff;
+            cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            user-select: none;
         }
+
+        .category-header:hover { background: #fdfaf7; }
+
+        .cat-badge {
+            background: var(--success);
+            color: white;
+            font-size: 0.8rem;
+            padding: 3px 9px;
+            border-radius: 12px;
+            margin-left: 8px;
+            display: none;
+        }
+
+        .cat-badge.show { display: inline-block; }
+
+        .category-content {
+            padding: 0 15px 15px 15px;
+            display: none;
+            border-top: 1px solid #f2efe9;
+            padding-top: 12px;
+        }
+
+        .category-box.open .category-content { display: block; }
 
         .ingredients-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 9px;
         }
 
         .ing-btn {
-            background-color: #f7f7f7;
-            border: 2px solid #e6e6e6;
+            background-color: #f7f6f2;
+            border: 2px solid #e5e2dc;
             border-radius: 14px;
-            padding: 14px 8px;
-            font-size: 1.02rem;
+            padding: 12px 6px;
+            font-size: 0.96rem;
             font-weight: 600;
             color: var(--text);
             cursor: pointer;
@@ -179,44 +189,59 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 5px;
             transition: all 0.15s ease;
             user-select: none;
+            text-align: center;
         }
 
-        .ing-btn .icon {
-            font-size: 1.6rem;
-        }
+        .ing-btn .icon { font-size: 1.55rem; }
 
         .ing-btn.selected {
             background-color: var(--success-bg);
             border-color: var(--success);
             color: var(--success);
             transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(46, 125, 50, 0.18);
+            box-shadow: 0 4px 8px rgba(46, 125, 50, 0.18);
         }
 
-        /* Tarif Sekmeleri ve Filtreler */
-        .results-section {
-            margin-top: 30px;
+        /* Mutfak Seçimi (Türk Mutfağı vs Dünya Mutfağı) */
+        .filter-panel {
+            background: var(--card);
+            padding: 16px;
+            border-radius: 18px;
+            margin-top: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
         }
 
-        .tabs {
+        .filter-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--muted);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cuisine-tabs, .match-tabs {
             display: flex;
             gap: 8px;
-            margin-bottom: 18px;
             overflow-x: auto;
-            padding-bottom: 5px;
+            padding-bottom: 6px;
+            margin-bottom: 12px;
         }
 
+        .match-tabs { margin-bottom: 0; }
+
         .tab-btn {
-            background: #e8e4dc;
-            border: none;
-            padding: 12px 18px;
-            border-radius: 14px;
-            font-size: 1rem;
+            background: #eeebe4;
+            border: 2px solid transparent;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-size: 0.98rem;
             font-weight: 700;
-            color: #555;
+            color: #444;
             cursor: pointer;
             white-space: nowrap;
             transition: 0.2s;
@@ -225,10 +250,14 @@
         .tab-btn.active {
             background: var(--primary);
             color: white;
-            box-shadow: 0 3px 8px rgba(216, 67, 21, 0.25);
         }
 
-        /* Gelişmiş Tarif Kartı */
+        .tab-btn.world-tab.active {
+            background: var(--world);
+            color: white;
+        }
+
+        /* Tarif Kartları */
         .recipe-card {
             background: var(--card);
             border-radius: 20px;
@@ -238,13 +267,11 @@
             border: 2px solid transparent;
         }
 
-        .recipe-card.exact-match {
-            border-color: var(--success);
-        }
+        .recipe-card.exact-match { border-color: var(--success); }
 
         .recipe-header {
             padding: 18px 20px;
-            background: #fffdfb;
+            background: #fffcfc;
             border-bottom: 1px solid #f0ece1;
             display: flex;
             justify-content: space-between;
@@ -254,17 +281,32 @@
         }
 
         .recipe-title-group h3 {
-            font-size: 1.4rem;
+            font-size: 1.38rem;
             color: #1f1f1f;
             margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
         }
+
+        .cuisine-badge {
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-weight: 700;
+        }
+
+        .cuisine-turkish { background: var(--primary-light); color: var(--primary); }
+        .cuisine-world { background: var(--world-light); color: var(--world); }
 
         .recipe-meta {
             display: flex;
-            gap: 12px;
+            gap: 14px;
             font-size: 0.9rem;
             color: var(--muted);
             font-weight: 600;
+            flex-wrap: wrap;
         }
 
         .badge {
@@ -274,30 +316,20 @@
             font-weight: 700;
         }
 
-        .badge-exact {
-            background: var(--success-bg);
-            color: var(--success);
-        }
-
-        .badge-partial {
-            background: var(--warning-bg);
-            color: var(--warning);
-        }
+        .badge-exact { background: var(--success-bg); color: var(--success); }
+        .badge-partial { background: var(--warning-bg); color: var(--warning); }
 
         .recipe-body {
             padding: 20px;
             display: grid;
-            grid-template-columns: 1fr 1.3fr;
+            grid-template-columns: 1fr 1.35fr;
             gap: 20px;
         }
 
-        @media (max-width: 680px) {
-            .recipe-body {
-                grid-template-columns: 1fr;
-            }
+        @media (max-width: 700px) {
+            .recipe-body { grid-template-columns: 1fr; }
         }
 
-        /* Sol Kolon: Malzeme Durumu & Tüm Malzemeler */
         .ingredients-panel {
             background: #faf8f5;
             padding: 16px;
@@ -305,13 +337,10 @@
         }
 
         .panel-title {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 800;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             color: var(--primary-dark);
-            display: flex;
-            align-items: center;
-            gap: 6px;
         }
 
         .chip-list {
@@ -324,91 +353,65 @@
         .ing-chip {
             padding: 5px 10px;
             border-radius: 8px;
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             font-weight: 600;
         }
 
-        .chip-have {
-            background: var(--success-bg);
-            color: var(--success);
-        }
+        .chip-have { background: var(--success-bg); color: var(--success); }
+        .chip-missing { background: #ffebee; color: #c62828; }
 
-        .chip-missing {
-            background: #ffebee;
-            color: #c62828;
-        }
-
-        .full-ing-list {
-            list-style: none;
-        }
-
+        .full-ing-list { list-style: none; }
         .full-ing-list li {
-            padding: 7px 0;
+            padding: 6px 0;
             border-bottom: 1px dashed #e0dcd3;
-            font-size: 0.98rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 0.95rem;
         }
+        .full-ing-list li:last-child { border-bottom: none; }
 
-        .full-ing-list li:last-child {
-            border-bottom: none;
-        }
-
-        /* Sağ Kolon: Adım Adım Yapılış */
-        .steps-panel {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .steps-list {
-            list-style: none;
-        }
-
+        .steps-list { list-style: none; }
         .step-item {
             display: flex;
             gap: 12px;
-            margin-bottom: 14px;
-            font-size: 1.02rem;
+            margin-bottom: 12px;
+            font-size: 1rem;
             line-height: 1.55;
         }
 
         .step-number {
             background: var(--primary);
             color: white;
-            min-width: 28px;
-            height: 28px;
+            min-width: 26px;
+            height: 26px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             margin-top: 2px;
         }
 
         .tip-box {
             background: #fff8e1;
             border-left: 4px solid #ffb300;
-            padding: 12px 14px;
+            padding: 12px;
             border-radius: 8px;
-            font-size: 0.95rem;
+            font-size: 0.93rem;
             color: #5d4037;
-            margin-top: 10px;
+            margin-top: 12px;
         }
 
         .empty-state {
             text-align: center;
-            padding: 40px 20px;
+            padding: 35px 20px;
             background: var(--card);
             border-radius: 18px;
             color: var(--muted);
-            font-size: 1.1rem;
+            font-size: 1.08rem;
             line-height: 1.6;
         }
 
-        /* Yeni Tarif Modalı */
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -419,171 +422,250 @@
             justify-content: center;
             padding: 15px;
         }
-
-        .modal.active {
-            display: flex;
-        }
-
+        .modal.active { display: flex; }
         .modal-content {
             background: white;
             width: 100%;
-            max-width: 600px;
+            max-width: 620px;
             border-radius: 20px;
             padding: 22px;
             max-height: 90vh;
             overflow-y: auto;
         }
-
-        .form-group {
-            margin-bottom: 14px;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: 700;
-            margin-bottom: 6px;
-            font-size: 0.95rem;
-        }
-
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            font-size: 1rem;
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-weight: 700; margin-bottom: 5px; font-size: 0.92rem; }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 10px; font-size: 0.98rem;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>👩‍🍳 Annemin Akıllı Mutfağı</h1>
-    <p>Evdeki malzemelere dokun, tam ölçülü en uygun tarifler gelsin!</p>
+    <h1>👩‍🍳 Annemin Büyük Mutfak Rehberi</h1>
+    <p>Türk Mutfağının Tüm Lezzetleri & Dünya Mutfağı Klasikleri</p>
 </header>
 
 <div class="container">
-    <!-- Üst Kontroller -->
     <div class="top-bar">
-        <button class="btn btn-clear" onclick="clearSelection()">🔄 Seçimleri Temizle</button>
+        <div>
+            <button class="btn btn-clear" onclick="clearSelection()">🔄 Temizle</button>
+            <button class="btn btn-toggle-cat" onclick="toggleAllCategories()">📂 Tüm Reyonları Aç/Kapat</button>
+        </div>
         <button class="btn btn-add" onclick="openModal()">➕ Yeni Tarif Ekle</button>
     </div>
 
     <!-- Seçilen Malzemeler Sepeti -->
     <div id="selected-basket" class="selected-basket">
-        <div>
-            <strong style="color: var(--success); display:block; margin-bottom:6px;">🧺 Seçtiğin Malzemeler (Çıkarmak için dokun):</strong>
-            <div id="basket-tags" class="basket-tags"></div>
-        </div>
+        <strong style="color: var(--success);">🧺 Seçtiğin Malzemeler (Çıkarmak için üzerine dokun):</strong>
+        <div id="basket-tags" class="basket-tags"></div>
     </div>
 
-    <!-- Malzeme Seçim Alanı -->
+    <!-- 8 Geniş Malzeme Kategorisi -->
     <div id="categories-container"></div>
 
-    <!-- Sonuçlar ve Tarifler -->
-    <div class="results-section" id="results-section">
-        <div class="tabs">
-            <button class="tab-btn active" id="tab-best" onclick="setTab('best')">🌟 En Uygun Tarifler</button>
-            <button class="tab-btn" id="tab-exact" onclick="setTab('exact')">✅ Tamamı Evde Olanlar</button>
-            <button class="tab-btn" id="tab-all" onclick="setTab('all')">📖 Tüm Tarif Defteri</button>
+    <!-- Mutfak ve Uygunluk Filtreleri -->
+    <div class="filter-panel">
+        <div class="filter-title">1. Mutfak Seçimi:</div>
+        <div class="cuisine-tabs">
+            <button class="tab-btn active" id="cuisine-all" onclick="setCuisine('all')">🍽️ Tüm Mutfaklar</button>
+            <button class="tab-btn" id="cuisine-turkish" onclick="setCuisine('turkish')">🇹🇷 Türk Mutfağı (Tümü)</button>
+            <button class="tab-btn" id="cuisine-corba" onclick="setCuisine('corba')">🥣 Çorbalar</button>
+            <button class="tab-btn" id="cuisine-anayemek" onclick="setCuisine('anayemek')">🍲 Tencere & Kebap</button>
+            <button class="tab-btn" id="cuisine-zeytinyagli" onclick="setCuisine('zeytinyagli')">🫒 Zeytinyağlı & Sarma</button>
+            <button class="tab-btn" id="cuisine-hamur" onclick="setCuisine('hamur')">🥟 Börek & Hamur İşi</button>
+            <button class="tab-btn" id="cuisine-tatli" onclick="setCuisine('tatli')">🍮 Tatlılar</button>
+            <button class="tab-btn world-tab" id="cuisine-world" onclick="setCuisine('world')">🌍 Dünya Mutfağı</button>
         </div>
 
-        <div id="recipes-container"></div>
+        <div class="filter-title" style="margin-top: 10px;">2. Malzeme Uyumu Sıralaması:</div>
+        <div class="match-tabs">
+            <button class="tab-btn active" id="tab-best" onclick="setTab('best')">🌟 Seçtiklerime En Uygunlar</button>
+            <button class="tab-btn" id="tab-exact" onclick="setTab('exact')">✅ Tamamı Evde Olanlar</button>
+            <button class="tab-btn" id="tab-all" onclick="setTab('all')">📖 Seçimsiz Tüm Tarifleri Gör</button>
+        </div>
     </div>
+
+    <!-- Tarif Sonuçları -->
+    <div id="recipes-container"></div>
 </div>
 
 <!-- Yeni Tarif Ekleme Modalı -->
 <div class="modal" id="addModal">
     <div class="modal-content">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-            <h2>📖 Deftere Yeni Tarif Ekle</h2>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <h2>📖 Yeni Tarif Ekle</h2>
             <button class="btn btn-clear" onclick="closeModal()" style="padding: 6px 12px;">✖</button>
         </div>
         <div class="form-group">
             <label>Yemeğin Adı:</label>
-            <input type="text" id="newName" placeholder="Örn: Zeytinyağlı Taze Fasulye">
+            <input type="text" id="newName" placeholder="Örn: Analı Kızlı / Lazanya">
         </div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;">
             <div class="form-group">
-                <label>Pişirme Süresi:</label>
-                <input type="text" id="newTime" placeholder="Örn: 40 Dk">
+                <label>Mutfak / Kategori:</label>
+                <select id="newCategory">
+                    <option value="anayemek">🇹🇷 Tencere & Kebap</option>
+                    <option value="corba">🇹🇷 Çorba</option>
+                    <option value="zeytinyagli">🇹🇷 Zeytinyağlı & Sarma</option>
+                    <option value="hamur">🇹🇷 Börek & Hamur İşi</option>
+                    <option value="tatli">🇹🇷 Tatlı</option>
+                    <option value="world">🌍 Dünya Mutfağı</option>
+                </select>
             </div>
             <div class="form-group">
-                <label>Kaç Kişilik:</label>
-                <input type="text" id="newServings" placeholder="Örn: 4-6 Kişilik">
+                <label>Süre:</label>
+                <input type="text" id="newTime" placeholder="45 Dk">
+            </div>
+            <div class="form-group">
+                <label>Porsiyon:</label>
+                <input type="text" id="newServings" placeholder="4-6 Kişilik">
             </div>
         </div>
         <div class="form-group">
-            <label>1. Arama İçin Ana Malzemeleri Seçin (Butonlara Dokunun):</label>
-            <div class="ingredients-grid" id="modal-ingredients" style="max-height: 180px; overflow-y: auto; padding: 6px; border:1px solid #eee; border-radius:10px;"></div>
+            <label>Ana Malzemelere Dokunun:</label>
+            <div class="ingredients-grid" id="modal-ingredients" style="max-height: 170px; overflow-y: auto; padding: 6px; border:1px solid #ddd; border-radius:10px;"></div>
         </div>
         <div class="form-group">
-            <label>2. Tam Ölçülü Tüm Malzemeler (Her satıra bir malzeme yazın):</label>
-            <textarea id="newFullIngredients" rows="4" placeholder="500 gr taze fasulye&#10;2 adet orta boy domates&#10;1 adet kuru soğan&#10;Yarım çay bardağı zeytinyağı&#10;1 tatlı kaşığı tuz"></textarea>
+            <label>Tam Ölçülü Tüm Malzemeler (Alt alta yazın):</label>
+            <textarea id="newFullIngredients" rows="3" placeholder="500 gr kıyma&#10;2 adet soğan&#10;1 yemek kaşığı salça"></textarea>
         </div>
         <div class="form-group">
-            <label>3. Adım Adım Yapılışı (Her satıra bir adım yazın):</label>
-            <textarea id="newSteps" rows="4" placeholder="Fasulyeleri ayıklayıp kırın.&#10;Soğanı zeytinyağında kavurun.&#10;Fasulye ve domatesi ekleyip kısık ateşte pişirin."></textarea>
+            <label>Adım Adım Yapılışı (Alt alta yazın):</label>
+            <textarea id="newSteps" rows="3" placeholder="Soğanları kavurun.&#10;Kıymayı ekleyip pişirin."></textarea>
         </div>
         <div class="form-group">
-            <label>💡 Püf Noktası (İsteğe bağlı):</label>
-            <input type="text" id="newTip" placeholder="Örn: Пişerken1 küp şeker atarsanız lezzeti artar.">
+            <label>💡 Püf Noktası:</label>
+            <input type="text" id="newTip" placeholder="İsteğe bağlı püf noktası...">
         </div>
-        <button class="btn btn-add" style="width: 100%; justify-content: center;" onclick="saveNewRecipe()">💾 Tarifi Deftere Kaydet</button>
+        <button class="btn btn-add" style="width: 100%; justify-content: center;" onclick="saveNewRecipe()">💾 Kaydet</button>
     </div>
 </div>
 
 <script>
-    // 1. KATEGORİLER VE MALZEMELER
+    // 1. DEVASA MALZEME HAZNESİ (8 KATEGORİ, 65+ MALZEME)
     const ingredientCategories = [
         {
-            name: "🍅 Sebze & Yeşillik",
+            id: "cat-sebze",
+            name: "🍅 Sebzeler (16 Çeşit)",
+            defaultOpen: true,
             items: [
                 { id: "patates", name: "Patates", icon: "🥔" },
-                { id: "sogan", name: "Soğan", icon: "🧅" },
+                { id: "sogan", name: "Kuru Soğan", icon: "🧅" },
                 { id: "domates", name: "Domates", icon: "🍅" },
-                { id: "biber", name: "Biber", icon: "🌶️" },
+                { id: "biber", name: "Yeşil Biber", icon: "🌶️" },
+                { id: "kapya", name: "Kapya Biber", icon: "🫑" },
                 { id: "patlican", name: "Patlıcan", icon: "🍆" },
                 { id: "kabak", name: "Kabak", icon: "🥒" },
                 { id: "sarimsak", name: "Sarımsak", icon: "🧄" },
                 { id: "havuc", name: "Havuç", icon: "🥕" },
                 { id: "ispanak", name: "Ispanak", icon: "🥬" },
                 { id: "tazefasulye", name: "Taze Fasulye", icon: "🫛" },
+                { id: "karnabahar", name: "Karnabahar", icon: "🥦" },
+                { id: "brokoli", name: "Brokoli", icon: "🥦" },
+                { id: "pirasa", name: "Pırasa", icon: "🎋" },
+                { id: "lahana", name: "Beyaz Lahana", icon: "🥬" },
                 { id: "mantar", name: "Mantar", icon: "🍄" },
-                { id: "bezelye", name: "Bezelye", icon: "🟢" }
+                { id: "bezelye", name: "Bezelye", icon: "🟢" },
+                { id: "bamya", name: "Bamya", icon: "🌿" },
+                { id: "enginar", name: "Enginar", icon: "💚" },
+                { id: "misir", name: "Mısır", icon: "🌽" }
             ]
         },
         {
-            name: "🥩 Et, Tavuk & Şarküteri",
+            id: "cat-yesillik",
+            name: "🌿 Yeşillik & Sarmalık Yapraklar",
+            defaultOpen: false,
+            items: [
+                { id: "maydanoz", name: "Maydanoz", icon: "🌿" },
+                { id: "dereotu", name: "Dereotu", icon: "🌱" },
+                { id: "tazesogan", name: "Taze Soğan", icon: "🧅" },
+                { id: "asmayapragi", name: "Asma Yaprağı", icon: "🍃" },
+                { id: "pazi", name: "Pazı / Kiraz Yaprağı", icon: "🥬" },
+                { id: "feslegen", name: "Fesleğen", icon: "🌿" }
+            ]
+        },
+        {
+            id: "cat-et",
+            name: "🥩 Et, Tavuk, Balık & Şarküteri",
+            defaultOpen: true,
             items: [
                 { id: "kiyma", name: "Kıyma", icon: "🥩" },
-                { id: "kusbasi", name: "Kuşbaşı Et", icon: "🍖" },
-                { id: "tavuk", name: "Tavuk", icon: "🍗" },
-                { id: "sucuk", name: "Sucuk", icon: "🌭" }
+                { id: "kusbasi", name: "Kuşbaşı Dana Eti", icon: "🍖" },
+                { id: "kuzueti", name: "Kuzu Eti / İncik", icon: "🍗" },
+                { id: "biftek", name: "Biftek / Jülyen Et", icon: "🥩" },
+                { id: "tavukgogsu", name: "Tavuk Göğsü", icon: "🍗" },
+                { id: "tavukbut", name: "Tavuk But / Baget", icon: "🍗" },
+                { id: "balik", name: "Balık (Somon/Çupra/Hamsi)", icon: "🐟" },
+                { id: "tonbaligi", name: "Ton Balığı", icon: "🥫" },
+                { id: "sucuk", name: "Sucuk", icon: "🌭" },
+                { id: "pastirma", name: "Pastırma", icon: "🥓" }
             ]
         },
         {
-            name: "🌾 Bakliyat, Tahıl & Hamur",
+            id: "cat-bakliyat",
+            name: "🌾 Bakliyat & Tahıllar",
+            defaultOpen: false,
             items: [
                 { id: "pirinc", name: "Pirinç", icon: "🍚" },
-                { id: "bulgur", name: "Bulgur", icon: "🌾" },
-                { id: "mercimek", name: "Mercimek", icon: "🥣" },
-                { id: "makarna", name: "Makarna", icon: "🍝" },
+                { id: "bulgur", name: "Pilavlık Bulgur", icon: "🌾" },
+                { id: "koftelikbulgur", name: "İnce Köftelik Bulgur", icon: "🌾" },
+                { id: "kirmizimercimek", name: "Kırmızı Mercimek", icon: "🥣" },
+                { id: "yesilmercimek", name: "Yeşil Mercimek", icon: "🫘" },
                 { id: "nohut", name: "Nohut", icon: "🫘" },
                 { id: "kurufasulye", name: "Kuru Fasulye", icon: "🫘" },
-                { id: "sehriye", name: "Şehriye", icon: "🍜" },
-                { id: "yufka", name: "Yufka", icon: "🥟" }
+                { id: "barbunya", name: "Barbunya", icon: "🫘" },
+                { id: "yarma", name: "Yarma / Buğday", icon: "🌾" },
+                { id: "sehriye", name: "Arpa / Tel Şehriye", icon: "🍜" },
+                { id: "irmik", name: "İrmik", icon: "🌾" }
             ]
         },
         {
-            name: "🧀 Süt, Kahvaltılık & Temel",
+            id: "cat-hamur",
+            name: "🥟 Hamur İşi, Un & Makarna",
+            defaultOpen: false,
+            items: [
+                { id: "un", name: "Un", icon: "🥡" },
+                { id: "yufka", name: "Böreklik Yufka", icon: "🥟" },
+                { id: "milfoy", name: "Milföy Hamuru", icon: "🥐" },
+                { id: "makarna", name: "Makarna / Spagetti", icon: "🍝" },
+                { id: "lazanya", name: "Lazanya Yaprağı", icon: "🍝" },
+                { id: "lavas", name: "Lavaş / Tortilla", icon: "🫓" },
+                { id: "bayatekmek", name: "Ekmek / Galeta Unu", icon: "🍞" },
+                { id: "nisasta", name: "Nişasta", icon: "🥡" },
+                { id: "kadayif", name: "Kadayıf / Güllaç", icon: "🍮" }
+            ]
+        },
+        {
+            id: "cat-sut",
+            name: "🧀 Süt Ürünleri & Yumurta",
+            defaultOpen: false,
             items: [
                 { id: "yumurta", name: "Yumurta", icon: "🥚" },
                 { id: "yogurt", name: "Yoğurt", icon: "🥣" },
                 { id: "sut", name: "Süt", icon: "🥛" },
-                { id: "peynir", name: "Peynir", icon: "🧀" },
-                { id: "un", name: "Un", icon: "🥡" },
-                { id: "salca", name: "Salça", icon: "🥫" },
-                { id: "krema", name: "Krema", icon: "🥛" }
+                { id: "tereyagi", name: "Tereyağı", icon: "🧈" },
+                { id: "beyazpeynir", name: "Beyaz Peynir / Lor", icon: "🧀" },
+                { id: "kasar", name: "Kaşar / Mozzarella", icon: "🧀" },
+                { id: "krema", name: "Sıvı Krema", icon: "🥛" },
+                { id: "labne", name: "Labne / Mascarpone", icon: "🧁" }
+            ]
+        },
+        {
+            id: "cat-sos",
+            name: "🥫 Soslar, Kuruyemiş & Tatlı Malzemeleri",
+            defaultOpen: false,
+            items: [
+                { id: "salca", name: "Domates / Biber Salçası", icon: "🥫" },
+                { id: "zeytinyagi", name: "Zeytinyağı", icon: "🫒" },
+                { id: "limon", name: "Limon", icon: "🍋" },
+                { id: "nareksisi", name: "Nar Ekşisi", icon: "🍷" },
+                { id: "tahin", name: "Tahin", icon: "🫙" },
+                { id: "soyasosu", name: "Soya Sosu", icon: "🍾" },
+                { id: "kori", name: "Köri Sos / Baharat", icon: "🍛" },
+                { id: "ceviz", name: "Ceviz / Fındık / Fıstık", icon: "🌰" },
+                { id: "kayisi", name: "Kuru Kayısı / Üzüm", icon: "🍑" },
+                { id: "kakao", name: "Kakao / Çikolata", icon: "🍫" }
             ]
         }
     ];
@@ -591,230 +673,427 @@
     const allIngredientsMap = {};
     ingredientCategories.forEach(cat => {
         cat.items.forEach(item => {
-            allIngredientsMap[item.id] = { name: item.name, icon: item.icon, label: `${item.icon} ${item.name}` };
+            allIngredientsMap[item.id] = { name: item.name, icon: item.icon, label: `${item.icon} ${item.name}`, catId: cat.id };
         });
     });
 
-    // 2. ZENGİNLEŞTİRİLMİŞ TAM ÖLÇÜLÜ TARİF VERİTABANI
+    // 2. TÜRK VE DÜNYA MUTFAĞI GENİŞ TARİF KÜTÜPHANESİ
     const defaultRecipes = [
+        // --- TÜRK MUTFAĞI: ÇORBALAR ---
+        {
+            name: "Geleneksel Ezogelin Çorbası",
+            category: "corba",
+            cuisineLabel: "🇹🇷 Türk Mutfağı - Çorba",
+            time: "35 Dk",
+            servings: "6 Kişilik",
+            ingredients: ["kirmizimercimek", "pirinc", "bulgur", "sogan", "sarimsak", "salca", "tereyagi"],
+            fullIngredients: [
+                "1 su bardağı kırmızı mercimek",
+                "1 yemek kaşığı pirinç",
+                "1 yemek kaşığı pilavlık bulgur",
+                "1 adet kuru soğan, 2 diş sarımsak",
+                "1 yemek kaşığı domates salçası, 1 yemek kaşığı tereyağı",
+                "1 tatlı kaşığı kuru nane, pul biber, tuz",
+                "7 su bardağı sıcak su"
+            ],
+            steps: [
+                "Yıkanmış mercimek, pirinç ve bulguru tencereye alıp 7 bardak sıcak suyla yumuşayana kadar haşlayın.",
+                "Ayrı bir tavada tereyağını eritip ince kıyılmış soğan ve sarımsağı kavurun.",
+                "Salçayı, kuru naneyi ve pul biberi tavaya ekleyip kokusu çıkana kadar 1-2 dakika kavurun.",
+                "Hazırladığınız salçalı sosu kaynayan çorba tenceresine döküp karıştırın, tuzunu ekleyip 10 dakika daha kısık ateşte özleştirin."
+            ],
+            tip: "Ezogelin çorbası blenderdan geçirilmez, taneli kıvamı makbuldür."
+        },
+        {
+            name: "Terbiyeli Şehriyeli Tavuk Çorbası",
+            category: "corba",
+            cuisineLabel: "🇹🇷 Türk Mutfağı - Şifa Çorbası",
+            time: "40 Dk",
+            servings: "6 Kişilik",
+            ingredients: ["tavukbut", "sehriye", "yogurt", "yumurta", "un", "limon", "sarimsak"],
+            fullIngredients: [
+                "2 adet tavuk baget veya kalça (haşlanıp didiklenmiş)",
+                "1 çay bardağı tel veya arpa şehriye",
+                "Terbiyesi için: 1 su bardağı yoğurt, 1 yumurta sarısı, 1,5 yemek kaşığı un, yarım limon suyu",
+                "1 diş rendelenmiş sarımsak, tereyağı, nane, tuz, karabiber"
+            ],
+            steps: [
+                "Tavukları 6 su bardağı suyla haşlayın, etleri çıkarıp didikleyin. Tavuk suyunu kaynamaya bırakıp şehriyeleri içine atın.",
+                "Ayrı kasede yoğurt, yumurta sarısı, un ve limon suyunu pürüzsüz olana kadar çırpın.",
+                "Kaynayan tavuk suyundan 2 kepçe alıp terbiyeye yavaşça ekleyerek ılıştırın ve tencereye dökün.",
+                "Didiklenmiş tavukları ve sarımsağı ekleyin, 5 dakika kaynatıp üzerine tereyağlı nane yakın."
+            ],
+            tip: "Terbiyeyi eklerken çorbayı sürekli karıştırırsanız kesilme yapmaz."
+        },
+        {
+            name: "Yayla Çorbası",
+            category: "corba",
+            cuisineLabel: "🇹🇷 Türk Mutfağı - Çorba",
+            time: "25 Dk",
+            servings: "4-6 Kişilik",
+            ingredients: ["pirinc", "yogurt", "yumurta", "un", "tereyagi"],
+            fullIngredients: [
+                "1 çay bardağı pirinç",
+                "1,5 su bardağı yoğurt",
+                "1 adet yumurta sarısı",
+                "1 yemek kaşığı tepeleme un",
+                "6 su bardağı su, 2 yemek kaşığı tereyağı, bol kuru nane, tuz"
+            ],
+            steps: [
+                "Pirinci yıkayıp 3 su bardağı su ile yumuşayana kadar haşlayın.",
+                "Yoğurt, yumurta sarısı ve unu kalan 3 bardak soğuk suyla çırpıp tencereye ekleyin.",
+                "Kaynayana kadar sürekli karıştırın. Kaynadıktan sonra tuzunu atın.",
+                "Tereyağında kızdırılmış bol kuru naneyi üzerine gezdirin."
+            ],
+            tip: "Tuzu mutlaka çorba kaynadıktan sonra atın ki yoğurt kesilmesin."
+        },
+
+        // --- TÜRK MUTFAĞI: TENCERE YEMEKLERİ & KEBAPLAR ---
+        {
+            name: "Hünkar Beğendi",
+            category: "anayemek",
+            cuisineLabel: "🇹🇷 Osmanlı Saray Mutfağı",
+            time: "55 Dk",
+            servings: "4 Kişilik",
+            ingredients: ["kusbasi", "patlican", "sogan", "domates", "biber", "salca", "sut", "un", "kasar", "tereyagi"],
+            fullIngredients: [
+                "500 gr kuzu veya dana kuşbaşı et",
+                "1 adet kuru soğan, 2 adet yeşil biber, 2 adet domates, 1 yemek kaşığı salça",
+                "Beğendi için: 4 adet közlenmiş patlıcan",
+                "1,5 yemek kaşığı un, 1,5 yemek kaşığı tereyağı",
+                "1,5 su bardağı soğuk süt, 1 su bardağı rendelenmiş kaşar peyniri, tuz, muskat/karabiber"
+            ],
+            steps: [
+                "Etleri tencerede suyunu salıp çekene kadar kavurun. Soğan, biber, salça ve domatesi ekleyip üzerini geçecek kadar sıcak suyla etler lokum olana kadar pişirin.",
+                "Beğendi için tereyağında unu kokusu çıkana kadar kavurun, közlenip ince kıyılmış patlıcanları ekleyip ezerek karıştırın.",
+                "Sütü azar azar ilave edip kıvam alana kadar pişirin. Ocaktan almadan kaşar peynirini ve tuzu ekleyip eritin.",
+                "Servis tabağına beğendiyi yayın, üzerine sıcak et sote koyarak servis edin."
+            ],
+            tip: "Patlıcanları ocakta veya fırında közledikten sonra poşete koyup 10 dakika bekletirseniz kabukları kendiliğinden soyulur."
+        },
+        {
+            name: "Malatya Usulü Kiraz / Pazı Yaprağı Sarması (Ekşili Köfte)",
+            category: "anayemek",
+            cuisineLabel: "🇹🇷 Yöresel Malatya Mutfağı",
+            time: "60 Dk",
+            servings: "6 Kişilik",
+            ingredients: ["koftelikbulgur", "pazi", "yogurt", "un", "sogan", "tereyagi", "limon"],
+            fullIngredients: [
+                "2 su bardağı ince köftelik bulgur (yarma/düğrcük karışık)",
+                "Yarım kg kiraz yaprağı veya taze pazı yaprağı",
+                "Yoğurtlu sos için: 3 su bardağı süzme/ev yoğurdu, 1,5 yemek kaşığı un, yarım limon suyu",
+                "Üzeri için: 3 adet büyük kuru soğan (piyazlık doğranmış), 2 yemek kaşığı tereyağı, 1 tatlı kaşığı salça, erik ekşisi"
+            ],
+            steps: [
+                "Bulguru tuz ve ılık suyla macun kıvamına gelene kadar iyice yoğurun.",
+                "Haşlanmış yaprakların içine fındık büyüklüğünde bulgur koyup serçe parmağı inceliğinde sarın.",
+                "Tencerede yoğurt, un ve suyu çırparak kaynatın, kaynayan yoğurtlu suya sarmaları bırakıp pişirin.",
+                "Ayrı tavada tereyağı ve salça ile bol piyazlık soğanı karamelize olana kadar kavurup sarmaların üzerine dökün."
+            ],
+            tip: "Soğanını bol tutmak ve erik ekşisi kullanmak bu yemeğin asıl lezzet sırrıdır."
+        },
         {
             name: "Karnıyarık",
+            category: "anayemek",
+            cuisineLabel: "🇹🇷 Türk Mutfağı - Klasik",
             time: "45 Dk",
             servings: "4-6 Kişilik",
             ingredients: ["patlican", "kiyma", "sogan", "domates", "biber", "sarimsak", "salca"],
             fullIngredients: [
-                "6 adet orta boy patlıcan",
-                "300 gr orta yağlı kıyma",
-                "2 adet kuru soğan (ince yemeklik doğranmış)",
-                "2 adet yeşil biber",
-                "2 adet orta boy domates (1 tanesi üzeri için)",
-                "2 diş sarımsak",
-                "1,5 yemek kaşığı domates salçası",
-                "Sıvı yağ, tuz, karabiber, pul biber",
-                "1 su bardağı sıcak su (tepsi için)"
+                "6 adet patlıcan, 300 gr kıyma, 2 adet soğan",
+                "2 adet biber, 2 adet domates, 2 diş sarımsak, 1,5 yemek kaşığı salça"
             ],
             steps: [
-                "Patlıcanları alacalı soyup acısının çıkması için 15 dakika tuzlu suda bekletin, ardından kurulayıp az yağda her yerini kızartın.",
-                "Ayrı bir tavada yemeklik doğranmış soğanları ve sarımsağı kavurun, ardından kıymayı ekleyip suyunu çekene kadar pişirin.",
-                "Doğranmış 1 adet biber, küp doğranmış 1 domates, yarım kaşık salça ve baharatları kıymaya ekleyip 5 dakika daha kavurun.",
-                "Fırın tepsisine dizdiğiniz patlıcanların ortasını boydan boya yarın ve içlerine kıymalı harcı doldurun.",
-                "Üzerlerine dilimlenmiş domates ve biber yerleştirin. Kalan 1 kaşık salçayı sıcak suda çözdürüp tepsiye dökün.",
-                "Önceden ısıtılmış 190 derece fırında 20-25 dakika pişirin."
+                "Patlıcanları alacalı soyup kızartın veya fırında közleyin.",
+                "Soğan, sarımsak, kıyma, biber, domates ve salçayı kavurarak iç harcı hazırlayın.",
+                "Patlıcanların ortasını açıp harcı doldurun, salçalı suyla 190 derece fırında 25 dakika pişirin."
             ],
-            tip: "Patlıcanları kızartmak yerine fırça ile yağlayıp 200 derece fırında közleyerek çok daha hafif yapabilirsiniz."
+            tip: "Kıymalı harca bir tutam ince kıyılmış maydanoz eklerseniz aroması harika olur."
         },
         {
-            name: "Lokanta Usulü Mercimek Çorbası",
-            time: "30 Dk",
-            servings: "6 Kişilik",
-            ingredients: ["mercimek", "sogan", "havuc", "patates", "un", "salca"],
-            fullIngredients: [
-                "1,5 su bardağı kırmızı mercimek",
-                "1 adet kuru soğan",
-                "1 adet orta boy patates",
-                "1 adet orta boy havuç",
-                "1 yemek kaşığı tepeleme un",
-                "2 yemek kaşığı tereyağı + 2 yemek kaşığı sıvı yağ",
-                "6 su bardağı sıcak su (veya et/tavuk suyu)",
-                "Üzeri için: 1 tatlı kaşığı salça veya toz kırmızı biber, nane",
-                "1,5 tatlı kaşığı tuz, yarım çay kaşığı karabiber, kimyon"
-            ],
-            steps: [
-                "Tencerede sıvı yağ ve 1 kaşık tereyağını eritin. İri doğranmış soğan, patates ve havucu ekleyip 3-4 dakika kavurun.",
-                "1 yemek kaşığı unu ekleyip kokusu çıkana kadar 1 dakika daha kavurun.",
-                "İyice yıkanmış mercimekleri, tuzu ve 6 su bardağı sıcak suyu ilave edip kapağını kapatın.",
-                "Sebzeler ve mercimekler tamamen yumuşayana kadar (yaklaşık 20-25 dk) orta ateşte pişirin.",
-                "Pişen çorbayı pürüzsüz olana kadar el blenderından geçirin.",
-                "Küçük bir tavada kalan tereyağı ile salça veya kırmızı toz biberi kızdırıp çorbanın üzerine gezdirerek servis edin."
-            ],
-            tip: "Mercimekleri bol suda berraklaşana kadar yıkarsanız çorbanızın üzerinde köpük oluşmaz ve rengi altın sarısı olur."
-        },
-        {
-            name: "Fırında Tavuk Patates",
+            name: "İzmir Köfte",
+            category: "anayemek",
+            cuisineLabel: "🇹🇷 Türk Mutfağı - Fırın",
             time: "50 Dk",
-            servings: "4 Kişilik",
-            ingredients: ["tavuk", "patates", "sogan", "biber", "domates", "sarimsak", "yogurt", "salca"],
+            servings: "4-6 Kişilik",
+            ingredients: ["kiyma", "patates", "sogan", "sarimsak", "yumurta", "bayatekmek", "domates", "biber", "salca"],
             fullIngredients: [
-                "750 gr tavuk baget veya kalça şiş",
+                "500 gr kıyma, 1 adet rendelenmiş soğan, 1 yumurta, 1 su bardağı bayat ekmek içi/galeta unu",
                 "4 adet orta boy patates (elma dilim doğranmış)",
-                "15-20 adet arpacık soğan (veya 2 normal soğan)",
-                "3 diş sarımsak",
-                "2 adet yeşil biber, 1 adet domates",
-                "Sosu için: 2 yemek kaşığı yoğurt, 1 yemek kaşığı salça",
-                "Yarım çay bardağı zeytinyağı",
-                "1 tatlı kaşığı kekik, pul biber, karabiber, tuz"
+                "3 adet yeşil biber, 2 adet domates, 1,5 yemek kaşığı salça, kimyon, karabiber, tuz"
             ],
             steps: [
-                "Geniş bir kasede yoğurt, salça, zeytinyağı, ezilmiş sarımsaklar ve tüm baharatları çırparak sosu hazırlayın.",
-                "Tavukları, elma dilim patatesleri ve soğanları bu sosa bulayıp güzelce harmanlayın.",
-                "Tüm malzemeleri yağlı kağıt serili fırın tepsisine yayın, üzerlerine biber ve domates dilimlerini yerleştirin.",
-                "Üzerini ıslatılıp sıkılmış yağlı kağıtla kapatarak 200 derece fırında 35 dakika pişirin.",
-                "Son 15 dakikada üzerindeki kağıdı alıp tavukların ve patateslerin üzeri nar gibi kızarana kadar fırınlayın."
+                "Kıyma, soğan, yumurta, ekmek içi ve baharatları yoğurup parmak şeklinde köfteler yapın.",
+                "Patatesleri ve köfteleri az yağda hafifçe kızartıp fırın tepsisine bir patates bir köfte olacak şekilde dizin.",
+                "Üzerine sıcak suda açılmış salçalı sosu döküp 200 derece fırında 30 dakika pişirin."
             ],
-            tip: "Sosa eklenen yoğurt tavukların pamuk gibi yumuşak kalmasını ve harika kızarmasını sağlar."
+            tip: "Köfteleri şekillendirdikten sonra buzdolabında 20 dakika dinlendirirseniz asla dağılmaz."
         },
         {
-            name: "Kıymalı Patates Oturtma",
-            time: "40 Dk",
-            servings: "4-6 Kişilik",
-            ingredients: ["patates", "kiyma", "sogan", "biber", "domates", "sarimsak", "salca"],
-            fullIngredients: [
-                "5 adet orta boy patates",
-                "250 gr kıyma",
-                "1 adet büyük kuru soğan",
-                "2 adet çarliston veya sivri biber",
-                "2 adet domates (rendelenmiş)",
-                "2 diş sarımsak",
-                "1 yemek kaşığı domates salçası",
-                "1,5 su bardağı sıcak su, sıvı yağ, tuz, karabiber, kimyon"
-            ],
-            steps: [
-                "Patatesleri soyup çok ince olmayacak şekilde halka halka doğrayın ve geniş bir tencerenin tabanına dizin.",
-                "Ayrı bir tavada soğan, sarımsak ve biberleri yağda soteleyin, ardından kıymayı ekleyip kavurun.",
-                "Salçayı, rendelenmiş domatesi ve baharatları kıymaya ekleyip 3-4 dakika pişirin.",
-                "Hazırladığınız kıymalı sosu tenceredeki patateslerin üzerine eşit şekilde yayın.",
-                "Kenarından 1,5 su bardağı sıcak suyu ilave edin. Kaynayana kadar orta, kaynadıktan sonra kısık ateşte patatesler yumuşayana kadar (yaklaşık 25 dk) pişirin."
-            ],
-            tip: "Patatesleri dizmeden önce çok az yağda önlü arkalı 2 dakika mühürlerseniz yemek dağılmaz ve lezzeti ikiye katlanır."
-        },
-        {
-            name: "Kabak Mücveri",
-            time: "25 Dk",
-            servings: "4 Kişilik",
-            ingredients: ["kabak", "yumurta", "un", "sogan", "peynir"],
-            fullIngredients: [
-                "3 adet orta boy kabak",
-                "2 adet yumurta",
-                "3-4 dal taze soğan (veya 1 küçük kuru soğan)",
-                "Yarım demet dereotu ve maydanoz",
-                "1 çay bardağı beyaz peynir veya lor peyniri",
-                "4-5 yemek kaşığı tepeleme un",
-                "1 çay kaşığı kabartma tozu, tuz, karabiber, pul biber",
-                "Kızartmak için sıvı yağ (Yanına sarımsaklı yoğurt)"
-            ],
-            steps: [
-                "Kabakları rendeleyin ve avucunuzun içinde sıkarak fazla suyunu tamamen süzün.",
-                "Çukur bir kaba suyu sıkılmış kabakları, çırpılmış yumurtaları, ince kıyılmış soğanı ve ezilmiş peyniri alın.",
-                "Unu, kabartma tozunu ve baharatları ekleyip koyu kek kıvamında bir harç elde edene kadar karıştırın.",
-                "Tavada az miktarda yağı kızdırın. Harçtan birer yemek kaşığı alıp tavaya aralıklı dökün ve üstlerini hafif düzleyin.",
-                "Her iki tarafını da altın sarısı olana kadar kızartıp kağıt havlu üzerine alın. Sarımsaklı yoğurtla servis edin."
-            ],
-            tip: "Kabakların suyunu çok iyi sıkmak en önemli adımdır; aksi halde mücver çok un ister ve hamur gibi olur."
-        },
-        {
-            name: "Meyhane Usulü Bulgur Pilavı",
-            time: "25 Dk",
-            servings: "4-6 Kişilik",
-            ingredients: ["bulgur", "sogan", "biber", "domates", "sarimsak", "salca"],
-            fullIngredients: [
-                "2 su bardağı pilavlık bulgur",
-                "1 adet büyük kuru soğan",
-                "2 adet yeşil biber",
-                "2 adet olgun domates (rendelenmiş)",
-                "2 diş sarımsak",
-                "1 yemek kaşığı biber veya domates salçası",
-                "2 yemek kaşığı tereyağı + 3 yemek kaşığı zeytinyağı",
-                "3,5 su bardağı sıcak su, tuz, karabiber, kuru nane"
-            ],
-            steps: [
-                "Tencerede tereyağı ve zeytinyağını ısıtıp yemeklik doğranmış soğan, sarımsak ve biberleri yumuşayana kadar kavurun.",
-                "Salçayı ekleyip kokusu çıkana kadar kavurun, ardından rendelenmiş domatesleri ilave edip 3 dakika pişirin.",
-                "Yıkanıp süzülmüş bulguru, tuzu, karabiberi ve naneyi ekleyip 2 dakika tüm malzemeyi harmanlayın.",
-                "Sıcak suyunu verip kapağını kapatın. Kısık ateşte suyunu çekene kadar pişirin ve 10 dakika demlendirin."
-            ],
-            tip: "Demlenirken kapağın altına kağıt havlu koyarsanız pilavınız tane tane olur."
-        },
-        {
-            name: "Kremalı Mantarlı Tavuklu Makarna",
-            time: "25 Dk",
-            servings: "4 Kişilik",
-            ingredients: ["makarna", "tavuk", "mantar", "krema", "sarimsak", "sogan"],
-            fullIngredients: [
-                "1 paket makarna (tercihen penne veya burgu)",
-                "400 gr tavuk göğsü (jülyen doğranmış)",
-                "300 gr kültür mantarı (dilimlenmiş)",
-                "1 paket sıvı krema (200 ml)",
-                "1 adet küçük soğan, 2 diş sarımsak",
-                "3 yemek kaşığı zeytinyağı, tuz, karabiber, köri veya kekik"
-            ],
-            steps: [
-                "Makarnayı tuzlu kaynar suda 8-10 dakika haşlayıp süzün (haşlama suyundan yarım bardak ayırın).",
-                "Geniş bir tavada tavukları yüksek ateşte suyunu salıp çekene kadar soteleyin.",
-                "Doğranmış soğan, sarımsak ve mantarları ekleyip mantarlar suyunu çekene kadar kavurmaya devam edin.",
-                "Sıvı kremayı ve baharatları ekleyip kısık ateşte 3-4 dakika kıvam alana kadar kaynatın.",
-                "Haşlanmış makarnayı tavadaki sosla birleştirip 1-2 dakika birlikte çevirin ve sıcak servis yapın."
-            ],
-            tip: "Makarnayı süzdükten sonra kesinlikle soğuk sudan geçirmeyin ki kremalı sos makarnaya tam tutunsun."
-        },
-        {
-            name: "Klasik Menemen",
-            time: "15 Dk",
-            servings: "2-3 Kişilik",
-            ingredients: ["domates", "biber", "yumurta", "sogan"],
-            fullIngredients: [
-                "4 adet olgun orta boy domates (kabuğu soyulup küp doğranmış)",
-                "3 adet yeşil sivri biber",
-                "3 adet yumurta",
-                "1 adet küçük kuru soğan (isteğe bağlı)",
-                "2 yemek kaşığı tereyağı veya zeytinyağı",
-                "1 çay kaşığı tuz, yarım çay kaşığı pul biber ve karabiber"
-            ],
-            steps: [
-                "Tavada yağı eritip ince doğranmış soğan ve biberleri diriliği gidene kadar soteleyin.",
-                "Kabukları soyulup doğranmış domatesleri ve tuzu ekleyin. Tavanın kapağını kapatıp domatesler suyunu salıp hafif çekene kadar pişirin.",
-                "Yumurtaları doğrudan tavaya kırıp beyazları pişene kadar hafifçe karıştırın, baharatlarını serpip ocaktan alın."
-            ],
-            tip: "Yumurtaları kırdıktan sonra çok fazla pişirip kurutmayın, hafif sulu kalması ekmeği banmak için idealdir."
-        },
-        {
-            name: "Etli Kuru Fasulye",
+            name: "Etli Nohut Yemeği",
+            category: "anayemek",
+            cuisineLabel: "🇹🇷 Türk Mutfağı - Bakliyat",
             time: "50 Dk",
             servings: "6 Kişilik",
-            ingredients: ["kurufasulye", "kusbasi", "sogan", "biber", "salca", "domates"],
+            ingredients: ["nohut", "kusbasi", "sogan", "biber", "salca", "tereyagi"],
             fullIngredients: [
-                "2 su bardağı kuru fasulye (bir gece önceden ıslatılmış ve haşlanmış)",
-                "250 gr dana kuşbaşı et",
-                "1 adet büyük kuru soğan",
-                "2 adet yeşil biber",
-                "1 yemek kaşığı domates salçası, yarım yemek kaşığı biber salçası",
-                "1 adet domates (küp doğranmış)",
-                "2 yemek kaşığı tereyağı, sıcak su, tuz, pul biber, kimyon"
+                "2 su bardağı ıslatılmış nohut, 250 gr kuşbaşı et",
+                "1 adet kuru soğan, 2 adet yeşil biber",
+                "1 yemek kaşığı domates salçası, yarım kaşık biber salçası, tereyağı, kimyon, tuz"
             ],
             steps: [
-                "Tencerede kuşbaşı etleri suyunu salıp çekene kadar kavurun.",
-                "Tereyağını, yemeklik doğranmış soğanı ve biberleri ekleyip pembeleşene kadar soteleyin.",
-                "Salçaları ve doğranmış domatesi ilave edip 2-3 dakika daha kavurun.",
-                "Haşlanmış kuru fasulyeleri ekleyin, üzerini 2 parmak geçecek kadar sıcak su ve tuz ilave edin.",
-                "Kısık ateşte fasulyeler ve etler lokum gibi olup suyu özleşene kadar yaklaşık 30-35 dakika pişirin."
+                "Kuşbaşı etleri suyunu çekene kadar kavurun, tereyağı, soğan ve biberleri ekleyin.",
+                "Salçaları kavurup ıslatılmış nohutları ve sıcak suyu ilave edin.",
+                "Düdüklü tencerede 30 dakika veya normal tencerede yumuşayana kadar pişirin."
             ],
-            tip: "Pişerken içine 1 çay kaşığı kimyon atmak hem lezzet verir hem de fasulyenin gazını alır."
+            tip: "Islatma suyuna 1 çay kaşığı karbonat atıp yıkarsanız nohutlar lokum gibi pişer."
+        },
+
+        // --- TÜRK MUTFAĞI: ZEYTİNYAĞLILAR & SARMALAR ---
+        {
+            name: "Zeytinyağlı Yaprak Sarma",
+            category: "zeytinyagli",
+            cuisineLabel: "🇹🇷 Türk Mutfağı - Zeytinyağlı",
+            time: "60 Dk",
+            servings: "6-8 Kişilik",
+            ingredients: ["asmayapragi", "pirinc", "sogan", "zeytinyagi", "limon", "maydanoz", "salca"],
+            fullIngredients: [
+                "500 gr salamura asma yaprağı",
+                "2 su bardağı pirinç, 3 adet büyük kuru soğan (ince doğranmış)",
+                "1 su bardağı zeytinyağı, yarım demet maydanoz, 1 tatlı kaşığı salça",
+                "1 tatlı kaşığı kuru nane, yenibahar, tarçın, karabiber, 1 adet limon"
+            ],
+            steps: [
+                "Zeytinyağının yarısıyla bol soğanı pembeleşene kadar kavurun, pirinci ekleyip 3 dakika çevirin.",
+                "Baharatları, yeşilliği ve yarım bardak sıcak suyu ekleyip suyunu çekince ocaktan alın ve soğutun.",
+                "Yaprakları sarıp tencereye dizin. Üzerine limon dilimleri, kalan zeytinyağı ve 2 bardak sıcak su koyup kısık ateşte pişirin."
+            ],
+            tip: "Sarmalar piştikten sonra tencerenin kapağını hiç açmadan kendi halinde soğumaya bırakırsanız yapraklar kararmaz ve parlar."
+        },
+        {
+            name: "Zeytinyağlı Taze Fasulye",
+            category: "zeytinyagli",
+            cuisineLabel: "🇹🇷 Türk Mutfağı - Zeytinyağlı",
+            time: "45 Dk",
+            servings: "4-6 Kişilik",
+            ingredients: ["tazefasulye", "domates", "sogan", "sarimsak", "zeytinyagi"],
+            fullIngredients: [
+                "750 gr taze fasulye, 3 adet olgun domates",
+                "2 adet kuru soğan, 3 diş sarımsak",
+                "Yarım su bardağı zeytinyağı, 2 adet küp şeker, tuz"
+            ],
+            steps: [
+                "Tencereye zeytinyağı, doğranmış soğan, sarımsak, ayıklanmış fasulyeler ve küp doğranmış domatesleri çiğden kat kat dizin.",
+                "Tuzunu, şekerini ve sadece yarım çay bardağı suyu ekleyip kapağını kapatın.",
+                "En kısık ateşte kendi suyuyla yumuşayana kadar pişirip soğuk servis edin."
+            ],
+            tip: "Zeytinyağlı fasulyeyi hiç su koymadan domatesin kendi suyuyla kısık ateşte pişirmek lezzetini katlar."
+        },
+        {
+            name: "Fellah Köftesi / Mercimekli Köfte",
+            category: "zeytinyagli",
+            cuisineLabel: "🇹🇷 Güneydoğu & Anadolu Mutfağı",
+            time: "35 Dk",
+            servings: "6 Kişilik",
+            ingredients: ["kirmizimercimek", "koftelikbulgur", "sogan", "salca", "maydanoz", "tazesogan", "limon", "zeytinyagi"],
+            fullIngredients: [
+                "1 su bardağı kırmızı mercimek, 1,5 su bardağı ince köftelik bulgur",
+                "2 adet kuru soğan, 2 yemek kaşığı salça, 1 çay bardağı zeytinyağı",
+                "Yarım demet maydanoz, 5 dal taze soğan, kimyon, pul biber, limon"
+            ],
+            steps: [
+                "Mercimeği 3 su bardağı suyla iyice dağılana kadar haşlayın. Ocaktan alıp içine bulguru dökün ve kapağını kapatıp 20 dakika şişmeye bırakın.",
+                "Tavada zeytinyağı ile soğanları ve salçayı kavurun.",
+                "Mercimekli harca kavrulmuş soğanı ve baharatları ekleyip yoğurun. Son olarak yeşillikleri katıp sıkım yapın."
+            ],
+            tip: "Yoğurma işlemi bittikten sonra elinizi hafif suya batırarak sıkarsanız şekli pürüzsüz olur."
+        },
+
+        // --- TÜRK MUTFAĞI: BÖREK & HAMUR İŞİ ---
+        {
+            name: "Sodalı Peynirli Su Böreği Tadında Tepsi Böreği",
+            category: "hamur",
+            cuisineLabel: "🇹🇷 Türk Mutfağı - Börek",
+            time: "45 Dk",
+            servings: "8 Kişilik",
+            ingredients: ["yufka", "beyazpeynir", "maydanoz", "sut", "yumurta", "tereyagi"],
+            fullIngredients: [
+                "5 adet taze böreklik yufka",
+                "300 gr beyaz peynir veya lor, yarım demet maydanoz",
+                "Sosu için: 1 su bardağı süt, yarım su bardağı sıvı yağ, 2 adet yumurta, 1 şişe maden suyu"
+            ],
+            steps: [
+                "Yağlanmış tepsiye ilk yufkayı kenarları sarkacak şekilde serin.",
+                "Diğer yufkaları parçalayıp her katına sütlü yumurtalı sostan bolca sürün, orta kata peynirli harcı yayın.",
+                "En üstü kapatıp dilimleyin, üzerine 1 şişe maden suyu döküp 180 derece fırında altı üstü kızarana kadar pişirin."
+            ],
+            tip: "Dilimledikten sonra fırına vermeden 15 dakika sosu çekmesini beklerseniz gerçek su böreği gibi kabarır."
+        },
+        {
+            name: "Kayseri Usulü Ev Mantısı / Soslu Hazır Mantı",
+            category: "hamur",
+            cuisineLabel: "🇹🇷 Türk Mutfağı - Hamur İşi",
+            time: "35 Dk",
+            servings: "4 Kişilik",
+            ingredients: ["un", "yumurta", "kiyma", "sogan", "yogurt", "sarimsak", "salca", "tereyagi"],
+            fullIngredients: [
+                "Hamuru için: 3 su bardağı un, 1 yumurta, 1 tatlı kaşığı tuz, 1 su bardağı ılık su",
+                "İçi için: 250 gr kıyma, 1 adet rendelenmiş soğan, karabiber, tuz",
+                "Üzeri için: Sarımsaklı yoğurt, 2 yemek kaşığı tereyağı, 1 yemek kaşığı salça, nane, sumak"
+            ],
+            steps: [
+                "Un, yumurta, tuz ve suyla sert bir hamur yoğurup 20 dakika dinlendirin.",
+                "Hamuru oklavayla açıp küçük kareler kesin, ortalarına kıymalı harç koyup bohça şeklinde kapatın.",
+                "Tuzlu kaynar suda haşlayıp tabağa alın, üzerine sarımsaklı yoğurt ve tereyağlı salçalı sos gezdirin."
+            ],
+            tip: "Haşlama suyuna 1 yemek kaşığı sıvı yağ atarsanız mantılar birbirine yapışmaz."
+        },
+
+        // --- TÜRK MUTFAĞI: TATLILAR ---
+        {
+            name: "Fırın Sütlaç (Tam Kıvamında)",
+            category: "tatli",
+            cuisineLabel: "🇹🇷 Türk Mutfağı - Sütlü Tatlı",
+            time: "40 Dk",
+            servings: "6 Kişilik",
+            ingredients: ["sut", "pirinc", "nisasta", "yumurta"],
+            fullIngredients: [
+                "1 litre süt, 1 çay bardağı pirinç, 2 su bardağı su (pirinci haşlamak için)",
+                "1 su bardağı toz şeker, 1 adet yumurta sarısı",
+                "2 yemek kaşığı buğday nişastası (yarım çay bardağı sütle açılmış), 1 paket vanilya"
+            ],
+            steps: [
+                "Pirinci 2 bardak suyla suyunu çekene kadar haşlayın. Üzerine sütü ve şekeri ekleyip kaynatın.",
+                "Nişasta, yumurta sarısı ve yarım çay bardağı sütü çırpıp kaynayan sütlaca yavaşça ekleyin ve 5 dakika kıvam alana kadar pişirin.",
+                "Toprak güveç kaplarına paylaştırın, fırın tepsisine yarısına kadar soğuk su koyup 200 derece fırının en üst rafında üzerlerini kızartın."
+            ],
+            tip: "Güveçleri koyduğunuz tepsiye mutlaka soğuk su ekleyin, böylece sütlaçlar fırında taşmaz ve kurumaz."
+        },
+        {
+            name: "Dondurmalı / Sütlü İrmik Helvası",
+            category: "tatli",
+            cuisineLabel: "🇹🇷 Türk Mutfağı - Tatlı",
+            time: "25 Dk",
+            servings: "6 Kişilik",
+            ingredients: ["irmik", "tereyagi", "sut", "ceviz"],
+            fullIngredients: [
+                "2 su bardağı irmik",
+                "100 gr tereyağı + yarım çay bardağı sıvı yağ",
+                "1,5 su bardağı toz şeker, 2,5 su bardağı süt (veya yarı yarıya su-süt), ceviz veya çam fıstığı"
+            ],
+            steps: [
+                "Tereyağı ve sıvı yağı eritip irmiği ve varsa fıstık/cevizi kısık ateşte rengi koyulaşana kadar sabırla (yaklaşık 15 dk) kavurun.",
+                "Ayrı kapta süt ve şekeri karıştırıp kavrulan irmiğin üzerine dikkatlice dökün.",
+                "Kısık ateşte suyunu çekene kadar karıştırın, kapağını kapatıp 15 dakika demlendirin."
+            ],
+            tip: "İrmiği ne kadar kısık ateşte yavaş kavurursanız helvanız o kadar tane tane olur."
+        },
+
+        // --- 🌍 DÜNYA MUTFAĞI ---
+        {
+            name: "Kremalı Mantarlı Alfredo Makarna (Fettuccine)",
+            category: "world",
+            cuisineLabel: "🌍 İtalyan Mutfağı",
+            time: "25 Dk",
+            servings: "4 Kişilik",
+            ingredients: ["makarna", "tavukgogsu", "mantar", "krema", "sarimsak", "kasar", "tereyagi"],
+            fullIngredients: [
+                "1 paket makarna (Fettuccine veya Penne)",
+                "400 gr jülyen doğranmış tavuk göğsü, 300 gr kültür mantarı",
+                "1 paket sıvı krema (200 ml), 2 diş sarımsak, 1 yemek kaşığı tereyağı",
+                "Yarım su bardağı rendelenmiş parmesan veya eski kaşar, karabiber, fesleğen"
+            ],
+            steps: [
+                "Makarnayı tuzlu suda haşlayın. Geniş tavada tavukları yüksek ateşte soteleyin.",
+                "Tereyağı, sarımsak ve dilimlenmiş mantarları ekleyip yüksek ateşte kavurun.",
+                "Sıvı kremayı ve peyniri ekleyip sos koyulaşana kadar 3 dakika kaynatın, makarnayla birleştirip servis edin."
+            ],
+            tip: "Makarnanın haşlama suyundan yarım çay bardağı sosa eklerseniz sos makarnayla kusursuz bütünleşir."
+        },
+        {
+            name: "Köri Soslu Tavuk (Cafe de Paris / Hint Usulü)",
+            category: "world",
+            cuisineLabel: "🌍 Dünya Mutfağı - Bistro",
+            time: "25 Dk",
+            servings: "4 Kişilik",
+            ingredients: ["tavukgogsu", "krema", "kori", "mantar", "kapya", "biber", "sarimsak"],
+            fullIngredients: [
+                "600 gr kuşbaşı tavuk göğsü",
+                "1 paket sıvı krema (200 ml), 1,5 tatlı kaşığı köri baharatı",
+                "1 adet kırmızı kapya biber, 2 adet yeşil biber, 200 gr mantar, 2 diş sarımsak"
+            ],
+            steps: [
+                "Tavukları suyunu salıp çekene kadar kavurun. Jülyen doğranmış biberleri, mantarı ve sarımsağı ekleyip soteleyin.",
+                "Sıvı kremayı ve köriyi ekleyip kısık ateşte sos kıvam alana kadar 4-5 dakika pişirin."
+            ],
+            tip: "Köri baharatını kremayı dökmeden hemen önce yağda 15 saniye çevirirseniz aroması çok daha güzel açığa çıkar."
+        },
+        {
+            name: "Meksika Usulü Tavuk Fajita / Quesadilla",
+            category: "world",
+            cuisineLabel: "🌍 Meksika Mutfağı",
+            time: "30 Dk",
+            servings: "4 Kişilik",
+            ingredients: ["tavukgogsu", "kapya", "biber", "sogan", "sarimsak", "lavas", "kasar", "soyasosu"],
+            fullIngredients: [
+                "500 gr jülyen doğranmış tavuk göğsü (veya dana biftek)",
+                "2 adet kapya biber, 2 adet yeşil biber, 2 adet piyazlık kuru soğan",
+                "2 yemek kaşığı soya sosu, kimyon, toz kırmızı biber, sarımsak, lavaş ekmeği"
+            ],
+            steps: [
+                "Tavukları zeytinyağı, sarımsak ve baharatlarla harmanlayıp kızgın döküm tavada yüksek ateşte pişirin.",
+                "Ayrı tavada jülyen doğranmış soğan ve renkli biberleri hafif diri kalacak şekilde soteleyip soya sosu ekleyin.",
+                "Tavuk ve sebzeleri birleştirip sıcak lavaş ve kaşar peyniriyle dürüm yaparak servis edin."
+            ],
+            tip: "Sebzeleri çok öldürmeden yüksek ateşte hızlıca sotelemek Fajita'nın çıtır dokusunu korur."
+        },
+        {
+            name: "Bolonez Soslu İtalyan Lazanya",
+            category: "world",
+            cuisineLabel: "🌍 İtalyan Mutfağı",
+            time: "50 Dk",
+            servings: "6 Kişilik",
+            ingredients: ["lazanya", "kiyma", "sogan", "havuc", "domates", "salca", "sut", "un", "tereyagi", "kasar"],
+            fullIngredients: [
+                "1 paket lazanya yaprağı, 400 gr kıyma, 1 adet soğan, 1 adet rendelenmiş havuç",
+                "3 adet rendelenmiş domates, 1,5 yemek kaşığı salça",
+                "Beşamel sos için: 2 yemek kaşığı tereyağı, 2 yemek kaşığı un, 2,5 su bardağı süt",
+                "Üzeri için: 1,5 su bardağı rendelenmiş kaşar veya mozzarella peyniri"
+            ],
+            steps: [
+                "Soğan, havuç ve kıymayı kavurun; salça, domates ve 1 bardak sıcak su ekleyip sulu bir Bolonez sos hazırlayın.",
+                "Tereyağında unu kavurup sütü ekleyerek muhallebi kıvamında beşamel sos pişirin.",
+                "Borcama sırasıyla beşamel sos, lazanya yaprağı, kıymalı sos ve kaşar peyniri dizin. En üste bol kaşar serpip 190 derecede 30 dakika fırınlayın."
+            ],
+            tip: "Kıymalı sosu normalden biraz daha sulu bırakırsanız lazanya yapraklarını önceden haşlamanıza hiç gerek kalmaz."
+        },
+        {
+            name: "İtalyan Usulü Ev Yapımı Tiramisu",
+            category: "world",
+            cuisineLabel: "🌍 İtalyan Mutfağı - Tatlı",
+            time: "25 Dk",
+            servings: "6-8 Kişilik",
+            ingredients: ["sut", "yumurta", "un", "labne", "kakao"],
+            fullIngredients: [
+                "1 paket kedi dili bisküvi (veya kakaolu kek tabanı)",
+                "Kreması için: 3 su bardağı süt, 1 yumurta sarısı, 3 yemek kaşığı un, 1 çay bardağı şeker, 200 gr labne peyniri",
+                "Islatmak için: 1 su bardağı ılık süt + 1 yemek kaşığı granül kahve, üzeri için kakao"
+            ],
+            steps: [
+                "Süt, un, şeker ve yumurta sarısını pişirip muhallebi yapın. Ilıyınca labne peynirini ekleyip mikserle çırpın.",
+                "Bisküvileri kahveli sütle ıslatıp borcama dizin, yarım kremayı yayın. İkinci kat bisküvi ve kalan kremayı ekleyin.",
+                "Buzdolabında 3 saat dinlendirip servis öncesi süzgeçle bol kakao eleyin."
+            ],
+            tip: "Labne peynirini muhallebi kaynarken değil, ılıdıktan sonra eklerseniz kremanız ipeksi olur."
         }
     ];
 
     let selectedIngredients = new Set();
     let modalSelectedIngredients = new Set();
-    let currentTab = "best"; // 'best', 'exact', 'all'
-    let recipes = JSON.parse(localStorage.getItem("annemin_tarifleri_v2")) || defaultRecipes;
+    let currentTab = "best";     // 'best', 'exact', 'all'
+    let currentCuisine = "all";  // 'all', 'turkish', 'corba', 'anayemek', 'zeytinyagli', 'hamur', 'tatli', 'world'
+    let allOpen = false;
+    let recipes = JSON.parse(localStorage.getItem("annemin_tarifleri_v3")) || defaultRecipes;
 
     function init() {
         renderCategories();
@@ -823,19 +1102,38 @@
         renderModalIngredients();
     }
 
-    // Kategori ve Malzeme Butonlarını Çiz
+    // Kategori Kutularını Çiz (Akordeon Yapısı)
     function renderCategories() {
         const container = document.getElementById("categories-container");
+        // Hangi kutuların açık olduğunu hatırla
+        const openIds = new Set();
+        document.querySelectorAll(".category-box.open").forEach(el => openIds.add(el.id));
+
         container.innerHTML = "";
 
         ingredientCategories.forEach(cat => {
             const box = document.createElement("div");
-            box.className = "category-box";
+            box.id = cat.id;
+            const isOpen = openIds.size > 0 ? openIds.has(cat.id) : cat.defaultOpen;
+            box.className = "category-box" + (isOpen ? " open" : "");
 
-            const title = document.createElement("div");
-            title.className = "category-title";
-            title.innerHTML = `<span>${cat.name}</span> <span style="font-size:0.85rem; color:#888; font-weight:normal;">Seçmek için dokunun</span>`;
-            box.appendChild(title);
+            // Bu kategoriden kaç malzeme seçilmiş?
+            const selectedInCat = cat.items.filter(i => selectedIngredients.has(i.id)).length;
+
+            const header = document.createElement("div");
+            header.className = "category-header";
+            header.onclick = () => box.classList.toggle("open");
+            header.innerHTML = `
+                <div>
+                    <span>${cat.name}</span>
+                    <span class="cat-badge ${selectedInCat > 0 ? 'show' : ''}">${selectedInCat} Seçildi</span>
+                </div>
+                <span style="font-size:0.9rem; color:#777;">▼ Dokun Aç/Kapat</span>
+            `;
+            box.appendChild(header);
+
+            const content = document.createElement("div");
+            content.className = "category-content";
 
             const grid = document.createElement("div");
             grid.className = "ingredients-grid";
@@ -848,12 +1146,20 @@
                 grid.appendChild(btn);
             });
 
-            box.appendChild(grid);
+            content.appendChild(grid);
+            box.appendChild(content);
             container.appendChild(box);
         });
     }
 
-    // Seçilenler Sepetini Güncelle
+    function toggleAllCategories() {
+        allOpen = !allOpen;
+        document.querySelectorAll(".category-box").forEach(box => {
+            if (allOpen) box.classList.add("open");
+            else box.classList.remove("open");
+        });
+    }
+
     function renderBasket() {
         const basket = document.getElementById("selected-basket");
         const tagsContainer = document.getElementById("basket-tags");
@@ -876,11 +1182,8 @@
     }
 
     function toggleIngredient(id) {
-        if (selectedIngredients.has(id)) {
-            selectedIngredients.delete(id);
-        } else {
-            selectedIngredients.add(id);
-        }
+        if (selectedIngredients.has(id)) selectedIngredients.delete(id);
+        else selectedIngredients.add(id);
         renderCategories();
         renderBasket();
         renderRecipes();
@@ -893,55 +1196,66 @@
         renderRecipes();
     }
 
+    function setCuisine(cuisine) {
+        currentCuisine = cuisine;
+        document.querySelectorAll(".cuisine-tabs .tab-btn").forEach(b => b.classList.remove("active"));
+        document.getElementById("cuisine-" + cuisine).classList.add("active");
+        renderRecipes();
+    }
+
     function setTab(tab) {
         currentTab = tab;
-        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        document.querySelectorAll(".match-tabs .tab-btn").forEach(b => b.classList.remove("active"));
         document.getElementById("tab-" + tab).classList.add("active");
         renderRecipes();
     }
 
-    // Tarifleri Hesapla ve Ekrana Bas
     function renderRecipes() {
         const container = document.getElementById("recipes-container");
         container.innerHTML = "";
 
-        // Her tarif için eşleşme oranını hesapla
-        const scoredRecipes = recipes.map(recipe => {
+        // 1. Önce Mutfak / Kategori Filtresini Uygula
+        let cuisineFiltered = recipes.filter(r => {
+            if (currentCuisine === "all") return true;
+            if (currentCuisine === "turkish") return r.category !== "world";
+            return r.category === currentCuisine;
+        });
+
+        // 2. Malzeme Eşleşme Puanlarını Hesapla
+        const scored = cuisineFiltered.map(recipe => {
             const matched = recipe.ingredients.filter(ing => selectedIngredients.has(ing));
             const missing = recipe.ingredients.filter(ing => !selectedIngredients.has(ing));
             const matchPercent = Math.round((matched.length / recipe.ingredients.length) * 100);
             return {
                 ...recipe,
-                matched,
-                missing,
                 matchedCount: matched.length,
                 missingCount: missing.length,
                 matchPercent
             };
         });
 
-        let filtered = [];
+        let finalRecipes = [];
 
         if (currentTab === "all") {
-            filtered = scoredRecipes.sort((a, b) => b.matchPercent - a.matchPercent);
+            finalRecipes = scored.sort((a, b) => b.matchPercent - a.matchPercent);
         } else if (currentTab === "exact") {
             if (selectedIngredients.size === 0) {
-                container.innerHTML = `<div class="empty-state">👆 Evdeki malzemeleri yukarıdan seçtiğinizde, <strong>hiç eksik malzemesi olmadan</strong> hemen yapabileceğiniz yemekler burada listelenir.</div>`;
+                container.innerHTML = `<div class="empty-state">👆 Yukarıdaki reyonlardan evdeki malzemelere dokunduğunuzda, <strong>hiç eksik malzemesi olmayan</strong> tarifler burada listelenir.</div>`;
                 return;
             }
-            filtered = scoredRecipes.filter(r => r.missingCount === 0);
+            finalRecipes = scored.filter(r => r.missingCount === 0);
         } else {
             // 'best' sekmesi
             if (selectedIngredients.size === 0) {
                 container.innerHTML = `
                     <div class="empty-state">
-                        👆 <strong>Yukarıdaki malzemelerden evinizde olanlara dokunun!</strong><br>
-                        Seçtiğiniz malzemelere en uygun yemekler, tam malzeme ölçüleri ve adım adım yapılışlarıyla hemen burada belirecek.<br><br>
-                        <small>Tüm tarifleri görmek isterseniz üstteki <b>"📖 Tüm Tarif Defteri"</b> sekmesine dokunabilirsiniz.</small>
+                        👆 <strong>Yukarıdaki reyonlardan elinizdeki malzemelere dokunun!</strong><br>
+                        Seçtiğiniz malzemelere göre <b>Türk Mutfağı</b> ve <b>Dünya Mutfağı</b> tarifleri uyum sırasına göre burada listelenecek.<br><br>
+                        <small>Malzeme seçmeden tüm yemekleri incelemek için yukarıdaki <b>"📖 Seçimsiz Tüm Tarifleri Gör"</b> butonuna dokunabilirsiniz.</small>
                     </div>`;
                 return;
             }
-            filtered = scoredRecipes
+            finalRecipes = scored
                 .filter(r => r.matchedCount > 0)
                 .sort((a, b) => {
                     if (b.matchPercent !== a.matchPercent) return b.matchPercent - a.matchPercent;
@@ -949,45 +1263,38 @@
                 });
         }
 
-        if (filtered.length === 0) {
-            container.innerHTML = `<div class="empty-state">Seçtiğiniz kriterlere uygun tarif bulunamadı. Birkaç malzeme daha seçmeyi veya <b>"🌟 En Uygun Tarifler"</b> sekmesine geçmeyi deneyebilirsiniz.</div>`;
+        if (finalRecipes.length === 0) {
+            container.innerHTML = `<div class="empty-state">Bu kategoride seçtiğiniz malzemelerle eşleşen tarif bulunamadı. Üstten <b>"🍽️ Tüm Mutfaklar"</b> veya <b>"📖 Seçimsiz Tüm Tarifleri Gör"</b> sekmesine dokunabilirsiniz.</div>`;
             return;
         }
 
-        filtered.forEach(recipe => {
+        finalRecipes.forEach(recipe => {
             const isExact = recipe.missingCount === 0 && selectedIngredients.size > 0;
+            const isWorld = recipe.category === "world";
             const card = document.createElement("div");
             card.className = "recipe-card" + (isExact ? " exact-match" : "");
 
-            // Uygunluk Rozeti
             let badgeHTML = "";
             if (selectedIngredients.size > 0) {
-                if (recipe.missingCount === 0) {
-                    badgeHTML = `<span class="badge badge-exact">✅ %100 Uygun (Tüm Malzemeler Var!)</span>`;
-                } else {
-                    badgeHTML = `<span class="badge badge-partial">🌟 %${recipe.matchPercent} Uygun (${recipe.missingCount} Eksik)</span>`;
-                }
+                badgeHTML = isExact
+                    ? `<span class="badge badge-exact">✅ %100 Uygun (Hepsi Evde!)</span>`
+                    : `<span class="badge badge-partial">🌟 %${recipe.matchPercent} Uygun (${recipe.missingCount} Eksik)</span>`;
             } else {
-                badgeHTML = `<span class="badge badge-exact">📖 Tarif Defteri</span>`;
+                badgeHTML = `<span class="badge badge-exact">📖 Tam Ölçülü Tarif</span>`;
             }
 
-            // Seçilen ve Eksik Malzeme Etiketleri
+            const cuisineBadge = `<span class="cuisine-badge ${isWorld ? 'cuisine-world' : 'cuisine-turkish'}">${recipe.cuisineLabel || (isWorld ? '🌍 Dünya Mutfağı' : '🇹🇷 Türk Mutfağı')}</span>`;
+
             const chipsHTML = recipe.ingredients.map(id => {
                 const info = allIngredientsMap[id];
                 const label = info ? info.label : id;
-                const hasIt = selectedIngredients.has(id);
-                if (selectedIngredients.size === 0) {
-                    return `<span class="ing-chip chip-have">${label}</span>`;
-                }
-                return hasIt
-                    ? `<span class="ing-chip chip-have">✓ ${label} (Var)</span>`
+                if (selectedIngredients.size === 0) return `<span class="ing-chip chip-have">${label}</span>`;
+                return selectedIngredients.has(id)
+                    ? `<span class="ing-chip chip-have">✓ ${label}</span>`
                     : `<span class="ing-chip chip-missing">✗ ${label} (Eksik)</span>`;
             }).join("");
 
-            // Tam Ölçülü Malzemeler
             const fullIngsHTML = recipe.fullIngredients.map(item => `<li>🔸 ${item}</li>`).join("");
-
-            // Adım Adım Yapılış
             const stepsHTML = recipe.steps.map((step, idx) => `
                 <li class="step-item">
                     <span class="step-number">${idx + 1}</span>
@@ -1000,19 +1307,19 @@
             card.innerHTML = `
                 <div class="recipe-header">
                     <div class="recipe-title-group">
-                        <h3>🍲 ${recipe.name}</h3>
+                        <h3>${recipe.name} ${cuisineBadge}</h3>
                         <div class="recipe-meta">
-                            <span>⏱️ ${recipe.time || '35 Dk'}</span>
-                            <span>🍽️ ${recipe.servings || '4 Kişilik'}</span>
+                            <span>⏱️ ${recipe.time}</span>
+                            <span>🍽️ ${recipe.servings}</span>
                         </div>
                     </div>
                     ${badgeHTML}
                 </div>
                 <div class="recipe-body">
                     <div class="ingredients-panel">
-                        <div class="panel-title">🔍 Malzeme Durumu</div>
+                        <div class="panel-title">🔍 Ana Malzeme Kontrolü</div>
                         <div class="chip-list">${chipsHTML}</div>
-                        <div class="panel-title" style="margin-top:15px;">📋 Tüm Malzemeler (Tam Ölçülü)</div>
+                        <div class="panel-title" style="margin-top:14px;">📋 Tüm Malzemeler (Tam Ölçülü)</div>
                         <ul class="full-ing-list">${fullIngsHTML}</ul>
                     </div>
                     <div class="steps-panel">
@@ -1028,7 +1335,7 @@
         });
     }
 
-    // YENİ TARİF EKLEME MODALI İŞLEMLERİ
+    // Modal İşlemleri
     function renderModalIngredients() {
         const container = document.getElementById("modal-ingredients");
         container.innerHTML = "";
@@ -1036,8 +1343,8 @@
             const btn = document.createElement("button");
             btn.type = "button";
             btn.className = "ing-btn" + (modalSelectedIngredients.has(id) ? " selected" : "");
-            btn.style.padding = "8px";
-            btn.style.fontSize = "0.9rem";
+            btn.style.padding = "7px";
+            btn.style.fontSize = "0.85rem";
             btn.innerHTML = allIngredientsMap[id].label;
             btn.onclick = () => {
                 if (modalSelectedIngredients.has(id)) modalSelectedIngredients.delete(id);
@@ -1066,31 +1373,40 @@
 
     function saveNewRecipe() {
         const name = document.getElementById("newName").value.trim();
-        const time = document.getElementById("newTime").value.trim() || "30 Dk";
+        const category = document.getElementById("newCategory").value;
+        const time = document.getElementById("newTime").value.trim() || "40 Dk";
         const servings = document.getElementById("newServings").value.trim() || "4 Kişilik";
         const fullIngsText = document.getElementById("newFullIngredients").value.trim();
         const stepsText = document.getElementById("newSteps").value.trim();
         const tip = document.getElementById("newTip").value.trim();
 
         if (!name || modalSelectedIngredients.size === 0 || !fullIngsText || !stepsText) {
-            alert("Lütfen yemeğin adını, ana malzemelerini, tam ölçülü listesini ve yapılış adımlarını doldurun.");
+            alert("Lütfen yemek adını, ana malzemeleri, ölçülü listeyi ve yapılışını doldurun.");
             return;
         }
 
-        const fullIngredients = fullIngsText.split("\n").map(s => s.trim()).filter(Boolean);
-        const steps = stepsText.split("\n").map(s => s.trim()).filter(Boolean);
+        const categoryLabels = {
+            corba: "🇹🇷 Türk Mutfağı - Çorba",
+            anayemek: "🇹🇷 Türk Mutfağı - Ana Yemek",
+            zeytinyagli: "🇹🇷 Türk Mutfağı - Zeytinyağlı",
+            hamur: "🇹🇷 Türk Mutfağı - Hamur İşi",
+            tatli: "🇹🇷 Türk Mutfağı - Tatlı",
+            world: "🌍 Dünya Mutfağı"
+        };
 
         recipes.push({
             name,
+            category,
+            cuisineLabel: categoryLabels[category],
             time,
             servings,
             ingredients: Array.from(modalSelectedIngredients),
-            fullIngredients,
-            steps,
+            fullIngredients: fullIngsText.split("\n").map(s => s.trim()).filter(Boolean),
+            steps: stepsText.split("\n").map(s => s.trim()).filter(Boolean),
             tip
         });
 
-        localStorage.setItem("annemin_tarifleri_v2", JSON.stringify(recipes));
+        localStorage.setItem("annemin_tarifleri_v3", JSON.stringify(recipes));
         closeModal();
         renderRecipes();
     }
