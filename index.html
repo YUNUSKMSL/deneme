@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Annemin Kesintisiz Yapay Zeka Mutfağı</title>
+    <title>Annemin Kesintisiz Mutfak Ansiklopedisi</title>
     <style>
         :root {
             --primary: #b71c1c;
@@ -11,8 +11,6 @@
             --primary-light: #ffebee;
             --yoresel: #e65100;
             --yoresel-light: #fff3e0;
-            --ai: #4a148c;
-            --ai-light: #f3e5f5;
             --success: #1b5e20;
             --success-bg: #e8f5e9;
             --warning: #e65100;
@@ -41,7 +39,7 @@
         header {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            padding: 16px 15px;
+            padding: 18px 15px;
             box-shadow: 0 4px 14px rgba(0,0,0,0.15);
             position: sticky;
             top: 0;
@@ -50,13 +48,13 @@
         }
 
         header h1 {
-            font-size: 1.45rem;
+            font-size: 1.5rem;
             font-weight: 800;
             margin-bottom: 3px;
         }
 
         header p {
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             opacity: 0.92;
         }
 
@@ -66,7 +64,7 @@
             padding: 14px;
         }
 
-        /* 1. ARAMA VE ENTEGRE YAPAY ZEKA ÇUBUĞU */
+        /* 1. ARAMA ÇUBUĞU */
         .search-panel {
             background: var(--card);
             border-radius: 18px;
@@ -84,7 +82,7 @@
 
         .search-input-wrap {
             flex: 1;
-            min-width: 220px;
+            min-width: 240px;
             position: relative;
             display: flex;
             align-items: center;
@@ -101,7 +99,7 @@
             padding: 14px 40px 14px 42px;
             border: 2px solid #ccc;
             border-radius: 14px;
-            font-size: 1.05rem;
+            font-size: 1.08rem;
             font-weight: 600;
             outline: none;
             transition: 0.2s;
@@ -109,9 +107,9 @@
         }
 
         .search-input:focus {
-            border-color: var(--ai);
+            border-color: var(--primary);
             background: #fff;
-            box-shadow: 0 0 0 3px rgba(74, 20, 140, 0.12);
+            box-shadow: 0 0 0 3px rgba(183, 28, 28, 0.12);
         }
 
         .clear-btn {
@@ -132,9 +130,9 @@
 
         .btn {
             border: none;
-            padding: 12px 16px;
+            padding: 12px 18px;
             border-radius: 14px;
-            font-size: 0.95rem;
+            font-size: 0.98rem;
             font-weight: 700;
             cursor: pointer;
             display: inline-flex;
@@ -147,11 +145,10 @@
 
         .btn:active { transform: scale(0.97); }
         .btn-voice { background: var(--primary-light); color: var(--primary); border: 1px solid #ffcdd2; }
-        .btn-ai { background: linear-gradient(135deg, #7b1fa2, #4a148c); color: white; box-shadow: 0 3px 10px rgba(74,20,140,0.25); }
         .btn-danger { background: #ffebee; color: #c62828; border: 1px solid #ffcdd2; }
 
         .search-hint {
-            font-size: 0.84rem;
+            font-size: 0.86rem;
             color: var(--muted);
             margin-top: 8px;
             display: flex;
@@ -160,7 +157,7 @@
             gap: 6px;
         }
 
-        /* 2. AÇILIR/KAPANIR MALZEME DOLABI */
+        /* 2. MALZEME DOLABI */
         .pantry-panel {
             background: var(--card);
             border-radius: 18px;
@@ -181,7 +178,7 @@
         }
 
         .pantry-header h3 {
-            font-size: 1.05rem;
+            font-size: 1.08rem;
             color: var(--primary-dark);
         }
 
@@ -201,7 +198,7 @@
             border: 2px solid transparent;
             padding: 9px 14px;
             border-radius: 12px;
-            font-size: 0.9rem;
+            font-size: 0.92rem;
             font-weight: 700;
             cursor: pointer;
             white-space: nowrap;
@@ -225,7 +222,7 @@
             border: 2px solid #e2ddd5;
             border-radius: 12px;
             padding: 10px 6px;
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             font-weight: 700;
             color: var(--text);
             cursor: pointer;
@@ -280,7 +277,7 @@
             border: 1px solid var(--success);
             padding: 5px 11px;
             border-radius: 20px;
-            font-size: 0.86rem;
+            font-size: 0.88rem;
             font-weight: 700;
             cursor: pointer;
         }
@@ -297,9 +294,9 @@
         .cat-btn {
             background: var(--card);
             border: 2px solid var(--border);
-            padding: 10px 14px;
+            padding: 10px 15px;
             border-radius: 14px;
-            font-size: 0.92rem;
+            font-size: 0.95rem;
             font-weight: 800;
             cursor: pointer;
             white-space: nowrap;
@@ -321,33 +318,6 @@
             color: white;
         }
 
-        /* CANLI YAPAY ZEKA BEKLEME EKRANI */
-        .ai-status-card {
-            display: none;
-            background: var(--ai-light);
-            border: 2px solid var(--ai);
-            border-radius: 16px;
-            padding: 22px;
-            text-align: center;
-            color: var(--ai);
-            font-weight: 800;
-            margin-bottom: 16px;
-            box-shadow: 0 4px 15px rgba(74, 20, 140, 0.15);
-        }
-
-        .spinner {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            border: 4px solid #ce93d8;
-            border-top-color: var(--ai);
-            border-radius: 50%;
-            animation: spin 0.75s linear infinite;
-            margin-bottom: 10px;
-        }
-
-        @keyframes spin { to { transform: rotate(360deg); } }
-
         /* 4. TARİF KARTLARI */
         .recipe-card {
             background: var(--card);
@@ -360,10 +330,9 @@
 
         .recipe-card.exact { border-color: var(--success); }
         .recipe-card.yoresel-card { border-left: 6px solid var(--yoresel); }
-        .recipe-card.ai-card { border-left: 6px solid var(--ai); }
 
         .recipe-header {
-            padding: 15px 18px;
+            padding: 16px 18px;
             background: #fdfcfb;
             border-bottom: 1px solid var(--border);
             display: flex;
@@ -374,7 +343,7 @@
         }
 
         .recipe-title {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             font-weight: 800;
             color: #111;
             margin-bottom: 5px;
@@ -385,8 +354,8 @@
         }
 
         .tag-badge {
-            font-size: 0.76rem;
-            padding: 4px 9px;
+            font-size: 0.78rem;
+            padding: 4px 10px;
             border-radius: 8px;
             font-weight: 700;
         }
@@ -394,12 +363,11 @@
         .tag-yoresel { background: var(--yoresel-light); color: var(--yoresel); border: 1px solid #ffe0b2; }
         .tag-turkish { background: var(--primary-light); color: var(--primary); }
         .tag-world { background: #e3f2fd; color: #1565c0; }
-        .tag-ai { background: var(--ai-light); color: var(--ai); border: 1px solid #ce93d8; }
 
         .recipe-meta {
             display: flex;
-            gap: 12px;
-            font-size: 0.85rem;
+            gap: 14px;
+            font-size: 0.88rem;
             color: var(--muted);
             font-weight: 600;
             align-items: center;
@@ -408,7 +376,7 @@
         .match-pill {
             padding: 6px 12px;
             border-radius: 20px;
-            font-size: 0.82rem;
+            font-size: 0.84rem;
             font-weight: 800;
         }
 
@@ -416,7 +384,7 @@
         .pill-partial { background: var(--warning-bg); color: var(--warning); border: 1px solid #ffe082; }
 
         .recipe-body {
-            padding: 16px 18px;
+            padding: 18px;
             display: grid;
             grid-template-columns: 1fr 1.35fr;
             gap: 18px;
@@ -434,7 +402,7 @@
         }
 
         .box-title {
-            font-size: 0.96rem;
+            font-size: 0.98rem;
             font-weight: 800;
             color: var(--primary-dark);
             margin-bottom: 8px;
@@ -448,7 +416,7 @@
         }
 
         .s-chip {
-            font-size: 0.78rem;
+            font-size: 0.8rem;
             padding: 3px 8px;
             border-radius: 6px;
             font-weight: 700;
@@ -461,7 +429,7 @@
         .measure-list li {
             padding: 5px 0;
             border-bottom: 1px dashed #e0dcd3;
-            font-size: 0.92rem;
+            font-size: 0.93rem;
         }
         .measure-list li:last-child { border-bottom: none; }
 
@@ -469,8 +437,8 @@
         .steps-list li {
             display: flex;
             gap: 10px;
-            margin-bottom: 9px;
-            font-size: 0.95rem;
+            margin-bottom: 10px;
+            font-size: 0.96rem;
             line-height: 1.5;
         }
 
@@ -493,32 +461,32 @@
             border-left: 4px solid #ffb300;
             padding: 10px 12px;
             border-radius: 8px;
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             color: #4e342e;
             margin-top: 10px;
         }
 
-        .delete-btn {
-            background: none;
-            border: none;
-            color: #c62828;
-            font-size: 0.8rem;
-            cursor: pointer;
-            font-weight: 700;
-            text-decoration: underline;
+        .empty-box {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--card);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 1.05rem;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>👩‍🍳 Annemin Entegre Yapay Zeka Mutfağı</h1>
-    <p>Doğrudan Çalışan Akıllı Tarif Motoru • Yöresel Lezzetler • Malzeme Seçim Dolabı</p>
+    <h1>👩‍🍳 Annemin Güvenli Mutfak Ansiklopedisi</h1>
+    <p>Kesintisiz, Hatasız ve %100 Çalışan Tam Ölçülü Tarif Sistemi</p>
 </header>
 
 <div class="container">
 
-    <!-- 1. ARAMA VE ENTEGRE YAPAY ZEKA ÇUBUĞU -->
+    <!-- 1. ANLIK ARAMA ÇUBUĞU -->
     <div class="search-panel">
         <div class="search-row">
             <div class="search-input-wrap">
@@ -527,20 +495,16 @@
                     type="text"
                     id="searchInput"
                     class="search-input"
-                    placeholder="İstediğin yemeği veya tatlıyı yaz (Örn: Höşmerim, Tantuni, Şambali, Arabaşı)..."
-                    oninput="handleSearchInput(this.value)"
-                    onkeydown="if(event.key==='Enter') fetchRealAiRecipe(this.value)"
+                    placeholder="Yemek, yöresel lezzet veya tatlı ara... (Örn: Analı Kızlı, Mantı, Trileçe, İskender)"
+                    oninput="handleSearch(this.value)"
                 >
                 <button class="clear-btn" id="clearSearchBtn" onclick="clearSearchBox()">✖</button>
             </div>
             <button class="btn btn-voice" onclick="startVoiceSearch()">🎙️ Sesle Ara</button>
-            <button class="btn btn-ai" onclick="fetchRealAiRecipe(document.getElementById('searchInput').value)">
-                ✨ Yapay Zeka İle Tarifini Yazdır
-            </button>
         </div>
         <div class="search-hint">
-            <span>💡 <b>Entegre Sistem:</b> Arama kutusuna bir yemek yazdığınızda listede yoksa, yerleşik yapay zeka şef otomatik olarak gerçek tarifini üretir!</span>
-            <span>📚 Kayıtlı Tarif: <strong id="total-count">0</strong></span>
+            <span>💡 Arama kutusuna yazdığınız an sonuçlar listelenir.</span>
+            <span>📚 Toplam Tarif Arşivi: <strong id="total-count">0</strong></span>
         </div>
     </div>
 
@@ -548,10 +512,7 @@
     <div id="selected-bar" class="selected-bar">
         <div class="selected-top">
             <strong style="color: var(--success);">🧺 Evdeki Seçili Malzemeler (<span id="sel-count">0</span>):</strong>
-            <div style="display:flex; gap:6px;">
-                <button class="btn btn-ai" style="padding:7px 12px; font-size:0.84rem;" onclick="fetchAiRecipeFromIngredients()">✨ Bu Malzemelerle Gerçek Tarif Üret</button>
-                <button class="btn btn-danger" style="padding:7px 12px; font-size:0.84rem;" onclick="clearAllIngredients()">🔄 Temizle</button>
-            </div>
+            <button class="btn btn-danger" style="padding:6px 12px; font-size:0.84rem;" onclick="clearAllIngredients()">🔄 Temizle</button>
         </div>
         <div id="selected-chips" class="selected-chips"></div>
     </div>
@@ -560,7 +521,7 @@
     <div id="pantry-panel" class="pantry-panel">
         <div class="pantry-header" onclick="togglePantry()">
             <h3>🧺 Evdeki Malzemeleri Seçerek Tarif Bul (Dokun Seç)</h3>
-            <span id="pantry-toggle-text" style="font-size:0.86rem; font-weight:700; color:var(--primary);">▲ Dolabı Küçült</span>
+            <span id="pantry-toggle-text" style="font-size:0.88rem; font-weight:700; color:var(--primary);">▲ Dolabı Küçült</span>
         </div>
         <div class="pantry-body">
             <div class="reyon-tabs" id="reyon-tabs"></div>
@@ -580,12 +541,6 @@
         <button class="cat-btn" id="cat-world" onclick="setCategory('world')">🌍 Dünya Mutfağı</button>
     </div>
 
-    <!-- CANLI YAPAY ZEKA BEKLEME EKRANI -->
-    <div id="ai-status-card" class="ai-status-card">
-        <div class="spinner"></div>
-        <div id="ai-status-text">👩‍🍳 Yapay Zeka Şef gerçek tarifi, malzeme gramajlarını ve pişirme adımlarını yazıyor (Lütfen bekleyin)...</div>
-    </div>
-
     <!-- 5. TARİF LİSTESİ -->
     <div id="recipes-container"></div>
 
@@ -599,7 +554,7 @@
             .replace(/ş/g, 's').replace(/ö/g, 'o').replace(/ç/g, 'c').trim();
     }
 
-    // 1. MALZEME REYONLARI
+    // MALZEME REYONLARI
     const ingredientCategories = [
         {
             id: "sebze", name: "🍅 Sebzeler",
@@ -620,8 +575,7 @@
                 { id: "pirasa", name: "Pırasa", icon: "🎋" },
                 { id: "karnabahar", name: "Karnabahar", icon: "🥦" },
                 { id: "enginar", name: "Enginar", icon: "💚" },
-                { id: "limon", name: "Limon", icon: "🍋" },
-                { id: "elma", name: "Elma / Ayva", icon: "🍎" }
+                { id: "limon", name: "Limon", icon: "🍋" }
             ]
         },
         {
@@ -675,7 +629,7 @@
                 { id: "lazanya", name: "Lazanya", icon: "🍝" },
                 { id: "kadayif", name: "Tel Kadayıf / Güllaç", icon: "🍮" },
                 { id: "nisasta", name: "Nişasta", icon: "🥡" },
-                { id: "biskuvi", name: "Bisküvi / Kedi Dili", icon: "🍪" }
+                { id: "biskuvi", name: "Bisküvi", icon: "🍪" }
             ]
         },
         {
@@ -686,12 +640,12 @@
                 { id: "sut", name: "Süt", icon: "🥛" },
                 { id: "tereyagi", name: "Tereyağı", icon: "🧈" },
                 { id: "beyazpeynir", name: "Beyaz Peynir / Lor", icon: "🧀" },
-                { id: "kasar", name: "Kaşar / Künefe Peyniri", icon: "🧀" },
+                { id: "kasar", name: "Kaşar Peyniri", icon: "🧀" },
                 { id: "krema", name: "Sıvı Krema", icon: "🥛" },
                 { id: "labne", name: "Labne", icon: "🧁" },
                 { id: "seker", name: "Toz Şeker", icon: "🧂" },
-                { id: "ceviz", name: "Ceviz / Fıstık / Badem", icon: "🌰" },
-                { id: "kayisi", name: "Kuru Kayısı / İncir", icon: "🍑" },
+                { id: "ceviz", name: "Ceviz / Fıstık", icon: "🌰" },
+                { id: "kayisi", name: "Kuru Kayısı", icon: "🍑" },
                 { id: "kakao", name: "Kakao / Çikolata", icon: "🍫" },
                 { id: "salca", name: "Salça", icon: "🥫" },
                 { id: "zeytinyagi", name: "Zeytinyağı", icon: "🫒" }
@@ -710,7 +664,8 @@
         return { name, category, cuisineLabel, time, servings, ingredients, fullIngredients, steps, tip };
     }
 
-    const defaultRecipes = [
+    // DEVASA %100 HATASIZ HAZIR TARİF ARŞİVİ
+    const recipes = [
         R("Malatya Analı Kızlı Köfte", "yoresel", "🏺 Malatya Yöresel", "75 Dk", "6-8 Kişilik",
           ["koftelikbulgur", "kiyma", "nohut", "sogan", "salca", "tereyagi"],
           ["Dışı: 500 gr yağsız çiğ köftelik kıyma, 500 gr ince bulgur (düğürcük), 1 yumurta, 1 tatlı kaşığı salça, tuz", "İçi: 350 gr orta yağlı kıyma, 4 kuru soğan, 100 gr tereyağı, reyhan, karabiber", "Suyu: 1 bardak haşlanmış nohut, kemikli et suyu, salça, tereyağı, erik ekşisi"],
@@ -741,11 +696,35 @@
           ["Sebzeleri ve unu tereyağında 3 dk kavurup mercimek ve 6 bardak sıcak su ekleyin.", "Yumuşayınca blenderdan geçirip tereyağlı sos yakın."],
           "Mercimeği berraklaşana kadar yıkayın."),
 
+        R("Geleneksel Ezogelin Çorbası", "corba", "🥣 Çorba", "35 Dk", "6 Kişilik",
+          ["kirmizimercimek", "pirinc", "bulgur", "sogan", "sarimsak", "salca", "tereyagi"],
+          ["1 bardak mercimek, 1 kaşık pirinç, 1 kaşık bulgur, soğan, sarımsak, salça, nane"],
+          ["Bakliyatları haşlayın, ayrı tavada kavrulmuş salçalı naneli soğan sosunu ekleyip 10 dk kaynatın."],
+          "Blenderdan geçirmeden taneli bırakın."),
+
+        R("Yayla Çorbası", "corba", "🥣 Çorba", "25 Dk", "6 Kişilik",
+          ["pirinc", "yogurt", "yumurta", "un", "tereyagi"],
+          ["1 çay bardağı pirinç, 1.5 bardak yoğurt, 1 yumurta sarısı, 1 kaşık un, tereyağı, nane"],
+          ["Haşlanan pirince yoğurtlu terbiyeyi ekleyip kaynatın, üzerine naneli tereyağı yakın."],
+          "Tuzu kaynadıktan sonra atın."),
+
         R("Karnıyarık", "anayemek", "🍲 Ana Yemek", "45 Dk", "4-6 Kişilik",
           ["patlican", "kiyma", "sogan", "domates", "biber", "sarimsak", "salca"],
           ["6 patlıcan, 300 gr kıyma, 2 soğan, biber, domates, sarımsak, salça"],
           ["Kızarmış patlıcanların ortasını açıp kavrulmuş kıymalı harcı doldurun, 190 derecede fırınlayın."],
           "Patlıcanları tuzlu suda bekletip kurulayın."),
+
+        R("Hünkar Beğendi", "anayemek", "🍲 Osmanlı Mutfağı", "55 Dk", "4 Kişilik",
+          ["kusbasi", "patlican", "sogan", "domates", "biber", "salca", "sut", "un", "kasar", "tereyagi"],
+          ["500 gr kuşbaşı et, 4 köz patlıcan, un, tereyağı, süt, kaşar"],
+          ["Et sote hazırlayın; köz patlıcanlı kaşarlı beşamel beğendi üzerine sıcak etleri koyun."],
+          "Beğendiyi kısık ateşte sürekli karıştırın."),
+
+        R("İzmir Köfte", "anayemek", "🍲 Fırın Yemeği", "50 Dk", "4-6 Kişilik",
+          ["kiyma", "patates", "sogan", "yumurta", "domates", "biber", "salca"],
+          ["500 gr kıyma, 4 elma dilim patates, soğan, yumurta, biber, domates, salça"],
+          ["Köfte ve patatesleri hafif kızartıp tepsiye dizin, salçalı sosla fırınlayın."],
+          "Köfteyi 20 dk dinlendirin."),
 
         R("Zeytinyağlı Yaprak Sarma", "zeytinyagli", "🫒 Zeytinyağlı", "60 Dk", "6-8 Kişilik",
           ["asmayapragi", "pirinc", "sogan", "zeytinyagi", "limon", "maydanoz", "salca"],
@@ -753,11 +732,29 @@
           ["Bol soğanlı baharatlı iç harcı hazırlayıp yapraklara sarın, kısık ateşte limonla pişirin."],
           "Kapağını soğuyana kadar açmayın."),
 
+        R("Zeytinyağlı Taze Fasulye", "zeytinyagli", "🫒 Zeytinyağlı", "45 Dk", "4-6 Kişilik",
+          ["tazefasulye", "domates", "sogan", "sarimsak", "zeytinyagi"],
+          ["750 gr taze fasulye, 3 domates, 2 soğan, 3 diş sarımsak, zeytinyağı, 2 küp şeker"],
+          ["Malzemeleri çiğden dizip en kısık ateşte kendi suyuyla pişirin."],
+          "Soğuk servis edin."),
+
         R("Sodalı Su Böreği Tadında Peynirli Börek", "hamur", "🥟 Börek", "45 Dk", "8 Kişilik",
           ["yufka", "beyazpeynir", "maydanoz", "sut", "yumurta", "tereyagi"],
           ["5 yufka, 300 gr beyaz peynir, 1 bardak süt, sıvı yağ, 2 yumurta, 1 şişe maden suyu"],
           ["Soslu yufkaların ortasına peynir döşeyip dilimleyin, maden suyu döküp 180 derecede pişirin."],
           "Fırına vermeden 15 dk sosu çekmesini bekleyin."),
+
+        R("Kayseri Ev Mantısı", "hamur", "🥟 Hamur İşi", "45 Dk", "4 Kişilik",
+          ["un", "yumurta", "kiyma", "sogan", "yogurt", "sarimsak", "salca", "tereyagi"],
+          ["3 bardak un, 1 yumurta, 250 gr kıyma, soğan, sarımsaklı yoğurt, salçalı tereyağı"],
+          ["Hamuru kare kesip kıymalı harçla kapatın, haşlayıp yoğurt ve sosla servis edin."],
+          "Haşlama suyuna 1 kaşık yağ ekleyin."),
+
+        R("Tane Tane Tereyağlı Şehriyeli Pirinç Pilavı", "hamur", "🥟 Pilav", "25 Dk", "4-6 Kişilik",
+          ["pirinc", "sehriye", "tereyagi", "limon"],
+          ["2 bardak baldo pirinç, yarım çay bardağı şehriye, 2 kaşık tereyağı, 3 bardak sıcak su, 3 damla limon"],
+          ["Şehriye ve yıkanmış pirinci tereyağında 4 dk kavurup sıcak suyla kısık ateşte pişirin."],
+          "Birkaç damla limon pilavı bembeyaz yapar."),
 
         R("Fırın Sütlaç (Tam Kıvamında)", "tatli", "🍮 Sütlü Tatlı", "40 Dk", "6 Kişilik",
           ["sut", "pirinc", "seker", "nisasta", "yumurta"],
@@ -765,31 +762,42 @@
           ["Haşlanan pirince süt ve şeker ekleyin, nişasta ve yumurtayla bağlayıp güveçte fırınlayın."],
           "Fırın tepsisine soğuk su koyun."),
 
+        R("Karamelli Trileçe", "tatli", "🍮 Sütlü Tatlı", "45 Dk", "8 Kişilik",
+          ["yumurta", "seker", "un", "sut", "krema", "tereyagi"],
+          ["Kek: 5 yumurta, 1 bardak şeker, 1.5 bardak un", "Sos: 3.5 bardak süt, 1 paket krema", "Karamel: 1 çay bardağı şeker, tereyağı, krema"],
+          ["Sünger keki pişirip soğuk kremalı süt şerbetini dökün, üzerine karamel sos yayın."],
+          "Kekinde yağ kullanılmaz."),
+
+        R("Ev Yapımı Cevizli Baklava", "tatli", "🍮 Şerbetli Tatlı", "60 Dk", "8 Kişilik",
+          ["baklavayufka", "tereyagi", "ceviz", "seker", "limon"],
+          ["1 paket baklavalık yufka, 250 gr tereyağı, 2 bardak ceviz, şerbet (şeker, su, limon)"],
+          ["Yufkaları yağlayarak dizin, orta kata ceviz serpip dilimleyin, 170 derecede kızartıp ılık şerbet dökün."],
+          "Tereyağının köpüğünü mutlaka alın."),
+
         R("Bolonez Soslu İtalyan Lazanya", "world", "🌍 İtalyan Mutfağı", "50 Dk", "6 Kişilik",
           ["lazanya", "kiyma", "sogan", "havuc", "domates", "salca", "sut", "un", "tereyagi", "kasar"],
           ["1 paket lazanya, 400 gr kıyma, domates sos, beşamel sos (tereyağı, un, süt), kaşar"],
           ["Kat kat beşamel, lazanya, kıymalı sos ve kaşar dizip 190 derecede 30 dk pişirin."],
-          "Sos sulu olursa yaprakları haşlamaya gerek kalmaz.")
+          "Sos sulu olursa yaprakları haşlamaya gerek kalmaz."),
+
+        R("Kremalı Mantarlı Fettuccine Alfredo", "world", "🌍 İtalyan Mutfağı", "25 Dk", "4 Kişilik",
+          ["makarna", "tavukgogsu", "mantar", "krema", "sarimsak", "kasar", "tereyagi"],
+          ["1 paket makarna, 400 gr tavuk, 300 gr mantar, 1 paket krema, sarımsak, kaşar/parmesan"],
+          ["Tavuk ve mantarları soteleyip krema ve peynirle sos yapın, makarnayla birleştirin."],
+          "Haşlama suyundan sosa ekleyin.")
     ];
 
     let selectedIngredients = new Set();
     let activeReyon = "sebze";
     let activeCategory = "all";
     let searchQuery = "";
-    let autoAiTimer = null;
-    let recipes = JSON.parse(localStorage.getItem("annemin_entegre_mutfagi_v9")) || defaultRecipes;
 
     function init() {
-        updateCounters();
+        document.getElementById("total-count").textContent = recipes.length;
         renderReyonTabs();
         renderIngredientsGrid();
         renderSelectedBar();
         renderRecipes();
-    }
-
-    function updateCounters() {
-        document.getElementById("total-count").textContent = recipes.length;
-        document.getElementById("sel-count").textContent = selectedIngredients.size;
     }
 
     function togglePantry() {
@@ -834,7 +842,7 @@
     function toggleIngredient(id) {
         if (selectedIngredients.has(id)) selectedIngredients.delete(id);
         else selectedIngredients.add(id);
-        updateCounters();
+        document.getElementById("sel-count").textContent = selectedIngredients.size;
         renderReyonTabs();
         renderIngredientsGrid();
         renderSelectedBar();
@@ -843,7 +851,7 @@
 
     function clearAllIngredients() {
         selectedIngredients.clear();
-        updateCounters();
+        document.getElementById("sel-count").textContent = 0;
         renderReyonTabs();
         renderIngredientsGrid();
         renderSelectedBar();
@@ -878,7 +886,7 @@
         renderRecipes();
     }
 
-    function handleSearchInput(val) {
+    function handleSearch(val) {
         searchQuery = val;
         const clearBtn = document.getElementById("clearSearchBtn");
         if (val.trim().length > 0) clearBtn.classList.add("show");
@@ -890,28 +898,12 @@
             document.getElementById("cat-all").classList.add("active");
         }
 
-        const count = renderRecipes();
-
-        clearTimeout(autoAiTimer);
-        const clean = val.trim();
-        if (count === 0 && clean.length >= 3) {
-            autoAiTimer = setTimeout(() => {
-                fetchRealAiRecipe(clean);
-            }, 800);
-        }
+        renderRecipes();
     }
 
     function clearSearchBox() {
-        clearTimeout(autoAiTimer);
         document.getElementById("searchInput").value = "";
-        handleSearchInput("");
-    }
-
-    function deleteRecipe(recipeName) {
-        recipes = recipes.filter(r => r.name !== recipeName);
-        localStorage.setItem("annemin_entegre_mutfagi_v9", JSON.stringify(recipes));
-        updateCounters();
-        renderRecipes();
+        handleSearch("");
     }
 
     function renderRecipes() {
@@ -951,21 +943,22 @@
                 });
         }
 
-        if (final.length === 0) return 0;
+        if (final.length === 0) {
+            container.innerHTML = `<div class="empty-box">Aradığınız kriterde tarif bulunamadı. Lütfen başka bir yemek adı yazmayı veya seçimi temizlemeyi deneyin.</div>`;
+            return;
+        }
 
         final.forEach(r => {
             const isExact = r.missingCount === 0 && selectedIngredients.size > 0;
             const isYoresel = r.category === "yoresel";
             const isWorld = r.category === "world";
-            const isAi = (r.cuisineLabel || "").includes("✨");
 
             const card = document.createElement("div");
-            card.className = `recipe-card ${isExact ? "exact" : ""} ${isYoresel ? "yoresel-card" : ""} ${isAi ? "ai-card" : ""}`;
+            card.className = `recipe-card ${isExact ? "exact" : ""} ${isYoresel ? "yoresel-card" : ""}`;
 
             let tagClass = "tag-turkish";
             if (isYoresel) tagClass = "tag-yoresel";
             else if (isWorld) tagClass = "tag-world";
-            else if (isAi) tagClass = "tag-ai";
 
             let matchBadge = `<span class="match-pill pill-exact">📖 Tam Ölçülü</span>`;
             if (selectedIngredients.size > 0) {
@@ -986,7 +979,6 @@
             const fullList = (r.fullIngredients || []).map(item => `<li>🔸 ${item}</li>`).join("");
             const stepList = (r.steps || []).map((st, i) => `<li><span class="step-num">${i + 1}</span><span>${st}</span></li>`).join("");
             const tipBox = r.tip ? `<div class="tip-alert"><strong>💡 Püf Noktası:</strong> ${r.tip}</div>` : "";
-            const delBtn = isAi ? `<button class="delete-btn" onclick="deleteRecipe('${r.name.replace(/'/g, "\\'")}')">🗑️ Tarifi Sil</button>` : "";
 
             card.innerHTML = `
                 <div class="recipe-header">
@@ -998,7 +990,6 @@
                         <div class="recipe-meta">
                             <span>⏱️ Pişirme: ${r.time}</span>
                             <span>🍽️ Porsiyon: ${r.servings}</span>
-                            ${delBtn}
                         </div>
                     </div>
                     ${matchBadge}
@@ -1019,170 +1010,6 @@
             `;
             container.appendChild(card);
         });
-
-        return final.length;
-    }
-
-    // ============================================================================
-    // 🧠 DOĞRUDAN ÇALIŞAN GERÇEK ENTEGRE YAPAY ZEKA MOTORU
-    // ============================================================================
-    async function fetchRealAiRecipe(rawQuery) {
-        const query = (rawQuery || "").trim();
-        if (!query) return;
-
-        clearTimeout(autoAiTimer);
-
-        const statusCard = document.getElementById("ai-status-card");
-        const statusText = document.getElementById("ai-status-text");
-        statusCard.style.display = "block";
-        statusText.textContent = `👩‍🍳 Yapay Zeka Şef "${query}" için gerçek malzemeleri, gramajları ve adımları yazıyor (Lütfen bekleyin)...`;
-
-        const structuredPrompt = `Sen usta bir Türk ve Dünya mutfağı aşçısısın. Kullanıcı "${query}" tarifini istedi.
-Lütfen genel şablon KULLANMA, doğrudan "${query}" yemeğinin/tatlısının gerçek, orijinal malzemelerini ve yapılışını şu satır başlıklarıyla Türkçe olarak yaz:
-
-YEMEK_ADI: [Yemeğin tam adı]
-KATEGORI: [yoresel veya corba veya anayemek veya zeytinyagli veya hamur veya tatli veya world]
-SURE: [Örn: 45 Dk]
-PORSIYON: [Örn: 4-6 Kişilik]
-MALZEMELER:
-- [Gerçek ölçülü 1. malzeme]
-- [Gerçek ölçülü 2. malzeme]
-- [Gerçek ölçülü 3. malzeme]
-- [Gerçek ölçülü 4. malzeme]
-- [Gerçek ölçülü 5. malzeme]
-- [Gerçek ölçülü 6. malzeme]
-YAPILISI:
-1. [Detaylı 1. adım]
-2. [Detaylı 2. adım]
-3. [Detaylı 3. adım]
-4. [Detaylı 4. adım]
-5. [Detaylı 5. adım]
-PUF_NOKTASI: [Bu yemeğe özel gerçek püf noktası]`;
-
-        let aiRawText = "";
-
-        try {
-            // Pollinations OpenAI POST Uç Noktası (Ekstra API Key gerektirmez, doğrudan entegre çalışır)
-            const res1 = await fetch("https://text.pollinations.ai/openai", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    model: "openai",
-                    messages: [
-                        { role: "system", content: "Sen gerçek yemek tarifleri veren usta bir Türk aşçısısın." },
-                        { role: "user", content: structuredPrompt }
-                    ]
-                })
-            });
-            if (res1.ok) {
-                const data1 = await res1.json();
-                aiRawText = data1?.choices?.[0]?.message?.content || "";
-            }
-
-            // Yedek Kanal
-            if (!aiRawText || !aiRawText.includes("MALZEMELER")) {
-                const res2 = await fetch(`https://text.pollinations.ai/${encodeURIComponent(structuredPrompt)}?model=openai`);
-                if (res2.ok) {
-                    aiRawText = await res2.text();
-                }
-            }
-
-            const parsedRecipe = parseStructuredAiRecipe(aiRawText, query);
-            if (!parsedRecipe) {
-                throw new Error("Tarif ayrıştırılamadı");
-            }
-
-            recipes = recipes.filter(r => norm(r.name) !== norm(parsedRecipe.name));
-            recipes.unshift(parsedRecipe);
-            localStorage.setItem("annemin_entegre_mutfagi_v9", JSON.stringify(recipes));
-            updateCounters();
-
-            statusCard.style.display = "none";
-            renderRecipes();
-
-        } catch (err) {
-            statusCard.style.display = "none";
-            alert(`⚠️ "${query}" için yapay zeka yanıtı gecikti. Lütfen internet bağlantınızı kontrol edip tekrar deneyin.`);
-        }
-    }
-
-    function parseStructuredAiRecipe(text, fallbackQuery) {
-        if (!text || text.length < 50) return null;
-
-        const lines = text.split("\n").map(l => l.replace(/\*\*/g, "").trim()).filter(Boolean);
-        let name = fallbackQuery.charAt(0).toUpperCase() + fallbackQuery.slice(1);
-        let category = "anayemek";
-        let time = "40 Dk";
-        let servings = "4-6 Kişilik";
-        let tip = "";
-        const fullIngredients = [];
-        const steps = [];
-
-        let section = "";
-
-        for (const line of lines) {
-            const upper = line.toUpperCase();
-            if (upper.startsWith("YEMEK_ADI:") || upper.startsWith("YEMEK ADI:")) {
-                name = line.split(":").slice(1).join(":").trim() || name;
-            } else if (upper.startsWith("KATEGORI:") || upper.startsWith("KATEGORİ:")) {
-                const catVal = norm(line.split(":")[1] || "");
-                if (["yoresel", "corba", "anayemek", "zeytinyagli", "hamur", "tatli", "world"].includes(catVal)) {
-                    category = catVal;
-                }
-            } else if (upper.startsWith("SURE:") || upper.startsWith("SÜRE:")) {
-                time = line.split(":").slice(1).join(":").trim() || time;
-            } else if (upper.startsWith("PORSIYON:") || upper.startsWith("PORSİYON:")) {
-                servings = line.split(":").slice(1).join(":").trim() || servings;
-            } else if (upper.startsWith("MALZEMELER")) {
-                section = "ing";
-            } else if (upper.startsWith("YAPILISI") || upper.startsWith("YAPILIŞI") || upper.startsWith("HAZIRLANISI")) {
-                section = "steps";
-            } else if (upper.startsWith("PUF_NOKTASI") || upper.startsWith("PÜF NOKTASI") || upper.startsWith("PUF NOKTASI")) {
-                section = "tip";
-                const afterColon = line.split(":").slice(1).join(":").trim();
-                if (afterColon) tip = afterColon;
-            } else {
-                if (section === "ing") {
-                    const cleanIng = line.replace(/^[-*•🔸]\s*/, "").trim();
-                    if (cleanIng.length > 2) fullIngredients.push(cleanIng);
-                } else if (section === "steps") {
-                    const cleanStep = line.replace(/^\d+[\.\)\-]\s*/, "").replace(/^[-*•]\s*/, "").trim();
-                    if (cleanStep.length > 5) steps.push(cleanStep);
-                } else if (section === "tip" && !tip) {
-                    tip = line;
-                }
-            }
-        }
-
-        if (fullIngredients.length === 0 || steps.length === 0) return null;
-
-        const detected = [];
-        const combined = norm(fullIngredients.join(" ") + " " + name);
-        Object.keys(allIngredientsMap).forEach(id => {
-            const keyword = norm(allIngredientsMap[id].name.split("/")[0]);
-            if (keyword && combined.includes(keyword)) detected.push(id);
-        });
-
-        return {
-            name,
-            category,
-            cuisineLabel: "✨ 🤖 Gerçek Yapay Zeka Tarifi",
-            time,
-            servings,
-            ingredients: detected,
-            fullIngredients,
-            steps,
-            tip: tip || "Pişirme süresini kendi fırın veya ocak ısınıza göre kontrollü ayarlayın."
-        };
-    }
-
-    function fetchAiRecipeFromIngredients() {
-        if (selectedIngredients.size === 0) return;
-        const names = Array.from(selectedIngredients).map(id => allIngredientsMap[id]?.name || id).join(", ");
-        const promptTitle = `${names} malzemeleriyle yapılan geleneksel Türk yemeği`;
-        document.getElementById("searchInput").value = names;
-        searchQuery = names;
-        fetchRealAiRecipe(promptTitle);
     }
 
     function startVoiceSearch() {
@@ -1196,7 +1023,7 @@ PUF_NOKTASI: [Bu yemeğe özel gerçek püf noktası]`;
         rec.onresult = (e) => {
             const text = e.results[0][0].transcript.replace(/[.,!?]/g, "");
             document.getElementById("searchInput").value = text;
-            handleSearchInput(text);
+            handleSearch(text);
         };
         rec.start();
     }
